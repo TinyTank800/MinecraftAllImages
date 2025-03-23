@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft All Item Images Gallery</title>
+	<link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        /* Root Variables for Theme Support */
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1e1e1e;
+            --button-bg: #ff9800;
+            --button-hover: #e68900;
+            --border-color: #444;
+            --logo-brightness: 80%;
+            --footer-text: #bbb;
+        }
+        
+        /* Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px 0;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+            filter: brightness(var(--logo-brightness));
+            transition: filter 0.3s ease;
+        }
+        
+        .container {
+            background: var(--container-bg);
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+        
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        #search-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--container-bg);
+            color: var(--text-color);
+        }
+        
+        button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        
+        button:hover {
+            background: var(--button-hover);
+            transform: scale(1.02);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-color: var(--button-bg);
+        }
+        
+        .item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .item-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            word-break: break-word;
+            color: var(--text-color);
+        }
+        
+        .download-button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: auto;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        
+        .download-button:hover {
+            background: var(--button-hover);
+            transform: scale(1.05);
+        }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 20px;
+            font-size: 18px;
+            color: var(--footer-text);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: var(--footer-text);
+        }
+        
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        
+        .toggle-label {
+            font-size: 14px;
+        }
+        
+        .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: var(--button-bg);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            color: var(--footer-text);
+        }
+        
+        .social-links a {
+            color: var(--button-bg);
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            text-decoration: underline;
+            color: var(--button-hover);
+        }
+        /* Light Mode Styling */
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #222222;
+            --container-bg: #f4f4f4;
+            --button-bg: #0078d4;
+            --button-hover: #005fa3;
+            --border-color: #ccc;
+            --logo-brightness: 100%;
+            --footer-text: #555;
+        }
+        
+        /* Toggle Button Moves Right in Light Mode */
+        [data-theme="light"] .toggle-switch {
+            background: var(--button-hover);
+        }
+        
+        [data-theme="light"] .toggle-switch::before {
+            transform: translateX(20px);
+        }
+        
+        /* Page Break Line */
+        .styled-hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #555, transparent);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="assets/favicon.png" alt="Jemsire Logo" class="logo">
+    <div class="container">
+        <h1>Minecraft All Item Images Gallery</h1>
+        <p id="repo-info" style="text-align: center; margin-bottom: 20px; color: var(--footer-text);">Loading repository information...</p>
+        
+        <div class="toggle-container">
+            <span class="toggle-label">Dark Mode</span>
+            <div class="toggle-switch" id="theme-toggle"></div>
+            <span class="toggle-label">Light Mode</span>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for items...">
+            <button id="download-all">Download All as ZIP</button>
+        </div>
+        
+        <div id="gallery" class="gallery">
+            <div class="loading">Loading items...</div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/yourusername/minecraft-item-gallery" target="_blank">GitHub</a>
+            <a href="#" target="_blank">Contact</a>
+        </div>
+        <p>© 2025 Minecraft All Item Images Gallery | Not affiliated with Mojang</p>
+    </footer>
+
+    <script>
+        // Initialize empty array for our items
+        let allItems = [];
+        
+        // Format the displayed name (remove file extension and replace underscores with spaces)
+        function formatItemName(filename) {
+            return filename.replace('.png', '').replace(/_/g, ' ');
+        }
+        
+        // Create HTML for a single item
+        function createItemElement(filename) {
+            const displayName = formatItemName(filename);
+            
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            
+            const img = document.createElement('img');
+            img.src = `images/${filename}`; // Adjust the path as needed
+            img.alt = displayName;
+            
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'item-name';
+            nameDiv.textContent = displayName;
+            
+            const downloadButton = document.createElement('button');
+            downloadButton.className = 'download-button';
+            downloadButton.textContent = 'Download';
+            downloadButton.addEventListener('click', () => {
+                downloadImage(filename);
+            });
+            
+            itemDiv.appendChild(img);
+            itemDiv.appendChild(nameDiv);
+            itemDiv.appendChild(downloadButton);
+            
+            return itemDiv;
+        }
+        
+        // Function to download a single image
+        function downloadImage(filename) {
+            const link = document.createElement('a');
+            link.href = `images/${filename}`;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Function to download all filtered images as a ZIP
+        async function downloadAllAsZip(items) {
+            const zip = new JSZip();
+            const promises = [];
+            
+            // Add loading state
+            const downloadAllButton = document.getElementById('download-all');
+            const originalText = downloadAllButton.textContent;
+            downloadAllButton.textContent = "Preparing ZIP...";
+            downloadAllButton.disabled = true;
+            
+            // Fetch each image and add to ZIP
+            items.forEach(filename => {
+                const promise = fetch(`images/${filename}`)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        zip.file(filename, blob);
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching ${filename}:`, error);
+                    });
+                    
+                promises.push(promise);
+            });
+            
+            try {
+                await Promise.all(promises);
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                saveAs(zipBlob, 'minecraft-items.zip');
+            } catch (error) {
+                console.error('Error creating ZIP:', error);
+                alert('There was an error creating the ZIP file. Please try again.');
+            } finally {
+                // Restore button state
+                downloadAllButton.textContent = originalText;
+                downloadAllButton.disabled = false;
+            }
+        }
+        
+        // Filter and display items based on search input
+        function filterItems() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const gallery = document.getElementById('gallery');
+            
+            // Clear the gallery
+            gallery.innerHTML = '';
+            
+            // Filter items based on search term
+            const filteredItems = allItems.filter(item => 
+                formatItemName(item).toLowerCase().includes(searchTerm)
+            );
+            
+            // Display filtered items or a message if no results
+            if (filteredItems.length > 0) {
+                filteredItems.forEach(item => {
+                    gallery.appendChild(createItemElement(item));
+                });
+            } else {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = 'No items found. Try a different search term.';
+                gallery.appendChild(noResults);
+            }
+        }
+        
+        // Function to get all image filenames from GitHub repository
+        async function loadImageFilenames() {
+            try {
+                // Show loading message
+                const gallery = document.getElementById('gallery');
+                gallery.innerHTML = '<div class="loading">Loading items...</div>';
+                
+                // Get repository info from the URL
+                // Example: https://username.github.io/repo-name/
+                const urlParts = window.location.hostname.split('.');
+                let username, repoName;
+                
+                if (urlParts[0].endsWith('github') && urlParts[1] === 'io') {
+                    // Local development
+                    username = prompt("Enter your GitHub username:");
+                    repoName = prompt("Enter your repository name:");
+                } else {
+                    // GitHub Pages
+                    username = urlParts[0];
+                    repoName = window.location.pathname.split('/')[1];
+                }
+                
+                if (!username || !repoName) {
+                    throw new Error("Could not determine GitHub repository information");
+                }
+                
+                console.log(`Fetching images from ${username}/${repoName}`);
+                
+                // First, try using the GitHub API to fetch contents of the images directory
+                try {
+                    const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/images`;
+                    const response = await fetch(apiUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error(`GitHub API error: ${response.status}`);
+                    }
+                    
+                    const contents = await response.json();
+                    
+                    // Filter for image files
+                    allItems = contents
+                        .filter(item => item.type === 'file' && 
+                                item.name.match(/\.(png|jpg|jpeg|gif|webp)$/i))
+                        .map(item => item.name);
+                } catch (apiError) {
+                    console.error('Error fetching from GitHub API:', apiError);
+                    console.log('Falling back to manifest.json approach...');
+                    
+                    // Fallback to manifest.json
+                    try {
+                        const manifestResponse = await fetch('manifest.json');
+                        const manifest = await manifestResponse.json();
+                        allItems = manifest.images || [];
+                        
+                        if (allItems.length === 0) {
+                            throw new Error('No images found in manifest');
+                        }
+                    } catch (manifestError) {
+                        console.error('Error loading manifest:', manifestError);
+                        
+                        // Last resort: try to detect images by iterating through common Minecraft item names
+                        const commonItems = [
+                            "diamond_sword.png", "iron_pickaxe.png", "golden_apple.png",
+                            "oak_planks.png", "cobblestone.png", "dirt.png",
+                            // Add more common Minecraft items here
+                        ];
+                        
+                        gallery.innerHTML = `
+                            <div class="no-results">
+                                <p>Unable to automatically load images. You have two options:</p>
+                                <p>1. Create a manifest.json file with your image filenames:</p>
+                                <pre>{
+  "images": [
+    "diamond_sword.png",
+    "iron_pickaxe.png",
+    "..."
+  ]
+}</pre>
+                                <p>2. Enter image filenames manually:</p>
+                                <textarea id="manual-items" rows="5" placeholder="One filename per line, e.g.:\ndiamond_sword.png\niron_pickaxe.png"></textarea>
+                                <button id="load-manual">Load Items</button>
+                            </div>
+                        `;
+                        
+                        // Set up manual loading
+                        document.getElementById('load-manual').addEventListener('click', () => {
+                            const input = document.getElementById('manual-items').value;
+                            allItems = input.split('\n')
+                                .map(line => line.trim())
+                                .filter(line => line.length > 0);
+                            
+                            if (allItems.length > 0) {
+                                filterItems();
+                            } else {
+                                alert('Please enter at least one filename');
+                            }
+                        });
+                        
+                        return;
+                    }
+                }
+                
+                console.log(`Loaded ${allItems.length} image filenames`);
+                
+                // Update repository info
+                document.getElementById('repo-info').textContent = 
+                    `Displaying items from ${username}/${repoName}`;
+                
+                // Display the items
+                filterItems();
+            } catch (error) {
+                console.error('Error loading image filenames:', error);
+                document.getElementById('gallery').innerHTML = `
+                    <div class="no-results">
+                        Error loading images: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        // Initialize the gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set theme from localStorage if available
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+            
+            // Set up theme toggle
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            
+            // Load all image filenames first
+            loadImageFilenames();
+            
+            // Set up search functionality
+            document.getElementById('search-input').addEventListener('input', filterItems);
+            
+            // Set up download all functionality
+            document.getElementById('download-all').addEventListener('click', () => {
+                const searchTerm = document.getElementById('search-input').value.toLowerCase();
+                const filteredItems = allItems.filter(item => 
+                    formatItemName(item).toLowerCase().includes(searchTerm)
+                );
+                
+                if (filteredItems.length > 0) {
+                    downloadAllAsZip(filteredItems);
+                } else {
+                    alert('No items to download. Please adjust your search.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
