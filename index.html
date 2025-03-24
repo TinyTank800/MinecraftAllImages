@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft All Item Images Gallery</title>
-	<link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
@@ -391,50 +391,67 @@
             }
         }
         
-        // Function to get all image filenames from GitHub repository
+        // Function to get all image filenames from GitHub repository with pagination
         async function loadImageFilenames() {
             try {
                 // Show loading message
                 const gallery = document.getElementById('gallery');
-                gallery.innerHTML = '<div class="loading">Loading items...</div>';
+                gallery.innerHTML = '<div class="loading">Loading items (this may take a moment for large repositories)...</div>';
                 
-                // Get repository info from the URL
-                // Example: https://username.github.io/repo-name/
-                const urlParts = window.location.hostname.split('.');
-                let username, repoName;
-                
-                if (urlParts[0].endsWith('github') && urlParts[1] === 'io') {
-                    // Local development
-                    username = "TinyTank800";
-                    repoName = "MinecraftAllImages";
-                } else {
-                    // GitHub Pages
-                    username = urlParts[0];
-                    repoName = window.location.pathname.split('/')[1];
-                }
-                
-                if (!username || !repoName) {
-                    throw new Error("Could not determine GitHub repository information");
-                }
+                // Hard-coded repository information
+                const username = "TinyTank800";
+                const repoName = "MinecraftAllImages";
                 
                 console.log(`Fetching images from ${username}/${repoName}`);
+                document.getElementById('repo-info').textContent = 
+                    `Fetching items from ${username}/${repoName}...`;
                 
-                // First, try using the GitHub API to fetch contents of the images directory
+                // Initialize allItems array
+                allItems = [];
+                
+                // First, try using the GitHub API to fetch contents of the images directory with pagination
                 try {
-                    const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/images`;
-                    const response = await fetch(apiUrl);
+                    let page = 1;
+                    let hasMorePages = true;
                     
-                    if (!response.ok) {
-                        throw new Error(`GitHub API error: ${response.status}`);
+                    while (hasMorePages) {
+                        const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/images?per_page=100&page=${page}`;
+                        const response = await fetch(apiUrl);
+                        
+                        if (!response.ok) {
+                            if (response.status === 404) {
+                                throw new Error("Images folder not found");
+                            } else {
+                                throw new Error(`GitHub API error: ${response.status}`);
+                            }
+                        }
+                        
+                        const contents = await response.json();
+                        
+                        // If the response is an empty array, we've reached the end of pagination
+                        if (contents.length === 0) {
+                            hasMorePages = false;
+                            continue;
+                        }
+                        
+                        // Filter for image files and add to allItems
+                        const newItems = contents
+                            .filter(item => item.type === 'file' && 
+                                    item.name.match(/\.(png|jpg|jpeg|gif|webp)$/i))
+                            .map(item => item.name);
+                        
+                        allItems = [...allItems, ...newItems];
+                        
+                        // Check if we likely have more pages (GitHub API doesn't provide a standard way to check)
+                        // If we got exactly 100 items, there's likely another page
+                        if (contents.length < 100) {
+                            hasMorePages = false;
+                        } else {
+                            page++;
+                            // Update loading message with progress
+                            gallery.innerHTML = `<div class="loading">Loading items... Found ${allItems.length} so far</div>`;
+                        }
                     }
-                    
-                    const contents = await response.json();
-                    
-                    // Filter for image files
-                    allItems = contents
-                        .filter(item => item.type === 'file' && 
-                                item.name.match(/\.(png|jpg|jpeg|gif|webp)$/i))
-                        .map(item => item.name);
                 } catch (apiError) {
                     console.error('Error fetching from GitHub API:', apiError);
                     console.log('Falling back to manifest.json approach...');
@@ -451,24 +468,10 @@
                     } catch (manifestError) {
                         console.error('Error loading manifest:', manifestError);
                         
-                        // Last resort: try to detect images by iterating through common Minecraft item names
-                        const commonItems = [
-                            "diamond_sword.png", "iron_pickaxe.png", "golden_apple.png",
-                            "oak_planks.png", "cobblestone.png", "dirt.png",
-                            // Add more common Minecraft items here
-                        ];
-                        
                         gallery.innerHTML = `
                             <div class="no-results">
                                 <p>Unable to automatically load images. You have two options:</p>
-                                <p>1. Create a manifest.json file with your image filenames:</p>
-                                <pre>{
-  "images": [
-    "diamond_sword.png",
-    "iron_pickaxe.png",
-    "..."
-  ]
-}</pre>
+                                <p>1. Create a manifest.json file with your image filenames.</p>
                                 <p>2. Enter image filenames manually:</p>
                                 <textarea id="manual-items" rows="5" placeholder="One filename per line, e.g.:\ndiamond_sword.png\niron_pickaxe.png"></textarea>
                                 <button id="load-manual">Load Items</button>
