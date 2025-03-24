@@ -162,6 +162,34 @@
             color: var(--footer-text);
         }
         
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 15px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        /* Progress Bar for ZIP loading */
+        .progress-container {
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 8px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: var(--button-bg);
+            border-radius: 8px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
         /* Toggle Switch */
         .toggle-container {
             display: flex;
@@ -218,6 +246,7 @@
             text-decoration: underline;
             color: var(--button-hover);
         }
+        
         /* Light Mode Styling */
         [data-theme="light"] {
             --bg-color: #ffffff;
@@ -239,12 +268,11 @@
             transform: translateX(20px);
         }
         
-        /* Page Break Line */
-        .styled-hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #555, transparent);
-            margin: 20px 0;
+        /* Virtual Scrolling */
+        .virtual-scroller {
+            height: 700px;
+            overflow-y: auto;
+            position: relative;
         }
     </style>
 </head>
@@ -252,7 +280,7 @@
     <img src="assets/favicon.png" alt="Jemsire Logo" class="logo">
     <div class="container">
         <h1>Minecraft All Item Images Gallery</h1>
-        <p id="repo-info" style="text-align: center; margin-bottom: 20px; color: var(--footer-text);">Loading repository information...</p>
+        <p id="repo-info" style="text-align: center; margin-bottom: 20px; color: var(--footer-text);">Loading items...</p>
         
         <div class="toggle-container">
             <span class="toggle-label">Dark Mode</span>
@@ -262,10 +290,19 @@
         
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search for items...">
-            <button id="download-all">Download All as ZIP</button>
+            <button id="download-all">Download Selected as ZIP</button>
         </div>
         
-        <div id="gallery" class="gallery">
+        <div id="loading-progress" class="progress-container" style="display: none;">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        
+        <div class="stats-bar">
+            <div id="total-count">Total: 0 items</div>
+            <div id="filtered-count">Showing: 0 items</div>
+        </div>
+        
+        <div id="gallery" class="gallery virtual-scroller">
             <div class="loading">Loading items...</div>
         </div>
     </div>
@@ -282,6 +319,9 @@
         // Initialize empty array for our items
         let allItems = [];
         
+        // Batch size for rendering items (for performance)
+        const RENDER_BATCH_SIZE = 100;
+        
         // Format the displayed name (remove file extension and replace underscores with spaces)
         function formatItemName(filename) {
             return filename.replace('.png', '').replace(/_/g, ' ');
@@ -297,6 +337,7 @@
             const img = document.createElement('img');
             img.src = `images/${filename}`; // Adjust the path as needed
             img.alt = displayName;
+            img.loading = "lazy"; // Enable lazy loading for better performance
             
             const nameDiv = document.createElement('div');
             nameDiv.className = 'item-name';
@@ -337,15 +378,29 @@
             downloadAllButton.textContent = "Preparing ZIP...";
             downloadAllButton.disabled = true;
             
+            // Show progress
+            const progressContainer = document.getElementById('loading-progress');
+            const progressBar = document.getElementById('progress-bar');
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            
+            let completed = 0;
+            
             // Fetch each image and add to ZIP
             items.forEach(filename => {
                 const promise = fetch(`images/${filename}`)
                     .then(response => response.blob())
                     .then(blob => {
                         zip.file(filename, blob);
+                        completed++;
+                        const progress = Math.round((completed / items.length) * 100);
+                        progressBar.style.width = `${progress}%`;
                     })
                     .catch(error => {
                         console.error(`Error fetching ${filename}:`, error);
+                        completed++;
+                        const progress = Math.round((completed / items.length) * 100);
+                        progressBar.style.width = `${progress}%`;
                     });
                     
                 promises.push(promise);
@@ -362,6 +417,7 @@
                 // Restore button state
                 downloadAllButton.textContent = originalText;
                 downloadAllButton.disabled = false;
+                progressContainer.style.display = 'none';
             }
         }
         
@@ -378,11 +434,23 @@
                 formatItemName(item).toLowerCase().includes(searchTerm)
             );
             
+            // Update stats
+            document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+            document.getElementById('filtered-count').textContent = `Showing: ${filteredItems.length} items`;
+            
             // Display filtered items or a message if no results
             if (filteredItems.length > 0) {
-                filteredItems.forEach(item => {
+                // Only render the first batch initially for performance with large datasets
+                const initialBatch = filteredItems.slice(0, RENDER_BATCH_SIZE);
+                
+                initialBatch.forEach(item => {
                     gallery.appendChild(createItemElement(item));
                 });
+                
+                // If there are more items, set up lazy loading for the rest
+                if (filteredItems.length > RENDER_BATCH_SIZE) {
+                    setupLazyLoading(gallery, filteredItems, RENDER_BATCH_SIZE);
+                }
             } else {
                 const noResults = document.createElement('div');
                 noResults.className = 'no-results';
@@ -391,119 +459,85 @@
             }
         }
         
-        // Function to get all image filenames from GitHub repository with pagination
-        async function loadImageFilenames() {
+        // Set up lazy loading for large item sets
+        function setupLazyLoading(container, items, startIndex) {
+            // Create an intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && startIndex < items.length) {
+                    // Load next batch
+                    const endIndex = Math.min(startIndex + RENDER_BATCH_SIZE, items.length);
+                    const nextBatch = items.slice(startIndex, endIndex);
+                    
+                    nextBatch.forEach(item => {
+                        container.appendChild(createItemElement(item));
+                    });
+                    
+                    // Update the start index for the next batch
+                    setupLazyLoading(container, items, endIndex);
+                    
+                    // Stop observing current target
+                    observer.disconnect();
+                }
+            });
+            
+            // Add a sentinel element to observe
+            if (startIndex < items.length) {
+                const sentinel = document.createElement('div');
+                sentinel.className = 'loading';
+                sentinel.textContent = 'Loading more items...';
+                container.appendChild(sentinel);
+                
+                // Start observing
+                observer.observe(sentinel);
+            }
+        }
+        
+        // Function to load images from manifest.json file
+        async function loadImagesFromManifest() {
             try {
                 // Show loading message
                 const gallery = document.getElementById('gallery');
-                gallery.innerHTML = '<div class="loading">Loading items (this may take a moment for large repositories)...</div>';
+                gallery.innerHTML = '<div class="loading">Loading items from manifest...</div>';
                 
-                // Hard-coded repository information
-                const username = "TinyTank800";
-                const repoName = "MinecraftAllImages";
-                
-                console.log(`Fetching images from ${username}/${repoName}`);
-                document.getElementById('repo-info').textContent = 
-                    `Fetching items from ${username}/${repoName}...`;
+                document.getElementById('repo-info').textContent = `Loading items from manifest.json...`;
                 
                 // Initialize allItems array
                 allItems = [];
                 
-                // First, try using the GitHub API to fetch contents of the images directory with pagination
                 try {
-                    let page = 1;
-                    let hasMorePages = true;
-                    
-                    while (hasMorePages) {
-                        const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/images?per_page=100&page=${page}`;
-                        const response = await fetch(apiUrl);
-                        
-                        if (!response.ok) {
-                            if (response.status === 404) {
-                                throw new Error("Images folder not found");
-                            } else {
-                                throw new Error(`GitHub API error: ${response.status}`);
-                            }
-                        }
-                        
-                        const contents = await response.json();
-                        
-                        // If the response is an empty array, we've reached the end of pagination
-                        if (contents.length === 0) {
-                            hasMorePages = false;
-                            continue;
-                        }
-                        
-                        // Filter for image files and add to allItems
-                        const newItems = contents
-                            .filter(item => item.type === 'file' && 
-                                    item.name.match(/\.(png|jpg|jpeg|gif|webp)$/i))
-                            .map(item => item.name);
-                        
-                        allItems = [...allItems, ...newItems];
-                        
-                        // Check if we likely have more pages (GitHub API doesn't provide a standard way to check)
-                        // If we got exactly 100 items, there's likely another page
-                        if (contents.length < 100) {
-                            hasMorePages = false;
-                        } else {
-                            page++;
-                            // Update loading message with progress
-                            gallery.innerHTML = `<div class="loading">Loading items... Found ${allItems.length} so far</div>`;
-                        }
+                    // Fetch the manifest file
+                    const manifestResponse = await fetch('manifest.json');
+                    if (!manifestResponse.ok) {
+                        throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
                     }
-                } catch (apiError) {
-                    console.error('Error fetching from GitHub API:', apiError);
-                    console.log('Falling back to manifest.json approach...');
                     
-                    // Fallback to manifest.json
-                    try {
-                        const manifestResponse = await fetch('manifest.json');
-                        const manifest = await manifestResponse.json();
-                        allItems = manifest.images || [];
-                        
-                        if (allItems.length === 0) {
-                            throw new Error('No images found in manifest');
-                        }
-                    } catch (manifestError) {
-                        console.error('Error loading manifest:', manifestError);
-                        
-                        gallery.innerHTML = `
-                            <div class="no-results">
-                                <p>Unable to automatically load images. You have two options:</p>
-                                <p>1. Create a manifest.json file with your image filenames.</p>
-                                <p>2. Enter image filenames manually:</p>
-                                <textarea id="manual-items" rows="5" placeholder="One filename per line, e.g.:\ndiamond_sword.png\niron_pickaxe.png"></textarea>
-                                <button id="load-manual">Load Items</button>
-                            </div>
-                        `;
-                        
-                        // Set up manual loading
-                        document.getElementById('load-manual').addEventListener('click', () => {
-                            const input = document.getElementById('manual-items').value;
-                            allItems = input.split('\n')
-                                .map(line => line.trim())
-                                .filter(line => line.length > 0);
-                            
-                            if (allItems.length > 0) {
-                                filterItems();
-                            } else {
-                                alert('Please enter at least one filename');
-                            }
-                        });
-                        
-                        return;
+                    const manifest = await manifestResponse.json();
+                    allItems = manifest.images || [];
+                    
+                    if (allItems.length === 0) {
+                        throw new Error('No images found in manifest');
                     }
+                    
+                    // Update repository info
+                    document.getElementById('repo-info').textContent = 
+                        `Displaying ${allItems.length} items from manifest`;
+                    
+                    // Update stats
+                    document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+                    
+                    // Display the items
+                    filterItems();
+                    
+                } catch (error) {
+                    console.error('Error loading manifest:', error);
+                    
+                    gallery.innerHTML = `
+                        <div class="no-results">
+                            <p>Unable to load images. Please ensure:</p>
+                            <p>1. You've placed a manifest.json file in your repository root with your image filenames.</p>
+                        </div>
+                    `;
                 }
-                
-                console.log(`Loaded ${allItems.length} image filenames`);
-                
-                // Update repository info
-                document.getElementById('repo-info').textContent = 
-                    `Displaying items from ${username}/${repoName}`;
-                
-                // Display the items
-                filterItems();
             } catch (error) {
                 console.error('Error loading image filenames:', error);
                 document.getElementById('gallery').innerHTML = `
@@ -533,8 +567,8 @@
             // Set up theme toggle
             document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
             
-            // Load all image filenames first
-            loadImageFilenames();
+            // Load all image filenames from manifest
+            loadImagesFromManifest();
             
             // Set up search functionality
             document.getElementById('search-input').addEventListener('input', filterItems);
