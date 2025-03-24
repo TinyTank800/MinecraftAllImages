@@ -14,6 +14,7 @@
             --text-color: #e0e0e0;
             --container-bg: #1e1e1e;
             --button-bg: #ff9800;
+            --button-bg-rgb: 255, 152, 0;
             --button-hover: #e68900;
             --border-color: #444;
             --logo-brightness: 80%;
@@ -104,16 +105,23 @@
             border-radius: 8px;
             padding: 10px;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.3s;
+            transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
+            cursor: pointer;
         }
         
         .item:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             border-color: var(--button-bg);
+        }
+        
+        .item.selected {
+            background-color: rgba(var(--button-bg-rgb), 0.2);
+            border: 2px solid var(--button-bg);
+            box-shadow: 0 0 8px var(--button-bg);
         }
         
         .item img {
@@ -253,6 +261,7 @@
             --text-color: #222222;
             --container-bg: #f4f4f4;
             --button-bg: #0078d4;
+            --button-bg-rgb: 0, 120, 212;
             --button-hover: #005fa3;
             --border-color: #ccc;
             --logo-brightness: 100%;
@@ -274,6 +283,41 @@
             overflow-y: auto;
             position: relative;
         }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--button-bg);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--button-hover);
+        }
+        
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
@@ -290,7 +334,8 @@
         
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search for items...">
-            <button id="download-all">Download Selected as ZIP</button>
+            <button id="download-all">Download All as ZIP</button>
+            <button id="clear-selection" style="display: none;">Clear Selection</button>
         </div>
         
         <div id="loading-progress" class="progress-container" style="display: none;">
@@ -314,10 +359,19 @@
         </div>
         <p>© 2025 Minecraft All Item Images Gallery | Not affiliated with Mojang</p>
     </footer>
+    
+    <div class="back-to-top" id="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
 
     <script>
         // Initialize empty array for our items
         let allItems = [];
+        
+        // Track selected items
+        let selectedItems = new Set();
         
         // Batch size for rendering items (for performance)
         const RENDER_BATCH_SIZE = 100;
@@ -333,6 +387,12 @@
             
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item';
+            itemDiv.dataset.filename = filename;
+            
+            // If this item is in the selected set, add the selected class
+            if (selectedItems.has(filename)) {
+                itemDiv.classList.add('selected');
+            }
             
             const img = document.createElement('img');
             img.src = `images/${filename}`; // Adjust the path as needed
@@ -346,8 +406,14 @@
             const downloadButton = document.createElement('button');
             downloadButton.className = 'download-button';
             downloadButton.textContent = 'Download';
-            downloadButton.addEventListener('click', () => {
+            downloadButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent item selection when clicking download
                 downloadImage(filename);
+            });
+            
+            // Add click handler for selection
+            itemDiv.addEventListener('click', () => {
+                toggleItemSelection(itemDiv, filename);
             });
             
             itemDiv.appendChild(img);
@@ -355,6 +421,46 @@
             itemDiv.appendChild(downloadButton);
             
             return itemDiv;
+        }
+        
+        // Toggle item selection
+        function toggleItemSelection(itemElement, filename) {
+            if (selectedItems.has(filename)) {
+                selectedItems.delete(filename);
+                itemElement.classList.remove('selected');
+            } else {
+                selectedItems.add(filename);
+                itemElement.classList.add('selected');
+            }
+            
+            // Update download button text
+            updateDownloadButton();
+        }
+        
+        // Update the download button text based on selection state
+        function updateDownloadButton() {
+            const downloadButton = document.getElementById('download-all');
+            const clearButton = document.getElementById('clear-selection');
+            
+            if (selectedItems.size > 0) {
+                downloadButton.textContent = `Download Selected (${selectedItems.size}) as ZIP`;
+                clearButton.style.display = 'inline-block';
+            } else {
+                downloadButton.textContent = 'Download All as ZIP';
+                clearButton.style.display = 'none';
+            }
+        }
+        
+        // Clear all selected items
+        function clearSelection() {
+            selectedItems.clear();
+            
+            // Remove selected class from all items
+            document.querySelectorAll('.item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            updateDownloadButton();
         }
         
         // Function to download a single image
@@ -468,12 +574,19 @@
                     const endIndex = Math.min(startIndex + RENDER_BATCH_SIZE, items.length);
                     const nextBatch = items.slice(startIndex, endIndex);
                     
+                    // Remove the loading sentinel
+                    const loadingSentinel = entries[0].target;
+                    container.removeChild(loadingSentinel);
+                    
                     nextBatch.forEach(item => {
                         container.appendChild(createItemElement(item));
                     });
                     
-                    // Update the start index for the next batch
-                    setupLazyLoading(container, items, endIndex);
+                    // Update the start index for the next batch and add new sentinel
+                    // only if there are more items to load
+                    if (endIndex < items.length) {
+                        setupLazyLoading(container, items, endIndex);
+                    }
                     
                     // Stop observing current target
                     observer.disconnect();
@@ -573,18 +686,48 @@
             // Set up search functionality
             document.getElementById('search-input').addEventListener('input', filterItems);
             
-            // Set up download all functionality
+            // Set up download all/selected functionality
             document.getElementById('download-all').addEventListener('click', () => {
-                const searchTerm = document.getElementById('search-input').value.toLowerCase();
-                const filteredItems = allItems.filter(item => 
-                    formatItemName(item).toLowerCase().includes(searchTerm)
-                );
-                
-                if (filteredItems.length > 0) {
-                    downloadAllAsZip(filteredItems);
+                // If we have items selected, use those
+                if (selectedItems.size > 0) {
+                    downloadAllAsZip([...selectedItems]);
                 } else {
-                    alert('No items to download. Please adjust your search.');
+                    // Otherwise use the current filtered items
+                    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+                    const filteredItems = allItems.filter(item => 
+                        formatItemName(item).toLowerCase().includes(searchTerm)
+                    );
+                    
+                    if (filteredItems.length > 0) {
+                        downloadAllAsZip(filteredItems);
+                    } else {
+                        alert('No items to download. Please adjust your search.');
+                    }
                 }
+            });
+            
+            // Set up clear selection button
+            document.getElementById('clear-selection').addEventListener('click', clearSelection);
+            
+            // Set up back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            const gallery = document.getElementById('gallery');
+            
+            // Show back to top button when scrolled down
+            gallery.addEventListener('scroll', () => {
+                if (gallery.scrollTop > 500) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Scroll to top when clicked
+            backToTopButton.addEventListener('click', () => {
+                gallery.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
