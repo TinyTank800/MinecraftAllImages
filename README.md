@@ -2,7 +2,7 @@
 
 A searchable, downloadable gallery of Minecraft item images captured from the in-game hotbar.
 
-![Minecraft Item Gallery Screenshot](https://api.placeholder/800/400)
+![Version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json)
 
 ## Features
 
