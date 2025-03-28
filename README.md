@@ -4,7 +4,9 @@ A searchable, downloadable gallery of Minecraft item images captured from the in
 
 ![Version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json)
 
-## Features
+---
+
+## 🔧 Features
 
 - 🔍 **Search** - Quickly find items by name
 - 📥 **Download** - Get individual items or download all as a ZIP
@@ -21,7 +23,9 @@ This gallery showcases Minecraft item images that have been captured from the in
 - Resource packs
 - Server websites
 
-## How It Works
+---
+
+## 🛠️ How It Works
 
 The gallery website uses the GitHub API to dynamically fetch all images from the repository's `images` folder. When a user visits the site, it:
 
@@ -30,7 +34,9 @@ The gallery website uses the GitHub API to dynamically fetch all images from the
 3. Renders them in a responsive, searchable grid
 4. Provides download functionality for individual images or all images as a ZIP
 
-## Using This Template
+---
+
+## 📂 Using This Template
 
 ### For Your Own Minecraft Item Gallery
 
@@ -65,7 +71,6 @@ If you're interested in creating your own item gallery:
 The gallery is built using:
 
 - Plain HTML, CSS, and JavaScript (no frameworks)
-- GitHub API for fetching repository contents
 - JSZip and FileSaver.js for creating and downloading ZIP files
 
 ## License
@@ -77,9 +82,12 @@ This project is available under the MIT License. Feel free to use, modify, and d
 - Thanks to Mojang for creating Minecraft
 - JSZip and FileSaver.js libraries for download functionality
 
-## Contact
+---
 
-If you have questions or suggestions, please open an issue on this repository.
+## 📢 Feedback & Support
+*Found a bug or missing feature?* Let us know!  
+🐙 **GitHub Issues**: [Main Repo](https://github.com/TinyTank800/MinecraftAllImages/issues)  
+💬 **Discord**: [Join The Jemsire Community](https://discord.jemsire.com)  
 
 ---
 
