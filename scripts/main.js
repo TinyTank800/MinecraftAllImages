@@ -31,17 +31,18 @@ async function loadReleases() {
         // Try to find available versions by checking ZIP files
         const versions = new Set();
         
-        // Check for ZIP files in the releases folder
+        // Check for ZIP files in the releases folder using GitHub API
         try {
-            const response = await fetch(`${BASE_PATH}/releases/`);
-            const text = await response.text();
+            const response = await fetch('https://api.github.com/repos/TinyTank800/MinecraftAllImages/contents/releases');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch releases: ${response.status}`);
+            }
             
-            // Split the response into lines and look for ZIP files
-            const lines = text.split('\n');
-            lines.forEach(line => {
-                if (line.includes('minecraft-items-') && line.endsWith('.zip')) {
+            const files = await response.json();
+            files.forEach(file => {
+                if (file.name.includes('minecraft-items-') && file.name.endsWith('.zip')) {
                     // Extract version from filename
-                    const version = line.split('minecraft-items-')[1].replace('.zip', '');
+                    const version = file.name.split('minecraft-items-')[1].replace('.zip', '');
                     versions.add(version);
                 }
             });
@@ -53,7 +54,7 @@ async function loadReleases() {
         Array.from(versions).sort().reverse().forEach(version => {
             const option = document.createElement('option');
             option.value = version;
-            option.textContent = `Version ${version}`;
+            option.textContent = `${version}`;
             versionSelect.appendChild(option);
         });
         
