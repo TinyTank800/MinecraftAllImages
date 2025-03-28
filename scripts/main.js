@@ -1,0 +1,539 @@
+// Initialize empty array for our items
+let allItems = [];
+
+// Track selected items
+let selectedItems = new Set();
+
+// Batch size for rendering items (for performance)
+const RENDER_BATCH_SIZE = 100;
+
+// Base path for assets (empty for local, '/MinecraftAllImages' for GitHub Pages)
+const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/') 
+    ? '/MinecraftAllImages' 
+    : '';
+
+// Store releases data
+let releases = [];
+
+// Function to load releases from GitHub API
+async function loadReleases() {
+    try {
+        // Use the correct API URL based on whether we're on GitHub Pages or not
+        const apiUrl = 'https://api.github.com/repos/TinyTank800/MinecraftAllImages/releases';
+            
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch releases: ${response.status}`);
+        }
+        
+        releases = await response.json();
+        
+        // Update version selector
+        const versionSelect = document.getElementById('version-select');
+        versionSelect.innerHTML = ''; // Clear existing options
+        
+        // Add latest version option
+        const latestOption = document.createElement('option');
+        latestOption.value = 'latest';
+        latestOption.textContent = 'Latest Version';
+        versionSelect.appendChild(latestOption);
+        
+        // Add other versions
+        releases.forEach(release => {
+            const option = document.createElement('option');
+            option.value = release.tag_name;
+            option.textContent = `${release.tag_name}`;
+            // Add release date if available
+            if (release.published_at) {
+                const date = new Date(release.published_at).toLocaleDateString();
+                option.textContent += ` (${date})`;
+            }
+            versionSelect.appendChild(option);
+        });
+        
+        // Set initial version from URL parameter or localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const versionParam = urlParams.get('version');
+        if (versionParam) {
+            versionSelect.value = versionParam;
+        } else {
+            const savedVersion = localStorage.getItem('selectedVersion');
+            if (savedVersion) {
+                versionSelect.value = savedVersion;
+            }
+        }
+        
+        // Handle version change
+        versionSelect.addEventListener('change', handleVersionChange);
+        
+    } catch (error) {
+        console.error('Error loading releases:', error);
+        // Show error in UI
+        const versionSelect = document.getElementById('version-select');
+        versionSelect.innerHTML = `
+            <option value="latest">Latest Version</option>
+            <option value="1.21.4">1.21.4</option>
+        `;
+        versionSelect.disabled = true;
+        
+        // Show error message to user
+        const repoInfo = document.getElementById('repo-info');
+        repoInfo.innerHTML = `
+            <span style="color: #ff6b6b;">
+                Warning: Unable to load version list. Using default options.
+            </span>
+        `;
+    }
+}
+
+// Function to handle version change
+async function handleVersionChange(event) {
+    const selectedVersion = event.target.value;
+    
+    // Save selection to localStorage
+    localStorage.setItem('selectedVersion', selectedVersion);
+    
+    // Update URL without reloading
+    const url = new URL(window.location.href);
+    url.searchParams.set('version', selectedVersion);
+    window.history.pushState({}, '', url);
+    
+    // Show loading state
+    const gallery = document.getElementById('gallery');
+    gallery.innerHTML = '<div class="loading">Loading version...</div>';
+    
+    if (selectedVersion === 'latest') {
+        // Load latest version from manifest
+        await loadImagesFromManifest();
+    } else {
+        // Find the release asset with the images
+        const release = releases.find(r => r.tag_name === selectedVersion);
+        if (release) {
+            // Look for the ZIP file with the correct naming pattern
+            const asset = release.assets.find(a => 
+                a.name.toLowerCase() === `minecraft-items-${selectedVersion}.zip`
+            );
+            
+            if (asset) {
+                // Download and process the ZIP file
+                try {
+                    const response = await fetch(asset.browser_download_url);
+                    if (!response.ok) {
+                        throw new Error(`Failed to download release: ${response.status}`);
+                    }
+                    
+                    const blob = await response.blob();
+                    const zip = new JSZip();
+                    const contents = await zip.loadAsync(blob);
+                    
+                    // Extract image files
+                    allItems = [];
+                    for (const [filename, file] of Object.entries(contents.files)) {
+                        if (filename.toLowerCase().endsWith('.png')) {
+                            allItems.push(filename);
+                        }
+                    }
+                    
+                    if (allItems.length === 0) {
+                        throw new Error('No PNG images found in the release ZIP file');
+                    }
+                    
+                    // Update UI
+                    document.getElementById('repo-info').textContent = 
+                        `Displaying ${allItems.length} items from version ${selectedVersion}`;
+                    document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+                    
+                    // Display items
+                    filterItems();
+                    
+                } catch (error) {
+                    console.error('Error loading version:', error);
+                    gallery.innerHTML = `
+                        <div class="no-results">
+                            <p>Error loading version ${selectedVersion}:</p>
+                            <p>${error.message}</p>
+                            <p>Please try again or contact support if the issue persists.</p>
+                        </div>
+                    `;
+                }
+            } else {
+                gallery.innerHTML = `
+                    <div class="no-results">
+                        <p>No image ZIP file found in version ${selectedVersion}.</p>
+                        <p>Please ensure the release contains a file named "minecraft-items-${selectedVersion}.zip".</p>
+                    </div>
+                `;
+            }
+        } else {
+            gallery.innerHTML = `
+                <div class="no-results">
+                    <p>Version ${selectedVersion} not found.</p>
+                    <p>Please try selecting a different version.</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Format the displayed name (remove file extension and replace underscores with spaces)
+function formatItemName(filename) {
+    return filename.replace('.png', '').replace(/_/g, ' ');
+}
+
+// Create HTML for a single item
+function createItemElement(filename) {
+    const displayName = formatItemName(filename);
+    
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item';
+    itemDiv.dataset.filename = filename;
+    
+    // If this item is in the selected set, add the selected class
+    if (selectedItems.has(filename)) {
+        itemDiv.classList.add('selected');
+    }
+    
+    const img = document.createElement('img');
+    img.src = `${BASE_PATH}/images/${filename}`; // Using base path
+    img.alt = displayName;
+    img.loading = "lazy"; // Enable lazy loading for better performance
+    
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'item-name';
+    nameDiv.textContent = displayName;
+    
+    const downloadButton = document.createElement('button');
+    downloadButton.className = 'download-button';
+    downloadButton.textContent = 'Download';
+    downloadButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent item selection when clicking download
+        downloadImage(filename);
+    });
+    
+    // Add click handler for selection
+    itemDiv.addEventListener('click', () => {
+        toggleItemSelection(itemDiv, filename);
+    });
+    
+    itemDiv.appendChild(img);
+    itemDiv.appendChild(nameDiv);
+    itemDiv.appendChild(downloadButton);
+    
+    return itemDiv;
+}
+
+// Toggle item selection
+function toggleItemSelection(itemElement, filename) {
+    if (selectedItems.has(filename)) {
+        selectedItems.delete(filename);
+        itemElement.classList.remove('selected');
+    } else {
+        selectedItems.add(filename);
+        itemElement.classList.add('selected');
+    }
+    
+    // Update download button text
+    updateDownloadButton();
+}
+
+// Update the download button text based on selection state
+function updateDownloadButton() {
+    const downloadButton = document.getElementById('download-all');
+    const clearButton = document.getElementById('clear-selection');
+    
+    if (selectedItems.size > 0) {
+        downloadButton.textContent = `Download Selected (${selectedItems.size}) as ZIP`;
+        clearButton.style.display = 'inline-block';
+    } else {
+        downloadButton.textContent = 'Download All as ZIP';
+        clearButton.style.display = 'none';
+    }
+}
+
+// Clear all selected items
+function clearSelection() {
+    selectedItems.clear();
+    
+    // Remove selected class from all items
+    document.querySelectorAll('.item.selected').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    updateDownloadButton();
+}
+
+// Function to download a single image
+function downloadImage(filename) {
+    const link = document.createElement('a');
+    link.href = `${BASE_PATH}/images/${filename}`; // Using base path
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Function to download all filtered images as a ZIP
+async function downloadAllAsZip(items) {
+    const zip = new JSZip();
+    const promises = [];
+    
+    // Add loading state
+    const downloadAllButton = document.getElementById('download-all');
+    const originalText = downloadAllButton.textContent;
+    downloadAllButton.textContent = "Preparing ZIP...";
+    downloadAllButton.disabled = true;
+    
+    // Show progress
+    const progressContainer = document.getElementById('loading-progress');
+    const progressBar = document.getElementById('progress-bar');
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    
+    let completed = 0;
+    
+    // Fetch each image and add to ZIP
+    items.forEach(filename => {
+        const promise = fetch(`${BASE_PATH}/images/${filename}`) // Using base path
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(filename, blob);
+                completed++;
+                const progress = Math.round((completed / items.length) * 100);
+                progressBar.style.width = `${progress}%`;
+            })
+            .catch(error => {
+                console.error(`Error fetching ${filename}:`, error);
+                completed++;
+                const progress = Math.round((completed / items.length) * 100);
+                progressBar.style.width = `${progress}%`;
+            });
+            
+        promises.push(promise);
+    });
+    
+    try {
+        await Promise.all(promises);
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, 'minecraft-items.zip');
+    } catch (error) {
+        console.error('Error creating ZIP:', error);
+        alert('There was an error creating the ZIP file. Please try again.');
+    } finally {
+        // Restore button state
+        downloadAllButton.textContent = originalText;
+        downloadAllButton.disabled = false;
+        progressContainer.style.display = 'none';
+    }
+}
+
+// Filter and display items based on search input
+function filterItems() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const gallery = document.getElementById('gallery');
+    
+    // Clear the gallery
+    gallery.innerHTML = '';
+    
+    // Filter items based on search term
+    const filteredItems = allItems.filter(item => 
+        formatItemName(item).toLowerCase().includes(searchTerm)
+    );
+    
+    // Update stats
+    document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+    document.getElementById('filtered-count').textContent = `Showing: ${filteredItems.length} items`;
+    
+    // Display filtered items or a message if no results
+    if (filteredItems.length > 0) {
+        // Only render the first batch initially for performance with large datasets
+        const initialBatch = filteredItems.slice(0, RENDER_BATCH_SIZE);
+        
+        initialBatch.forEach(item => {
+            gallery.appendChild(createItemElement(item));
+        });
+        
+        // If there are more items, set up lazy loading for the rest
+        if (filteredItems.length > RENDER_BATCH_SIZE) {
+            setupLazyLoading(gallery, filteredItems, RENDER_BATCH_SIZE);
+        }
+    } else {
+        const noResults = document.createElement('div');
+        noResults.className = 'no-results';
+        noResults.textContent = 'No items found. Try a different search term.';
+        gallery.appendChild(noResults);
+    }
+}
+
+// Set up lazy loading for large item sets
+function setupLazyLoading(container, items, startIndex) {
+    // Create an intersection observer
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && startIndex < items.length) {
+            // Load next batch
+            const endIndex = Math.min(startIndex + RENDER_BATCH_SIZE, items.length);
+            const nextBatch = items.slice(startIndex, endIndex);
+            
+            // Remove the loading sentinel
+            const loadingSentinel = entries[0].target;
+            container.removeChild(loadingSentinel);
+            
+            nextBatch.forEach(item => {
+                container.appendChild(createItemElement(item));
+            });
+            
+            // Update the start index for the next batch and add new sentinel
+            // only if there are more items to load
+            if (endIndex < items.length) {
+                setupLazyLoading(container, items, endIndex);
+            }
+            
+            // Stop observing current target
+            observer.disconnect();
+        }
+    });
+    
+    // Add a sentinel element to observe
+    if (startIndex < items.length) {
+        const sentinel = document.createElement('div');
+        sentinel.className = 'loading';
+        sentinel.textContent = 'Loading more items...';
+        container.appendChild(sentinel);
+        
+        // Start observing
+        observer.observe(sentinel);
+    }
+}
+
+// Function to load images from manifest.json file
+async function loadImagesFromManifest() {
+    try {
+        // Show loading message
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = '<div class="loading">Loading items from manifest...</div>';
+        
+        document.getElementById('repo-info').textContent = `Loading items from manifest.json...`;
+        
+        // Initialize allItems array
+        allItems = [];
+        
+        try {
+            // Fetch the manifest file
+            const manifestResponse = await fetch(`${BASE_PATH}/manifest.json`); // Using base path
+            if (!manifestResponse.ok) {
+                throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+            }
+            
+            const manifest = await manifestResponse.json();
+            allItems = manifest.images || [];
+            
+            if (allItems.length === 0) {
+                throw new Error('No images found in manifest');
+            }
+            
+            // Update repository info
+            document.getElementById('repo-info').textContent = 
+                `Displaying ${allItems.length} items from manifest`;
+            
+            // Update stats
+            document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+            
+            // Display the items
+            filterItems();
+            
+        } catch (error) {
+            console.error('Error loading manifest:', error);
+            
+            gallery.innerHTML = `
+                <div class="no-results">
+                    <p>Unable to load images. Please ensure:</p>
+                    <p>1. You've placed a manifest.json file in your repository root with your image filenames.</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error loading image filenames:', error);
+        document.getElementById('gallery').innerHTML = `
+            <div class="no-results">
+                Error loading images: ${error.message}
+            </div>
+        `;
+    }
+}
+
+// Theme toggle functionality
+function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Initialize the gallery
+document.addEventListener('DOMContentLoaded', () => {
+    // Set theme from localStorage if available
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.setAttribute('data-theme', savedTheme);
+    }
+    
+    // Set up theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+    
+    // Load releases first
+    loadReleases().then(() => {
+        // Then load images based on selected version
+        const versionSelect = document.getElementById('version-select');
+        if (versionSelect.value === 'latest') {
+            loadImagesFromManifest();
+        } else {
+            handleVersionChange({ target: versionSelect });
+        }
+    });
+    
+    // Set up search functionality
+    document.getElementById('search-input').addEventListener('input', filterItems);
+    
+    // Set up download all/selected functionality
+    document.getElementById('download-all').addEventListener('click', () => {
+        // If we have items selected, use those
+        if (selectedItems.size > 0) {
+            downloadAllAsZip([...selectedItems]);
+        } else {
+            // Otherwise use the current filtered items
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const filteredItems = allItems.filter(item => 
+                formatItemName(item).toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredItems.length > 0) {
+                downloadAllAsZip(filteredItems);
+            } else {
+                alert('No items to download. Please adjust your search.');
+            }
+        }
+    });
+    
+    // Set up clear selection button
+    document.getElementById('clear-selection').addEventListener('click', clearSelection);
+    
+    // Set up back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    const gallery = document.getElementById('gallery');
+    
+    // Show back to top button when scrolled down
+    gallery.addEventListener('scroll', () => {
+        if (gallery.scrollTop > 500) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top when clicked
+    backToTopButton.addEventListener('click', () => {
+        gallery.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}); 
