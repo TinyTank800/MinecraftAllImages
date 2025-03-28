@@ -79,7 +79,7 @@ async function loadReleases() {
         const versionSelect = document.getElementById('version-select');
         versionSelect.innerHTML = `
             <option value="latest">Latest Version</option>
-            <option value="1.21.4">Version 1.21.4</option>
+            <option value="1.21.4">1.21.4</option>
         `;
         versionSelect.disabled = true;
         
@@ -133,13 +133,16 @@ async function handleVersionChange(event) {
             const zip = new JSZip();
             const contents = await zip.loadAsync(blob);
             
-            // Extract image files
+            // Extract image files and sort them alphabetically
             allItems = [];
             for (const [filename, file] of Object.entries(contents.files)) {
                 if (filename.toLowerCase().endsWith('.png')) {
                     allItems.push(filename);
                 }
             }
+            
+            // Sort items alphabetically
+            allItems.sort((a, b) => a.localeCompare(b));
             
             if (allItems.length === 0) {
                 throw new Error('No PNG images found in the version ZIP file');
