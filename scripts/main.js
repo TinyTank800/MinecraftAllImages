@@ -15,19 +15,9 @@ const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/')
 // Store releases data
 let releases = [];
 
-// Function to load releases from GitHub API
+// Function to load releases from releases folder
 async function loadReleases() {
     try {
-        // Use the correct API URL based on whether we're on GitHub Pages or not
-        const apiUrl = 'https://api.github.com/repos/TinyTank800/MinecraftAllImages/releases';
-            
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch releases: ${response.status}`);
-        }
-        
-        releases = await response.json();
-        
         // Update version selector
         const versionSelect = document.getElementById('version-select');
         versionSelect.innerHTML = ''; // Clear existing options
@@ -38,16 +28,32 @@ async function loadReleases() {
         latestOption.textContent = 'Latest Version';
         versionSelect.appendChild(latestOption);
         
-        // Add other versions
-        releases.forEach(release => {
+        // Try to find available versions by checking ZIP files
+        const versions = new Set();
+        
+        // Check for ZIP files in the releases folder
+        try {
+            const response = await fetch(`${BASE_PATH}/releases/`);
+            const text = await response.text();
+            
+            // Split the response into lines and look for ZIP files
+            const lines = text.split('\n');
+            lines.forEach(line => {
+                if (line.includes('minecraft-items-') && line.endsWith('.zip')) {
+                    // Extract version from filename
+                    const version = line.split('minecraft-items-')[1].replace('.zip', '');
+                    versions.add(version);
+                }
+            });
+        } catch (e) {
+            console.warn('Could not scan releases folder:', e);
+        }
+        
+        // Add found versions to the selector
+        Array.from(versions).sort().reverse().forEach(version => {
             const option = document.createElement('option');
-            option.value = release.tag_name;
-            option.textContent = `${release.tag_name}`;
-            // Add release date if available
-            if (release.published_at) {
-                const date = new Date(release.published_at).toLocaleDateString();
-                option.textContent += ` (${date})`;
-            }
+            option.value = version;
+            option.textContent = `Version ${version}`;
             versionSelect.appendChild(option);
         });
         
@@ -72,7 +78,7 @@ async function loadReleases() {
         const versionSelect = document.getElementById('version-select');
         versionSelect.innerHTML = `
             <option value="latest">Latest Version</option>
-            <option value="1.21.4">1.21.4</option>
+            <option value="1.21.4">Version 1.21.4</option>
         `;
         versionSelect.disabled = true;
         
@@ -106,69 +112,46 @@ async function handleVersionChange(event) {
         // Load latest version from manifest
         await loadImagesFromManifest();
     } else {
-        // Find the release asset with the images
-        const release = releases.find(r => r.tag_name === selectedVersion);
-        if (release) {
-            // Look for the ZIP file with the correct naming pattern
-            const asset = release.assets.find(a => 
-                a.name.toLowerCase() === `minecraft-items-${selectedVersion}.zip`
-            );
+        try {
+            // Load ZIP from the releases folder
+            const zipUrl = `${BASE_PATH}/releases/minecraft-items-${selectedVersion}.zip`;
+            const response = await fetch(zipUrl);
             
-            if (asset) {
-                // Download and process the ZIP file
-                try {
-                    const response = await fetch(asset.browser_download_url);
-                    if (!response.ok) {
-                        throw new Error(`Failed to download release: ${response.status}`);
-                    }
-                    
-                    const blob = await response.blob();
-                    const zip = new JSZip();
-                    const contents = await zip.loadAsync(blob);
-                    
-                    // Extract image files
-                    allItems = [];
-                    for (const [filename, file] of Object.entries(contents.files)) {
-                        if (filename.toLowerCase().endsWith('.png')) {
-                            allItems.push(filename);
-                        }
-                    }
-                    
-                    if (allItems.length === 0) {
-                        throw new Error('No PNG images found in the release ZIP file');
-                    }
-                    
-                    // Update UI
-                    document.getElementById('repo-info').textContent = 
-                        `Displaying ${allItems.length} items from version ${selectedVersion}`;
-                    document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
-                    
-                    // Display items
-                    filterItems();
-                    
-                } catch (error) {
-                    console.error('Error loading version:', error);
-                    gallery.innerHTML = `
-                        <div class="no-results">
-                            <p>Error loading version ${selectedVersion}:</p>
-                            <p>${error.message}</p>
-                            <p>Please try again or contact support if the issue persists.</p>
-                        </div>
-                    `;
-                }
-            } else {
-                gallery.innerHTML = `
-                    <div class="no-results">
-                        <p>No image ZIP file found in version ${selectedVersion}.</p>
-                        <p>Please ensure the release contains a file named "minecraft-items-${selectedVersion}.zip".</p>
-                    </div>
-                `;
+            if (!response.ok) {
+                throw new Error(`Failed to download version: ${response.status}`);
             }
-        } else {
+            
+            const blob = await response.blob();
+            const zip = new JSZip();
+            const contents = await zip.loadAsync(blob);
+            
+            // Extract image files
+            allItems = [];
+            for (const [filename, file] of Object.entries(contents.files)) {
+                if (filename.toLowerCase().endsWith('.png')) {
+                    allItems.push(filename);
+                }
+            }
+            
+            if (allItems.length === 0) {
+                throw new Error('No PNG images found in the version ZIP file');
+            }
+            
+            // Update UI
+            document.getElementById('repo-info').textContent = 
+                `Displaying ${allItems.length} items from version ${selectedVersion}`;
+            document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+            
+            // Display items
+            filterItems();
+            
+        } catch (error) {
+            console.error('Error loading version:', error);
             gallery.innerHTML = `
                 <div class="no-results">
-                    <p>Version ${selectedVersion} not found.</p>
-                    <p>Please try selecting a different version.</p>
+                    <p>Error loading version ${selectedVersion}:</p>
+                    <p>${error.message}</p>
+                    <p>Please try again or contact support if the issue persists.</p>
                 </div>
             `;
         }
