@@ -114,15 +114,22 @@ async function handleVersionChange(event) {
         await loadImagesFromManifest();
     } else {
         try {
-            // Load ZIP from the releases folder
-            const zipUrl = `${BASE_PATH}/releases/minecraft-items-${selectedVersion}.zip`;
-            const response = await fetch(zipUrl);
-            
+            // Get the download URL from GitHub API
+            const response = await fetch(`https://api.github.com/repos/TinyTank800/MinecraftAllImages/contents/releases/minecraft-items-${selectedVersion}.zip`);
             if (!response.ok) {
-                throw new Error(`Failed to download version: ${response.status}`);
+                throw new Error(`Failed to get version info: ${response.status}`);
             }
             
-            const blob = await response.blob();
+            const fileInfo = await response.json();
+            const downloadUrl = fileInfo.download_url;
+            
+            // Download the ZIP file
+            const zipResponse = await fetch(downloadUrl);
+            if (!zipResponse.ok) {
+                throw new Error(`Failed to download version: ${zipResponse.status}`);
+            }
+            
+            const blob = await zipResponse.blob();
             const zip = new JSZip();
             const contents = await zip.loadAsync(blob);
             
