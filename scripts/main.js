@@ -143,6 +143,7 @@ async function handleVersionChange(event) {
         await loadImagesFromManifest();
     } else {
         try {
+            console.log('Fetching version info for:', selectedVersion);
             // Get the download URL from GitHub API
             const response = await fetch(`https://api.github.com/repos/TinyTank800/MinecraftAllImages/contents/releases/minecraft-items-${selectedVersion}.zip`);
             if (!response.ok) {
@@ -150,17 +151,23 @@ async function handleVersionChange(event) {
             }
             
             const fileInfo = await response.json();
+            console.log('File info:', fileInfo);
             const downloadUrl = fileInfo.download_url;
+            console.log('Download URL:', downloadUrl);
             
             // Download the ZIP file
+            console.log('Downloading ZIP file...');
             const zipResponse = await fetch(downloadUrl);
             if (!zipResponse.ok) {
                 throw new Error(`Failed to download version: ${zipResponse.status}`);
             }
             
             const blob = await zipResponse.blob();
+            console.log('ZIP blob size:', blob.size);
             const zip = new JSZip();
+            console.log('Loading ZIP contents...');
             currentZipContents = await zip.loadAsync(blob);
+            console.log('ZIP contents loaded:', Object.keys(currentZipContents.files).length, 'files found');
             
             // Extract image files and sort them alphabetically
             allItems = [];
@@ -169,6 +176,8 @@ async function handleVersionChange(event) {
                     allItems.push(filename);
                 }
             }
+            
+            console.log('Found PNG files:', allItems.length);
             
             // Sort items alphabetically
             allItems.sort((a, b) => a.localeCompare(b));
@@ -222,12 +231,22 @@ function createItemElement(filename) {
     if (currentVersion === 'latest') {
         img.src = `${BASE_PATH}/images/${filename}`;
     } else if (currentZipContents && currentZipContents[filename]) {
+        console.log('Loading image from ZIP:', filename);
         // Create a blob URL from the ZIP contents
         currentZipContents[filename].async('blob').then(blob => {
+            console.log('Created blob for:', filename, 'size:', blob.size);
             const url = URL.createObjectURL(blob);
             img.src = url;
             // Clean up the URL when the image is loaded
-            img.onload = () => URL.revokeObjectURL(url);
+            img.onload = () => {
+                console.log('Image loaded successfully:', filename);
+                URL.revokeObjectURL(url);
+            };
+            img.onerror = (error) => {
+                console.error('Error loading image:', filename, error);
+            };
+        }).catch(error => {
+            console.error('Error creating blob for:', filename, error);
         });
     }
     
