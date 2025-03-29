@@ -15,6 +15,10 @@ const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/')
 // Store releases data
 let releases = [];
 
+// Store current version and ZIP contents
+let currentVersion = 'latest';
+let currentZipContents = null;
+
 // Function to load releases from releases folder
 async function loadReleases() {
     try {
@@ -96,6 +100,7 @@ async function loadReleases() {
 // Function to handle version change
 async function handleVersionChange(event) {
     const selectedVersion = event.target.value;
+    currentVersion = selectedVersion;
     
     // Save selection to localStorage
     localStorage.setItem('selectedVersion', selectedVersion);
@@ -131,11 +136,11 @@ async function handleVersionChange(event) {
             
             const blob = await zipResponse.blob();
             const zip = new JSZip();
-            const contents = await zip.loadAsync(blob);
+            currentZipContents = await zip.loadAsync(blob);
             
             // Extract image files and sort them alphabetically
             allItems = [];
-            for (const [filename, file] of Object.entries(contents.files)) {
+            for (const [filename, file] of Object.entries(currentZipContents.files)) {
                 if (filename.toLowerCase().endsWith('.png')) {
                     allItems.push(filename);
                 }
@@ -188,7 +193,18 @@ function createItemElement(filename) {
     }
     
     const img = document.createElement('img');
-    img.src = `${BASE_PATH}/images/${filename}`; // Using base path
+    
+    // Set image source based on current version
+    if (currentVersion === 'latest') {
+        img.src = `${BASE_PATH}/images/${filename}`;
+    } else if (currentZipContents && currentZipContents[filename]) {
+        // Create a blob URL from the ZIP contents
+        const blob = currentZipContents[filename].async('blob');
+        blob.then(blob => {
+            img.src = URL.createObjectURL(blob);
+        });
+    }
+    
     img.alt = displayName;
     img.loading = "lazy"; // Enable lazy loading for better performance
     
@@ -258,12 +274,26 @@ function clearSelection() {
 
 // Function to download a single image
 function downloadImage(filename) {
-    const link = document.createElement('a');
-    link.href = `${BASE_PATH}/images/${filename}`; // Using base path
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (currentVersion === 'latest') {
+        const link = document.createElement('a');
+        link.href = `${BASE_PATH}/images/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (currentZipContents && currentZipContents[filename]) {
+        // Download from ZIP contents
+        currentZipContents[filename].async('blob').then(blob => {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    }
 }
 
 // Function to download all filtered images as a ZIP
