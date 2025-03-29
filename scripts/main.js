@@ -18,6 +18,7 @@ let releases = [];
 // Store current version and ZIP contents
 let currentVersion = 'latest';
 let currentZipContents = null;
+let fileMap = {}; // maps filename (no path) to full path inside ZIP
 
 // Get script version from URL
 const scriptTag = document.querySelector('script[src*="main.js"]');
@@ -171,9 +172,12 @@ async function handleVersionChange(event) {
             
             // Extract image files and sort them alphabetically
             allItems = [];
+            fileMap = {};
             for (const [filename, file] of Object.entries(currentZipContents.files)) {
-                if (filename.toLowerCase().endsWith('.png')) {
-                    allItems.push(filename);
+                if (!file.dir && filename.toLowerCase().endsWith('.png')) {
+                    const simpleName = filename.split('/').pop();
+                    allItems.push(simpleName);
+                    fileMap[simpleName] = filename;
                 }
             }
             
