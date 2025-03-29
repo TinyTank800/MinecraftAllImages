@@ -223,9 +223,11 @@ function createItemElement(filename) {
         img.src = `${BASE_PATH}/images/${filename}`;
     } else if (currentZipContents && currentZipContents[filename]) {
         // Create a blob URL from the ZIP contents
-        const blob = currentZipContents[filename].async('blob');
-        blob.then(blob => {
-            img.src = URL.createObjectURL(blob);
+        currentZipContents[filename].async('blob').then(blob => {
+            const url = URL.createObjectURL(blob);
+            img.src = url;
+            // Clean up the URL when the image is loaded
+            img.onload = () => URL.revokeObjectURL(url);
         });
     }
     
@@ -297,7 +299,7 @@ function clearSelection() {
 }
 
 // Function to download a single image
-function downloadImage(filename) {
+async function downloadImage(filename) {
     if (currentVersion === 'latest') {
         const link = document.createElement('a');
         link.href = `${BASE_PATH}/images/${filename}`;
@@ -306,17 +308,26 @@ function downloadImage(filename) {
         link.click();
         document.body.removeChild(link);
     } else if (currentZipContents && currentZipContents[filename]) {
-        // Download from ZIP contents
-        currentZipContents[filename].async('blob').then(blob => {
+        try {
+            // Get the file from ZIP
+            const file = currentZipContents[filename];
+            const blob = await file.async('blob');
             const url = URL.createObjectURL(blob);
+            
+            // Create download link
             const link = document.createElement('a');
             link.href = url;
             link.download = filename;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            
+            // Clean up
             URL.revokeObjectURL(url);
-        });
+        } catch (error) {
+            console.error('Error downloading file:', error);
+            alert('Error downloading file. Please try again.');
+        }
     }
 }
 
@@ -339,30 +350,53 @@ async function downloadAllAsZip(items) {
     
     let completed = 0;
     
-    // Fetch each image and add to ZIP
-    items.forEach(filename => {
-        const promise = fetch(`${BASE_PATH}/images/${filename}`) // Using base path
-            .then(response => response.blob())
-            .then(blob => {
-                zip.file(filename, blob);
-                completed++;
-                const progress = Math.round((completed / items.length) * 100);
-                progressBar.style.width = `${progress}%`;
-            })
-            .catch(error => {
-                console.error(`Error fetching ${filename}:`, error);
-                completed++;
-                const progress = Math.round((completed / items.length) * 100);
-                progressBar.style.width = `${progress}%`;
-            });
-            
-        promises.push(promise);
-    });
-    
     try {
+        if (currentVersion === 'latest') {
+            // Fetch each image and add to ZIP
+            items.forEach(filename => {
+                const promise = fetch(`${BASE_PATH}/images/${filename}`)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        zip.file(filename, blob);
+                        completed++;
+                        const progress = Math.round((completed / items.length) * 100);
+                        progressBar.style.width = `${progress}%`;
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching ${filename}:`, error);
+                        completed++;
+                        const progress = Math.round((completed / items.length) * 100);
+                        progressBar.style.width = `${progress}%`;
+                    });
+                    
+                promises.push(promise);
+            });
+        } else if (currentZipContents) {
+            // Copy files from current ZIP
+            items.forEach(filename => {
+                if (currentZipContents[filename]) {
+                    const promise = currentZipContents[filename].async('blob')
+                        .then(blob => {
+                            zip.file(filename, blob);
+                            completed++;
+                            const progress = Math.round((completed / items.length) * 100);
+                            progressBar.style.width = `${progress}%`;
+                        })
+                        .catch(error => {
+                            console.error(`Error processing ${filename}:`, error);
+                            completed++;
+                            const progress = Math.round((completed / items.length) * 100);
+                            progressBar.style.width = `${progress}%`;
+                        });
+                    
+                    promises.push(promise);
+                }
+            });
+        }
+        
         await Promise.all(promises);
         const zipBlob = await zip.generateAsync({ type: 'blob' });
-        saveAs(zipBlob, 'minecraft-items.zip');
+        saveAs(zipBlob, `minecraft-items-${currentVersion}.zip`);
     } catch (error) {
         console.error('Error creating ZIP:', error);
         alert('There was an error creating the ZIP file. Please try again.');
