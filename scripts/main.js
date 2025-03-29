@@ -19,8 +19,29 @@ let releases = [];
 let currentVersion = 'latest';
 let currentZipContents = null;
 
+// Get script version from URL
+const scriptTag = document.querySelector('script[src*="main.js"]');
+const scriptVersion = scriptTag ? scriptTag.src.split('v=')[1] : 'unknown';
+
+// Add version indicator to UI
+const versionIndicator = document.createElement('div');
+versionIndicator.style.cssText = `
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: var(--card-bg);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text-color);
+    opacity: 0.7;
+    z-index: 1000;
+`;
+versionIndicator.textContent = `Script v${scriptVersion}`;
+document.body.appendChild(versionIndicator);
+
 // Log version for debugging
-console.log('MinecraftAllImages Gallery Script Version 1.0.1');
+console.log(`MinecraftAllImages Gallery Script Version: ${scriptVersion}`);
 
 // Function to load releases from releases folder
 async function loadReleases() {
