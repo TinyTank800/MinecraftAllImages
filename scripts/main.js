@@ -19,6 +19,9 @@ let releases = [];
 let currentVersion = 'latest';
 let currentZipContents = null;
 
+// Log version for debugging
+console.log('MinecraftAllImages Gallery Script Version 1.0.1');
+
 // Function to load releases from releases folder
 async function loadReleases() {
     try {
