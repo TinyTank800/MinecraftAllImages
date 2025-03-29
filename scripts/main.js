@@ -12,13 +12,11 @@ const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/')
     ? '/MinecraftAllImages' 
     : '';
 
-// Store releases data
-let releases = [];
-
-// Store current version and ZIP contents
+// Store versions information
+let availableVersions = [];
+let baseVersion = '1.21.4'; // Default base version
 let currentVersion = 'latest';
-let currentZipContents = null;
-let fileMap = {}; // maps filename (no path) to full path inside ZIP
+let loadedImages = new Map(); // Map to track which version each image comes from
 
 // Get script version from URL
 const scriptTag = document.querySelector('script[src*="main.js"]');
@@ -44,8 +42,8 @@ document.body.appendChild(versionIndicator);
 // Log version for debugging
 console.log(`MinecraftAllImages Gallery Script Version: ${scriptVersion}`);
 
-// Function to load releases from releases folder
-async function loadReleases() {
+// Function to load available versions
+async function loadVersions() {
     try {
         // Update version selector
         const versionSelect = document.getElementById('version-select');
@@ -57,35 +55,43 @@ async function loadReleases() {
         latestOption.textContent = 'Latest Version';
         versionSelect.appendChild(latestOption);
         
-        // Try to find available versions by checking ZIP files
-        const versions = new Set();
-        
-        // Check for ZIP files in the releases folder using GitHub API
+        // Try to find available versions by checking version folders
         try {
-            const response = await fetch('https://api.github.com/repos/TinyTank800/MinecraftAllImages/contents/releases');
+            const response = await fetch(`${BASE_PATH}/images`);
             if (!response.ok) {
-                throw new Error(`Failed to fetch releases: ${response.status}`);
+                throw new Error(`Failed to fetch versions: ${response.status}`);
             }
             
-            const files = await response.json();
-            files.forEach(file => {
-                if (file.name.includes('minecraft-items-') && file.name.endsWith('.zip')) {
-                    // Extract version from filename
-                    const version = file.name.split('minecraft-items-')[1].replace('.zip', '');
-                    versions.add(version);
-                }
+            const data = await response.json();
+            
+            // Filter for version folders (exclude base folder)
+            availableVersions = data
+                .filter(item => item.type === 'dir' && item.name !== 'base')
+                .map(item => item.name)
+                .sort((a, b) => compareVersions(b, a)); // Sort in descending order
+            
+            console.log('Available versions:', availableVersions);
+            
+            // Add versions to selector
+            availableVersions.forEach(version => {
+                const option = document.createElement('option');
+                option.value = version;
+                option.textContent = version;
+                versionSelect.appendChild(option);
             });
+            
         } catch (e) {
-            console.warn('Could not scan releases folder:', e);
+            console.warn('Could not scan versions folder:', e);
+            // Fallback to hardcoded versions
+            const hardcodedVersions = ['1.21.5', '1.21.4'];
+            hardcodedVersions.forEach(version => {
+                availableVersions.push(version);
+                const option = document.createElement('option');
+                option.value = version;
+                option.textContent = version;
+                versionSelect.appendChild(option);
+            });
         }
-        
-        // Add found versions to the selector
-        Array.from(versions).sort().reverse().forEach(version => {
-            const option = document.createElement('option');
-            option.value = version;
-            option.textContent = `${version}`;
-            versionSelect.appendChild(option);
-        });
         
         // Set initial version from URL parameter or localStorage
         const urlParams = new URLSearchParams(window.location.search);
@@ -102,24 +108,34 @@ async function loadReleases() {
         // Handle version change
         versionSelect.addEventListener('change', handleVersionChange);
         
-    } catch (error) {
-        console.error('Error loading releases:', error);
-        // Show error in UI
-        const versionSelect = document.getElementById('version-select');
-        versionSelect.innerHTML = `
-            <option value="latest">Latest Version</option>
-            <option value="1.21.4">1.21.4</option>
-        `;
-        versionSelect.disabled = true;
+        // Load initial version
+        handleVersionChange({ target: versionSelect });
         
-        // Show error message to user
-        const repoInfo = document.getElementById('repo-info');
-        repoInfo.innerHTML = `
+    } catch (error) {
+        console.error('Error loading versions:', error);
+        // Show error in UI
+        document.getElementById('repo-info').innerHTML = `
             <span style="color: #ff6b6b;">
                 Warning: Unable to load version list. Using default options.
             </span>
         `;
     }
+}
+
+// Helper function to compare version numbers
+function compareVersions(a, b) {
+    const aParts = a.split('.').map(Number);
+    const bParts = b.split('.').map(Number);
+    
+    for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+        const aVal = aParts[i] || 0;
+        const bVal = bParts[i] || 0;
+        if (aVal !== bVal) {
+            return aVal - bVal;
+        }
+    }
+    
+    return 0;
 }
 
 // Function to handle version change
@@ -139,75 +155,126 @@ async function handleVersionChange(event) {
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '<div class="loading">Loading version...</div>';
     
-    if (selectedVersion === 'latest') {
-        // Load latest version from manifest
-        await loadImagesFromManifest();
-    } else {
-        try {
-            console.log('Fetching version info for:', selectedVersion);
-            // Get the download URL from GitHub API
-            const response = await fetch(`https://api.github.com/repos/TinyTank800/MinecraftAllImages/contents/releases/minecraft-items-${selectedVersion}.zip`);
-            if (!response.ok) {
-                throw new Error(`Failed to get version info: ${response.status}`);
+    try {
+        // Reset tracking
+        loadedImages.clear();
+        allItems = [];
+        
+        // Load base images first
+        await loadBaseImages();
+        
+        // Load version-specific changes
+        if (selectedVersion === 'latest') {
+            // For latest, load all versions in sequence
+            const sortedVersions = [...availableVersions].sort((a, b) => compareVersions(a, b));
+            for (const version of sortedVersions) {
+                await loadVersionChanges(version);
             }
-            
-            const fileInfo = await response.json();
-            console.log('File info:', fileInfo);
-            const downloadUrl = fileInfo.download_url;
-            console.log('Download URL:', downloadUrl);
-            
-            // Download the ZIP file
-            console.log('Downloading ZIP file...');
-            const zipResponse = await fetch(downloadUrl);
-            if (!zipResponse.ok) {
-                throw new Error(`Failed to download version: ${zipResponse.status}`);
+        } else {
+            // For specific version, load changes up to and including selected version
+            const sortedVersions = [...availableVersions]
+                .filter(v => compareVersions(v, selectedVersion) <= 0)
+                .sort((a, b) => compareVersions(a, b));
+                
+            for (const version of sortedVersions) {
+                await loadVersionChanges(version);
+                if (version === selectedVersion) break;
             }
-            
-            const blob = await zipResponse.blob();
-            console.log('ZIP blob size:', blob.size);
-            const zip = new JSZip();
-            console.log('Loading ZIP contents...');
-            currentZipContents = await zip.loadAsync(blob);
-            console.log('ZIP contents loaded:', Object.keys(currentZipContents.files).length, 'files found');
-            
-            // Extract image files and sort them alphabetically
-            allItems = [];
-            fileMap = {};
-            for (const [filename, file] of Object.entries(currentZipContents.files)) {
-                if (!file.dir && filename.toLowerCase().endsWith('.png')) {
-                    const simpleName = filename.split('/').pop();
-                    allItems.push(simpleName);
-                    fileMap[simpleName] = filename;
-                }
-            }
-            
-            console.log('Found PNG files:', allItems.length);
-            
-            // Sort items alphabetically
-            allItems.sort((a, b) => a.localeCompare(b));
-            
-            if (allItems.length === 0) {
-                throw new Error('No PNG images found in the version ZIP file');
-            }
-            
-            // Update UI
-            document.getElementById('repo-info').textContent = 
-                `Displaying ${allItems.length} items from version ${selectedVersion}`;
-            document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
-            
-            // Display items
-            filterItems();
-            
-        } catch (error) {
-            console.error('Error loading version:', error);
-            gallery.innerHTML = `
-                <div class="no-results">
-                    <p>Error loading version ${selectedVersion}:</p>
-                    <p>${error.message}</p>
-                    <p>Please try again or contact support if the issue persists.</p>
-                </div>
-            `;
         }
+        
+        // Sort items alphabetically
+        allItems.sort((a, b) => a.localeCompare(b));
+        
+        // Update UI
+        document.getElementById('repo-info').textContent = 
+            `Displaying ${allItems.length} items ${selectedVersion === 'latest' ? 'from latest version' : `from version ${selectedVersion}`}`;
+        document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
+        
+        // Display items
+        filterItems();
+        
+    } catch (error) {
+        console.error(`Error loading version ${selectedVersion}:`, error);
+        gallery.innerHTML = `
+            <div class="no-results">
+                <p>Error loading version ${selectedVersion}:</p>
+                <p>${error.message}</p>
+                <p>Please try again or contact support if the issue persists.</p>
+            </div>
+        `;
+    }
+}
+
+// Function to load base images
+async function loadBaseImages() {
+    try {
+        console.log('Loading base images...');
+        const response = await fetch(`${BASE_PATH}/images/base/manifest.json`);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch base manifest: ${response.status}`);
+        }
+        
+        const manifest = await response.json();
+        const baseImages = manifest.images || [];
+        
+        // Add all base images to our list and track their source
+        baseImages.forEach(image => {
+            allItems.push(image);
+            loadedImages.set(image, 'base');
+        });
+        
+        console.log(`Loaded ${baseImages.length} base images`);
+    } catch (error) {
+        console.error('Error loading base images:', error);
+        throw error;
+    }
+}
+
+// Function to load version-specific changes
+async function loadVersionChanges(version) {
+    try {
+        console.log(`Loading changes for version ${version}...`);
+        const response = await fetch(`${BASE_PATH}/images/${version}/changes.json`);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch changes for ${version}: ${response.status}`);
+        }
+        
+        const changes = await response.json();
+        
+        // Apply changes to our item list
+        
+        // Handle added items
+        for (const addedItem of changes.added || []) {
+            if (!allItems.includes(addedItem)) {
+                allItems.push(addedItem);
+            }
+            loadedImages.set(addedItem, version);
+        }
+        
+        // Handle modified items (update their source)
+        for (const modifiedItem of changes.modified || []) {
+            if (!allItems.includes(modifiedItem)) {
+                allItems.push(modifiedItem);
+            }
+            loadedImages.set(modifiedItem, version);
+        }
+        
+        // Handle removed items
+        for (const removedItem of changes.removed || []) {
+            const index = allItems.indexOf(removedItem);
+            if (index !== -1) {
+                allItems.splice(index, 1);
+            }
+            loadedImages.delete(removedItem);
+        }
+        
+        console.log(`Applied changes for version ${version}: +${changes.added.length} ~${changes.modified.length} -${changes.removed.length}`);
+    } catch (error) {
+        console.error(`Error loading changes for ${version}:`, error);
+        // Don't throw here - we want to continue if one version fails
+        console.warn(`Skipping version ${version} due to error`);
     }
 }
 
@@ -231,31 +298,24 @@ function createItemElement(filename) {
     
     const img = document.createElement('img');
     
-    // Set image source based on current version
-    if (currentVersion === 'latest') {
-        img.src = `${BASE_PATH}/images/${filename}`;
-    } else if (currentZipContents && currentZipContents[filename]) {
-        console.log('Loading image from ZIP:', filename);
-        // Create a blob URL from the ZIP contents
-        currentZipContents[filename].async('blob').then(blob => {
-            console.log('Created blob for:', filename, 'size:', blob.size);
-            const url = URL.createObjectURL(blob);
-            img.src = url;
-            // Clean up the URL when the image is loaded
-            img.onload = () => {
-                console.log('Image loaded successfully:', filename);
-                URL.revokeObjectURL(url);
-            };
-            img.onerror = (error) => {
-                console.error('Error loading image:', filename, error);
-            };
-        }).catch(error => {
-            console.error('Error creating blob for:', filename, error);
-        });
+    // Get version this image comes from
+    const imageVersion = loadedImages.get(filename);
+    
+    // Set image source based on version
+    if (imageVersion === 'base') {
+        img.src = `${BASE_PATH}/images/base/${filename}`;
+    } else {
+        img.src = `${BASE_PATH}/images/${imageVersion}/${filename}`;
     }
     
     img.alt = displayName;
     img.loading = "lazy"; // Enable lazy loading for better performance
+    
+    // Add error handling for broken images
+    img.onerror = function() {
+        console.warn(`Image not found: ${filename} from version ${imageVersion}`);
+        this.src = `${BASE_PATH}/assets/missing.png`; // Fallback image
+    };
     
     const nameDiv = document.createElement('div');
     nameDiv.className = 'item-name';
@@ -322,113 +382,22 @@ function clearSelection() {
 }
 
 // Function to download a single image
-async function downloadImage(filename) {
-    if (currentVersion === 'latest') {
-        const link = document.createElement('a');
-        link.href = `${BASE_PATH}/images/${filename}`;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else if (currentZipContents && currentZipContents[filename]) {
-        try {
-            // Get the file from ZIP
-            const file = currentZipContents[filename];
-            const blob = await file.async('blob');
-            const url = URL.createObjectURL(blob);
-            
-            // Create download link
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Clean up
-            URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error('Error downloading file:', error);
-            alert('Error downloading file. Please try again.');
-        }
+function downloadImage(filename) {
+    const imageVersion = loadedImages.get(filename);
+    let imageUrl;
+    
+    if (imageVersion === 'base') {
+        imageUrl = `${BASE_PATH}/images/base/${filename}`;
+    } else {
+        imageUrl = `${BASE_PATH}/images/${imageVersion}/${filename}`;
     }
-}
-
-// Function to download all filtered images as a ZIP
-async function downloadAllAsZip(items) {
-    const zip = new JSZip();
-    const promises = [];
     
-    // Add loading state
-    const downloadAllButton = document.getElementById('download-all');
-    const originalText = downloadAllButton.textContent;
-    downloadAllButton.textContent = "Preparing ZIP...";
-    downloadAllButton.disabled = true;
-    
-    // Show progress
-    const progressContainer = document.getElementById('loading-progress');
-    const progressBar = document.getElementById('progress-bar');
-    progressContainer.style.display = 'block';
-    progressBar.style.width = '0%';
-    
-    let completed = 0;
-    
-    try {
-        if (currentVersion === 'latest') {
-            // Fetch each image and add to ZIP
-            items.forEach(filename => {
-                const promise = fetch(`${BASE_PATH}/images/${filename}`)
-                    .then(response => response.blob())
-                    .then(blob => {
-                        zip.file(filename, blob);
-                        completed++;
-                        const progress = Math.round((completed / items.length) * 100);
-                        progressBar.style.width = `${progress}%`;
-                    })
-                    .catch(error => {
-                        console.error(`Error fetching ${filename}:`, error);
-                        completed++;
-                        const progress = Math.round((completed / items.length) * 100);
-                        progressBar.style.width = `${progress}%`;
-                    });
-                    
-                promises.push(promise);
-            });
-        } else if (currentZipContents) {
-            // Copy files from current ZIP
-            items.forEach(filename => {
-                if (currentZipContents[filename]) {
-                    const promise = currentZipContents[filename].async('blob')
-                        .then(blob => {
-                            zip.file(filename, blob);
-                            completed++;
-                            const progress = Math.round((completed / items.length) * 100);
-                            progressBar.style.width = `${progress}%`;
-                        })
-                        .catch(error => {
-                            console.error(`Error processing ${filename}:`, error);
-                            completed++;
-                            const progress = Math.round((completed / items.length) * 100);
-                            progressBar.style.width = `${progress}%`;
-                        });
-                    
-                    promises.push(promise);
-                }
-            });
-        }
-        
-        await Promise.all(promises);
-        const zipBlob = await zip.generateAsync({ type: 'blob' });
-        saveAs(zipBlob, `minecraft-items-${currentVersion}.zip`);
-    } catch (error) {
-        console.error('Error creating ZIP:', error);
-        alert('There was an error creating the ZIP file. Please try again.');
-    } finally {
-        // Restore button state
-        downloadAllButton.textContent = originalText;
-        downloadAllButton.disabled = false;
-        progressContainer.style.display = 'none';
-    }
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Filter and display items based on search input
@@ -509,59 +478,71 @@ function setupLazyLoading(container, items, startIndex) {
     }
 }
 
-// Function to load images from manifest.json file
-async function loadImagesFromManifest() {
+// Function to download all filtered images as a ZIP
+async function downloadAllAsZip(items) {
+    const zip = new JSZip();
+    const promises = [];
+    
+    // Add loading state
+    const downloadAllButton = document.getElementById('download-all');
+    const originalText = downloadAllButton.textContent;
+    downloadAllButton.textContent = "Preparing ZIP...";
+    downloadAllButton.disabled = true;
+    
+    // Show progress
+    const progressContainer = document.getElementById('loading-progress');
+    const progressBar = document.getElementById('progress-bar');
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    
+    let completed = 0;
+    
     try {
-        // Show loading message
-        const gallery = document.getElementById('gallery');
-        gallery.innerHTML = '<div class="loading">Loading items from manifest...</div>';
-        
-        document.getElementById('repo-info').textContent = `Loading items from manifest.json...`;
-        
-        // Initialize allItems array
-        allItems = [];
-        
-        try {
-            // Fetch the manifest file
-            const manifestResponse = await fetch(`${BASE_PATH}/manifest.json`); // Using base path
-            if (!manifestResponse.ok) {
-                throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+        // Fetch each image and add to ZIP
+        for (const filename of items) {
+            const imageVersion = loadedImages.get(filename);
+            let imageUrl;
+            
+            if (imageVersion === 'base') {
+                imageUrl = `${BASE_PATH}/images/base/${filename}`;
+            } else {
+                imageUrl = `${BASE_PATH}/images/${imageVersion}/${filename}`;
             }
             
-            const manifest = await manifestResponse.json();
-            allItems = manifest.images || [];
-            
-            if (allItems.length === 0) {
-                throw new Error('No images found in manifest');
-            }
-            
-            // Update repository info
-            document.getElementById('repo-info').textContent = 
-                `Displaying ${allItems.length} items from manifest`;
-            
-            // Update stats
-            document.getElementById('total-count').textContent = `Total: ${allItems.length} items`;
-            
-            // Display the items
-            filterItems();
-            
-        } catch (error) {
-            console.error('Error loading manifest:', error);
-            
-            gallery.innerHTML = `
-                <div class="no-results">
-                    <p>Unable to load images. Please ensure:</p>
-                    <p>1. You've placed a manifest.json file in your repository root with your image filenames.</p>
-                </div>
-            `;
+            const promise = fetch(imageUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch ${filename}: ${response.status}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    zip.file(filename, blob);
+                    completed++;
+                    const progress = Math.round((completed / items.length) * 100);
+                    progressBar.style.width = `${progress}%`;
+                })
+                .catch(error => {
+                    console.error(`Error fetching ${filename}:`, error);
+                    completed++;
+                    const progress = Math.round((completed / items.length) * 100);
+                    progressBar.style.width = `${progress}%`;
+                });
+                
+            promises.push(promise);
         }
+        
+        await Promise.all(promises);
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `minecraft-items-${currentVersion}.zip`);
     } catch (error) {
-        console.error('Error loading image filenames:', error);
-        document.getElementById('gallery').innerHTML = `
-            <div class="no-results">
-                Error loading images: ${error.message}
-            </div>
-        `;
+        console.error('Error creating ZIP:', error);
+        alert('There was an error creating the ZIP file. Please try again.');
+    } finally {
+        // Restore button state
+        downloadAllButton.textContent = originalText;
+        downloadAllButton.disabled = false;
+        progressContainer.style.display = 'none';
     }
 }
 
@@ -584,16 +565,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set up theme toggle
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
     
-    // Load releases first
-    loadReleases().then(() => {
-        // Then load images based on selected version
-        const versionSelect = document.getElementById('version-select');
-        if (versionSelect.value === 'latest') {
-            loadImagesFromManifest();
-        } else {
-            handleVersionChange({ target: versionSelect });
-        }
-    });
+    // Load versions
+    loadVersions();
     
     // Set up search functionality
     document.getElementById('search-input').addEventListener('input', filterItems);
@@ -641,4 +614,4 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
     });
-}); 
+});
