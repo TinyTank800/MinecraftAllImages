@@ -609,6 +609,8 @@ async function downloadItemsAsZip(items, zipFilename) {
     let completedGathering = 0;
     const totalItems = items.length;
     const imageData = []; // Array to hold { filename, blob } pairs
+    let cacheHits = 0; // Counter for cache hits
+    let cacheMisses = 0; // Counter for cache misses (fetches)
     const BATCH_SIZE = 10; // Keep batching for fetches
 
     try {
@@ -634,12 +636,14 @@ async function downloadItemsAsZip(items, zipFilename) {
 
                     if (cachedResponse && cachedResponse.ok) {
                         // 1a. Cache Hit
-                        // console.log(`Cache hit for: ${filename}`);
+                        // console.log(`Cache hit for: ${filename}`); // Removed per-item logging
+                        cacheHits++;
                         const blob = await cachedResponse.blob();
                         return { filename, blob };
                     } else {
                         // 1b. Cache Miss - Fetch
-                        // console.log(`Cache miss for: ${filename}. Fetching...`);
+                        // console.log(`Cache miss for: ${filename}. Fetching...`); // Removed per-item logging
+                        cacheMisses++;
                         const fetchResponse = await fetch(imageUrl);
                         if (!fetchResponse.ok) {
                             throw new Error(`Fetch failed: ${fetchResponse.status}`);
@@ -649,7 +653,7 @@ async function downloadItemsAsZip(items, zipFilename) {
 
                         // 2. Store in Cache
                         await cache.put(imageUrl, responseToCache);
-                        // console.log(`Cached fetched response for: ${filename}`);
+                        // console.log(`Cached fetched response for: ${filename}`); // Removed per-item logging
                         return { filename, blob };
                     }
                 } catch (error) {
@@ -683,6 +687,7 @@ async function downloadItemsAsZip(items, zipFilename) {
         }
 
         console.log(`Phase 1 Complete: Gathered ${imageData.length} blobs successfully out of ${totalItems} requested.`);
+        console.log(`Cache Stats: Hits = ${cacheHits}, Fetches = ${cacheMisses}`); // Added summary logging
 
         if (imageData.length === 0) {
              throw new Error("No images could be gathered (all failed or were skipped).");

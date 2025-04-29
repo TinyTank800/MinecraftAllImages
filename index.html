@@ -86,28 +86,31 @@
         </button>
         <div id="info-section" class="info-section" role="region" aria-labelledby="toggle-info-button">
             <h2>About This Project</h2>
-            <p>This gallery showcases Minecraft item images captured from the in-game hotbar and formatted consistently. Ideal for wikis, guides, resource packs, server websites, etc.</p>
+            <p>This gallery showcases Minecraft item images captured from the in-game hotbar and formatted consistently. Ideal for wikis, guides, resource pack, server websites, and more.</p>
 
             <h2>Key Features</h2>
             <ul>
                 <li><strong>Search:</strong> Quickly find items by name.</li>
-                <li><strong>Selection:</strong> Click item cards to select multiple items.</li>
-                <li><strong>Details & Download:</strong> Click the (i) icon on an item to view details and download it individually.</li>
+                <li><strong>Selection:</strong> Click item cards to select multiple items for bulk download.</li>
+                <li><strong>Details & Download:</strong> Click the <code>(i)</code> icon on an item to view details and download it individually.</li>
                 <li><strong>Bulk Download:</strong> Use the "Download Selected" or "Download All" buttons to get a ZIP archive.</li>
-                <li><strong>Versioning:</strong> Select specific Minecraft versions to see how item textures appeared then (or select "Latest").</li>
-                <li><strong>Updates:</strong> Automatically displays new images when added.</li>
-                <li><strong>Responsive:</strong> Works on desktop and mobile.</li>
-                <li><strong>Dark/Light Mode:</strong> Choose your preferred theme.</li>
+                <li><strong>Efficient Downloads:</strong> Uses <strong>browser caching</strong> to significantly speed up subsequent ZIP downloads and reduce network requests after the first time images are loaded.</li>
+                <li><strong>Versioning:</strong> Select specific Minecraft versions (or "Latest") to see how item textures appeared at that time.</li>
+                <li><strong>Updates:</strong> Automatically displays new images when the underlying data is updated.</li>
+                <li><strong>Responsive:</strong> Works smoothly on desktop and mobile devices.</li>
+                <li><strong>Dark/Light Mode:</strong> Choose your preferred visual theme.</li>
             </ul>
 
             <h2>How It Works (Simplified)</h2>
-            <p>The site loads a base set of images and then applies changes (additions, modifications, removals) from specific version folders up to the selected version. This ensures you see the correct textures for that version.</p>
+            <p>The site loads a base set of images. It then intelligently applies changes (additions, modifications, removals) tracked in version-specific files (<code>changes.json</code>) up to the version you select. This ensures you see the correct textures for that particular version or the most recent ones if "Latest" is chosen. Image data is stored efficiently using browser caching once loaded.</p>
 
-             <h2>Technical Details</h2>
-             <ul>
-                <li>Built with plain HTML, CSS, and JavaScript.</li>
-                <li>Uses JSZip and FileSaver.js for ZIP functionality.</li>
-             </ul>
+            <h2>Technical Details</h2>
+            <ul>
+                <li>Built with plain HTML, CSS, and JavaScript – no frameworks.</li>
+                <li>Uses <strong>JSZip</strong> and <strong>FileSaver.js</strong> for client-side ZIP creation and saving.</li>
+                <li>Leverages the <strong>Cache Storage API</strong> for optimized image fetching and storage during the download process.</li>
+                <li>Image availability across versions is managed via a base <code>manifest.json</code> and version-specific <code>changes.json</code> files.</li>
+            </ul>
 
             <hr class="styled-hr">
              <p><em>This project is not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang AB.</em></p>

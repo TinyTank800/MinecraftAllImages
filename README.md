@@ -8,10 +8,15 @@ A searchable, downloadable gallery of Minecraft item images captured from the in
 
 ## 🔧 Features
 
-- 🔍 **Search** - Quickly find items by name
-- 📥 **Download** - Get individual items or download all as a ZIP
-- 🔄 **Automatic Updates** - Gallery automatically displays new images when added to the repository
-- 📱 **Responsive Design** - Works on desktop and mobile devices
+- 🔍 **Search:** Quickly find items by name.
+-🖱️ **Selection:** Click item cards to select multiple items for bulk download.
+- ℹ️ **Details & Download:** Click the `(i)` icon on an item to view details and download it individually.
+- 📚 **Bulk Download:** Use the "Download Selected" or "Download All" buttons to get a ZIP archive.
+-⚡ **Efficient Downloads:** Uses browser caching (including Cache Storage API) to significantly speed up subsequent ZIP downloads.
+- 📅 **Versioning:** Select specific Minecraft versions (or "Latest") to see historical item textures.
+- ✨ **Automatic Updates:** Gallery automatically displays new images when the underlying data is updated.
+- 📱 **Responsive Design:** Works smoothly on desktop and mobile devices.
+-🎨 **Dark/Light Mode:** Choose your preferred visual theme.
 
 ## About This Project
 
@@ -27,23 +32,23 @@ This gallery showcases Minecraft item images that have been captured from the in
 
 ## 🛠️ How It Works
 
-The gallery website uses the GitHub API to dynamically fetch all images from the repository's `images` folder. When a user visits the site, it:
+The gallery loads a base set of images defined in `manifest.json`. It then intelligently applies version-specific changes (additions, modifications, removals) tracked in `changes.json` files for the selected Minecraft version. This ensures you see the correct textures for that particular version or the most recent ones if "Latest" is chosen.
 
-1. Detects your GitHub username and repository from the URL
-2. Queries the GitHub API to get a list of all images in the repository
-3. Renders them in a responsive, searchable grid
-4. Provides download functionality for individual images or all images as a ZIP
+To optimize loading and download speeds, the site heavily utilizes browser caching, including the Cache Storage API, to store images locally after they are first loaded.
 
 ---
 
-## 📂 Using This Template
+## 📂 Project Structure
 
-### For Your Own Minecraft Item Gallery
+This section details the main components of the project:
 
-1. Fork this repository
-2. Replace the images in the `images` folder with your own Minecraft item screenshots
-3. Enable GitHub Pages in your repository settings
-4. Your gallery will be available at `https://[your-username].github.io/[repository-name]/`
+- `index.html`: The main page structure.
+- `styles/`: Contains CSS for styling.
+- `scripts/`: Contains the JavaScript for functionality (search, sort, download, caching, versioning).
+- `images/`: Stores the actual Minecraft item images.
+- `manifest.json`: Defines the base set of items and their initial image files.
+- `changes.json`: Located in version-specific directories (e.g., `1.20.1/changes.json`), these files track item additions, removals, or texture updates compared to the base manifest.
+- `versions.json`: Lists the available Minecraft versions for the dropdown selector.
 
 ### Requirements
 
@@ -72,6 +77,7 @@ The gallery is built using:
 
 - Plain HTML, CSS, and JavaScript (no frameworks)
 - JSZip and FileSaver.js for creating and downloading ZIP files
+- The Cache Storage API for optimized image fetching and storage, enhancing download performance.
 
 ## License
 
