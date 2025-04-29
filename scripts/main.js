@@ -590,125 +590,156 @@ function downloadSingleItem(filename) {
 
 async function downloadItemsAsZip(items, zipFilename) {
     const zip = new JSZip();
-    
-    // Add loading state
-    const downloadAllButton = document.getElementById('download-all');
-    const originalText = downloadAllButton.textContent;
-    downloadAllButton.textContent = "Preparing ZIP...";
-    downloadAllButton.disabled = true;
-    
-    // Show progress (progress bar display/reset is now handled in handleDownloadClick)
+    const downloadButton = document.getElementById('download-all'); // Renamed for clarity
+    const originalText = downloadButton.textContent;
     const progressContainer = document.getElementById('loading-progress');
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
-    // Ensure text starts at 0% visually
-    progressText.textContent = '0%'; 
-    progressBar.style.width = '0%'; // Ensure bar starts at 0% visually
-    progressBar.classList.remove('error'); // Ensure no stale error state
-    
-    let completed = 0;
+    const CACHE_NAME = 'minecraft-image-cache-v1'; // Cache name
+
+    // --- Phase 1: Gather Image Blobs (Check Cache, Fetch if Missing) ---
+    console.log(`Starting Phase 1: Gathering ${items.length} items...`);
+    downloadButton.textContent = "Gathering images...";
+    downloadButton.disabled = true;
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    progressBar.classList.remove('error');
+    progressText.textContent = 'Gathering: 0%';
+
+    let completedGathering = 0;
     const totalItems = items.length;
-    
+    const imageData = []; // Array to hold { filename, blob } pairs
+    const BATCH_SIZE = 10; // Keep batching for fetches
+
     try {
-        // Process items in small batches to avoid overwhelming the browser
-        const BATCH_SIZE = 10; // Process 10 images at a time
-        console.log(`Starting ZIP download in batches of ${BATCH_SIZE}`);
-        
+        const cache = await caches.open(CACHE_NAME); // Open cache once
+
         for (let i = 0; i < totalItems; i += BATCH_SIZE) {
-            // Get the current batch of items
             const batch = items.slice(i, i + BATCH_SIZE);
-            console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(totalItems / BATCH_SIZE)} (Items ${i + 1}-${Math.min(i + BATCH_SIZE, totalItems)})`);
-            
-            // Process this batch in parallel
-            const batchPromises = batch.map(filename => {
+            console.log(`Gathering batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(totalItems / BATCH_SIZE)}`);
+
+            const batchPromises = batch.map(async (filename) => {
                 const imageVersion = loadedImages.get(filename);
                 const imageUrl = getItemImageUrl(filename, imageVersion);
-                
-                // Skip missing images
+
+                // Skip known missing/placeholder images early
                 if (imageUrl.endsWith('/assets/missing.png')) {
-                    console.warn(`Skipping missing/unknown image in ZIP: ${filename}`);
-                    return Promise.resolve(null); // Resolve with null for progress tracking
+                    console.warn(`Skipping placeholder image: ${filename}`);
+                    return null; // Indicate skipped
                 }
-                
-                // Fetch the image
-                return fetch(imageUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            // Log specific error but continue batch
-                            console.error(`Failed to fetch ${filename}: ${response.status}`);
-                            return null; // Treat as failed, return null
-                            // throw new Error(`Failed to fetch ${filename}: ${response.status}`); // Original: throws, stops Promise.all
+
+                try {
+                    // 1. Check Cache
+                    const cachedResponse = await cache.match(imageUrl);
+
+                    if (cachedResponse && cachedResponse.ok) {
+                        // 1a. Cache Hit
+                        // console.log(`Cache hit for: ${filename}`);
+                        const blob = await cachedResponse.blob();
+                        return { filename, blob };
+                    } else {
+                        // 1b. Cache Miss - Fetch
+                        // console.log(`Cache miss for: ${filename}. Fetching...`);
+                        const fetchResponse = await fetch(imageUrl);
+                        if (!fetchResponse.ok) {
+                            throw new Error(`Fetch failed: ${fetchResponse.status}`);
                         }
-                        return response.blob().then(blob => ({ filename, blob }));
-                    })
-                    .catch(error => {
-                        // Log specific error but continue batch
-                        console.error(`Error fetching ${filename}:`, error);
-                        return null; // Treat as failed, return null
-                    });
-            });
-            
-            // Wait for this batch to complete
-            const batchResults = await Promise.all(batchPromises);
-            
-            // Add successful results to ZIP and update progress
-            batchResults.forEach(result => {
-                if (result) {
-                    try {
-                        zip.file(result.filename, result.blob);
-                    } catch (zipError) {
-                        console.error(`Error adding file ${result.filename} to zip:`, zipError);
-                        // Optionally alert user or handle differently
+                        const responseToCache = fetchResponse.clone(); // Clone for caching
+                        const blob = await fetchResponse.blob();
+
+                        // 2. Store in Cache
+                        await cache.put(imageUrl, responseToCache);
+                        // console.log(`Cached fetched response for: ${filename}`);
+                        return { filename, blob };
                     }
+                } catch (error) {
+                    console.error(`Error processing ${filename}:`, error);
+                    return { filename, error: true }; // Mark as error to update progress but not add to zip
                 }
-                
-                // Update progress for each item attempted in the batch
-                completed++;
-                const progress = Math.round((completed / totalItems) * 100);
-                progressBar.style.width = `${progress}%`;
-                progressText.textContent = `${progress}%`;
             });
-            
-            // Optional: Small delay between batches if needed, but usually not required
-            // await new Promise(resolve => setTimeout(resolve, 50)); 
+
+            // Wait for the current batch to finish processing (cache checks/fetches)
+            const batchResults = await Promise.all(batchPromises);
+
+            // Process results of the batch
+            batchResults.forEach(result => {
+                completedGathering++;
+                const progress = Math.round((completedGathering / totalItems) * 100);
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Gathering: ${progress}%`;
+
+                if (result && !result.error) {
+                    imageData.push(result); // Add successful results
+                } else if (result && result.error) {
+                    console.warn(`Failed to get blob for ${result.filename}, will be excluded from ZIP.`);
+                    // Optionally add visual indication of partial failure
+                } else {
+                     // Null result means it was skipped (e.g., missing.png)
+                     // console.log(`Skipped an item as planned.`); // Can be noisy, commented out
+                }
+            });
+             // Small delay might help UI responsiveness on large batches, optional
+            // await new Promise(resolve => setTimeout(resolve, 10));
         }
-        
-        console.log(`All batches processed. Attempting to generate ZIP blob for ${completed} items attempted...`);
-        
-        // Generate the ZIP file
-        const zipBlob = await zip.generateAsync({ type: 'blob' }, (metadata) => {
-            // Optional: Update progress during zip generation (can be slow for many files)
-            const percent = metadata.percent.toFixed(2);
-            console.log(`Zipping progress: ${percent}%`);
-            progressBar.style.width = `${percent}%`; // Might be visually confusing after fetch progress
-            progressText.textContent = `Zipping: ${percent}%`;
+
+        console.log(`Phase 1 Complete: Gathered ${imageData.length} blobs successfully out of ${totalItems} requested.`);
+
+        if (imageData.length === 0) {
+             throw new Error("No images could be gathered (all failed or were skipped).");
+        }
+
+        // --- Phase 2: Create and Download ZIP ---
+        console.log(`Starting Phase 2: Zipping ${imageData.length} items...`);
+        progressText.textContent = 'Zipping: 0%'; // Reset progress text for zipping phase
+        progressBar.style.width = '0%'; // Reset progress bar for zipping phase
+
+        // Add gathered blobs to the zip
+        imageData.forEach(data => {
+            try {
+                 zip.file(data.filename, data.blob);
+            } catch (zipError) {
+                 console.error(`Error adding file ${data.filename} to zip:`, zipError);
+                 // Optionally remove it from a counter if you want to report partial success
+            }
         });
-        console.log(`ZIP Blob generated successfully, size: ${zipBlob.size} bytes.`);
-        
-        // Download the ZIP file
+
+
+        // Generate the ZIP file blob
+        const zipBlob = await zip.generateAsync(
+            { type: 'blob', streamFiles: true }, // streamFiles might improve performance for many files
+            (metadata) => {
+                const percent = metadata.percent.toFixed(0);
+                // console.log(`Zipping progress: ${percent}%`);
+                progressBar.style.width = `${percent}%`;
+                progressText.textContent = `Zipping: ${percent}%`;
+            }
+        );
+
+        console.log(`Phase 2 Complete: ZIP Blob generated, size: ${zipBlob.size} bytes.`);
+
+        // Trigger download
         console.log(`Calling saveAs for filename: ${zipFilename}`);
         saveAs(zipBlob, zipFilename);
         console.log(`saveAs call completed for ${zipFilename}.`);
-        
+        progressText.textContent = 'Done!'; // Final status update
+
     } catch (error) {
-        // Enhanced logging & Add error state
-        console.error('Error caught during ZIP creation or download process:', error);
-        progressBar.classList.add('error'); // Add error class
-        progressBar.style.width = '100%'; // Fill bar on error
-        progressText.textContent = 'Error!'; // Update text on error
-        alert('There was an error creating the ZIP file. Please check the console for details.');
+        console.error('Error during ZIP creation process:', error);
+        progressBar.classList.add('error');
+        progressBar.style.width = '100%';
+        // Show brief error message in progress bar
+        const shortError = error.message.length > 40 ? error.message.substring(0, 37) + '...' : error.message;
+        progressText.textContent = `Error: ${shortError}`; 
+        alert(`There was an error: ${error.message}`);
     } finally {
-        // Restore button state
-        // Add logging & Remove error state 
         console.log('Restoring button state in finally block.');
-        downloadAllButton.textContent = originalText;
-        downloadAllButton.disabled = false;
-        // Hide progress bar after a short delay to allow user to see completion/error
+        downloadButton.textContent = originalText;
+        downloadButton.disabled = false;
+        // Hide progress bar after a delay
         setTimeout(() => {
-             // Check if progress bar still exists before manipulating
-             if (progressContainer) progressContainer.style.display = 'none'; 
-             if (progressBar) progressBar.classList.remove('error'); // Clean up error class
-        }, 2500); // Increased delay slightly
+            if (progressContainer) progressContainer.style.display = 'none';
+            if (progressBar) progressBar.classList.remove('error');
+        }, 3000); // Slightly longer delay
     }
 }
 
