@@ -606,12 +606,10 @@ button:disabled {
 
 /* Footer */
 footer {
-    margin-top: 40px;
-    padding: 20px;
     text-align: center;
-    width: 100%;
-    color: var(--muted-text);
-    font-size: 0.9em;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
 }
 
 .social-links a {
@@ -647,32 +645,37 @@ footer {
 
 /* Back to Top Button */
 .back-to-top {
-    position: relative;
-    bottom: -10px;
-    right: 0px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
+    position: sticky; /* Stick to bottom of container viewport */
+    bottom: 10px;     /* Small space from bottom */
+    /* Remove fixed positioning properties like right */
+    width: calc(100% - 40px); /* Adjust width based on container padding */
+    margin: 20px auto 0 auto; /* Center horizontally, space above */
+    height: auto; /* Auto height based on padding */
+    border-radius: 6px; /* Bar-like radius */
+    padding: 10px 0; /* Vertical padding */
     background-color: var(--accent-color);
-    color: #000; /* Black icon */
+    color: #000; /* Black text/icon */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2); /* Shadow on top */
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-    z-index: 1000;
+    transform: translateY(100%); /* Start offscreen below */
+    transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+    z-index: 999; /* Ensure it's above gallery but below modal */
     border: none;
+    font-weight: bold;
+    pointer-events: none;
 }
 [data-theme="light"] .back-to-top {
-     color: #fff; /* White icon */
+     color: #fff; /* White text/icon */
 }
 
 .back-to-top.visible {
     opacity: 0.9;
-    transform: translateY(0);
+    transform: translateY(0); /* Slide into view */
+    pointer-events: auto;
 }
 
 .back-to-top:hover {
@@ -680,10 +683,15 @@ footer {
     background-color: var(--accent-hover);
 }
 
+/* Hide the SVG icon for now, using text */
 .back-to-top svg {
-    width: 22px;
-    height: 22px;
+     display: none; 
+    /* width: 22px; 
+    height: 22px; */
 }
+
+/* Add text content via JS or directly in HTML */
+/* We'll modify the HTML directly */
 
 /* Modal Styles */
 .modal {
@@ -877,4 +885,103 @@ footer {
         width: 96px;
         height: 96px;
     }
+}
+
+/* Supporters Section Styles */
+.supporters-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-elevation-low);
+}
+
+.supporters-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.supporters-section h2 {
+    text-align: center;
+    margin-bottom: 0;
+    color: var(--accent-color);
+    font-weight: 600;
+    width: 100%;
+}
+
+.supporters-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.supporter-name {
+    background-color: var(--background-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    flex-grow: 0;
+    flex-basis: 160px;
+}
+
+/* Tier Colors */
+.supporter-name[data-tier="0"] {
+    color: #ffffff;
+    border: 3px solid #a7a7a7;
+}
+
+.supporter-name[data-tier="1"] {
+    color: #faa61a; 
+    border: 3px solid #c98716;
+}
+
+.supporter-name[data-tier="2"] {
+    color: #9032e2; 
+    border: 3px solid #601f99;
+}
+
+.supporter-name[data-tier="3"] {
+    color: #9cff9a;
+    border: 3px solid #6fb86e;
+}
+
+/* Center the button container and add spacing */
+.support-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for the 'Become a Supporter' button */
+.support-link-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="light"] .support-link-button {
+    color: #fff;
+}
+
+.support-link-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 2px 5px rgba(var(--accent-color-rgb), 0.3);
+    text-decoration: none;
+}
+
+.support-link-button:active {
+    transform: scale(0.98);
 }

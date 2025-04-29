@@ -21,7 +21,15 @@
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Minecraft Item Gallery",
-          "description": "Complete gallery of Minecraft item images from all versions"
+          "description": "Complete gallery of Minecraft item images from all versions, filterable by version and searchable.",
+          "url": "https://MinecraftAllImages.jemsire.com/",
+          "image": "https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/assets/og-image.png",
+          "author": {
+            "@type": "Person",
+            "name": "TinyTank800",
+            "url": "https://github.com/TinyTank800"
+          },
+          "keywords": "Minecraft, item images, Minecraft items, resource pack, item gallery, Minecraft textures"
         }
     </script>
 </head>
@@ -133,10 +141,24 @@
         </div>
 
         <button class="back-to-top" id="back-to-top" title="Back to Top" aria-label="Back to Top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-            </svg>
+            Back to Top
         </button>
+
+        <!-- Supporters Section -->
+        <div class="supporters-section">
+            <div class="supporters-header">
+                <h2>Our Supporters</h2>
+            </div>
+            <div id="supporters-list" class="supporters-grid">
+                <!-- Supporter names will be loaded here by JavaScript -->
+                <p>Loading supporters...</p>
+            </div>
+            <div class="support-button-container">
+                <a href="https://discord.jemsire.com" target="_blank" rel="noopener noreferrer" class="support-link-button">
+                    Become a Supporter!
+                </a>
+            </div>
+        </div>
     </div>
 
     <footer>

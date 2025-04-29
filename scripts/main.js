@@ -8,6 +8,7 @@ let availableVersions = []; // List of available version folders
 let currentVersion = 'latest'; // Currently selected version filter
 let currentSort = 'az'; // Current sort order ('az' or 'za')
 let currentModalFilename = null; // Track filename shown in modal
+let supportersListDiv; // Add this variable
 
 // Declare DOM element variables here, but assign them inside DOMContentLoaded
 let gallery, searchInput, downloadAllButton, clearSelectionButton, selectVisibleButton;
@@ -50,11 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalSelectButton = document.getElementById('modal-select-button');
     toggleInfoButton = document.getElementById('toggle-info-button'); 
     infoSection = document.getElementById('info-section'); 
+    supportersListDiv = document.getElementById('supporters-list'); // Assign the new div
 
     // Initialize the application
     initializeTheme();
     setupEventListeners();
     loadVersions(); // Start the loading process
+    loadSupporters(); // <<< ADD THIS LINE
     updateCopyrightYear();
 });
 
@@ -853,5 +856,57 @@ function handleGalleryClick(event) {
     } else {
         // Otherwise, treat click as item selection/deselection
         toggleItemSelection(itemElement, filename);
+    }
+}
+
+// --- Add this new function to load supporters ---
+async function loadSupporters() {
+    if (!supportersListDiv) return; // Exit if the element doesn't exist
+
+    try {
+        // Add timestamp to prevent caching of the JSON file itself if needed during frequent updates
+        // Remove ?t=... if you prefer standard browser caching for the JSON file
+        const response = await fetch(`${BASE_PATH}/members.json?t=${Date.now()}`); 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const supporterData = await response.json();
+
+        if (!Array.isArray(supporterData)) {
+            throw new Error('Invalid format: members.json should contain an array of objects.');
+        }
+
+        supportersListDiv.innerHTML = ''; // Clear the "Loading..." message or old content
+
+        if (supporterData.length === 0) {
+            supportersListDiv.innerHTML = '<p>No supporters listed currently.</p>';
+            return;
+        }
+
+        // Sort supporters by tier (descending) then name (ascending) - optional
+        supporterData.sort((a, b) => {
+            const tierComparison = (b.tier ?? 0) - (a.tier ?? 0); // Higher tiers first (handle potential null/undefined tier)
+            if (tierComparison !== 0) return tierComparison;
+            return a.name.localeCompare(b.name); // Sort by name if tiers are equal
+        });
+
+        supporterData.forEach(supporter => {
+            if (!supporter || typeof supporter.name !== 'string') {
+                console.warn('Skipping invalid supporter entry:', supporter);
+                return; // Skip invalid entries
+            }
+            const nameElement = document.createElement('span');
+            nameElement.className = 'supporter-name'; 
+            // Add data-tier attribute for styling
+            const tier = supporter.tier ?? 0; // Default to tier 0 if undefined
+            nameElement.dataset.tier = tier; 
+            nameElement.textContent = supporter.name;
+            nameElement.title = supporter.name; // Show full name on hover
+            supportersListDiv.appendChild(nameElement);
+        });
+
+    } catch (error) {
+        console.error('Error loading supporters:', error);
+        supportersListDiv.innerHTML = '<p>Could not load supporter list.</p>'; // Display error message
     }
 }
