@@ -9,14 +9,14 @@ A searchable, downloadable gallery of Minecraft item images captured from the in
 ## 🔧 Features
 
 - 🔍 **Search:** Quickly find items by name.
--🖱️ **Selection:** Click item cards to select multiple items for bulk download.
+- 🖱️ **Selection:** Click item cards to select multiple items for bulk download.
 - ℹ️ **Details & Download:** Click the `(i)` icon on an item to view details and download it individually.
 - 📚 **Bulk Download:** Use the "Download Selected" or "Download All" buttons to get a ZIP archive.
--⚡ **Efficient Downloads:** Uses browser caching (including Cache Storage API) to significantly speed up subsequent ZIP downloads.
+- ⚡ **Efficient Downloads:** Uses browser caching (including Cache Storage API) to significantly speed up subsequent ZIP downloads.
 - 📅 **Versioning:** Select specific Minecraft versions (or "Latest") to see historical item textures.
 - ✨ **Automatic Updates:** Gallery automatically displays new images when the underlying data is updated.
 - 📱 **Responsive Design:** Works smoothly on desktop and mobile devices.
--🎨 **Dark/Light Mode:** Choose your preferred visual theme.
+- 🎨 **Dark/Light Mode:** Choose your preferred visual theme.
 
 ## About This Project
 
