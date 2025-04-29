@@ -3,79 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft All Item Images Gallery</title>
+    <meta name="description" content="Complete gallery of Minecraft item images from all versions, optimized for developers, wiki creators, and resource pack makers. Download individual items or in bulk.">
+    <meta name="keywords" content="Minecraft, item images, Minecraft items, resource pack, item gallery, Minecraft textures">
+    <title>Minecraft Item Gallery</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css?v=1.2">
+    <link rel="canonical" href="https://MinecraftAllImages.jemsire.com/">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <meta property="og:title" content="Minecraft Item Gallery">
+    <meta property="og:description" content="Complete collection of Minecraft item images from all versions">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:url" content="https://jemsire.com/MinecraftAllImages">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Minecraft Item Gallery",
+          "description": "Complete gallery of Minecraft item images from all versions"
+        }
+    </script>
 </head>
 <body>
-    <img src="assets/favicon.png" alt="Jemsire Logo" class="logo">
+    
+    <!-- Main Container -->
     <div class="container">
-        <h1>Minecraft All Item Images Gallery</h1>
-		<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json" alt="Version">
-        <p id="repo-info" style="text-align: center; margin-bottom: 20px; color: var(--footer-text);">Loading items...</p>
+        <div class="page-header">
+            <!-- Group logo and title -->
+            <div class="header-left-group">
+                <img src="assets/favicon.png" alt="Jemsire Logo" class="logo">
+                <h1>Minecraft Item Gallery</h1>
+            </div>
+            <!-- Move version shield inside header -->
+            <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json" alt="Version Shield" class="version-shield">
+        </div>
         
+        <!-- Controls: Version, Theme, Sorting -->
         <div class="controls-container">
-            <div class="version-selector">
+            <div class="version-selector control-group">
                 <label for="version-select">Version:</label>
-                <select id="version-select">
-                    <option value="latest">Latest Version</option>
-                    <option value="1.21.4">1.21.5</option>
-                    <option value="1.21.4">1.21.4</option>
+                <select id="version-select" title="Select Minecraft Version">
+                    <option value="latest">Loading...</option>
                 </select>
             </div>
-            <div class="toggle-container">
-                <span class="toggle-label">Dark Mode</span>
-                <div class="toggle-switch" id="theme-toggle"></div>
-                <span class="toggle-label">Light Mode</span>
+            <div class="sort-selector control-group">
+                <label for="sort-select">Sort:</label>
+                <select id="sort-select" title="Sort Items">
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                    <option value="version">Version (Newest First)</option>
+                </select>
+            </div>
+            <div class="toggle-container control-group">
+                <span class="toggle-label">Dark</span>
+                <button class="toggle-switch" id="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle Theme"></button>
+                <span class="toggle-label">Light</span>
             </div>
         </div>
-        
+
+        <!-- Search and Download Controls -->
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search for items...">
-            <button id="download-all">Download All as ZIP</button>
+            <input type="text" id="search-input" placeholder="Search for items..." aria-label="Search Items">
+            <button id="select-visible" style="display: none;">Select Visible</button>
             <button id="clear-selection" style="display: none;">Clear Selection</button>
+            <button id="download-all">Download All as ZIP</button>
         </div>
-        
+
+        <p class="usage-note">
+            Click an item card to select/deselect. Click the 
+            <svg xmlns="http://www.w3.org/2000/svg" class="info-icon-inline" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" style="vertical-align: middle; display: inline-block;">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            icon for details.
+        </p>
+
+        <button id="toggle-info-button" class="info-toggle-button" aria-expanded="false" aria-controls="info-section">
+             Show Info / How to Use
+             <svg class="toggle-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+             </svg>
+        </button>
+        <div id="info-section" class="info-section" role="region" aria-labelledby="toggle-info-button">
+            <h2>About This Project</h2>
+            <p>This gallery showcases Minecraft item images captured from the in-game hotbar and formatted consistently. Ideal for wikis, guides, resource packs, server websites, etc.</p>
+
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Search:</strong> Quickly find items by name.</li>
+                <li><strong>Selection:</strong> Click item cards to select multiple items.</li>
+                <li><strong>Details & Download:</strong> Click the (i) icon on an item to view details and download it individually.</li>
+                <li><strong>Bulk Download:</strong> Use the "Download Selected" or "Download All" buttons to get a ZIP archive.</li>
+                <li><strong>Versioning:</strong> Select specific Minecraft versions to see how item textures appeared then (or select "Latest").</li>
+                <li><strong>Updates:</strong> Automatically displays new images when added.</li>
+                <li><strong>Responsive:</strong> Works on desktop and mobile.</li>
+                <li><strong>Dark/Light Mode:</strong> Choose your preferred theme.</li>
+            </ul>
+
+            <h2>How It Works (Simplified)</h2>
+            <p>The site loads a base set of images and then applies changes (additions, modifications, removals) from specific version folders up to the selected version. This ensures you see the correct textures for that version.</p>
+
+             <h2>Technical Details</h2>
+             <ul>
+                <li>Built with plain HTML, CSS, and JavaScript.</li>
+                <li>Uses JSZip and FileSaver.js for ZIP functionality.</li>
+             </ul>
+
+            <hr class="styled-hr">
+             <p><em>This project is not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang AB.</em></p>
+
+        </div>
+
+
         <div id="loading-progress" class="progress-container" style="display: none;">
             <div id="progress-bar" class="progress-bar"></div>
+            <span id="progress-text" class="progress-text">0%</span>
         </div>
-        
-        <div class="stats-bar">
+
+        <div class="stats-bar" aria-live="polite">
             <div id="total-count">Total: 0 items</div>
             <div id="filtered-count">Showing: 0 items</div>
         </div>
-        
+
         <div id="gallery" class="gallery virtual-scroller">
             <div class="loading">Loading items...</div>
         </div>
+
+        <button class="back-to-top" id="back-to-top" title="Back to Top" aria-label="Back to Top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
     </div>
-    
+
     <footer>
         <div class="social-links">
-            <h3>Find a bug or issue? Report it on Github:</h3>
-            <a href="https://github.com/TinyTank800/MinecraftAllImages/issues" target="_blank">Github Issues</a>
+            <h3>Find a bug or issue? Report it:</h3>
+            <a href="https://github.com/TinyTank800/MinecraftAllImages/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>
+             <a href="https://discord.jemsire.com" target="_blank" rel="noopener noreferrer">Discord Community</a>
         </div>
 
         <hr class="styled-hr">
 
-        <p>Created by TinyTank800 | Follow me on:</p>
+        <p>Created by TinyTank800 | Follow me:</p>
         <div class="social-links">
-            <a href="https://youtube.com/@tinytank800" target="_blank">YouTube</a>
-            <a href="https://discord.jemsire.com" target="_blank">Discord</a>
-            <a href="https://github.com/TinyTank800" target="_blank">GitHub</a>
+            <a href="https://youtube.com/@tinytank800" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://github.com/TinyTank800" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
 
-        <p>© 2025 Minecraft All Item Images Gallery | Not affiliated with Mojang</p>
+         <p>© <span id="copyright-year"></span> Minecraft Item Gallery | Not affiliated with Mojang AB.</p>
     </footer>
-    
-    <div class="back-to-top" id="back-to-top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
+
+    <div id="item-modal" class="modal" aria-modal="true" role="dialog" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-button" aria-label="Close Modal">×</button>
+            <img id="modal-img" src="" alt="Item Image" class="modal-image">
+            <h3 id="modal-item-name">Item Name</h3>
+            <p><strong>Filename:</strong> <code id="modal-filename">filename.png</code></p>
+            <p><strong>Source Version:</strong> <span id="modal-version">version</span></p>
+            <div class="modal-actions">
+                <button id="modal-download-button">Download</button>
+                <button id="modal-select-button">Select Item</button>
+            </div>
+        </div>
     </div>
 
-    <script src="scripts/main.js?v=1.0.5"></script>
+    <script src="scripts/main.js?v=1.1.1"></script>
 </body>
 </html>
