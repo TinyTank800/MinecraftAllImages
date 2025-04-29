@@ -590,7 +590,6 @@ function downloadSingleItem(filename) {
 
 async function downloadItemsAsZip(items, zipFilename) {
     const zip = new JSZip();
-    const promises = [];
     
     // Add loading state
     const downloadAllButton = document.getElementById('download-all');
@@ -598,89 +597,118 @@ async function downloadItemsAsZip(items, zipFilename) {
     downloadAllButton.textContent = "Preparing ZIP...";
     downloadAllButton.disabled = true;
     
-    // Show progress
+    // Show progress (progress bar display/reset is now handled in handleDownloadClick)
     const progressContainer = document.getElementById('loading-progress');
     const progressBar = document.getElementById('progress-bar');
-    progressContainer.style.display = 'block';
-    progressBar.style.width = '0%';
+    const progressText = document.getElementById('progress-text');
+    // Ensure text starts at 0% visually
+    progressText.textContent = '0%'; 
+    progressBar.style.width = '0%'; // Ensure bar starts at 0% visually
+    progressBar.classList.remove('error'); // Ensure no stale error state
     
     let completed = 0;
+    const totalItems = items.length;
     
     try {
-        // Fetch each image and add to ZIP
-        for (const filename of items) {
-            const imageVersion = loadedImages.get(filename);
-            // --- Use helper function for consistent URL generation ---
-            const imageUrl = getItemImageUrl(filename, imageVersion);
-
-            // Skip trying to fetch the placeholder image if getItemImageUrl returned it
-            if (imageUrl.endsWith('/assets/missing.png')) {
-                console.warn(`Skipping missing/unknown image in ZIP: ${filename}`);
-                // We still need to account for this item in the progress count
-                // Push a placeholder promise that resolves immediately to null
-                promises.push(Promise.resolve(null)); 
-                continue; // Skip fetch for this item
-            }
-            // ---------------------------------------------------------
+        // Process items in small batches to avoid overwhelming the browser
+        const BATCH_SIZE = 10; // Process 10 images at a time
+        console.log(`Starting ZIP download in batches of ${BATCH_SIZE}`);
+        
+        for (let i = 0; i < totalItems; i += BATCH_SIZE) {
+            // Get the current batch of items
+            const batch = items.slice(i, i + BATCH_SIZE);
+            console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(totalItems / BATCH_SIZE)} (Items ${i + 1}-${Math.min(i + BATCH_SIZE, totalItems)})`);
             
-            // Create a promise that resolves with the filename and blob
-            const promise = fetch(imageUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch ${filename}: ${response.status}`);
-                    }
-                    return response.blob().then(blob => ({ filename, blob }));
-                })
-                .catch(error => {
-                    console.error(`Error fetching ${filename}:`, error);
-                    return null; // Return null for failed files
-                });
+            // Process this batch in parallel
+            const batchPromises = batch.map(filename => {
+                const imageVersion = loadedImages.get(filename);
+                const imageUrl = getItemImageUrl(filename, imageVersion);
                 
-            promises.push(promise);
+                // Skip missing images
+                if (imageUrl.endsWith('/assets/missing.png')) {
+                    console.warn(`Skipping missing/unknown image in ZIP: ${filename}`);
+                    return Promise.resolve(null); // Resolve with null for progress tracking
+                }
+                
+                // Fetch the image
+                return fetch(imageUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            // Log specific error but continue batch
+                            console.error(`Failed to fetch ${filename}: ${response.status}`);
+                            return null; // Treat as failed, return null
+                            // throw new Error(`Failed to fetch ${filename}: ${response.status}`); // Original: throws, stops Promise.all
+                        }
+                        return response.blob().then(blob => ({ filename, blob }));
+                    })
+                    .catch(error => {
+                        // Log specific error but continue batch
+                        console.error(`Error fetching ${filename}:`, error);
+                        return null; // Treat as failed, return null
+                    });
+            });
+            
+            // Wait for this batch to complete
+            const batchResults = await Promise.all(batchPromises);
+            
+            // Add successful results to ZIP and update progress
+            batchResults.forEach(result => {
+                if (result) {
+                    try {
+                        zip.file(result.filename, result.blob);
+                    } catch (zipError) {
+                        console.error(`Error adding file ${result.filename} to zip:`, zipError);
+                        // Optionally alert user or handle differently
+                    }
+                }
+                
+                // Update progress for each item attempted in the batch
+                completed++;
+                const progress = Math.round((completed / totalItems) * 100);
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${progress}%`;
+            });
+            
+            // Optional: Small delay between batches if needed, but usually not required
+            // await new Promise(resolve => setTimeout(resolve, 50)); 
         }
         
-        // Wait for all fetch operations to complete
-        const results = await Promise.all(promises);
+        console.log(`All batches processed. Attempting to generate ZIP blob for ${completed} items attempted...`);
         
-        // Process results and add to ZIP
-        results.forEach((result, index) => {
-            if (result) {
-                zip.file(result.filename, result.blob);
-            }
-            
-            completed++;
-            const progress = Math.round((completed / items.length) * 100);
-            progressBar.style.width = `${progress}%`;
-            progressText.textContent = `${progress}%`;
+        // Generate the ZIP file
+        const zipBlob = await zip.generateAsync({ type: 'blob' }, (metadata) => {
+            // Optional: Update progress during zip generation (can be slow for many files)
+            const percent = metadata.percent.toFixed(2);
+            console.log(`Zipping progress: ${percent}%`);
+            progressBar.style.width = `${percent}%`; // Might be visually confusing after fetch progress
+            progressText.textContent = `Zipping: ${percent}%`;
         });
-        
-        // --- Add logging --- 
-        console.log(`Attempting to generate ZIP blob for ${items.length} items...`);
-        const zipBlob = await zip.generateAsync({ type: 'blob' });
         console.log(`ZIP Blob generated successfully, size: ${zipBlob.size} bytes.`);
         
-        // --- Add logging --- 
+        // Download the ZIP file
         console.log(`Calling saveAs for filename: ${zipFilename}`);
         saveAs(zipBlob, zipFilename);
         console.log(`saveAs call completed for ${zipFilename}.`);
-
+        
     } catch (error) {
-        // --- Enhanced logging & Add error state ---
+        // Enhanced logging & Add error state
         console.error('Error caught during ZIP creation or download process:', error);
         progressBar.classList.add('error'); // Add error class
         progressBar.style.width = '100%'; // Fill bar on error
-        alert('There was an error creating the ZIP file. Please try again.');
+        progressText.textContent = 'Error!'; // Update text on error
+        alert('There was an error creating the ZIP file. Please check the console for details.');
     } finally {
         // Restore button state
-        // --- Add logging & Remove error state ---
+        // Add logging & Remove error state 
         console.log('Restoring button state in finally block.');
         downloadAllButton.textContent = originalText;
         downloadAllButton.disabled = false;
         // Hide progress bar after a short delay to allow user to see completion/error
         setTimeout(() => {
-             progressContainer.style.display = 'none';
-             progressBar.classList.remove('error'); // Clean up error class
-        }, 1500); // Keep visible for 1.5 seconds
+             // Check if progress bar still exists before manipulating
+             if (progressContainer) progressContainer.style.display = 'none'; 
+             if (progressBar) progressBar.classList.remove('error'); // Clean up error class
+        }, 2500); // Increased delay slightly
     }
 }
 
