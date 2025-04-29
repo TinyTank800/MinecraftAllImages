@@ -374,6 +374,11 @@ button:disabled {
     color: #fff; /* White text in light mode */
 }
 
+/* NEW: Error state for progress bar */
+.progress-bar.error {
+    background-color: #d9534f; /* Bootstrap danger red */
+    color: #fff; /* White text on red */
+}
 
 .progress-text {
     position: absolute;

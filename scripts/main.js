@@ -562,6 +562,13 @@ function handleDownloadClick() {
     }
 
     const zipFilename = `minecraft-items-${currentVersion}-${zipFilenameSuffix}.zip`;
+
+    // --- Show and reset progress bar immediately ---
+    progressContainer.style.display = 'block'; 
+    progressBar.style.width = '0%';
+    progressBar.classList.remove('error'); // Remove previous error state
+    // ---------------------------------------------
+
     downloadItemsAsZip(itemsToDownload, zipFilename);
 }
 
@@ -581,7 +588,7 @@ function downloadSingleItem(filename) {
         });
 }
 
-async function downloadAllAsZip(items) {
+async function downloadItemsAsZip(items, zipFilename) {
     const zip = new JSZip();
     const promises = [];
     
@@ -603,13 +610,18 @@ async function downloadAllAsZip(items) {
         // Fetch each image and add to ZIP
         for (const filename of items) {
             const imageVersion = loadedImages.get(filename);
-            let imageUrl;
-            
-            if (imageVersion === 'base') {
-                imageUrl = `${BASE_PATH}/images/base/${filename}`;
-            } else {
-                imageUrl = `${BASE_PATH}/images/${imageVersion}/${filename}`;
+            // --- Use helper function for consistent URL generation ---
+            const imageUrl = getItemImageUrl(filename, imageVersion);
+
+            // Skip trying to fetch the placeholder image if getItemImageUrl returned it
+            if (imageUrl.endsWith('/assets/missing.png')) {
+                console.warn(`Skipping missing/unknown image in ZIP: ${filename}`);
+                // We still need to account for this item in the progress count
+                // Push a placeholder promise that resolves immediately to null
+                promises.push(Promise.resolve(null)); 
+                continue; // Skip fetch for this item
             }
+            // ---------------------------------------------------------
             
             // Create a promise that resolves with the filename and blob
             const promise = fetch(imageUrl)
@@ -639,18 +651,36 @@ async function downloadAllAsZip(items) {
             completed++;
             const progress = Math.round((completed / items.length) * 100);
             progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
         });
         
+        // --- Add logging --- 
+        console.log(`Attempting to generate ZIP blob for ${items.length} items...`);
         const zipBlob = await zip.generateAsync({ type: 'blob' });
-        saveAs(zipBlob, `minecraft-items-${currentVersion}.zip`);
+        console.log(`ZIP Blob generated successfully, size: ${zipBlob.size} bytes.`);
+        
+        // --- Add logging --- 
+        console.log(`Calling saveAs for filename: ${zipFilename}`);
+        saveAs(zipBlob, zipFilename);
+        console.log(`saveAs call completed for ${zipFilename}.`);
+
     } catch (error) {
-        console.error('Error creating ZIP:', error);
+        // --- Enhanced logging & Add error state ---
+        console.error('Error caught during ZIP creation or download process:', error);
+        progressBar.classList.add('error'); // Add error class
+        progressBar.style.width = '100%'; // Fill bar on error
         alert('There was an error creating the ZIP file. Please try again.');
     } finally {
         // Restore button state
+        // --- Add logging & Remove error state ---
+        console.log('Restoring button state in finally block.');
         downloadAllButton.textContent = originalText;
         downloadAllButton.disabled = false;
-        progressContainer.style.display = 'none';
+        // Hide progress bar after a short delay to allow user to see completion/error
+        setTimeout(() => {
+             progressContainer.style.display = 'none';
+             progressBar.classList.remove('error'); // Clean up error class
+        }, 1500); // Keep visible for 1.5 seconds
     }
 }
 
