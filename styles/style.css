@@ -805,36 +805,37 @@ footer {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
         width: 98%;
+        padding: 15px;
     }
     .controls-container {
-        gap: 1rem;
-        justify-content: space-around; /* Better spacing on mobile */
+        gap: 1rem; /* Slightly reduce gap */
     }
     .search-container {
-        flex-direction: column; /* Stack search and buttons */
-        align-items: stretch; /* Make elements full width */
+        flex-direction: column; /* Stack items vertically */
+        align-items: stretch; /* Make items take full width */
     }
     #search-input {
-        width: 100%; /* Full width search */
+        flex-basis: auto; /* Reset flex basis */
+        max-width: 100%; /* Ensure it doesn't overflow */
+        /* Height should be controlled by padding and font-size already */
     }
     .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Smaller items on mobile */
-        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Smaller items */
+        gap: 8px;
     }
     .item img {
-        /* Smaller image size for mobile */
-        width: 48px;
+        width: 48px; /* Smaller image */
         height: 48px;
     }
+
     .item-name {
-        font-size: 0.8em;
+        font-size: 0.7em; /* Smaller text */
     }
     .item-info-button {
+        padding: 3px; /* Smaller button */
         width: 20px;
         height: 20px;
-        font-size: 10px;
     }
     .item-info-button svg {
         width: 12px;
@@ -842,32 +843,53 @@ footer {
     }
     .modal-content {
         width: 90%;
-        margin: 15% auto; /* Adjust vertical margin */
-        padding: 20px;
+        padding: 15px;
     }
+    /* --- Back to Top Button Mobile Styles --- */
     .back-to-top {
-        width: 40px;
-        height: 40px;
-        bottom: 15px;
-        right: 15px;
+        /* Change from fixed square to sticky full-width bar */
+        position: sticky; /* Stick to bottom of viewport within flow */
+        bottom: 0;      /* Stick to the very bottom */
+        right: auto;    /* Remove fixed right positioning */
+        left: 0;       /* Align to the left */
+        width: 100%;    /* Span full width */
+        height: auto;   /* Auto height based on content */
+        border-radius: 0; /* Remove rounded corners for full width */
+        padding: 12px 0; /* Adjust padding */
+        text-align: center;
+        /* Ensure it's above other content if needed, but sticky helps */
+        z-index: 999;
+        /* Visibility is handled by JS adding/removing .visible */
+        /* Keep existing transitions */
+        transform: translateY(100%); /* Start hidden below */
     }
+
+    .back-to-top.visible {
+         transform: translateY(0); /* Slide in from bottom */
+         opacity: 1;
+         visibility: visible;
+    }
+
+
     .back-to-top svg {
-        width: 18px;
-        height: 18px;
+        display: none; /* Hide the SVG icon on the full-width bar */
     }
     .usage-note {
         font-size: 0.85em;
         padding: 6px 10px;
     }
     .info-toggle-button {
-        padding: 8px 12px;
         font-size: 0.9em;
+        padding: 8px 12px;
     }
     .info-section {
-        padding: 0 15px;
+        padding: 10px;
     }
     .info-section.visible {
-        padding: 15px;
+        max-height: 1000px; /* Adjust as needed for content */
+    }
+     .supporters-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust columns */
     }
 }
 

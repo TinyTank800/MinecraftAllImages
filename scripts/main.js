@@ -290,6 +290,9 @@ function handleSortChange(event) {
 
 function sortItems(itemsToSort) {
     itemsToSort.sort((a, b) => {
+        const nameA = formatItemName(a);
+        const nameB = formatItemName(b);
+
         if (currentSort === 'version') {
             // Version sort: Newest (highest version) first
             const versionA = loadedImages.get(a) || 'base'; // Default to 'base' if missing
@@ -300,20 +303,26 @@ function sortItems(itemsToSort) {
             if (versionB === 'base' && versionA !== 'base') return -1; // b is older
             if (versionA === 'base' && versionB === 'base') {
                  // If both are base, sort by name A-Z as secondary
-                 return formatItemName(a).localeCompare(formatItemName(b));
+                 return nameA.localeCompare(nameB);
             }
 
             // Compare versions using semantic comparison, newest first
             const comparison = compareVersions(versionB, versionA); // Note B vs A for descending
             if (comparison === 0) {
                  // If versions are the same, sort by name A-Z as secondary
-                 return formatItemName(a).localeCompare(formatItemName(b));
+                 return nameA.localeCompare(nameB);
             }
             return comparison;
+        } else if (currentSort === 'length') {
+             // Length sort: Longest name first
+             const lengthDiff = nameB.length - nameA.length;
+             if (lengthDiff === 0) {
+                 // If lengths are the same, sort by name A-Z as secondary
+                 return nameA.localeCompare(nameB);
+             }
+             return lengthDiff;
         } else {
             // Name sort (A-Z or Z-A)
-            const nameA = formatItemName(a);
-            const nameB = formatItemName(b);
             return currentSort === 'za' ? nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
         }
     });
