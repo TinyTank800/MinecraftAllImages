@@ -1,14 +1,19 @@
 // State Variables
-let allItems = []; // Raw list from API/manifests
+let allItems = []; // List of unique filenames across loaded versions
 let displayedItems = []; // Currently rendered items after sorting/filtering
 let selectedItems = new Set(); // Tracks selected filenames
-let loadedImages = new Map(); // Tracks source version for each image filename
+let loadedImages = new Map(); // Tracks source version (tag) for each image filename
+let imageDataCache = new Map(); // Cache for filename -> Blob mapping
 let itemNameCache = new Map(); // Cache for formatted item names
-let availableVersions = []; // List of available version folders
+let itemHistory = new Map(); // NEW: Tracks filename -> [{ version: string, filename: string }, ...]
+let availableVersions = []; // List of available version folders/zips
+let baseVersion = null; // Store the base version from versions.json
 let currentVersion = 'latest'; // Currently selected version filter
-let currentSort = 'az'; // Current sort order ('az' or 'za')
+let currentSort = 'az'; // Current sort order ('az', 'za', 'version')
 let currentModalFilename = null; // Track filename shown in modal
-let supportersListDiv; // Add this variable
+let supportersListDiv;
+let showRemovedItems = false; // New state variable for showing removed items
+let markedAsRemoved = new Set(); // Track items that *would* be removed
 
 // Declare DOM element variables here, but assign them inside DOMContentLoaded
 let gallery, searchInput, downloadAllButton, clearSelectionButton, selectVisibleButton;
@@ -16,12 +21,14 @@ let totalCountDisplay, filteredCountDisplay, versionSelect, sortSelect, themeTog
 let backToTopButton, progressContainer, progressBar, progressText, modal, modalCloseButton;
 let modalImg, modalItemName, modalFilename, modalVersion, modalDownloadButton;
 let modalSelectButton, toggleInfoButton, infoSection;
+let showRemovedToggle; // Reference for the new checkbox
 
 // Constants
 const RENDER_BATCH_SIZE = 100;
 const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/')
     ? '/MinecraftAllImages'
     : ''; // Adjust if deployed elsewhere
+const CACHE_NAME = 'minecraft-zip-cache-v1'; // Cache name for ZIP files
 
 // --- Initialization ---
 
@@ -49,22 +56,54 @@ document.addEventListener('DOMContentLoaded', () => {
     modalVersion = document.getElementById('modal-version');
     modalDownloadButton = document.getElementById('modal-download-button');
     modalSelectButton = document.getElementById('modal-select-button');
-    toggleInfoButton = document.getElementById('toggle-info-button'); 
-    infoSection = document.getElementById('info-section'); 
-    supportersListDiv = document.getElementById('supporters-list'); // Assign the new div
+    toggleInfoButton = document.getElementById('toggle-info-button');
+    infoSection = document.getElementById('info-section');
+    supportersListDiv = document.getElementById('supporters-list');
+    showRemovedToggle = document.getElementById('show-removed-toggle'); // Get the checkbox
 
     // Initialize the application
     initializeTheme();
+    initializeShowRemovedState(); // Load saved state for the checkbox
     setupEventListeners();
     loadVersions(); // Start the loading process
-    loadSupporters(); // <<< ADD THIS LINE
+    loadSupporters();
     updateCopyrightYear();
 });
+
+function setLoadingState(isLoading) {
+    if (isLoading) {
+        progressContainer.style.display = 'block';
+        progressBar.style.width = '0%';
+        progressBar.classList.remove('error');
+        progressText.textContent = 'Initializing...';
+        // Optionally disable controls
+        searchInput.disabled = true;
+        versionSelect.disabled = true;
+        sortSelect.disabled = true;
+        downloadAllButton.disabled = true;
+        clearSelectionButton.disabled = true;
+        selectVisibleButton.disabled = true;
+    } else {
+        // Don't hide progress immediately if it shows an error
+        if (!progressBar.classList.contains('error')) {
+            setTimeout(() => {
+                if (progressContainer) progressContainer.style.display = 'none';
+            }, 1500); // Delay hiding to show completion/error
+        }
+        // Re-enable controls
+        searchInput.disabled = false;
+        versionSelect.disabled = false; // Version change might re-trigger loading
+        sortSelect.disabled = false;
+        // downloadAllButton enabled status depends on selection/filter results
+        updateSelectionControls();
+    }
+}
 
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
     document.body.setAttribute('data-theme', savedTheme);
     themeToggleButton.setAttribute('aria-checked', savedTheme === 'light');
+    setLoadingState(false);
 }
 
 function setupEventListeners() {
@@ -77,21 +116,18 @@ function setupEventListeners() {
     selectVisibleButton.addEventListener('click', selectVisibleItems);
     gallery.addEventListener('scroll', handleScroll);
     backToTopButton.addEventListener('click', scrollToTop);
-    toggleInfoButton.addEventListener('click', toggleInfoSection); // Listener for info toggle
+    toggleInfoButton.addEventListener('click', toggleInfoSection);
+    showRemovedToggle.addEventListener('change', handleShowRemovedToggle); // Add listener
 
-    // Delegated listener for gallery items and info buttons
     gallery.addEventListener('click', handleGalleryClick);
-    gallery.addEventListener('scroll', handleScroll); // Also handles lazy load sentinel observation trigger
+    gallery.addEventListener('scroll', handleScroll);
 
-    // Modal listeners
     modalCloseButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (event) => {
-        // Close modal if clicking the backdrop (outside the content)
         if (event.target === modal) {
             closeModal();
         }
     });
-    // Modal action buttons listeners are assigned dynamically when modal opens
 }
 
 function updateCopyrightYear() {
@@ -101,35 +137,48 @@ function updateCopyrightYear() {
     }
 }
 
+function handleSortChange(event) {
+    currentSort = event.target.value;
+    // No need to save sort preference, it's usually transient
+    filterAndRenderItems(); // Re-sort and re-render the gallery
+}
+
 // --- Version Handling ---
 
 async function loadVersions() {
     versionSelect.innerHTML = '<option value="loading">Loading...</option>';
     versionSelect.disabled = true;
+    availableVersions = [];
+    baseVersion = null;
 
     try {
-        addVersionOption('latest', 'Latest Version');
+        console.log(`Fetching versions from ${BASE_PATH}/images/versions.json`);
+        const response = await fetch(`${BASE_PATH}/images/versions.json?t=${Date.now()}`);
+        if (!response.ok) {
+             console.error(`versions.json fetch failed (${response.status})`);
+             throw new Error('versions.json fetch failed');
+        }
+        const versionsData = await response.json();
 
-        // Fetch versions from versions.json
-        let versionsData = null;
-        try {
-            const response = await fetch(`${BASE_PATH}/images/versions.json`);
-            if (response.ok) {
-                versionsData = await response.json();
-                availableVersions = versionsData.versions || [];
-            } else {
-                 console.warn(`versions.json not found or failed (${response.status}), using fallback.`);
-                 throw new Error('versions.json fetch failed');
-            }
-        } catch (e) {
-            console.warn('Error fetching versions.json:', e);
-            availableVersions = ['1.21.5', '1.21.4']; // Hardcoded fallback
+        if (!versionsData || !Array.isArray(versionsData.versions) || typeof versionsData.base !== 'string') {
+            console.error('Invalid versions.json format:', versionsData);
+            throw new Error('Invalid versions.json format.');
         }
 
-        availableVersions.sort(compareVersions).reverse(); // Newest first in list
+        availableVersions = versionsData.versions.sort(compareVersions).reverse();
+        baseVersion = versionsData.base;
+
+        console.log('Available versions:', availableVersions);
+        console.log('Base version:', baseVersion);
+
+        if (!availableVersions.includes(baseVersion)) {
+             console.warn(`Base version "${baseVersion}" not found in available versions list.`);
+        }
+
+        versionSelect.innerHTML = '';
+        addVersionOption('latest', 'Latest Version');
         availableVersions.forEach(version => addVersionOption(version, version));
 
-        // Determine initial version to load
         const urlParams = new URLSearchParams(window.location.search);
         const versionParam = urlParams.get('version');
         const savedVersion = localStorage.getItem('selectedVersion');
@@ -139,16 +188,21 @@ async function loadVersions() {
             initialVersion = versionParam;
         } else if (savedVersion && (savedVersion === 'latest' || availableVersions.includes(savedVersion))) {
             initialVersion = savedVersion;
+        } else if (availableVersions.length > 0) {
+            initialVersion = 'latest';
         }
 
         versionSelect.value = initialVersion;
         currentVersion = initialVersion;
+        console.log(`Initial version set to: ${currentVersion}`);
 
-        await loadItemData(); // Load data for the initial version
+        await loadItemData();
 
     } catch (error) {
         console.error('Error loading versions:', error);
-        versionSelect.innerHTML = '<option value="error">Error</option>';
+        versionSelect.innerHTML = '<option value="error">Load Error</option>';
+        gallery.innerHTML = `<div class="no-results">Error loading version list.<br>(${error.message})<br>Please refresh the page.</div>`;
+        setLoadingState(false);
     } finally {
         versionSelect.disabled = false;
     }
@@ -163,7 +217,6 @@ function addVersionOption(value, text) {
     versionSelect.appendChild(option);
 }
 
-// Semantic Version Comparison
 function compareVersions(a, b) {
     const partsA = a.split('.').map(Number);
     const partsB = b.split('.').map(Number);
@@ -187,105 +240,347 @@ async function handleVersionChange(event) {
 
 // --- Data Loading & Processing ---
 
-async function loadItemData() {
-    gallery.innerHTML = '<div class="loading">Loading version data...</div>';
-    setLoadingState(true);
+async function loadVersionZip(version, cache, isBaseVersion) {
+    const zipUrl = `${BASE_PATH}/images/${version}.zip`;
+    const result = {
+        versionTag: version,
+        processed: false,
+        added: [],
+        modified: [],
+        removed: [],
+        manifestImages: [],
+        error: null
+    };
+
+    console.log(`Processing version zip: ${version} (Base: ${isBaseVersion})`);
+    setLoadingProgress(`Checking cache for ${version}.zip...`);
 
     try {
-        loadedImages.clear();
-        allItems = [];
-        //repoInfoDisplay.textContent = `Loading base images...`;
-        await loadManifest(`${BASE_PATH}/images/base/manifest.json`, 'base');
+        let zipBlob = null;
+        const cachedResponse = await cache.match(zipUrl);
 
-        let versionsToLoad = [];
-        if (currentVersion === 'latest') {
-            versionsToLoad = [...availableVersions].sort(compareVersions); // Oldest to newest
+        if (cachedResponse && cachedResponse.ok) {
+            console.log(`Cache hit for ZIP: ${version}`);
+            zipBlob = await cachedResponse.blob();
+            setLoadingProgress(`Loading ${version}.zip from cache...`);
         } else {
-            versionsToLoad = availableVersions
-                .filter(v => compareVersions(v, currentVersion) <= 0)
-                .sort(compareVersions); // Oldest to newest
+            console.log(`Cache miss for ZIP: ${version}. Fetching...`);
+            setLoadingProgress(`Downloading ${version}.zip...`);
+            const fetchResponse = await fetch(zipUrl);
+            if (!fetchResponse.ok) {
+                if (fetchResponse.status === 404) {
+                    console.warn(`ZIP file not found for version ${version} (404). Skipping.`);
+                    setLoadingProgress(`Skipped ${version} (Not found)`);
+                    result.error = 'ZIP Not Found (404)';
+                    return result;
+                }
+                throw new Error(`Fetch failed for ${version}.zip: ${fetchResponse.status} ${fetchResponse.statusText}`);
+            }
+            const responseToCache = fetchResponse.clone();
+            zipBlob = await fetchResponse.blob();
+            console.log(`Storing ${version}.zip in cache.`);
+            setLoadingProgress(`Caching ${version}.zip...`);
+            await cache.put(zipUrl, responseToCache);
         }
 
-        for (const version of versionsToLoad) {
-            await loadChangeset(`${BASE_PATH}/images/${version}/changes.json`, version);
+        if (zipBlob) {
+            console.log(`Unzipping ${version}.zip (${(zipBlob.size / 1024 / 1024).toFixed(2)} MB)`);
+            setLoadingProgress(`Processing ${version} contents...`);
+            const zip = await JSZip.loadAsync(zipBlob);
+
+            let manifestData = null;
+            let changesData = null;
+            const imageFilesToExtract = new Set();
+            const basePathInZip = `${version}/`; // Base path inside the zip
+
+            const manifestFile = zip.file(`${basePathInZip}manifest.json`);
+            const changesFile = zip.file(`${basePathInZip}changes.json`);
+
+            if (isBaseVersion) {
+                if (!manifestFile) throw new Error(`manifest.json not found in base version zip: ${version}.zip`);
+                setLoadingProgress(`Reading manifest for ${version}...`);
+                const manifestContent = await manifestFile.async("string");
+                try {
+                    manifestData = JSON.parse(manifestContent);
+                } catch (e) {
+                     throw new Error(`Error parsing manifest.json in ${version}.zip: ${e.message}`);
+                }
+
+                console.log(`Base manifest ${version}:`, manifestData);
+                if (!manifestData || !Array.isArray(manifestData.images)) {
+                    throw new Error(`Invalid manifest.json format in ${version}.zip`);
+                }
+
+                // Filter out specific unwanted files
+                result.manifestImages = (manifestData.images || []).filter(fname => fname !== 'x.png' && fname !== 'u.png');
+                console.log(`Filtered base manifest images for ${version}: ${result.manifestImages.length} items remain.`);
+
+                result.manifestImages.forEach(fname => imageFilesToExtract.add(fname));
+            } else {
+                if (!changesFile) {
+                    console.warn(`changes.json not found in version zip: ${version}.zip. Assuming no changes.`);
+                     setLoadingProgress(`No changes found for ${version}`);
+                     result.processed = true;
+                     return result;
+                 }
+                 setLoadingProgress(`Reading changes for ${version}...`);
+                 const changesContent = await changesFile.async("string");
+                  try {
+                      changesData = JSON.parse(changesContent);
+                  } catch (e) {
+                       throw new Error(`Error parsing changes.json in ${version}.zip: ${e.message}`);
+                  }
+
+                 console.log(`Changeset ${version}:`, changesData);
+                 if (!changesData) throw new Error(`Invalid changes.json format in ${version}.zip`);
+
+                 // Filter out specific unwanted files
+                 result.added = (changesData.added || []).filter(fname => fname !== 'x.png' && fname !== 'u.png');
+                 result.modified = (changesData.modified || []).filter(fname => fname !== 'x.png' && fname !== 'u.png');
+                 result.removed = (changesData.removed || []).filter(fname => fname !== 'x.png' && fname !== 'u.png');
+                 console.log(`Filtered changeset for ${version}: +${result.added.length}, ~${result.modified.length}, -${result.removed.length}`);
+
+                 result.added.forEach(fname => imageFilesToExtract.add(fname));
+                 result.modified.forEach(fname => imageFilesToExtract.add(fname));
+            }
+
+            if (imageFilesToExtract.size > 0) {
+                setLoadingProgress(`Extracting ${imageFilesToExtract.size} images for ${version}...`);
+                console.log(`Extracting images for ${version}:`, Array.from(imageFilesToExtract));
+                const imagePromises = [];
+                let extractedCount = 0;
+
+                imageFilesToExtract.forEach(filename => {
+                    // Construct the full path within the zip
+                    const filePathInZip = `${basePathInZip}${filename.replace(/\\/g, '/')}`;
+                    const imageFileEntry = zip.file(filePathInZip);
+                    if (imageFileEntry) {
+                        imagePromises.push(
+                            imageFileEntry.async('blob').then(blob => {
+                                imageDataCache.set(filename, blob);
+                                extractedCount++;
+                            }).catch(err => {
+                                console.error(`Error extracting image ${filename} from ${version}.zip:`, err);
+                            })
+                        );
+                    } else {
+                         console.warn(`Image file "${filePathInZip}" listed in manifest/changes not found in ${version}.zip`);
+                    }
+                });
+
+                await Promise.all(imagePromises);
+                console.log(`Finished extracting ${extractedCount}/${imageFilesToExtract.size} images for ${version}.`);
+                setLoadingProgress(`Extracted images for ${version}`);
+            } else {
+                 console.log(`No new/modified images to extract for ${version}.`);
+            }
+
+            result.processed = true;
         }
-
-        const versionLabel = currentVersion === 'latest' ? 'Latest Version' : `Version ${currentVersion}`;
-        filterAndRenderItems(); // Initial sort, filter, render
-
     } catch (error) {
-        console.error(`Error loading data for version ${currentVersion}:`, error);
-        gallery.innerHTML = `<div class="no-results">Error loading item data for ${currentVersion}.<br>(${error.message})<br>Try refreshing or selecting another version.</div>`;
-        totalCountDisplay.textContent = 'Total: 0 items';
-        filteredCountDisplay.textContent = 'Showing: 0 items';
-    } finally {
-       setLoadingState(false);
+        console.error(`Error processing version ${version}:`, error);
+        setLoadingProgress(`Error loading ${version}: ${error.message}`);
+        result.error = error.message;
     }
+    return result;
 }
 
-function setLoadingState(isLoading) {
-    // Disable/enable controls during data loading
-    [searchInput, downloadAllButton, clearSelectionButton, selectVisibleButton, versionSelect, sortSelect].forEach(el => el.disabled = isLoading);
-}
+async function loadItemData() {
+    setLoadingState(true);
+    setLoadingProgress('Loading item data...', 0);
+    console.log(`Starting loadItemData for version: ${currentVersion}`);
 
-async function loadManifest(manifestUrl, versionTag) {
+    allItems = [];
+    loadedImages.clear(); // Stores current filename -> { path, versionTag }
+    imageDataCache.clear(); // Clear image blob cache on version change
+    itemNameCache.clear(); // Clear formatted names
+    itemHistory.clear(); // NEW: Clear history on reload
+    markedAsRemoved.clear(); // Clear removed tracking
+
+    let targetVersion = currentVersion === 'latest' ? availableVersions[0] : currentVersion;
+    let versionPath = [];
+    let processing = true;
+
+    if (!baseVersion || availableVersions.length === 0) {
+        console.error("Base version or available versions not loaded.");
+        setLoadingProgress('Error: Version data missing.', null, true);
+        setLoadingState(false);
+        gallery.innerHTML = '<div class="no-results">Error loading version data. Please refresh.</div>';
+        return;
+    }
+
+    console.log(`Determined target version: ${targetVersion}`);
+
+    // Build the path of versions to process: from base up to targetVersion
+    versionPath.push(baseVersion);
+    // Correctly add all intermediate versions
+    const sortedAvailable = [...availableVersions].sort(compareVersions);
+    for (const v of sortedAvailable) {
+        // Include versions strictly after base and up to or equal to target
+        if (compareVersions(v, baseVersion) > 0 && compareVersions(v, targetVersion) <= 0) {
+            if (!versionPath.includes(v)) { // Avoid duplicates if base === target
+                 versionPath.push(v);
+            }
+        }
+    }
+    // Ensure the final path is sorted chronologically
+    versionPath.sort(compareVersions);
+
+    console.log('Processing version path:', versionPath);
+
+    const allVersionPromises = [];
+    const cache = await caches.open(CACHE_NAME);
+
+    // Prepare promises for loading all necessary version data (ZIPs)
+    for (let i = 0; i < versionPath.length; i++) {
+        const version = versionPath[i];
+        const isBase = version === baseVersion;
+        console.log(`Preparing to load data for version: ${version} (Base: ${isBase})`);
+        allVersionPromises.push(loadVersionZip(version, cache, isBase));
+    }
+
     try {
-        const response = await fetch(`${manifestUrl}?t=${Date.now()}`);
-        if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
-        const manifest = await response.json();
+        // Load all version data concurrently
+        const versionResults = await Promise.all(allVersionPromises);
+        console.log('All version ZIPs/data processed.');
 
-        (manifest.images || []).forEach(filename => {
-            if (!loadedImages.has(filename)) {
-                 allItems.push(filename);
-                 loadedImages.set(filename, versionTag);
-            }
-        });
-        console.log(`Loaded ${manifest.images?.length || 0} images from ${versionTag} manifest.`);
-    } catch (error) {
-        console.error(`Error processing ${versionTag} manifest (${manifestUrl}):`, error);
-        if (versionTag === 'base') throw error; // Base manifest failure is critical
-        else console.warn(`Skipping ${versionTag} manifest due to error.`);
-    }
-}
+        // --- Process results chronologically to build history and final state ---
+        let currentImageState = new Map(); // Tracks filename -> { path, versionTag } for the *current* step
+        const baseResult = versionResults.find(r => r.versionTag === baseVersion);
 
-async function loadChangeset(changesetUrl, versionTag) {
-     try {
-        const response = await fetch(`${changesetUrl}?t=${Date.now()}`);
-        if (!response.ok) {
-            if (response.status === 404) {
-                console.log(`No changeset for ${versionTag}, skipping.`);
-                return; // 404 is expected if no changes for a version
-            }
-            throw new Error(`Fetch failed: ${response.status}`);
+        if (!baseResult || !baseResult.processed) {
+             throw new Error(`Base version (${baseVersion}) data failed to process.`);
         }
-        const changes = await response.json();
-        let added = 0, modified = 0, removed = 0;
 
-        (changes.removed || []).forEach(filename => {
-            const index = allItems.indexOf(filename);
-            if (index > -1) { allItems.splice(index, 1); loadedImages.delete(filename); removed++; }
+        // 1. Initialize with Base Version data
+        console.log(`Processing base version: ${baseVersion}`);
+        setLoadingProgress(`Processing base: ${baseVersion}...`, 10); // Example progress
+        for (const baseFilename of baseResult.manifestImages) {
+            const imagePath = `${BASE_PATH}/images/${baseVersion}/${baseFilename}`;
+            currentImageState.set(baseFilename, { path: imagePath, versionTag: baseVersion });
+             // NEW: Initialize history
+            itemHistory.set(baseFilename, [{ version: baseVersion, filename: baseFilename }]);
+        }
+        console.log(`Base version processed. ${currentImageState.size} initial items.`);
+
+
+        // 2. Apply changes from subsequent versions
+        let processedCount = 1; // Start after base
+        const totalToProcess = versionPath.length;
+
+        for (const version of versionPath) {
+            if (version === baseVersion) continue; // Skip base, already processed
+
+            const result = versionResults.find(r => r.versionTag === version);
+             if (!result || !result.processed) {
+                 console.warn(`Skipping unprocessed or missing version data for: ${version}`);
+                 continue; // Skip if a version failed, but try to continue
+             }
+
+            const progress = 10 + Math.round(80 * (processedCount / (totalToProcess -1)));
+            setLoadingProgress(`Applying changes: ${version}...`, progress);
+            console.log(`Applying changes from version: ${version}`);
+
+            // Modifications
+            for (const modifiedFilename of result.modified) {
+                const imagePath = `${BASE_PATH}/images/${version}/${modifiedFilename}`;
+                currentImageState.set(modifiedFilename, { path: imagePath, versionTag: version });
+                // NEW: Add to history
+                if (itemHistory.has(modifiedFilename)) {
+                    itemHistory.get(modifiedFilename).push({ version: version, filename: modifiedFilename });
+                } else {
+                     // Should theoretically exist from base or previous add, but handle defensively
+                     console.warn(`Modified item ${modifiedFilename} in ${version} not found in history. Initializing.`);
+                     itemHistory.set(modifiedFilename, [{ version: version, filename: modifiedFilename }]);
+                }
+            }
+
+            // Additions
+            for (const addedFilename of result.added) {
+                const imagePath = `${BASE_PATH}/images/${version}/${addedFilename}`;
+                currentImageState.set(addedFilename, { path: imagePath, versionTag: version });
+                 // NEW: Initialize or add to history
+                 if (!itemHistory.has(addedFilename)) {
+                     itemHistory.set(addedFilename, [{ version: version, filename: addedFilename }]);
+                 } else {
+                      // Item was likely removed and is now being re-added. Append to history.
+                      itemHistory.get(addedFilename).push({ version: version, filename: addedFilename });
+                 }
+            }
+
+            // Removals (Conditional removal from current state)
+             for (const removedFilename of result.removed) {
+                 if (!showRemovedItems) {
+                     // If hiding removed items, delete from the current effective state.
+                     // If it gets added/modified later, it will be put back.
+                     currentImageState.delete(removedFilename);
+                 } else {
+                     // If showing removed items, don't delete from state, just mark for styling.
+                     markedAsRemoved.add(removedFilename);
+                 }
+                 // History doesn't track removals directly.
+             }
+             processedCount++;
+        }
+
+        // --- Final State Calculation ---
+        console.log("Finalizing item list...");
+        loadedImages = new Map(currentImageState); // Copy the final state reflecting removals if applicable
+        allItems = Array.from(loadedImages.keys());
+
+        // If hiding removed items, clear the styling set.
+        // If showing them, keep the set so createItemElement can apply the style.
+        if (!showRemovedItems) {
+            markedAsRemoved.clear();
+        }
+
+        // --- Cleanup & Render ---
+        setLoadingProgress('Sorting and rendering...', 95);
+        selectedItems.forEach(item => { // Clear selection if selected item is no longer visible
+            if (!allItems.includes(item)) {
+                selectedItems.delete(item);
+            }
         });
-        (changes.added || []).forEach(filename => {
-             if (!loadedImages.has(filename)) { allItems.push(filename); loadedImages.set(filename, versionTag); added++; }
-             else { const existing = loadedImages.get(filename); if (compareVersions(versionTag, existing) > 0) loadedImages.set(filename, versionTag); }
-        });
-        (changes.modified || []).forEach(filename => {
-            if (!loadedImages.has(filename)) { allItems.push(filename); added++; } // Treat as added if not present
-            loadedImages.set(filename, versionTag); // Always update source
-            modified++;
-        });
-        console.log(`Changeset ${versionTag}: +${added}, ~${modified}, -${removed}`);
+
+        // Initial sort and render
+        filterAndRenderItems();
+        updateSelectionControls(); // Update button states based on loaded items
+        setLoadingProgress('Done!', 100);
+        console.log(`Load complete. Total items for version ${currentVersion}: ${allItems.length}`);
+        console.log(`Item History map size: ${itemHistory.size}`);
+
+        // --- Log Cache Size --- 
+        let totalCacheSizeBytes = 0;
+        for (const blob of imageDataCache.values()) {
+            totalCacheSizeBytes += blob.size;
+        }
+        const totalCacheSizeMB = (totalCacheSizeBytes / 1024 / 1024).toFixed(2);
+        console.log(`Image Data Cache size: ${totalCacheSizeMB} MB (${imageDataCache.size} blobs)`);
+
+
     } catch (error) {
-        console.error(`Error processing changeset ${versionTag} (${changesetUrl}):`, error);
-        console.warn(`Skipping changeset ${versionTag} due to error.`);
+        console.error("Error processing version data:", error);
+        setLoadingProgress(`Error: ${error.message}`, null, true);
+        gallery.innerHTML = `<div class="no-results">Error loading item data for version ${targetVersion}.<br>(${error.message})<br>Try selecting a different version or refreshing.</div>`;
+    } finally {
+        setLoadingState(false);
+        console.log("loadItemData finished.");
     }
 }
 
-// --- Sorting & Filtering ---
-
-function handleSortChange(event) {
-    currentSort = event.target.value;
-    filterAndRenderItems();
+function setLoadingProgress(text, percentage = null, isError = false) {
+    if (progressText) progressText.textContent = text;
+    if (progressBar && percentage !== null) {
+        progressBar.style.width = `${percentage}%`;
+        if (isError) {
+            progressBar.classList.add('error');
+        } else {
+             progressBar.classList.remove('error');
+        }
+    }
+     if (progressContainer && progressContainer.style.display !== 'block' && percentage !== null && percentage >= 0) {
+        progressContainer.style.display = 'block';
+    }
 }
 
 function sortItems(itemsToSort) {
@@ -294,35 +589,21 @@ function sortItems(itemsToSort) {
         const nameB = formatItemName(b);
 
         if (currentSort === 'version') {
-            // Version sort: Newest (highest version) first
-            const versionA = loadedImages.get(a) || 'base'; // Default to 'base' if missing
-            const versionB = loadedImages.get(b) || 'base';
+            const versionA = loadedImages.get(a) || baseVersion;
+            const versionB = loadedImages.get(b) || baseVersion;
 
-            // Handle 'base' as the oldest
-            if (versionA === 'base' && versionB !== 'base') return 1; // a is older
-            if (versionB === 'base' && versionA !== 'base') return -1; // b is older
-            if (versionA === 'base' && versionB === 'base') {
-                 // If both are base, sort by name A-Z as secondary
-                 return nameA.localeCompare(nameB);
-            }
-
-            // Compare versions using semantic comparison, newest first
-            const comparison = compareVersions(versionB, versionA); // Note B vs A for descending
-            if (comparison === 0) {
-                 // If versions are the same, sort by name A-Z as secondary
-                 return nameA.localeCompare(nameB);
-            }
-            return comparison;
+             const comparison = compareVersions(versionB, versionA);
+             if (comparison === 0) {
+                  return nameA.localeCompare(nameB);
+             }
+             return comparison;
         } else if (currentSort === 'length') {
-             // Length sort: Longest name first
              const lengthDiff = nameB.length - nameA.length;
              if (lengthDiff === 0) {
-                 // If lengths are the same, sort by name A-Z as secondary
                  return nameA.localeCompare(nameB);
              }
              return lengthDiff;
         } else {
-            // Name sort (A-Z or Z-A)
             return currentSort === 'za' ? nameB.localeCompare(nameA) : nameA.localeCompare(nameB);
         }
     });
@@ -334,31 +615,27 @@ function filterItems(itemsToFilter, searchTerm) {
      return itemsToFilter.filter(filename => formatItemName(filename).toLowerCase().includes(lowerTerm));
 }
 
-// --- Rendering ---
-
 function filterAndRenderItems() {
     const searchTerm = searchInput.value;
-    sortItems(allItems); // Sort the source array
-    displayedItems = filterItems(allItems, searchTerm); // Filter into displayedItems
+    sortItems(allItems);
+    displayedItems = filterItems(allItems, searchTerm);
 
-    // Update counts and button visibility
     totalCountDisplay.textContent = `Total: ${allItems.length} items`;
     filteredCountDisplay.textContent = `Showing: ${displayedItems.length} items`;
     selectVisibleButton.style.display = searchTerm && displayedItems.length > 0 ? 'inline-block' : 'none';
 
     renderGallery(displayedItems);
-    updateSelectionControls(); // Ensure download button state reflects current view
+    updateSelectionControls();
 }
 
 function renderGallery(itemsToRender) {
-    gallery.innerHTML = ''; // Clear view
+    gallery.innerHTML = '';
 
     if (itemsToRender.length === 0) {
         gallery.innerHTML = '<div class="no-results">No items found matching your criteria.</div>';
         return;
     }
 
-    // Render initial batch + setup lazy load if needed
     const initialBatch = itemsToRender.slice(0, RENDER_BATCH_SIZE);
     initialBatch.forEach(filename => gallery.appendChild(createItemElement(filename)));
 
@@ -367,34 +644,31 @@ function renderGallery(itemsToRender) {
     }
 }
 
-let observer = null; // Intersection observer instance
+let observer = null;
 
 function setupLazyLoading(items, startIndex) {
-    if (observer) observer.disconnect(); // Clean up previous observer
+    if (observer) observer.disconnect();
 
     const sentinel = document.createElement('div');
-    sentinel.className = 'loading sentinel'; // Marker for observation
+    sentinel.className = 'loading sentinel';
     sentinel.textContent = 'Loading more items...';
 
     observer = new IntersectionObserver((entries) => {
-        // If sentinel is visible and more items exist
         if (entries[0].isIntersecting && startIndex < items.length) {
             const end = Math.min(startIndex + RENDER_BATCH_SIZE, items.length);
             const batch = items.slice(startIndex, end);
 
             batch.forEach(filename => {
-                // Insert before sentinel if it's still in the DOM
                  if (sentinel.parentNode) gallery.insertBefore(createItemElement(filename), sentinel);
-                 else gallery.appendChild(createItemElement(filename)); // Fallback append
+                 else gallery.appendChild(createItemElement(filename));
             });
 
-            startIndex = end; // Update index for next batch
+            startIndex = end;
 
-            // If more items, move sentinel down; else remove it and stop observing
             if (startIndex < items.length) gallery.appendChild(sentinel);
             else { sentinel.remove(); observer.disconnect(); observer = null; }
         }
-    }, { root: gallery }); // Observe scrolling within the gallery element
+    }, { root: gallery });
 
     if (startIndex < items.length) {
         gallery.appendChild(sentinel);
@@ -403,25 +677,22 @@ function setupLazyLoading(items, startIndex) {
 }
 
 function createItemElement(filename) {
-    const fragment = document.createDocumentFragment(); // Use fragment to reduce DOM ops
+    const fragment = document.createDocumentFragment();
     const itemDiv = document.createElement('div');
-    const displayName = formatItemName(filename); // Get formatted name (potentially cached)
+    const displayName = formatItemName(filename);
+    const itemVersion = loadedImages.get(filename) || '?';
 
     itemDiv.className = 'item';
     itemDiv.dataset.filename = filename;
-    // Tooltip clarifies clicking the card selects it
-    itemDiv.title = `Select/Deselect: ${displayName}
-Filename: ${filename}`;
+    itemDiv.title = `Select/Deselect: ${displayName}\nFilename: ${filename}\nVersion: ${itemVersion}`;
 
     if (selectedItems.has(filename)) itemDiv.classList.add('selected');
+    if (markedAsRemoved.has(filename)) itemDiv.classList.add('removed-item'); // Add class if marked as removed
 
-    // Append elements using helper functions
     itemDiv.appendChild(createItemInfoButton(filename, displayName));
     itemDiv.appendChild(createItemImage(filename, displayName));
     itemDiv.appendChild(createNameElement(displayName));
     itemDiv.appendChild(createVersionBadge(filename));
-
-    // NO individual listener here - handled by delegation in handleGalleryClick
 
     fragment.appendChild(itemDiv);
     return fragment;
@@ -433,20 +704,31 @@ function createItemInfoButton(filename, displayName) {
     infoButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>`;
     infoButton.setAttribute('aria-label', `Details for ${displayName}`);
     infoButton.title = 'View Details';
-    // NO listener here - handled by delegation in handleGalleryClick
     return infoButton;
 }
 
 function createItemImage(filename, displayName) {
     const img = document.createElement('img');
-    const itemVersion = loadedImages.get(filename) || 'unknown';
-    img.src = getItemImageUrl(filename, itemVersion);
-    img.alt = `Minecraft ${displayName} item texture from version ${itemVersion}`;
-    img.loading = "lazy"; // Keep native lazy loading
-    // Add width/height via CSS instead for better separation
+    img.alt = `Minecraft ${displayName} item texture`;
+    img.loading = "lazy";
+
+    // Get the definitive path and version from loadedImages
+    const itemData = loadedImages.get(filename);
+    const imagePath = itemData ? itemData.path : null;
+
+    if (imagePath) {
+        img.src = imagePath; // Use the direct path
+    } else {
+        console.warn(`Image path not found in loadedImages for: ${filename}`);
+        img.src = `${BASE_PATH}/assets/missing.png`;
+        img.alt += ' (Image path missing)';
+    }
+
     img.onerror = function() {
-        console.warn(`Image load failed: ${filename} (Source: ${itemVersion})`);
-        this.src = `${BASE_PATH}/assets/missing.png`;
+        console.warn(`Image load failed for path: ${this.src}`);
+        if (!this.src.endsWith('missing.png')) {
+             this.src = `${BASE_PATH}/assets/missing.png`;
+        }
         this.onerror = null;
     };
     return img;
@@ -460,17 +742,13 @@ function createNameElement(displayName) {
 }
 
 function createVersionBadge(filename) {
-    const itemVersion = loadedImages.get(filename) || 'unknown';
+    const itemData = loadedImages.get(filename);
+    const itemVersion = itemData ? itemData.versionTag : '?'; // Get the versionTag property
     const versionBadge = document.createElement('span');
     versionBadge.className = 'item-version-badge';
-    versionBadge.textContent = itemVersion === 'base' ? 'Base' : itemVersion;
+    versionBadge.textContent = itemVersion;
+    versionBadge.title = `Source Version: ${itemVersion}`;
     return versionBadge;
-}
-
-function getItemImageUrl(filename, version) {
-     if (version === 'base') return `${BASE_PATH}/images/base/${filename}`;
-     else if (version !== 'unknown') return `${BASE_PATH}/images/${version}/${filename}`;
-     else return `${BASE_PATH}/assets/missing.png`; // Fallback
 }
 
 function formatItemName(filename) {
@@ -481,24 +759,21 @@ function formatItemName(filename) {
     const formattedName = filename.replace(/\.png$/i, '').replace(/_/g, ' ')
                            .replace(/\b\w/g, char => char.toUpperCase());
 
-    itemNameCache.set(filename, formattedName); // Store in cache
+    itemNameCache.set(filename, formattedName);
     return formattedName;
 }
-
-// --- Selection Handling ---
 
 function toggleItemSelection(itemElement, filename) {
     const wasSelected = selectedItems.has(filename);
     if (wasSelected) {
         selectedItems.delete(filename);
-        itemElement?.classList.remove('selected'); // Optional chaining for safety
+        itemElement?.classList.remove('selected');
     } else {
         selectedItems.add(filename);
         itemElement?.classList.add('selected');
     }
     updateSelectionControls();
 
-    // Sync modal button if it's open for the toggled item
     if (modal.style.display === 'block' && currentModalFilename === filename) {
         updateModalSelectButton();
     }
@@ -506,21 +781,17 @@ function toggleItemSelection(itemElement, filename) {
 
 function clearSelection() {
     selectedItems.clear();
-    // Visually deselect all currently rendered items
     gallery.querySelectorAll('.item.selected').forEach(el => {
         el.classList.remove('selected');
     });
     updateSelectionControls();
 
-    // If modal is open, update its select button state
     if (modal.style.display === 'block' && currentModalFilename) {
-        updateModalSelectButton(); // Will now show "Select Item"
+        updateModalSelectButton();
     }
 }
 
-
 function selectVisibleItems() {
-    // Select items currently visible in the gallery viewport matching filter
     const visibleItemElements = gallery.querySelectorAll('.item');
     visibleItemElements.forEach(el => {
         const filename = el.dataset.filename;
@@ -531,12 +802,10 @@ function selectVisibleItems() {
     });
     updateSelectionControls();
 
-    // If modal is open, update its button state if the item just got selected
     if (modal.style.display === 'block' && currentModalFilename && selectedItems.has(currentModalFilename)) {
          updateModalSelectButton();
     }
 }
-
 
 function updateSelectionControls() {
     const count = selectedItems.size;
@@ -546,221 +815,131 @@ function updateSelectionControls() {
         downloadAllButton.textContent = `Download Selected (${count}) as ZIP`;
         downloadAllButton.disabled = false;
     } else {
-        // If nothing selected, button downloads all *visible* items
         downloadAllButton.textContent = 'Download All as ZIP';
-        // Disable if no items are displayed at all
         downloadAllButton.disabled = displayedItems.length === 0;
     }
 }
 
-// --- Download Handling ---
-
 function handleDownloadClick() {
-    let itemsToDownload;
-    let zipFilenameSuffix;
-
+    // Decide whether to download selected or all visible
     if (selectedItems.size > 0) {
-        itemsToDownload = Array.from(selectedItems);
-        zipFilenameSuffix = 'selected';
+        downloadItemsAsZip(Array.from(selectedItems), `Minecraft_Items_${currentVersion}_Selected.zip`);
     } else {
-        // Download all currently *displayed* (filtered) items
-        itemsToDownload = displayedItems;
-        zipFilenameSuffix = searchInput.value ? 'filtered' : 'all'; // More descriptive suffix
+        // Filter displayedItems to only include those currently loaded (handles showRemoved)
+        const itemsToDownload = displayedItems.filter(item => loadedImages.has(item.filename));
+        const filenamesToDownload = itemsToDownload.map(item => item.filename);
+        downloadItemsAsZip(filenamesToDownload, `Minecraft_Items_${currentVersion}_AllVisible.zip`);
     }
-
-    if (itemsToDownload.length === 0) {
-        alert('No items to download. Select items or adjust your search filter.');
-        return;
-    }
-
-    const zipFilename = `minecraft-items-${currentVersion}-${zipFilenameSuffix}.zip`;
-
-    // --- Show and reset progress bar immediately ---
-    progressContainer.style.display = 'block'; 
-    progressBar.style.width = '0%';
-    progressBar.classList.remove('error'); // Remove previous error state
-    // ---------------------------------------------
-
-    downloadItemsAsZip(itemsToDownload, zipFilename);
 }
 
-function downloadSingleItem(filename) {
-    const itemVersion = loadedImages.get(filename) || 'unknown';
-    const imageUrl = getItemImageUrl(filename, itemVersion);
+// Modified to accept optional specific path and download filename
+async function downloadSingleItem(baseFilename, specificImagePath = null, downloadFilename = null) {
+    console.log(`Attempting to download single item: ${baseFilename}`);
+    const itemData = loadedImages.get(baseFilename);
+    const historyData = itemHistory.get(baseFilename);
 
-    fetch(imageUrl)
-        .then(response => {
-            if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
-            return response.blob();
-        })
-        .then(blob => saveAs(blob, filename)) // FileSaver.js
-        .catch(error => {
-             console.error(`Error downloading ${filename}:`, error);
-             alert(`Could not download ${filename}. See console.`);
-        });
+
+    // Use provided path if available, otherwise use current loaded path
+    const imagePath = specificImagePath || (itemData ? itemData.path : null);
+    const finalDownloadFilename = downloadFilename || baseFilename; // Use suggested name or base filename
+
+
+    if (!imagePath) {
+         console.error(`No image path found for ${baseFilename}`);
+         alert(`Could not find image data for ${baseFilename}.`);
+         return;
+     }
+
+
+    try {
+        setLoadingState(true); // Show progress indicator for fetch
+        setLoadingProgress(`Fetching ${finalDownloadFilename}...`, 50);
+
+
+        // Fetch the specific image directly
+        const response = await fetch(imagePath);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch image ${imagePath}: ${response.statusText}`);
+        }
+        const blob = await response.blob();
+
+
+        setLoadingProgress(`Saving ${finalDownloadFilename}...`, 90);
+        saveAs(blob, finalDownloadFilename); // Use FileSaver.js
+        setLoadingProgress('Download complete!', 100);
+
+
+    } catch (error) {
+        console.error(`Error downloading single item ${finalDownloadFilename}:`, error);
+        alert(`Failed to download ${finalDownloadFilename}. Error: ${error.message}`);
+        setLoadingProgress('Download failed.', null, true);
+    } finally {
+        setLoadingState(false);
+    }
 }
 
 async function downloadItemsAsZip(items, zipFilename) {
     const zip = new JSZip();
-    const downloadButton = document.getElementById('download-all'); // Renamed for clarity
+    const downloadButton = document.getElementById('download-all');
     const originalText = downloadButton.textContent;
-    const progressContainer = document.getElementById('loading-progress');
-    const progressBar = document.getElementById('progress-bar');
-    const progressText = document.getElementById('progress-text');
-    const CACHE_NAME = 'minecraft-image-cache-v1'; // Cache name
-
-    // --- Phase 1: Gather Image Blobs (Check Cache, Fetch if Missing) ---
-    console.log(`Starting Phase 1: Gathering ${items.length} items...`);
-    downloadButton.textContent = "Gathering images...";
-    downloadButton.disabled = true;
+    setLoadingProgress('Preparing ZIP file...', 0);
     progressContainer.style.display = 'block';
-    progressBar.style.width = '0%';
     progressBar.classList.remove('error');
-    progressText.textContent = 'Gathering: 0%';
 
-    let completedGathering = 0;
-    const totalItems = items.length;
-    const imageData = []; // Array to hold { filename, blob } pairs
-    let cacheHits = 0; // Counter for cache hits
-    let cacheMisses = 0; // Counter for cache misses (fetches)
-    const BATCH_SIZE = 10; // Keep batching for fetches
+    console.log(`Starting ZIP creation for ${items.length} items.`);
+    downloadButton.textContent = "Zipping files...";
+    downloadButton.disabled = true;
 
     try {
-        const cache = await caches.open(CACHE_NAME); // Open cache once
-
-        for (let i = 0; i < totalItems; i += BATCH_SIZE) {
-            const batch = items.slice(i, i + BATCH_SIZE);
-            console.log(`Gathering batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(totalItems / BATCH_SIZE)}`);
-
-            const batchPromises = batch.map(async (filename) => {
-                const imageVersion = loadedImages.get(filename);
-                const imageUrl = getItemImageUrl(filename, imageVersion);
-
-                // Skip known missing/placeholder images early
-                if (imageUrl.endsWith('/assets/missing.png')) {
-                    console.warn(`Skipping placeholder image: ${filename}`);
-                    return null; // Indicate skipped
-                }
-
+        let addedCount = 0;
+        items.forEach(filename => {
+            const imageBlob = imageDataCache.get(filename);
+            if (imageBlob) {
                 try {
-                    // 1. Check Cache
-                    const cachedResponse = await cache.match(imageUrl);
-
-                    if (cachedResponse && cachedResponse.ok) {
-                        // 1a. Cache Hit
-                        // console.log(`Cache hit for: ${filename}`); // Removed per-item logging
-                        cacheHits++;
-                        const blob = await cachedResponse.blob();
-                        return { filename, blob };
-                    } else {
-                        // 1b. Cache Miss - Fetch
-                        // console.log(`Cache miss for: ${filename}. Fetching...`); // Removed per-item logging
-                        cacheMisses++;
-                        const fetchResponse = await fetch(imageUrl);
-                        if (!fetchResponse.ok) {
-                            throw new Error(`Fetch failed: ${fetchResponse.status}`);
-                        }
-                        const responseToCache = fetchResponse.clone(); // Clone for caching
-                        const blob = await fetchResponse.blob();
-
-                        // 2. Store in Cache
-                        await cache.put(imageUrl, responseToCache);
-                        // console.log(`Cached fetched response for: ${filename}`); // Removed per-item logging
-                        return { filename, blob };
-                    }
-                } catch (error) {
-                    console.error(`Error processing ${filename}:`, error);
-                    return { filename, error: true }; // Mark as error to update progress but not add to zip
+                    zip.file(filename, imageBlob);
+                    addedCount++;
+                } catch (zipError) {
+                     console.error(`Error adding file ${filename} to zip:`, zipError);
                 }
-            });
-
-            // Wait for the current batch to finish processing (cache checks/fetches)
-            const batchResults = await Promise.all(batchPromises);
-
-            // Process results of the batch
-            batchResults.forEach(result => {
-                completedGathering++;
-                const progress = Math.round((completedGathering / totalItems) * 100);
-                progressBar.style.width = `${progress}%`;
-                progressText.textContent = `Gathering: ${progress}%`;
-
-                if (result && !result.error) {
-                    imageData.push(result); // Add successful results
-                } else if (result && result.error) {
-                    console.warn(`Failed to get blob for ${result.filename}, will be excluded from ZIP.`);
-                    // Optionally add visual indication of partial failure
-                } else {
-                     // Null result means it was skipped (e.g., missing.png)
-                     // console.log(`Skipped an item as planned.`); // Can be noisy, commented out
-                }
-            });
-             // Small delay might help UI responsiveness on large batches, optional
-            // await new Promise(resolve => setTimeout(resolve, 10));
-        }
-
-        console.log(`Phase 1 Complete: Gathered ${imageData.length} blobs successfully out of ${totalItems} requested.`);
-        console.log(`Cache Stats: Hits = ${cacheHits}, Fetches = ${cacheMisses}`); // Added summary logging
-
-        if (imageData.length === 0) {
-             throw new Error("No images could be gathered (all failed or were skipped).");
-        }
-
-        // --- Phase 2: Create and Download ZIP ---
-        console.log(`Starting Phase 2: Zipping ${imageData.length} items...`);
-        progressText.textContent = 'Zipping: 0%'; // Reset progress text for zipping phase
-        progressBar.style.width = '0%'; // Reset progress bar for zipping phase
-
-        // Add gathered blobs to the zip
-        imageData.forEach(data => {
-            try {
-                 zip.file(data.filename, data.blob);
-            } catch (zipError) {
-                 console.error(`Error adding file ${data.filename} to zip:`, zipError);
-                 // Optionally remove it from a counter if you want to report partial success
+            } else {
+                 console.warn(`Blob not found for ${filename} when creating ZIP. Skipping.`);
             }
         });
 
+        if (addedCount === 0) {
+             throw new Error("No valid image data found for selected items.");
+        }
 
-        // Generate the ZIP file blob
+        console.log(`Added ${addedCount} files to ZIP. Generating blob...`);
+
         const zipBlob = await zip.generateAsync(
-            { type: 'blob', streamFiles: true }, // streamFiles might improve performance for many files
+            { type: 'blob', streamFiles: true },
             (metadata) => {
                 const percent = metadata.percent.toFixed(0);
-                // console.log(`Zipping progress: ${percent}%`);
-                progressBar.style.width = `${percent}%`;
-                progressText.textContent = `Zipping: ${percent}%`;
+                setLoadingProgress(`Zipping: ${percent}%`, percent);
             }
         );
 
-        console.log(`Phase 2 Complete: ZIP Blob generated, size: ${zipBlob.size} bytes.`);
+        console.log(`ZIP Blob generated, size: ${(zipBlob.size / 1024 / 1024).toFixed(2)} MB.`);
 
-        // Trigger download
-        console.log(`Calling saveAs for filename: ${zipFilename}`);
         saveAs(zipBlob, zipFilename);
-        console.log(`saveAs call completed for ${zipFilename}.`);
-        progressText.textContent = 'Done!'; // Final status update
+        setLoadingProgress('Done!', 100);
 
     } catch (error) {
         console.error('Error during ZIP creation process:', error);
-        progressBar.classList.add('error');
-        progressBar.style.width = '100%';
-        // Show brief error message in progress bar
         const shortError = error.message.length > 40 ? error.message.substring(0, 37) + '...' : error.message;
-        progressText.textContent = `Error: ${shortError}`; 
-        alert(`There was an error: ${error.message}`);
+        setLoadingProgress(`Error: ${shortError}`, 100, true);
+        alert(`There was an error creating the ZIP: ${error.message}`);
     } finally {
-        console.log('Restoring button state in finally block.');
+        console.log('Restoring download button state.');
         downloadButton.textContent = originalText;
         downloadButton.disabled = false;
-        // Hide progress bar after a delay
         setTimeout(() => {
-            if (progressContainer) progressContainer.style.display = 'none';
-            if (progressBar) progressBar.classList.remove('error');
-        }, 3000); // Slightly longer delay
+             if (progressContainer) progressContainer.style.display = 'none';
+             if (progressBar) progressBar.classList.remove('error');
+        }, 3000);
     }
 }
-
-// --- UI Helpers ---
 
 function toggleTheme() {
     const current = document.body.getAttribute('data-theme');
@@ -780,101 +959,156 @@ function scrollToTop() {
     gallery.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// --- How to Use / Info Section Toggle ---
 function toggleInfoSection() {
     const isExpanded = toggleInfoButton.getAttribute('aria-expanded') === 'true';
     if (isExpanded) {
         infoSection.classList.remove('visible');
         toggleInfoButton.setAttribute('aria-expanded', 'false');
-        toggleInfoButton.firstChild.textContent = ' Show Info / How to Use '; // Restore text
+        toggleInfoButton.firstChild.textContent = ' Show Info / How to Use ';
     } else {
         infoSection.classList.add('visible');
         toggleInfoButton.setAttribute('aria-expanded', 'true');
-        toggleInfoButton.firstChild.textContent = ' Hide Info / How to Use '; // Change text
+        toggleInfoButton.firstChild.textContent = ' Hide Info / How to Use ';
     }
 }
 
-
-// --- Modal Functionality ---
-
 function openModal(filename) {
-    currentModalFilename = filename;
+    console.log(`Opening modal for: ${filename}`);
+    currentModalFilename = filename; // Track for selection logic
+    const itemData = loadedImages.get(filename);
+    const historyContainer = document.getElementById('modal-history-list');
+    const historyEntries = itemHistory.get(filename) || []; // Get history, default to empty array
+
+
+    if (!itemData || !historyContainer) {
+        console.error(`Could not find item data or history container for ${filename}`);
+        closeModal();
+        return;
+    }
+
+
     const displayName = formatItemName(filename);
-    const itemVersion = loadedImages.get(filename) || 'unknown';
-    const imageUrl = getItemImageUrl(filename, itemVersion);
+    const currentImagePath = itemData.path; // Path for the currently selected version
+    const currentVersionTag = itemData.versionTag; // Tag for the currently selected version
 
-    modalImg.src = imageUrl;
-    modalImg.alt = displayName;
+
     modalItemName.textContent = displayName;
-    modalFilename.textContent = filename;
-    modalVersion.textContent = itemVersion === 'base' ? 'Base' : itemVersion;
+    modalFilename.textContent = filename; // Show the base filename
+    modalImg.src = currentImagePath; // Show the current version's image
+    modalImg.alt = displayName;
+    modalVersion.textContent = currentVersionTag; // Keep showing the "Source" of the current texture
 
-    updateModalSelectButton(); // Set initial button state
 
-    // Assign listeners for modal buttons
-    modalDownloadButton.onclick = () => downloadSingleItem(currentModalFilename);
-    modalSelectButton.onclick = () => {
-        // Find the corresponding item element *if it exists in the current view*
-        const itemElement = gallery.querySelector(`.item[data-filename="${currentModalFilename}"]`);
-        toggleItemSelection(itemElement, currentModalFilename); // Toggle selection state
-        // updateModalSelectButton is called inside toggleItemSelection if modal is open
+    // NEW: Populate history list
+    historyContainer.innerHTML = ''; // Clear previous history
+    if (historyEntries.length > 0) {
+        // Reverse history to show newest first (optional, could keep chronological)
+        historyEntries.slice().reverse().forEach(entry => {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'modal-history-item';
+
+            // Create container for text info (version + filename)
+            const textInfoDiv = document.createElement('div');
+            textInfoDiv.className = 'modal-history-text';
+
+            const versionSpan = document.createElement('span');
+            versionSpan.textContent = `Version ${entry.version}: `;
+            textInfoDiv.appendChild(versionSpan);
+
+            const filenameCode = document.createElement('code');
+            filenameCode.textContent = entry.filename; // Display the specific filename for that version
+            textInfoDiv.appendChild(filenameCode);
+
+            historyItem.appendChild(textInfoDiv); // Add text info container
+
+            // Create image element for history
+            const historyImg = document.createElement('img');
+            const historyImagePath = `${BASE_PATH}/images/${entry.version}/${entry.filename}`;
+            historyImg.src = historyImagePath;
+            historyImg.alt = `Texture from v${entry.version}`;
+            historyImg.className = 'modal-history-image';
+            historyImg.loading = 'lazy'; // Lazy load history images
+            historyImg.onerror = function() { 
+                this.alt = `Image missing for v${entry.version}`;
+                this.src = `${BASE_PATH}/assets/missing.png`; // Fallback image
+                this.onerror = null; 
+            };
+            historyItem.appendChild(historyImg); // Add image
+
+            const downloadButton = document.createElement('button');
+            downloadButton.textContent = 'Download';
+            downloadButton.className = 'modal-history-download';
+            downloadButton.onclick = () => {
+                const historyImagePath = `${BASE_PATH}/images/${entry.version}/${entry.filename}`;
+                downloadSingleItem(entry.filename, historyImagePath, `${displayName}_${entry.version}.png`); // Pass specific path and suggested filename
+            };
+            historyItem.appendChild(downloadButton);
+
+            historyContainer.appendChild(historyItem);
+        });
+    } else {
+        historyContainer.innerHTML = '<p>No history found (likely base version).</p>';
+    }
+
+
+    // Wire up the main download button to use the modified downloadSingleItem
+    modalDownloadButton.onclick = () => {
+        downloadSingleItem(currentModalFilename, currentImagePath, `${displayName}_${currentVersionTag}.png`);
     };
 
-    modal.style.display = 'block';
-    modalCloseButton.focus(); // Focus close button for accessibility
+    updateModalSelectButton(); // Update select/deselect state
+    modal.style.display = 'flex'; // Show modal
+    modal.setAttribute('aria-hidden', 'false');
+
+
+    // Focus management (optional but good for accessibility)
+    modalCloseButton.focus();
 }
 
 function closeModal() {
     modal.style.display = 'none';
     currentModalFilename = null;
-    modalImg.src = ""; // Clear image to prevent flash of old content
-    // Clear listeners to prevent potential memory leaks (though simple onclick is usually fine)
+    if (modalImg.src && modalImg.src.startsWith('blob:')) {
+        URL.revokeObjectURL(modalImg.src);
+    }
+    modalImg.src = "";
     modalDownloadButton.onclick = null;
     modalSelectButton.onclick = null;
 }
 
 function updateModalSelectButton() {
-    // Only proceed if the modal is actually supposed to be showing an item
     if (!currentModalFilename) return;
 
     if (selectedItems.has(currentModalFilename)) {
         modalSelectButton.textContent = 'Deselect Item';
-        // Use CSS variables for styling consistency if possible, fallback inline
         modalSelectButton.style.backgroundColor = 'var(--muted-text)';
-        modalSelectButton.style.color = 'var(--bg-color)'; // Ensure contrast
+        modalSelectButton.style.color = 'var(--bg-color)';
     } else {
         modalSelectButton.textContent = 'Select Item';
         modalSelectButton.style.backgroundColor = 'var(--accent-color)';
-        // Set text color based on theme for better contrast on accent
         const theme = document.body.getAttribute('data-theme') || 'dark';
         modalSelectButton.style.color = theme === 'light' ? '#fff' : '#000';
     }
 }
 
-// --- NEW: Delegated Event Handler for Gallery ---
 function handleGalleryClick(event) {
     const itemElement = event.target.closest('.item');
-    if (!itemElement) return; // Click wasn't inside an item
+    if (!itemElement) return;
 
     const filename = itemElement.dataset.filename;
-    if (!filename) return; // Item element missing filename data
+    if (!filename) return;
 
-    // Check if the info button was clicked specifically
     if (event.target.closest('.item-info-button')) {
         openModal(filename);
     } else {
-        // Otherwise, treat click as item selection/deselection
         toggleItemSelection(itemElement, filename);
     }
 }
 
-// --- Add this new function to load supporters ---
 async function loadSupporters() {
-    if (!supportersListDiv) return; // Exit if the element doesn't exist
+    if (!supportersListDiv) return;
 
     try {
-        // Add timestamp to prevent caching of the JSON file itself if needed during frequent updates
-        // Remove ?t=... if you prefer standard browser caching for the JSON file
         const response = await fetch(`${BASE_PATH}/members.json?t=${Date.now()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -885,37 +1119,53 @@ async function loadSupporters() {
             throw new Error('Invalid format: members.json should contain an array of objects.');
         }
 
-        supportersListDiv.innerHTML = ''; // Clear the "Loading..." message or old content
+        supportersListDiv.innerHTML = '';
 
         if (supporterData.length === 0) {
             supportersListDiv.innerHTML = '<p>No supporters listed currently.</p>';
             return;
         }
 
-        // Sort supporters by tier (descending) then name (ascending) - optional
         supporterData.sort((a, b) => {
-            const tierComparison = (b.tier ?? 0) - (a.tier ?? 0); // Higher tiers first (handle potential null/undefined tier)
+            const tierComparison = (b.tier ?? 0) - (a.tier ?? 0);
             if (tierComparison !== 0) return tierComparison;
-            return a.name.localeCompare(b.name); // Sort by name if tiers are equal
+            return a.name.localeCompare(b.name);
         });
 
         supporterData.forEach(supporter => {
             if (!supporter || typeof supporter.name !== 'string') {
                 console.warn('Skipping invalid supporter entry:', supporter);
-                return; // Skip invalid entries
+                return;
             }
             const nameElement = document.createElement('span');
             nameElement.className = 'supporter-name'; 
-            // Add data-tier attribute for styling
-            const tier = supporter.tier ?? 0; // Default to tier 0 if undefined
+            const tier = supporter.tier ?? 0;
             nameElement.dataset.tier = tier; 
             nameElement.textContent = supporter.name;
-            nameElement.title = supporter.name; // Show full name on hover
+            nameElement.title = supporter.name;
             supportersListDiv.appendChild(nameElement);
         });
 
     } catch (error) {
         console.error('Error loading supporters:', error);
-        supportersListDiv.innerHTML = '<p>Could not load supporter list.</p>'; // Display error message
+        supportersListDiv.innerHTML = '<p>Could not load supporter list.</p>';
     }
+}
+
+// New function to initialize checkbox state from localStorage
+function initializeShowRemovedState() {
+    const savedState = localStorage.getItem('showRemovedItems');
+    showRemovedItems = savedState === 'true';
+    if (showRemovedToggle) {
+        showRemovedToggle.checked = showRemovedItems;
+    }
+}
+
+// New handler for the checkbox change
+async function handleShowRemovedToggle(event) {
+    showRemovedItems = event.target.checked;
+    localStorage.setItem('showRemovedItems', showRemovedItems);
+    console.log(`Show removed items toggled: ${showRemovedItems}`);
+    // Reload data as the item list composition changes based on this flag
+    await loadItemData();
 }

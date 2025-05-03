@@ -40,6 +40,7 @@
     --modal-content-bg: #ffffff; /* Modal content background */
     --logo-brightness: 100%;
     --info-section-bg: rgba(238, 242, 245, 0.8); /* Light bg for info section */
+    --button-text-color: #fff; /* Define for light mode */
 }
 
 /* Base Styles */
@@ -1006,4 +1007,108 @@ footer {
 
 .support-link-button:active {
     transform: scale(0.98);
+}
+
+.modal-history-container {
+    max-height: 150px; /* Limit height and make scrollable */
+    overflow-y: auto;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 4px;
+    background-color: var(--muted-bg); /* Subtle background */
+}
+
+.modal-history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out elements */
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color-light);
+    font-size: 0.9em;
+}
+.modal-history-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.modal-history-item code {
+    background-color: var(--bg-color); /* Slightly different background for code */
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 0 5px;
+    font-size: 0.9em;
+}
+
+.modal-history-download {
+    padding: 3px 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: #000; /* Explicitly black for default (dark) theme */
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+/* Override for light theme */
+[data-theme="light"] .modal-history-download {
+    color: #fff; /* Explicitly white for light theme */
+}
+
+.modal-history-download:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* NEW: Style for history images in modal */
+.modal-history-image {
+    width: 64px; /* Increased size */
+    height: 64px; /* Increased size */
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 1px solid var(--border-color);
+    background-color: rgba(0,0,0,0.1); /* Match main modal image background */
+    border-radius: 3px;
+    margin-left: 10px; /* Space between text/filename and image */
+}
+
+/* Style for items that are marked as removed but shown */
+.item.removed-item {
+    opacity: 0.65;
+    /* Optional: Add a border or background change */
+    /* border: 1px dashed var(--muted-text); */
+}
+
+.item.removed-item .item-name {
+     /* Optional: Strikethrough the name */
+    /* text-decoration: line-through; */
+}
+
+.item.removed-item::after {
+    content: 'Removed';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: var(--muted-bg);
+    color: var(--muted-text);
+    font-size: 0.6em;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Item Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
 }

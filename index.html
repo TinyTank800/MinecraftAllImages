@@ -71,6 +71,12 @@
                     <option value="length">Name Length (Longest)</option>
                 </select>
             </div>
+            <div class="control-group">
+                <label for="show-removed-toggle">
+                    <input type="checkbox" id="show-removed-toggle">
+                    Show Removed Items
+                </label>
+            </div>
             <div class="toggle-container control-group">
                 <span class="toggle-label">Dark</span>
                 <button class="toggle-switch" id="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle Theme"></button>
@@ -193,9 +199,13 @@
             <img id="modal-img" src="" alt="Item Image" class="modal-image">
             <h3 id="modal-item-name">Item Name</h3>
             <p><strong>Filename:</strong> <code id="modal-filename">filename.png</code></p>
+            <h4>Version History:</h4>
+            <div id="modal-history-list" class="modal-history-container">
+                <!-- History items will be dynamically added here -->
+            </div>
             <p><strong>Source Version:</strong> <span id="modal-version">version</span></p>
             <div class="modal-actions">
-                <button id="modal-download-button">Download</button>
+                <button id="modal-download-button">Download Current</button>
                 <button id="modal-select-button">Select Item</button>
             </div>
         </div>
