@@ -826,9 +826,9 @@ function handleDownloadClick() {
         downloadItemsAsZip(Array.from(selectedItems), `Minecraft_Items_${currentVersion}_Selected.zip`);
     } else {
         // Filter displayedItems to only include those currently loaded (handles showRemoved)
-        const itemsToDownload = displayedItems.filter(item => loadedImages.has(item.filename));
-        const filenamesToDownload = itemsToDownload.map(item => item.filename);
-        downloadItemsAsZip(filenamesToDownload, `Minecraft_Items_${currentVersion}_AllVisible.zip`);
+        const itemsToDownload = displayedItems.filter(filename => loadedImages.has(filename));
+        // Directly use the filtered list of filenames
+        downloadItemsAsZip(itemsToDownload, `Minecraft_Items_${currentVersion}_AllVisible.zip`);
     }
 }
 
