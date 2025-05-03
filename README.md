@@ -8,15 +8,19 @@ A searchable, downloadable gallery of Minecraft item images captured from the in
 
 ## 🔧 Features
 
-- 🔍 **Search:** Quickly find items by name.
-- 🖱️ **Selection:** Click item cards to select multiple items for bulk download.
-- ℹ️ **Details & Download:** Click the `(i)` icon on an item to view details and download it individually.
-- 📚 **Bulk Download:** Use the "Download Selected" or "Download All" buttons to get a ZIP archive.
-- ⚡ **Efficient Downloads:** Uses browser caching (including Cache Storage API) to significantly speed up subsequent ZIP downloads.
-- 📅 **Versioning:** Select specific Minecraft versions (or "Latest") to see historical item textures.
-- ✨ **Automatic Updates:** Gallery automatically displays new images when the underlying data is updated.
-- 📱 **Responsive Design:** Works smoothly on desktop and mobile devices.
-- 🎨 **Dark/Light Mode:** Choose your preferred visual theme.
+- 🌍 **Comprehensive Gallery:** Access item images from virtually *all* major Minecraft Java Edition versions.
+- 🔎 **Easy Search & Filter:** Quickly find items by name and filter by specific game versions.
+- 📊 **Flexible Sorting:** Sort items alphabetically (A-Z, Z-A), by version (approximated newest first), or by name length.
+- 📦 **Bulk Downloads:** Select multiple items and download them as a single ZIP archive, or download all items for the selected version.
+- 💾 **Individual Downloads:** Download specific item images directly from the gallery or the details modal.
+- 📜 **Item Version History:** View how an item's texture changed across different Minecraft versions directly in the item details modal, with previews and individual downloads.
+- 👻 **Show Removed Items:** Option to display items that are no longer present in the selected version (useful for historical comparison).
+- ⚡ **Client-Side Caching:** Efficiently caches downloaded ZIP data in the browser (using Cache Storage API) to speed up subsequent downloads.
+- 🔗 **Direct Linking:** Share links that open the gallery to a specific version view.
+- 🌓 **Dark/Light Mode:** Choose your preferred theme.
+- 📱 **Responsive Design:** Works seamlessly on desktop and mobile devices.
+- 🙏 **Supporter Recognition:** Features a section acknowledging project supporters.
+- ⚙️ **Pure JS/CSS/HTML:** No frameworks needed, keeping it lightweight.
 
 ## About This Project
 

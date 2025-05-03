@@ -114,17 +114,18 @@
             <ul>
                 <li><strong>Search:</strong> Quickly find items by name.</li>
                 <li><strong>Selection:</strong> Click item cards to select multiple items for bulk download.</li>
-                <li><strong>Details & Download:</strong> Click the <code>(i)</code> icon on an item to view details and download it individually.</li>
+                <li><strong>Detailed History & Download:</strong> Click the <code>(i)</code> icon on an item to view details, including the item's filename, source version, <em>and a visual history of its appearance in previous versions with download options for each.</em></li>
                 <li><strong>Bulk Download:</strong> Use the "Download Selected" or "Download All" buttons to get a ZIP archive.</li>
                 <li><strong>Efficient Downloads:</strong> Uses <strong>browser caching</strong> to significantly speed up subsequent ZIP downloads and reduce network requests after the first time images are loaded.</li>
-                <li><strong>Versioning:</strong> Select specific Minecraft versions (or "Latest") to see how item textures appeared at that time.</li>
+                <li><strong>Versioning:</strong> Select specific Minecraft versions (or "Latest") to see how item textures appeared at that time. <em>The URL updates so you can share links to specific version views.</em></li>
+                <li><strong>Removed Item Visibility:</strong> Use the 'Show Removed Items' checkbox to include items that existed in earlier versions but are not in the currently selected one.</li>
                 <li><strong>Updates:</strong> Automatically displays new images when the underlying data is updated.</li>
                 <li><strong>Responsive:</strong> Works smoothly on desktop and mobile devices.</li>
                 <li><strong>Dark/Light Mode:</strong> Choose your preferred visual theme.</li>
             </ul>
 
             <h2>How It Works (Simplified)</h2>
-            <p>The site loads a base set of images. It then intelligently applies changes (additions, modifications, removals) tracked in version-specific files (<code>changes.json</code>) up to the version you select. This ensures you see the correct textures for that particular version or the most recent ones if "Latest" is chosen. Image data is stored efficiently using browser caching once loaded.</p>
+            <p>The site loads a base set of images. It then intelligently applies changes (additions, modifications, removals) tracked in version-specific files (<code>changes.json</code>) up to the version you select. This ensures you see the correct textures for that particular version or the most recent ones if "Latest" is chosen. <em>It also tracks the history of changes, allowing you to see how specific items evolved.</em> Image data is stored efficiently using browser caching once loaded.</p>
 
             <h2>Technical Details</h2>
             <ul>
