@@ -810,6 +810,7 @@ function selectVisibleItems() {
 function updateSelectionControls() {
     const count = selectedItems.size;
     clearSelectionButton.style.display = count > 0 ? 'inline-block' : 'none';
+    clearSelectionButton.disabled = count === 0;
 
     if (count > 0) {
         downloadAllButton.textContent = `Download Selected (${count}) as ZIP`;
@@ -825,8 +826,10 @@ function handleDownloadClick() {
     if (selectedItems.size > 0) {
         downloadItemsAsZip(Array.from(selectedItems), `Minecraft_Items_${currentVersion}_Selected.zip`);
     } else {
+        console.log('[Download All] displayedItems:', displayedItems); // Log initial array
         // Filter displayedItems to only include those currently loaded (handles showRemoved)
         const itemsToDownload = displayedItems.filter(filename => loadedImages.has(filename));
+        console.log('[Download All] itemsToDownload after filtering:', itemsToDownload); // Log filtered array
         // Directly use the filtered list of filenames
         downloadItemsAsZip(itemsToDownload, `Minecraft_Items_${currentVersion}_AllVisible.zip`);
     }
