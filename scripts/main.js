@@ -25,9 +25,8 @@ let showRemovedToggle; // Reference for the new checkbox
 
 // Constants
 const RENDER_BATCH_SIZE = 100;
-const BASE_PATH = window.location.pathname.includes('/MinecraftAllImages/')
-    ? '/MinecraftAllImages'
-    : ''; // Adjust if deployed elsewhere
+// Set BASE_PATH to empty string for Vite dev server and standard root deployment
+const BASE_PATH = '';
 const CACHE_NAME = 'minecraft-zip-cache-v1'; // Cache name for ZIP files
 
 // --- Initialization ---
@@ -589,10 +588,16 @@ function sortItems(itemsToSort) {
         const nameB = formatItemName(b);
 
         if (currentSort === 'version') {
-            const versionA = loadedImages.get(a) || baseVersion;
-            const versionB = loadedImages.get(b) || baseVersion;
+            // Get the item data objects
+            const itemDataA = loadedImages.get(a);
+            const itemDataB = loadedImages.get(b);
 
-             const comparison = compareVersions(versionB, versionA);
+            // Extract the versionTag string, falling back to baseVersion if needed
+            const versionTagA = itemDataA ? itemDataA.versionTag : baseVersion;
+            const versionTagB = itemDataB ? itemDataB.versionTag : baseVersion;
+
+             // Compare the version strings
+             const comparison = compareVersions(versionTagB, versionTagA); // Pass strings here
              if (comparison === 0) {
                   return nameA.localeCompare(nameB);
              }
@@ -720,14 +725,16 @@ function createItemImage(filename, displayName) {
         img.src = imagePath; // Use the direct path
     } else {
         console.warn(`Image path not found in loadedImages for: ${filename}`);
-        img.src = `${BASE_PATH}/assets/missing.png`;
+        img.src = `${BASE_PATH}/assets/missing.png`; // Updated fallback path
         img.alt += ' (Image path missing)';
     }
 
     img.onerror = function() {
         console.warn(`Image load failed for path: ${this.src}`);
         if (!this.src.endsWith('missing.png')) {
-             this.src = `${BASE_PATH}/assets/missing.png`;
+             // Check if the path already includes BASE_PATH before adding it
+             const fallbackSrc = this.src.startsWith(BASE_PATH + '/assets/') ? `${BASE_PATH}/assets/missing.png` : `/assets/missing.png`;
+             this.src = fallbackSrc; // Updated fallback path
         }
         this.onerror = null;
     };
@@ -1001,6 +1008,11 @@ function openModal(filename) {
     modalImg.alt = displayName;
     modalVersion.textContent = currentVersionTag; // Keep showing the "Source" of the current texture
 
+    modalImg.onerror = function() { // Add onerror to modal image too
+        console.warn(`Modal image load failed for path: ${this.src}`);
+        this.src = `${BASE_PATH}/assets/missing.png`; // Updated fallback path
+        this.onerror = null;
+    };
 
     // NEW: Populate history list
     historyContainer.innerHTML = ''; // Clear previous history
@@ -1031,10 +1043,10 @@ function openModal(filename) {
             historyImg.alt = `Texture from v${entry.version}`;
             historyImg.className = 'modal-history-image';
             historyImg.loading = 'lazy'; // Lazy load history images
-            historyImg.onerror = function() { 
+            historyImg.onerror = function() {
                 this.alt = `Image missing for v${entry.version}`;
-                this.src = `${BASE_PATH}/assets/missing.png`; // Fallback image
-                this.onerror = null; 
+                this.src = `${BASE_PATH}/assets/missing.png`; // Updated fallback path
+                this.onerror = null;
             };
             historyItem.appendChild(historyImg); // Add image
 
@@ -1070,13 +1082,16 @@ function openModal(filename) {
 
 function closeModal() {
     modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true'); // Ensure hidden state is set
     currentModalFilename = null;
-    if (modalImg.src && modalImg.src.startsWith('blob:')) {
-        URL.revokeObjectURL(modalImg.src);
-    }
-    modalImg.src = "";
+    // Remove onerror handler when closing
+    modalImg.onerror = null;
+    modalImg.src = ""; // Clear src
     modalDownloadButton.onclick = null;
     modalSelectButton.onclick = null;
+    // Clear history container too
+    const historyContainer = document.getElementById('modal-history-list');
+    if (historyContainer) historyContainer.innerHTML = '';
 }
 
 function updateModalSelectButton() {

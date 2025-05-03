@@ -1,0 +1,16 @@
+{
+  "name": "minecraftallimages",
+  "version": "1.0.0",
+  "description": "A searchable, downloadable gallery of Minecraft item images captured from the in-game hotbar.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^6.3.4"
+  }
+}
