@@ -14,6 +14,7 @@ let currentModalFilename = null; // Track filename shown in modal
 let supportersListDiv;
 let showRemovedItems = false; // New state variable for showing removed items
 let markedAsRemoved = new Set(); // Track items that *would* be removed
+let modalTriggerElement = null; // NEW: Store the element that opened the modal
 
 // Declare DOM element variables here, but assign them inside DOMContentLoaded
 let gallery, searchInput, downloadAllButton, clearSelectionButton, selectVisibleButton;
@@ -1075,21 +1076,31 @@ function openModal(filename) {
     modal.style.display = 'flex'; // Show modal
     modal.setAttribute('aria-hidden', 'false');
 
-
-    // Focus management (optional but good for accessibility)
-    modalCloseButton.focus();
+    // Let the browser handle initial focus or set to modal content if needed
+    // modalCloseButton.focus(); // REMOVED: Don't force focus here initially
+    // Instead, maybe focus the modal container itself or the first focusable element if required by accessibility patterns
+    // For now, let's focus on returning focus correctly.
 }
 
 function closeModal() {
+    // Return focus to the trigger element BEFORE hiding
+    if (modalTriggerElement && typeof modalTriggerElement.focus === 'function') {
+        try {
+            modalTriggerElement.focus();
+        } catch (e) {
+            console.warn("Could not return focus to trigger element:", e);
+        }
+    }
+    modalTriggerElement = null; // Clear the stored element
+
+    // Now hide the modal visually and semantically
     modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true'); // Ensure hidden state is set
+    modal.setAttribute('aria-hidden', 'true'); 
     currentModalFilename = null;
-    // Remove onerror handler when closing
     modalImg.onerror = null;
-    modalImg.src = ""; // Clear src
+    modalImg.src = ""; 
     modalDownloadButton.onclick = null;
     modalSelectButton.onclick = null;
-    // Clear history container too
     const historyContainer = document.getElementById('modal-history-list');
     if (historyContainer) historyContainer.innerHTML = '';
 }
@@ -1116,7 +1127,9 @@ function handleGalleryClick(event) {
     const filename = itemElement.dataset.filename;
     if (!filename) return;
 
-    if (event.target.closest('.item-info-button')) {
+    const infoButton = event.target.closest('.item-info-button');
+    if (infoButton) {
+        modalTriggerElement = infoButton; // Store the button that was clicked
         openModal(filename);
     } else {
         toggleItemSelection(itemElement, filename);
@@ -1127,7 +1140,10 @@ async function loadSupporters() {
     if (!supportersListDiv) return;
 
     try {
-        const response = await fetch(`${BASE_PATH}/members.json?t=${Date.now()}`); 
+        // Construct the raw GitHub URL
+        const githubRawUrl = 'https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/members.json';
+        // Add a timestamp to try and bypass GitHub's CDN cache more effectively
+        const response = await fetch(`${githubRawUrl}?t=${Date.now()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
