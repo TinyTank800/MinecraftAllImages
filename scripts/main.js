@@ -686,7 +686,8 @@ function createItemElement(filename) {
     const fragment = document.createDocumentFragment();
     const itemDiv = document.createElement('div');
     const displayName = formatItemName(filename);
-    const itemVersion = loadedImages.get(filename) || '?';
+    const itemData = loadedImages.get(filename);
+    const itemVersion = (itemData && typeof itemData === 'object') ? itemData.versionTag : (itemData || '?');
 
     itemDiv.className = 'item';
     itemDiv.dataset.filename = filename;
