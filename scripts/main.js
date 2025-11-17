@@ -3,7 +3,8 @@ let allItems = []; // List of unique filenames across loaded versions
 let displayedItems = []; // Currently rendered items after sorting/filtering
 let selectedItems = new Set(); // Tracks selected filenames
 let loadedImages = new Map(); // Tracks source version (tag) for each image filename
-let imageDataCache = new Map(); // Cache for filename -> Blob mapping
+let imageDataCache = new Map(); // Cache for filename -> Blob mapping (final version only)
+let versionedBlobCache = new Map(); // Cache for version:filename -> Blob mapping (all versions)
 let itemNameCache = new Map(); // Cache for formatted item names
 let itemHistory = new Map(); // NEW: Tracks filename -> [{ version: string, filename: string }, ...]
 let availableVersions = []; // List of available version folders/zips
@@ -357,7 +358,9 @@ async function loadVersionZip(version, cache, isBaseVersion) {
                     if (imageFileEntry) {
                         imagePromises.push(
                             imageFileEntry.async('blob').then(blob => {
-                                imageDataCache.set(filename, blob);
+                                // Store blob with version information to avoid race conditions
+                                const versionedKey = `${version}:${filename}`;
+                                versionedBlobCache.set(versionedKey, blob);
                                 extractedCount++;
                             }).catch(err => {
                                 console.error(`Error extracting image ${filename} from ${version}.zip:`, err);
@@ -392,7 +395,8 @@ async function loadItemData() {
 
     allItems = [];
     loadedImages.clear(); // Stores current filename -> { path, versionTag }
-    imageDataCache.clear(); // Clear image blob cache on version change
+    imageDataCache.clear(); // Clear image blob cache on version change (will be populated after determining final versions)
+    versionedBlobCache.clear(); // Clear versioned blob cache on version change
     itemNameCache.clear(); // Clear formatted names
     itemHistory.clear(); // NEW: Clear history on reload
     markedAsRemoved.clear(); // Clear removed tracking
@@ -527,6 +531,20 @@ async function loadItemData() {
         console.log("Finalizing item list...");
         loadedImages = new Map(currentImageState); // Copy the final state reflecting removals if applicable
         allItems = Array.from(loadedImages.keys());
+
+        // Populate imageDataCache with blobs from the correct final versions
+        // This ensures we use the correct version's blob, not an intermediate one
+        setLoadingProgress('Finalizing image cache...', 90);
+        for (const [filename, itemData] of loadedImages.entries()) {
+            const versionTag = itemData.versionTag;
+            const versionedKey = `${versionTag}:${filename}`;
+            const blob = versionedBlobCache.get(versionedKey);
+            if (blob) {
+                imageDataCache.set(filename, blob);
+            } else {
+                console.warn(`Blob not found for ${versionedKey} in versioned cache. May need to fetch from server.`);
+            }
+        }
 
         // If hiding removed items, clear the styling set.
         // If showing them, keep the set so createItemElement can apply the style.
