@@ -1,0 +1,148 @@
+---
+/**
+ * Screenshot-friendly OG card preview at exact 1200×630.
+ * Open /og-preview or /og-preview?title=Foo&subtitle=Bar&badge=baz
+ * Zoom browser to fit, screenshot, save as public/og/custom.png
+ */
+const params = Astro.url.searchParams;
+const title = params.get('title') ?? 'Minecraft Item Gallery';
+const subtitle = params.get('subtitle') ?? 'Every item image · all versions';
+const badge = params.get('badge') ?? 'Browse · Compare · Download';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=1200" />
+		<meta name="robots" content="noindex" />
+		<title>OG preview — {title}</title>
+		<style>
+			* { box-sizing: border-box; margin: 0; padding: 0; }
+			html, body {
+				width: 1200px;
+				height: 630px;
+				overflow: hidden;
+				background: #0a0a0b;
+			}
+			.card {
+				position: relative;
+				width: 1200px;
+				height: 630px;
+				background: #121214;
+				background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+				background-size: 14px 14px;
+				font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+				color: #f4f0f1;
+				overflow: hidden;
+			}
+			.card::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(ellipse 55% 80% at 85% 20%, rgba(225, 29, 46, 0.22), transparent);
+				pointer-events: none;
+			}
+			.accent-bar {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 8px;
+				height: 100%;
+				background: linear-gradient(180deg, #ff6b6b, #9b0f1c);
+			}
+			.logo-wrap {
+				position: absolute;
+				left: 72px;
+				top: 72px;
+				width: 120px;
+				height: 120px;
+				border-radius: 24px;
+				background: #1a1a1e;
+				border: 2px solid #2e282b;
+				display: grid;
+				grid-template-columns: repeat(3, 22px);
+				grid-template-rows: repeat(3, 22px);
+				gap: 4px;
+				padding: 0;
+				place-content: center;
+			}
+			.block { border-radius: 4px; }
+			.block.g { background: linear-gradient(135deg, #ff6b6b, #9b0f1c); }
+			.block.r { background: #e11d2e; }
+			.block.d { background: #7f1d1d; }
+			h1 {
+				position: absolute;
+				left: 96px;
+				top: 220px;
+				max-width: 900px;
+				font-size: 52px;
+				font-weight: 700;
+				line-height: 1.15;
+			}
+			.subtitle {
+				position: absolute;
+				left: 96px;
+				top: 330px;
+				font-size: 30px;
+				color: #b8aeb2;
+			}
+			.badge {
+				position: absolute;
+				left: 96px;
+				top: 400px;
+				padding: 10px 20px;
+				border-radius: 22px;
+				border: 1.5px solid #e11d2e;
+				background: rgba(225, 29, 46, 0.15);
+				color: #ff6b6b;
+				font-size: 20px;
+				font-weight: 600;
+			}
+			.domain {
+				position: absolute;
+				left: 96px;
+				bottom: 70px;
+				font-size: 22px;
+				color: #5c5356;
+			}
+			.decor {
+				position: absolute;
+				right: 72px;
+				bottom: 72px;
+				width: 120px;
+				height: 120px;
+				border-radius: 24px;
+				background: #1a1a1e;
+				border: 2px solid #2e282b;
+				display: grid;
+				grid-template-columns: repeat(3, 22px);
+				grid-template-rows: repeat(3, 22px);
+				gap: 4px;
+				padding: 0;
+				place-content: center;
+				opacity: 0.9;
+			}
+			.decor .block { width: 22px; height: 22px; }
+		</style>
+	</head>
+	<body>
+		<div class="card">
+			<div class="accent-bar"></div>
+			<div class="logo-wrap" aria-hidden="true">
+				<div class="block g"></div><div class="block r"></div><div class="block d"></div>
+				<div class="block r"></div><div class="block g"></div><div class="block r"></div>
+				<div class="block d"></div><div class="block r"></div><div class="block g"></div>
+			</div>
+			<h1>{title}</h1>
+			<p class="subtitle">{subtitle}</p>
+			<p class="badge">{badge}</p>
+			<p class="domain">mcitemgallery.com</p>
+			<div class="decor" aria-hidden="true">
+				<div class="block g"></div><div class="block r"></div><div class="block d"></div>
+				<div class="block r"></div><div class="block g"></div><div class="block r"></div>
+				<div class="block d"></div><div class="block r"></div><div class="block g"></div>
+			</div>
+		</div>
+	</body>
+</html>

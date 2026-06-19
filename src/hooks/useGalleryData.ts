@@ -14,6 +14,7 @@ import {
 } from '@/lib/image-source';
 import { altTextForItem, formatItemName } from '@/lib/slug';
 import { buildVersionPath, compareVersions } from '@/lib/versioning';
+import { safePushState, safeReplaceState } from '@/lib/safe-history';
 import { blobCacheKey, loadVersionZip, resolveImageUrl, revokeBlobUrls } from '@/lib/zip';
 import {
 	buildShareSelectionParams,
@@ -444,8 +445,8 @@ export function useGalleryData(options?: { initialCategory?: ItemCategory | null
 			localStorage.setItem('selectedVersion', next);
 			const url = new URL(window.location.href);
 			url.searchParams.set('version', next);
-			window.history.pushState({ version: next }, '', url);
 			setCurrentVersion(next);
+			safePushState({ version: next }, url);
 		},
 		setSortMode: (m: SortMode) => {
 			setSortMode(m);
@@ -467,7 +468,7 @@ export function useGalleryData(options?: { initialCategory?: ItemCategory | null
 			const url = new URL(window.location.href);
 			if (source === 'v1') url.searchParams.delete('images');
 			else url.searchParams.set('images', 'v2');
-			window.history.replaceState({}, '', url);
+			safeReplaceState({}, url);
 		},
 		reloadData,
 		toggleSelect,

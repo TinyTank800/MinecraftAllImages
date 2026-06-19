@@ -73,10 +73,8 @@ export function Controls(props: {
 
 		<div className="flex flex-col gap-3">
 
-			<div className="flex flex-wrap items-center justify-center gap-4 rounded-xl border p-4" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
-
-				<div className="flex items-center gap-2">
-
+			<div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-xl border p-3 sm:p-4 controls-bar" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
+				<div className="flex items-center gap-2 controls-field">
 					<label htmlFor="version-select" className="text-sm" style={{ color: 'var(--text-muted)' }}>Version:</label>
 
 					<select
@@ -105,8 +103,7 @@ export function Controls(props: {
 
 				</div>
 
-				<div className="flex items-center gap-2">
-
+				<div className="flex items-center gap-2 controls-field">
 					<label htmlFor="sort-select" className="text-sm" style={{ color: 'var(--text-muted)' }}>Sort:</label>
 
 					<select
@@ -135,8 +132,7 @@ export function Controls(props: {
 
 				</div>
 
-				<div className="flex items-center gap-2">
-
+				<div className="flex items-center gap-2 controls-field">
 					<label htmlFor="image-source-select" className="text-sm" style={{ color: 'var(--text-muted)' }} title="Legacy = all v1 versions. Enhanced = v2 mod exports only.">
 
 						Images:
@@ -167,8 +163,7 @@ export function Controls(props: {
 
 				{!hideRemovedToggle && (
 
-					<label className="flex items-center gap-2 text-sm cursor-pointer" style={{ color: 'var(--text-muted)' }}>
-
+					<label className="flex items-center gap-2 text-sm cursor-pointer controls-removed-toggle" style={{ color: 'var(--text-muted)' }}>
 						<input
 
 							type="checkbox"

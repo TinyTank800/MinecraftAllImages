@@ -121,7 +121,7 @@ export function ParticlesApp() {
 				</details>
 
 				<div className="sticky-controls">
-					<div className="card p-4">
+					<div className="card p-3 sm:p-4">
 						<ParticleControls
 							availableVersions={availableVersions}
 							currentVersion={currentVersion}

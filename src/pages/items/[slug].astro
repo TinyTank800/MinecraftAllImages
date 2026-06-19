@@ -64,7 +64,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical={`/items/${entry.slug}`} jsonLd={jsonLd}>
+<BaseLayout
+	title={title}
+	description={description}
+	canonical={`/items/${entry.slug}`}
+	image={imageUrl}
+	jsonLd={jsonLd}
+>
 	<ItemPageApp
 		client:load
 		meta={{

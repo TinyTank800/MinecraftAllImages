@@ -22,8 +22,8 @@ export function ParticleControls(props: {
 	} = props;
 
 	return (
-		<div className="flex flex-wrap items-center justify-center gap-4 rounded-xl border p-4" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
-			<div className="flex items-center gap-2">
+		<div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-xl border p-3 sm:p-4 controls-bar" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
+			<div className="flex items-center gap-2 controls-field">
 				<label htmlFor="particle-version-select" className="text-sm" style={{ color: 'var(--text-muted)' }}>
 					Version:
 				</label>
@@ -43,7 +43,7 @@ export function ParticleControls(props: {
 				</select>
 			</div>
 
-			<div className="flex items-center gap-2">
+			<div className="flex items-center gap-2 controls-field">
 				<label htmlFor="particle-sort-select" className="text-sm" style={{ color: 'var(--text-muted)' }}>
 					Sort:
 				</label>
@@ -61,7 +61,7 @@ export function ParticleControls(props: {
 				</select>
 			</div>
 
-			<label className="flex items-center gap-2 text-sm cursor-pointer" style={{ color: 'var(--text-muted)' }}>
+			<label className="flex items-center gap-2 text-sm cursor-pointer controls-removed-toggle" style={{ color: 'var(--text-muted)' }}>
 				<input
 					type="checkbox"
 					checked={showRemovedItems}

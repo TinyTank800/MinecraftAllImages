@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "generate-og": "node scripts/generate-og.mjs",
+    "build": "node scripts/generate-og.mjs && astro build",
     "preview": "astro preview",
     "lint": "eslint",
     "package-version": "node scripts/package-version.mjs",

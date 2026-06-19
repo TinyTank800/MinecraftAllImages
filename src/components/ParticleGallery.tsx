@@ -36,7 +36,7 @@ export function ParticleGallery(props: {
 					setVisible(items.slice(0, Math.min(visible.length + RENDER_BATCH_SIZE, items.length)));
 				}
 			},
-			{ root: containerRef.current },
+			{ root: null, rootMargin: '400px' },
 		);
 		observerRef.current.observe(sentinelRef.current);
 		return () => observerRef.current?.disconnect();
@@ -46,7 +46,7 @@ export function ParticleGallery(props: {
 		() => (
 			<div
 				ref={containerRef}
-				className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3 max-h-[75vh] min-h-[400px] overflow-y-auto p-2 border rounded-xl"
+				className="gallery-grid grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3 p-2 border rounded-xl"
 				style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}
 			>
 				{visible.length === 0 ? (

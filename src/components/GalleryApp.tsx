@@ -131,7 +131,7 @@ export function GalleryApp(props: GalleryAppProps) {
 					</details>
 
 				<div className="sticky-controls">
-					<div className="card p-4">
+					<div className="card p-3 sm:p-4">
 						<Controls
 							availableVersions={availableVersions}
 							currentVersion={currentVersion}

@@ -622,7 +622,7 @@ code {
   top: var(--header-h);
   z-index: 40;
   margin-bottom: 1rem;
-  padding: 0.75rem 0;
+  padding: 0.35rem 0;
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
@@ -911,22 +911,94 @@ code {
   }
 
   .hero {
-    padding: 1.75rem 0 1rem;
+    padding: 1.25rem 0 0.65rem;
   }
 
   .hero-lead {
-    font-size: 0.95rem;
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 1.45rem;
+    margin-bottom: 0.35rem;
   }
 
   .sticky-controls {
-    top: calc(var(--header-h) + 0.25rem);
+    top: calc(var(--header-h) + 0.15rem);
+    padding: 0.15rem 0;
+  }
+
+  .controls-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    align-items: stretch;
+    justify-items: stretch;
+  }
+
+  .controls-field {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.25rem !important;
+    width: 100%;
+  }
+
+  .controls-field label {
+    font-size: 0.72rem;
+  }
+
+  .controls-field select {
+    width: 100%;
+    min-width: 0 !important;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.82rem;
+  }
+
+  .controls-removed-toggle {
+    grid-column: 1 / -1;
+    justify-content: center;
+    font-size: 0.82rem;
+  }
+
+  .search-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 0.45rem;
+  }
+
+  .search-actions .btn {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .search-actions .btn-primary {
+    grid-column: 1 / -1;
   }
 
   .category-chips {
     justify-content: flex-start;
-    max-height: 6.5rem;
-    overflow-y: auto;
-    padding-bottom: 0.15rem;
+    flex-wrap: nowrap;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+    mask-image: linear-gradient(90deg, #000 92%, transparent);
+  }
+
+  .category-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-chip {
+    flex-shrink: 0;
+  }
+
+  .gallery-grid {
+    min-height: 0;
   }
 
   .docs-layout {

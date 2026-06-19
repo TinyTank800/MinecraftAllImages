@@ -7,13 +7,22 @@ export interface Props {
 	title?: string;
 	description?: string;
 	canonical?: string;
+	/** Absolute or site-relative OG image (1200×630 PNG recommended). */
+	image?: string;
 	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title = 'Minecraft Item Gallery — Every Item Image, All Versions', description = DESCRIPTION, canonical = '/', jsonLd } = Astro.props;
+const {
+	title = 'Minecraft Item Gallery — Every Item Image, All Versions',
+	description = DESCRIPTION,
+	canonical = '/',
+	image = '/og/default.png',
+	jsonLd,
+} = Astro.props;
 
 const fullTitle = title;
 const canonicalUrl = new URL(canonical, SITE_URL).href;
+const imageUrl = new URL(image, SITE_URL).href;
 ---
 
 <!doctype html>
@@ -30,9 +39,14 @@ const canonicalUrl = new URL(canonical, SITE_URL).href;
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:type" content="website" />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={fullTitle} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={fullTitle} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
 		<meta name="theme-color" content="#e11d2e" />
 		<script is:inline>
 			(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();

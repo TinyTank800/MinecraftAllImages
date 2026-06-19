@@ -80,7 +80,7 @@ export function Gallery(props: {
 
 			},
 
-			{ root: containerRef.current },
+			{ root: null, rootMargin: '400px' },
 
 		);
 
@@ -96,7 +96,7 @@ export function Gallery(props: {
 
 		return (
 
-			<div ref={containerRef} className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3 max-h-[75vh] min-h-[400px] overflow-y-auto p-2 border rounded-xl" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
+			<div ref={containerRef} className="gallery-grid grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3 p-2 border rounded-xl" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
 
 				{visible.length === 0 ? (
 

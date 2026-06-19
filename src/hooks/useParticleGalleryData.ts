@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import saveAs from 'file-saver';
-import { altTextForParticle, formatParticleName } from '@/lib/particles';
+import { safePushState } from '@/lib/safe-history';
 import {
 	loadLooseParticleManifest,
 	loadParticleVersionZip,
@@ -437,8 +437,8 @@ export function useParticleGalleryData() {
 			localStorage.setItem('selectedParticleVersion', next);
 			const url = new URL(window.location.href);
 			url.searchParams.set('version', next);
-			window.history.pushState({ version: next }, '', url);
 			setCurrentVersion(next);
+			safePushState({ version: next }, url);
 		},
 		setSortMode: (m: SortMode) => {
 			setSortMode(m);
