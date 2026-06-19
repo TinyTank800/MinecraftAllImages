@@ -1,5 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect width="16" height="16" fill="#1a1a1e"/>
-  <rect x="0" y="0" width="16" height="16" fill="none" stroke="#2e282b"/>
-  <rect x="7" y="7" width="2" height="2" fill="#e11d2e"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" shape-rendering="crispEdges" role="img" aria-label="Image unavailable">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6b6b"/>
+      <stop offset="1" stop-color="#9b0f1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="26" fill="#1a1a1e"/>
+  <rect x="3" y="3" width="122" height="122" rx="24" fill="none" stroke="#2e282b" stroke-width="2"/>
+  <g>
+    <rect x="26" y="26" width="22" height="22" rx="4" fill="url(#g)"/>
+    <rect x="53" y="26" width="22" height="22" rx="4" fill="#e11d2e"/>
+    <rect x="80" y="26" width="22" height="22" rx="4" fill="#7f1d1d"/>
+    <rect x="26" y="53" width="22" height="22" rx="4" fill="#e11d2e"/>
+    <rect x="53" y="53" width="22" height="22" rx="4" fill="url(#g)"/>
+    <rect x="80" y="53" width="22" height="22" rx="4" fill="#e11d2e"/>
+    <rect x="26" y="80" width="22" height="22" rx="4" fill="#7f1d1d"/>
+    <rect x="53" y="80" width="22" height="22" rx="4" fill="#e11d2e"/>
+    <rect x="80" y="80" width="22" height="22" rx="4" fill="url(#g)"/>
+  </g>
 </svg>

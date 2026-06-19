@@ -70,7 +70,7 @@ export function ParticleCard(props: {
 					}}
 				/>
 			) : (
-				<img src="/assets/missing.svg" alt={`${name} missing`} loading="lazy" className="mx-auto my-2 h-16 w-16 object-contain [image-rendering:pixelated]" />
+				<img src="/assets/missing.svg" alt={`${name} unavailable`} loading="lazy" className="mx-auto my-2 h-16 w-16 object-contain" />
 			)}
 
 			<div className="item-card-name">{name}</div>
