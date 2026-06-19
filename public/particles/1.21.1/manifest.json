@@ -1,0 +1,1021 @@
+{
+  "version": "1.21.1",
+  "isBase": true,
+  "particles": [
+    {
+      "id": "angry",
+      "displayFile": "angry.png",
+      "displayName": "Angry",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/angry/0.png"
+      ]
+    },
+    {
+      "id": "big_smoke",
+      "displayFile": "big_smoke.gif",
+      "displayName": "Big Smoke",
+      "animated": true,
+      "frameCount": 12,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/big_smoke/0.png",
+        "frames/big_smoke/1.png",
+        "frames/big_smoke/2.png",
+        "frames/big_smoke/3.png",
+        "frames/big_smoke/4.png",
+        "frames/big_smoke/5.png",
+        "frames/big_smoke/6.png",
+        "frames/big_smoke/7.png",
+        "frames/big_smoke/8.png",
+        "frames/big_smoke/9.png",
+        "frames/big_smoke/10.png",
+        "frames/big_smoke/11.png"
+      ]
+    },
+    {
+      "id": "bubble",
+      "displayFile": "bubble.png",
+      "displayName": "Bubble",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/bubble/0.png"
+      ]
+    },
+    {
+      "id": "bubble_pop",
+      "displayFile": "bubble_pop.gif",
+      "displayName": "Bubble Pop",
+      "animated": true,
+      "frameCount": 5,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/bubble_pop/0.png",
+        "frames/bubble_pop/1.png",
+        "frames/bubble_pop/2.png",
+        "frames/bubble_pop/3.png",
+        "frames/bubble_pop/4.png"
+      ]
+    },
+    {
+      "id": "cherry",
+      "displayFile": "cherry.gif",
+      "displayName": "Cherry",
+      "animated": true,
+      "frameCount": 12,
+      "frameSize": 3,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/cherry/0.png",
+        "frames/cherry/1.png",
+        "frames/cherry/2.png",
+        "frames/cherry/3.png",
+        "frames/cherry/4.png",
+        "frames/cherry/5.png",
+        "frames/cherry/6.png",
+        "frames/cherry/7.png",
+        "frames/cherry/8.png",
+        "frames/cherry/9.png",
+        "frames/cherry/10.png",
+        "frames/cherry/11.png"
+      ]
+    },
+    {
+      "id": "critical_hit",
+      "displayFile": "critical_hit.png",
+      "displayName": "Critical Hit",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/critical_hit/0.png"
+      ]
+    },
+    {
+      "id": "damage",
+      "displayFile": "damage.png",
+      "displayName": "Damage",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/damage/0.png"
+      ]
+    },
+    {
+      "id": "drip_fall",
+      "displayFile": "drip_fall.png",
+      "displayName": "Drip Fall",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/drip_fall/0.png"
+      ]
+    },
+    {
+      "id": "drip_hang",
+      "displayFile": "drip_hang.png",
+      "displayName": "Drip Hang",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/drip_hang/0.png"
+      ]
+    },
+    {
+      "id": "drip_land",
+      "displayFile": "drip_land.png",
+      "displayName": "Drip Land",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/drip_land/0.png"
+      ]
+    },
+    {
+      "id": "effect",
+      "displayFile": "effect.gif",
+      "displayName": "Effect",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/effect/0.png",
+        "frames/effect/1.png",
+        "frames/effect/2.png",
+        "frames/effect/3.png",
+        "frames/effect/4.png",
+        "frames/effect/5.png",
+        "frames/effect/6.png",
+        "frames/effect/7.png"
+      ]
+    },
+    {
+      "id": "enchanted_hit",
+      "displayFile": "enchanted_hit.png",
+      "displayName": "Enchanted Hit",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/enchanted_hit/0.png"
+      ]
+    },
+    {
+      "id": "explosion",
+      "displayFile": "explosion.gif",
+      "displayName": "Explosion",
+      "animated": true,
+      "frameCount": 16,
+      "frameSize": 32,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/explosion/0.png",
+        "frames/explosion/1.png",
+        "frames/explosion/2.png",
+        "frames/explosion/3.png",
+        "frames/explosion/4.png",
+        "frames/explosion/5.png",
+        "frames/explosion/6.png",
+        "frames/explosion/7.png",
+        "frames/explosion/8.png",
+        "frames/explosion/9.png",
+        "frames/explosion/10.png",
+        "frames/explosion/11.png",
+        "frames/explosion/12.png",
+        "frames/explosion/13.png",
+        "frames/explosion/14.png",
+        "frames/explosion/15.png"
+      ]
+    },
+    {
+      "id": "flame",
+      "displayFile": "flame.png",
+      "displayName": "Flame",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/flame/0.png"
+      ]
+    },
+    {
+      "id": "flash",
+      "displayFile": "flash.png",
+      "displayName": "Flash",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 32,
+      "kind": "static",
+      "frameFiles": [
+        "frames/flash/0.png"
+      ]
+    },
+    {
+      "id": "generic",
+      "displayFile": "generic.gif",
+      "displayName": "Generic",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/generic/0.png",
+        "frames/generic/1.png",
+        "frames/generic/2.png",
+        "frames/generic/3.png",
+        "frames/generic/4.png",
+        "frames/generic/5.png",
+        "frames/generic/6.png",
+        "frames/generic/7.png"
+      ]
+    },
+    {
+      "id": "glint",
+      "displayFile": "glint.png",
+      "displayName": "Glint",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/glint/0.png"
+      ]
+    },
+    {
+      "id": "glitter",
+      "displayFile": "glitter.gif",
+      "displayName": "Glitter",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/glitter/0.png",
+        "frames/glitter/1.png",
+        "frames/glitter/2.png",
+        "frames/glitter/3.png",
+        "frames/glitter/4.png",
+        "frames/glitter/5.png",
+        "frames/glitter/6.png",
+        "frames/glitter/7.png"
+      ]
+    },
+    {
+      "id": "glow",
+      "displayFile": "glow.png",
+      "displayName": "Glow",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/glow/0.png"
+      ]
+    },
+    {
+      "id": "goldheart",
+      "displayFile": "goldheart.gif",
+      "displayName": "Goldheart",
+      "animated": true,
+      "frameCount": 3,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/goldheart/0.png",
+        "frames/goldheart/1.png",
+        "frames/goldheart/2.png"
+      ]
+    },
+    {
+      "id": "gust",
+      "displayFile": "gust.gif",
+      "displayName": "Gust",
+      "animated": true,
+      "frameCount": 12,
+      "frameSize": 32,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/gust/0.png",
+        "frames/gust/1.png",
+        "frames/gust/2.png",
+        "frames/gust/3.png",
+        "frames/gust/4.png",
+        "frames/gust/5.png",
+        "frames/gust/6.png",
+        "frames/gust/7.png",
+        "frames/gust/8.png",
+        "frames/gust/9.png",
+        "frames/gust/10.png",
+        "frames/gust/11.png"
+      ]
+    },
+    {
+      "id": "heart",
+      "displayFile": "heart.png",
+      "displayName": "Heart",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/heart/0.png"
+      ]
+    },
+    {
+      "id": "infested",
+      "displayFile": "infested.png",
+      "displayName": "Infested",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/infested/0.png"
+      ]
+    },
+    {
+      "id": "lava",
+      "displayFile": "lava.png",
+      "displayName": "Lava",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/lava/0.png"
+      ]
+    },
+    {
+      "id": "nautilus",
+      "displayFile": "nautilus.png",
+      "displayName": "Nautilus",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/nautilus/0.png"
+      ]
+    },
+    {
+      "id": "note",
+      "displayFile": "note.png",
+      "displayName": "Note",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/note/0.png"
+      ]
+    },
+    {
+      "id": "ominous_spawning",
+      "displayFile": "ominous_spawning.png",
+      "displayName": "Ominous Spawning",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 16,
+      "kind": "static",
+      "frameFiles": [
+        "frames/ominous_spawning/0.png"
+      ]
+    },
+    {
+      "id": "raid_omen",
+      "displayFile": "raid_omen.png",
+      "displayName": "Raid Omen",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 5,
+      "kind": "static",
+      "frameFiles": [
+        "frames/raid_omen/0.png"
+      ]
+    },
+    {
+      "id": "sculk_charge",
+      "displayFile": "sculk_charge.gif",
+      "displayName": "Sculk Charge",
+      "animated": true,
+      "frameCount": 7,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/sculk_charge/0.png",
+        "frames/sculk_charge/1.png",
+        "frames/sculk_charge/2.png",
+        "frames/sculk_charge/3.png",
+        "frames/sculk_charge/4.png",
+        "frames/sculk_charge/5.png",
+        "frames/sculk_charge/6.png"
+      ]
+    },
+    {
+      "id": "sculk_charge_pop",
+      "displayFile": "sculk_charge_pop.gif",
+      "displayName": "Sculk Charge Pop",
+      "animated": true,
+      "frameCount": 4,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/sculk_charge_pop/0.png",
+        "frames/sculk_charge_pop/1.png",
+        "frames/sculk_charge_pop/2.png",
+        "frames/sculk_charge_pop/3.png"
+      ]
+    },
+    {
+      "id": "sculk_soul",
+      "displayFile": "sculk_soul.gif",
+      "displayName": "Sculk Soul",
+      "animated": true,
+      "frameCount": 11,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/sculk_soul/0.png",
+        "frames/sculk_soul/1.png",
+        "frames/sculk_soul/2.png",
+        "frames/sculk_soul/3.png",
+        "frames/sculk_soul/4.png",
+        "frames/sculk_soul/5.png",
+        "frames/sculk_soul/6.png",
+        "frames/sculk_soul/7.png",
+        "frames/sculk_soul/8.png",
+        "frames/sculk_soul/9.png",
+        "frames/sculk_soul/10.png"
+      ]
+    },
+    {
+      "id": "sga_a",
+      "displayFile": "sga_a.png",
+      "displayName": "Sga A",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_a/0.png"
+      ]
+    },
+    {
+      "id": "sga_b",
+      "displayFile": "sga_b.png",
+      "displayName": "Sga B",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_b/0.png"
+      ]
+    },
+    {
+      "id": "sga_c",
+      "displayFile": "sga_c.png",
+      "displayName": "Sga C",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_c/0.png"
+      ]
+    },
+    {
+      "id": "sga_d",
+      "displayFile": "sga_d.png",
+      "displayName": "Sga D",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_d/0.png"
+      ]
+    },
+    {
+      "id": "sga_e",
+      "displayFile": "sga_e.png",
+      "displayName": "Sga E",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_e/0.png"
+      ]
+    },
+    {
+      "id": "sga_f",
+      "displayFile": "sga_f.png",
+      "displayName": "Sga F",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_f/0.png"
+      ]
+    },
+    {
+      "id": "sga_g",
+      "displayFile": "sga_g.png",
+      "displayName": "Sga G",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_g/0.png"
+      ]
+    },
+    {
+      "id": "sga_h",
+      "displayFile": "sga_h.png",
+      "displayName": "Sga H",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_h/0.png"
+      ]
+    },
+    {
+      "id": "sga_i",
+      "displayFile": "sga_i.png",
+      "displayName": "Sga I",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_i/0.png"
+      ]
+    },
+    {
+      "id": "sga_j",
+      "displayFile": "sga_j.png",
+      "displayName": "Sga J",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_j/0.png"
+      ]
+    },
+    {
+      "id": "sga_k",
+      "displayFile": "sga_k.png",
+      "displayName": "Sga K",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_k/0.png"
+      ]
+    },
+    {
+      "id": "sga_l",
+      "displayFile": "sga_l.png",
+      "displayName": "Sga L",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_l/0.png"
+      ]
+    },
+    {
+      "id": "sga_m",
+      "displayFile": "sga_m.png",
+      "displayName": "Sga M",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_m/0.png"
+      ]
+    },
+    {
+      "id": "sga_n",
+      "displayFile": "sga_n.png",
+      "displayName": "Sga N",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_n/0.png"
+      ]
+    },
+    {
+      "id": "sga_o",
+      "displayFile": "sga_o.png",
+      "displayName": "Sga O",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_o/0.png"
+      ]
+    },
+    {
+      "id": "sga_p",
+      "displayFile": "sga_p.png",
+      "displayName": "Sga P",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_p/0.png"
+      ]
+    },
+    {
+      "id": "sga_q",
+      "displayFile": "sga_q.png",
+      "displayName": "Sga Q",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_q/0.png"
+      ]
+    },
+    {
+      "id": "sga_r",
+      "displayFile": "sga_r.png",
+      "displayName": "Sga R",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_r/0.png"
+      ]
+    },
+    {
+      "id": "sga_s",
+      "displayFile": "sga_s.png",
+      "displayName": "Sga S",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_s/0.png"
+      ]
+    },
+    {
+      "id": "sga_t",
+      "displayFile": "sga_t.png",
+      "displayName": "Sga T",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_t/0.png"
+      ]
+    },
+    {
+      "id": "sga_u",
+      "displayFile": "sga_u.png",
+      "displayName": "Sga U",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_u/0.png"
+      ]
+    },
+    {
+      "id": "sga_v",
+      "displayFile": "sga_v.png",
+      "displayName": "Sga V",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_v/0.png"
+      ]
+    },
+    {
+      "id": "sga_w",
+      "displayFile": "sga_w.png",
+      "displayName": "Sga W",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_w/0.png"
+      ]
+    },
+    {
+      "id": "sga_x",
+      "displayFile": "sga_x.png",
+      "displayName": "Sga X",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_x/0.png"
+      ]
+    },
+    {
+      "id": "sga_y",
+      "displayFile": "sga_y.png",
+      "displayName": "Sga Y",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_y/0.png"
+      ]
+    },
+    {
+      "id": "sga_z",
+      "displayFile": "sga_z.png",
+      "displayName": "Sga Z",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/sga_z/0.png"
+      ]
+    },
+    {
+      "id": "shriek",
+      "displayFile": "shriek.png",
+      "displayName": "Shriek",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 13,
+      "kind": "static",
+      "frameFiles": [
+        "frames/shriek/0.png"
+      ]
+    },
+    {
+      "id": "small_gust",
+      "displayFile": "small_gust.gif",
+      "displayName": "Small Gust",
+      "animated": true,
+      "frameCount": 7,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/small_gust/0.png",
+        "frames/small_gust/1.png",
+        "frames/small_gust/2.png",
+        "frames/small_gust/3.png",
+        "frames/small_gust/4.png",
+        "frames/small_gust/5.png",
+        "frames/small_gust/6.png"
+      ]
+    },
+    {
+      "id": "sonic_boom",
+      "displayFile": "sonic_boom.gif",
+      "displayName": "Sonic Boom",
+      "animated": true,
+      "frameCount": 16,
+      "frameSize": 32,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/sonic_boom/0.png",
+        "frames/sonic_boom/1.png",
+        "frames/sonic_boom/2.png",
+        "frames/sonic_boom/3.png",
+        "frames/sonic_boom/4.png",
+        "frames/sonic_boom/5.png",
+        "frames/sonic_boom/6.png",
+        "frames/sonic_boom/7.png",
+        "frames/sonic_boom/8.png",
+        "frames/sonic_boom/9.png",
+        "frames/sonic_boom/10.png",
+        "frames/sonic_boom/11.png",
+        "frames/sonic_boom/12.png",
+        "frames/sonic_boom/13.png",
+        "frames/sonic_boom/14.png",
+        "frames/sonic_boom/15.png"
+      ]
+    },
+    {
+      "id": "soul",
+      "displayFile": "soul.gif",
+      "displayName": "Soul",
+      "animated": true,
+      "frameCount": 11,
+      "frameSize": 16,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/soul/0.png",
+        "frames/soul/1.png",
+        "frames/soul/2.png",
+        "frames/soul/3.png",
+        "frames/soul/4.png",
+        "frames/soul/5.png",
+        "frames/soul/6.png",
+        "frames/soul/7.png",
+        "frames/soul/8.png",
+        "frames/soul/9.png",
+        "frames/soul/10.png"
+      ]
+    },
+    {
+      "id": "soul_fire_flame",
+      "displayFile": "soul_fire_flame.png",
+      "displayName": "Soul Fire Flame",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/soul_fire_flame/0.png"
+      ]
+    },
+    {
+      "id": "spark",
+      "displayFile": "spark.gif",
+      "displayName": "Spark",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/spark/0.png",
+        "frames/spark/1.png",
+        "frames/spark/2.png",
+        "frames/spark/3.png",
+        "frames/spark/4.png",
+        "frames/spark/5.png",
+        "frames/spark/6.png",
+        "frames/spark/7.png"
+      ]
+    },
+    {
+      "id": "spell",
+      "displayFile": "spell.gif",
+      "displayName": "Spell",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/spell/0.png",
+        "frames/spell/1.png",
+        "frames/spell/2.png",
+        "frames/spell/3.png",
+        "frames/spell/4.png",
+        "frames/spell/5.png",
+        "frames/spell/6.png",
+        "frames/spell/7.png"
+      ]
+    },
+    {
+      "id": "splash",
+      "displayFile": "splash.gif",
+      "displayName": "Splash",
+      "animated": true,
+      "frameCount": 4,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/splash/0.png",
+        "frames/splash/1.png",
+        "frames/splash/2.png",
+        "frames/splash/3.png"
+      ]
+    },
+    {
+      "id": "sweep",
+      "displayFile": "sweep.gif",
+      "displayName": "Sweep",
+      "animated": true,
+      "frameCount": 8,
+      "frameSize": 32,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/sweep/0.png",
+        "frames/sweep/1.png",
+        "frames/sweep/2.png",
+        "frames/sweep/3.png",
+        "frames/sweep/4.png",
+        "frames/sweep/5.png",
+        "frames/sweep/6.png",
+        "frames/sweep/7.png"
+      ]
+    },
+    {
+      "id": "trial_omen",
+      "displayFile": "trial_omen.png",
+      "displayName": "Trial Omen",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 5,
+      "kind": "static",
+      "frameFiles": [
+        "frames/trial_omen/0.png"
+      ]
+    },
+    {
+      "id": "trial_spawner_detection",
+      "displayFile": "trial_spawner_detection.gif",
+      "displayName": "Trial Spawner Detection",
+      "animated": true,
+      "frameCount": 5,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/trial_spawner_detection/0.png",
+        "frames/trial_spawner_detection/1.png",
+        "frames/trial_spawner_detection/2.png",
+        "frames/trial_spawner_detection/3.png",
+        "frames/trial_spawner_detection/4.png"
+      ]
+    },
+    {
+      "id": "trial_spawner_detection_ominous",
+      "displayFile": "trial_spawner_detection_ominous.gif",
+      "displayName": "Trial Spawner Detection Ominous",
+      "animated": true,
+      "frameCount": 5,
+      "frameSize": 8,
+      "kind": "sequence",
+      "frameFiles": [
+        "frames/trial_spawner_detection_ominous/0.png",
+        "frames/trial_spawner_detection_ominous/1.png",
+        "frames/trial_spawner_detection_ominous/2.png",
+        "frames/trial_spawner_detection_ominous/3.png",
+        "frames/trial_spawner_detection_ominous/4.png"
+      ]
+    },
+    {
+      "id": "vault_connection",
+      "displayFile": "vault_connection.png",
+      "displayName": "Vault Connection",
+      "animated": false,
+      "frameCount": 1,
+      "frameSize": 8,
+      "kind": "static",
+      "frameFiles": [
+        "frames/vault_connection/0.png"
+      ]
+    },
+    {
+      "id": "vibration",
+      "displayFile": "vibration.gif",
+      "displayName": "Vibration",
+      "animated": true,
+      "frameCount": 7,
+      "frameSize": 18,
+      "kind": "strip",
+      "frameFiles": [
+        "frames/vibration/0.png",
+        "frames/vibration/1.png",
+        "frames/vibration/2.png",
+        "frames/vibration/3.png",
+        "frames/vibration/4.png",
+        "frames/vibration/5.png",
+        "frames/vibration/6.png"
+      ]
+    }
+  ]
+}

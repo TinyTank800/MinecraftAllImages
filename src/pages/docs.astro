@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Header } from '../components/Header';
+import { SiteFooter } from '../components/SiteFooter';
+
+const sections = [
+	{ id: 'how-it-works', label: 'How the gallery works' },
+	{ id: 'image-sets', label: 'Legacy vs enhanced' },
+	{ id: 'exporting', label: 'Exporting images' },
+	{ id: 'packaging', label: 'Packaging for the site' },
+	{ id: 'particles', label: 'Particle textures' },
+	{ id: 'sharing', label: 'Share a selection' },
+	{ id: 'seo', label: 'Per-item pages' },
+	{ id: 'api', label: 'Public API & CDN' },
+];
+---
+
+<BaseLayout
+	title="Documentation — Minecraft Item Gallery"
+	description="How the gallery works, exporting and packaging images, sharing selections, and the public CDN API for fetching item PNGs programmatically."
+	canonical="/docs"
+>
+	<Header client:load />
+	<main class="container docs-page py-8 pb-16">
+		<nav class="breadcrumbs" aria-label="Breadcrumb">
+			<a href="/">Home</a><span class="sep">›</span><span>Documentation</span>
+		</nav>
+
+		<div class="docs-layout">
+			<aside class="docs-sidebar" aria-label="On this page">
+				<p class="docs-sidebar-heading">On this page</p>
+				<nav class="docs-sidebar-nav">
+					{sections.map((section) => (
+						<a href={`#${section.id}`}>{section.label}</a>
+					))}
+				</nav>
+			</aside>
+
+			<article class="prose-page docs-content card p-8 md:p-10">
+				<header class="docs-header">
+					<h1 class="gradient-text text-3xl md:text-4xl font-bold mb-2">Documentation</h1>
+					<p class="docs-lead">
+						How the site works, how to add new Minecraft versions, and how to use the public CDN in your
+						own projects.
+					</p>
+				</header>
+
+				<section class="docs-section" aria-labelledby="how-it-works">
+					<h2 id="how-it-works" class="docs-section-title">How the gallery works</h2>
+					<p>
+						The site loads a <strong>base version</strong> ZIP containing every item image, then applies
+						incremental <code>changes.json</code> files for each newer version (additions, modifications, removals).
+						This reconstructs the correct texture set for any selected Minecraft version while preserving full history.
+					</p>
+					<p>
+						In the browser, version ZIPs are cached locally so revisiting a version is fast. Each item card opens a
+						detail view with version history, a compare slider, color palettes, and downloads. Dedicated pages at
+						<code>/items/diamond-sword</code> provide a focused view for sharing and SEO.
+					</p>
+				</section>
+
+				<section class="docs-section" aria-labelledby="image-sets">
+					<h2 id="image-sets" class="docs-section-title">Legacy vs enhanced images</h2>
+					<p>
+						The gallery ships two parallel image sets. Use the <strong>Images</strong> selector in the UI
+						(or <code>?images=v2</code> in the URL) to switch.
+					</p>
+					<ul>
+						<li>
+							<strong>Legacy captures (v1)</strong> — original screenshot-based images in
+							<code>/images/</code>. Covers every version today.
+						</li>
+						<li>
+							<strong>Enhanced (mod) (v2)</strong> — re-rendered icons from the Fabric export mod in
+							<code>/images-v2/</code>. Sharper, with correct transparency. Rolled out per version as you
+							package new exports with <code>--set v2</code>.
+						</li>
+					</ul>
+					<p>
+						The item catalog and version list come from the active set only. Enhanced mode does not
+						mix in legacy images — package each version under <code>images-v2/</code> as you re-export it.
+					</p>
+				</section>
+
+				<section class="docs-section" aria-labelledby="exporting">
+					<h2 id="exporting" class="docs-section-title">Exporting a new version (mod)</h2>
+					<p>
+						Images are captured in-game with the standalone Fabric mod in
+						<code>generation/standalone-mod/</code> (MC 1.21.1). See
+						<code>generation/README.md</code> for build instructions.
+					</p>
+					<pre>/itemgallery export 1.21.1 64
+/itemgallery export 1.21.1 64 all   # include modded namespaces
+/itemgallery variants 1.21.1 64    # all potions, light levels, etc.
+/itemgallery dumptextures 1.21.1 particle</pre>
+					<p>
+						Output is written to <code>&lt;minecraft&gt;/gallery-export/&lt;version&gt;/</code> with
+						<code>manifest.json</code>, <code>hashes.json</code>, and auto-generated <code>changes.json</code> when
+						older exports are kept nearby.
+					</p>
+				</section>
+
+				<section class="docs-section" aria-labelledby="packaging">
+					<h2 id="packaging" class="docs-section-title">Packaging for the website</h2>
+					<p>From the repository root:</p>
+					<pre>{`# Enhanced v2 (recommended for mod exports)
+npm run package-version -- --source "path/to/gallery-export" --mc-version 1.21.1 --set v2
+
+# Legacy v1 (default — original image tree)
+npm run package-version -- --source "path/to/gallery-export" --mc-version 1.21.7`}</pre>
+					<p>This creates:</p>
+					<ul>
+						<li><code>public/images/&lt;version&gt;.zip</code> or <code>public/images-v2/&lt;version&gt;.zip</code></li>
+						<li>Loose PNGs/WebP and manifest copies for direct URLs and palette generation</li>
+						<li>Updated <code>versions.json</code> in that tree and SEO metadata via <code>enrich-metadata</code></li>
+					</ul>
+				</section>
+
+				<section class="docs-section" aria-labelledby="particles">
+					<h2 id="particles" class="docs-section-title">Particle textures</h2>
+					<p>
+						Particles are <strong>not</strong> part of the item gallery ZIPs. Export them separately, then
+						package for the <a href="/particles">/particles</a> page.
+					</p>
+					<pre>/itemgallery dumptextures 1.21.1 particle</pre>
+					<p>
+						This copies raw PNGs (and <code>.png.mcmeta</code> animation files) to
+						<code>gallery-export/&lt;version&gt;/dumped/</code>. Multi-frame textures are vertical strips in
+						the resource pack.
+					</p>
+					<pre>{`npm run package-particles -- --source "path/to/gallery-export" --mc-version 1.21.1`}</pre>
+					<p>The packaging script:</p>
+					<ul>
+						<li>Builds an <strong>animated GIF</strong> when a texture has multiple frames (from mcmeta or a vertical strip)</li>
+						<li>Keeps a single-frame <strong>PNG</strong> when there is only one frame</li>
+						<li>Writes <code>public/particles/&lt;version&gt;/manifest.json</code> and updates <code>versions.json</code></li>
+					</ul>
+				</section>
+
+				<section class="docs-section" aria-labelledby="sharing">
+					<h2 id="sharing" class="docs-section-title">Share a selection</h2>
+					<p>
+						Select items in the gallery and click <strong>Share Selection</strong> to copy a link.
+						Small selections use readable slugs in <code>?sel=</code>. Larger ones use a compact
+						<code>?selc=</code> bitset (~240 characters max). Add <code>?images=v2</code> to open in enhanced mode.
+					</p>
+				</section>
+
+				<section class="docs-section" aria-labelledby="seo">
+					<h2 id="seo" class="docs-section-title">Per-item pages &amp; SEO</h2>
+					<p>
+						Each item has a static page at <code>/items/diamond-sword</code> with ImageObject schema markup.
+						Category browse pages live under <code>/items/category/combat</code> and similar paths.
+					</p>
+				</section>
+
+				<section class="docs-section" aria-labelledby="api">
+					<h2 id="api" class="docs-section-title">Public API &amp; CDN</h2>
+					<p>
+						<strong>Phase 1 (current):</strong> stable public URLs on <code>mcitemgallery.com</code> — no API key
+						required. Use these directly in Discord bots, wikis, or any HTTP client.
+					</p>
+
+					<h3>CDN endpoints</h3>
+					<pre>{`GET https://mcitemgallery.com/images/versions.json
+GET https://mcitemgallery.com/images-v2/versions.json
+GET https://mcitemgallery.com/images/{version}.zip
+GET https://mcitemgallery.com/images-v2/{version}.zip
+GET https://mcitemgallery.com/images/{version}/{item}.png
+GET https://mcitemgallery.com/images-v2/{version}/{item}.png
+GET https://mcitemgallery.com/images/{version}/{item}.webp
+GET https://mcitemgallery.com/metadata/items-index.json
+GET https://mcitemgallery.com/metadata/categories.json
+GET https://mcitemgallery.com/metadata/palettes.json
+GET https://mcitemgallery.com/metadata/selection-index.json`}</pre>
+
+					<h3>Examples</h3>
+					<pre>{`# Diamond sword PNG for a specific version
+curl -O https://mcitemgallery.com/images/1.21.6/diamond_sword.png
+
+# Full version archive (base = all PNGs, incremental = changes only)
+curl -O https://mcitemgallery.com/images/1.13.2.zip
+
+# Resolve display names and categories
+curl -O https://mcitemgallery.com/metadata/items-index.json`}</pre>
+
+					<h3>Discord bots &amp; integrations</h3>
+					<p>
+						Fetch <code>/images/{'{version}'}/{'{item}'}.png</code> and attach the PNG directly.
+						Use <code>items-index.json</code> to map filenames to display names and categories.
+						<code>selection-index.json</code> backs compact share links (<code>?selc=</code>).
+					</p>
+
+					<h3>Phase 2 (planned)</h3>
+					<p>
+						A dedicated API at <code>api.mcitemgallery.com</code> with optional keys and rate limits:
+					</p>
+					<pre>{`GET https://api.mcitemgallery.com/v1/items/diamond_sword?version=1.21.6
+GET https://api.mcitemgallery.com/v1/versions`}</pre>
+					<p>Will redirect or stream from the CDN with an optional <code>X-API-Key</code> header.</p>
+
+					<p class="mt-4">
+						<a href="/openapi.yaml" class="btn btn-outline" download>OpenAPI spec (YAML)</a>
+					</p>
+				</section>
+
+				<p class="docs-footer-actions mt-6">
+					<a href="/" class="btn btn-primary">Back to gallery</a>
+				</p>
+			</article>
+		</div>
+	</main>
+	<SiteFooter client:load />
+</BaseLayout>

@@ -1,104 +1,125 @@
 # Minecraft Item Gallery
 
-A searchable, downloadable gallery of Minecraft item images captured from the in-game hotbar.
+A searchable, downloadable gallery of transparent Minecraft item images across Java Edition versions.
 
-![Version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json)
+**Live site:** [mcitemgallery.com](https://mcitemgallery.com)
 
----
+![Latest update](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/TinyTank800/MinecraftAllImages/main/version.json)
 
-## 🔧 Features
-
-- 🌍 **Comprehensive Gallery:** Access item images from virtually *all* major Minecraft Java Edition versions.
-- 🔎 **Easy Search & Filter:** Quickly find items by name and filter by specific game versions.
-- 📊 **Flexible Sorting:** Sort items alphabetically (A-Z, Z-A), by version (approximated newest first), or by name length.
-- 📦 **Bulk Downloads:** Select multiple items and download them as a single ZIP archive, or download all items for the selected version.
-- 💾 **Individual Downloads:** Download specific item images directly from the gallery or the details modal.
-- 📜 **Item Version History:** View how an item's texture changed across different Minecraft versions directly in the item details modal, with previews and individual downloads.
-- 👻 **Show Removed Items:** Option to display items that are no longer present in the selected version (useful for historical comparison).
-- ⚡ **Client-Side Caching:** Efficiently caches downloaded ZIP data in the browser (using Cache Storage API) to speed up subsequent downloads.
-- 🔗 **Direct Linking:** Share links that open the gallery to a specific version view.
-- 🌓 **Dark/Light Mode:** Choose your preferred theme.
-- 📱 **Responsive Design:** Works seamlessly on desktop and mobile devices.
-- 🙏 **Supporter Recognition:** Features a section acknowledging project supporters.
-- ⚙️ **Pure JS/CSS/HTML:** No frameworks needed, keeping it lightweight.
-
-## About This Project
-
-This gallery showcases Minecraft item images that have been captured from the in-game hotbar and formatted consistently. The images are ideal for:
-
-- Wiki projects
-- Minecraft guides
-- Educational materials
-- Resource packs
-- Server websites
+Built by [Okami Squadron](https://okamisquadron.com/) · MIT licensed · [GitHub](https://github.com/TinyTank800/MinecraftAllImages)
 
 ---
 
-## 🛠️ How It Works
+## Features
 
-The gallery loads a base set of images defined in `manifest.json`. It then intelligently applies version-specific changes (additions, modifications, removals) tracked in `changes.json` files for the selected Minecraft version. This ensures you see the correct textures for that particular version or the most recent ones if "Latest" is chosen.
+- **Comprehensive gallery** — item images from major Minecraft Java Edition versions
+- **Legacy & enhanced images** — switch between original captures (v1) and sharper mod re-renders (v2)
+- **Particle gallery** — [`/particles`](https://mcitemgallery.com/particles) with GIFs and frame PNG downloads
+- **Search, categories, and sorting** — creative-tab-style filters and multiple sort modes
+- **Version history & compare slider** — drag to compare textures across versions
+- **Color palettes** — copy vanilla hex colors from any item
+- **Share selection** — compact share links via `?sel=` or `?selc=`
+- **Bulk & individual downloads** — ZIP selected or visible items, or single PNGs
+- **Removed items archive** — [`/removed`](https://mcitemgallery.com/removed)
+- **Per-item SEO pages** — `/items/diamond-sword` with ImageObject schema
+- **Public CDN & docs** — [`/docs`](https://mcitemgallery.com/docs)
+- **Dark/light mode** and responsive layout
 
-To optimize loading and download speeds, the site heavily utilizes browser caching, including the Cache Storage API, to store images locally after they are first loaded.
+## Image sets (v1 vs v2)
 
----
+| Set | Location | Source |
+| --- | --- | --- |
+| **Legacy (v1)** | `public/images/` | Original screenshot-based pipeline — all versions today |
+| **Enhanced (v2)** | `public/images-v2/` | [Standalone Fabric mod](generation/standalone-mod/) — higher quality, rolling out per version |
 
-## 📂 Project Structure
+Users pick **Legacy (v1)** or **Enhanced (v2)** in the gallery. Each mode uses only its own version list and images — v2 does not mix in legacy PNGs.
 
-This section details the main components of the project:
+Package v2 exports with:
 
-- `index.html`: The main page structure.
-- `styles/`: Contains CSS for styling.
-- `scripts/`: Contains the JavaScript for functionality (search, sort, download, caching, versioning).
-- `images/`: Stores the actual Minecraft item images.
-- `manifest.json`: Defines the base set of items and their initial image files.
-- `changes.json`: Located in version-specific directories (e.g., `1.20.1/changes.json`), these files track item additions, removals, or texture updates compared to the base manifest.
-- `versions.json`: Lists the available Minecraft versions for the dropdown selector.
+```bash
+node scripts/package-version.mjs --source "path/to/gallery-export" --version 1.21.1 --set v2
+```
 
-### Requirements
+## Repository layout
 
-- Minecraft item images should be placed in the `images` folder
-- Images should have clear, descriptive filenames (e.g., `diamond_sword.png`, `oak_planks.png`)
-- Use underscores instead of spaces in filenames for best search results
+| Path | Description |
+| --- | --- |
+| `src/` | Astro pages + React gallery UI |
+| `public/` | Images, metadata, particles, static assets |
+| `scripts/` | `package-version`, `package-particles`, `enrich-metadata` |
+| [`generation/standalone-mod/`](generation/standalone-mod/) | **Fabric mod (recommended)** — `/itemgallery export` |
+| [`generation/MinecraftItemPipeline.py`](generation/MinecraftItemPipeline.py) | Legacy Python screenshot pipeline (v1 only) |
 
-## Creating Your Own Item Screenshots
+## How it works
 
-I created these screenshots using a custom script that:
+The gallery loads a **base version** ZIP, then applies incremental `changes.json` for each newer version. Legacy and enhanced sets are independent catalogs under `public/images/` and `public/images-v2/`.
 
-1. Takes screenshots of items in the Minecraft hotbar
-2. Crops them to a consistent size
-3. Applies formatting for a clean appearance
+See [`generation/README.md`](generation/README.md) for exporting and [`minecraft-item-gallery/README.md`](minecraft-item-gallery/README.md) for the web app.
 
-If you're interested in creating your own item gallery:
+## Local development
 
-1. Set up Minecraft with a resource pack that provides clear item visuals
-2. Place each item in the hotbar and capture screenshots
-3. Process the images to ensure consistent sizing and formatting
-4. Name files clearly using the item's name (e.g., `diamond_sword.png`)
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
+```
 
-## Technical Details
+## Packaging a new version
 
-The gallery is built using:
+After `/itemgallery export` in-game:
 
-- Plain HTML, CSS, and JavaScript (no frameworks)
-- JSZip and FileSaver.js for creating and downloading ZIP files
-- The Cache Storage API for optimized image fetching and storage, enhancing download performance.
+```bash
+# Enhanced (recommended for mod output)
+node scripts/package-version.mjs --source "path/to/gallery-export" --version 1.21.1 --set v2
+
+# Legacy v1 tree (default)
+node scripts/package-version.mjs --source "path/to/gallery-export" --version 1.21.7
+
+npm run enrich-metadata
+```
+
+Particles (separate from item ZIPs):
+
+```bash
+node scripts/package-particles.mjs --source "path/to/gallery-export" --version 1.21.1
+```
+
+See [`generation/README.md`](generation/README.md) for the full export pipeline.
+
+## Scripts
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Astro dev server |
+| `npm run build` | Production static build → `dist/` |
+| `npm run package-version` | Package mod export into `public/images/` or `public/images-v2/` |
+| `npm run package-particles` | Package particle dumps into `public/particles/` |
+| `npm run enrich-metadata` | Regenerate SEO metadata and palettes |
+
+## Public CDN
+
+```
+GET https://mcitemgallery.com/images/versions.json
+GET https://mcitemgallery.com/images-v2/versions.json
+GET https://mcitemgallery.com/images/{version}/{item}.png
+GET https://mcitemgallery.com/images-v2/{version}/{item}.png
+GET https://mcitemgallery.com/particles/{version}/{particle}.gif
+```
+
+Full details: [mcitemgallery.com/docs](https://mcitemgallery.com/docs)
 
 ## License
 
-This project is available under the MIT License. Feel free to use, modify, and distribute it as needed.
+MIT License.
 
-## Acknowledgments
+## Feedback
 
-- Thanks to Mojang for creating Minecraft
-- JSZip and FileSaver.js libraries for download functionality
+- **GitHub Issues:** [MinecraftAllImages](https://github.com/TinyTank800/MinecraftAllImages/issues)
+- **Discord:** [Okami Squadron](https://discord.oksqd.com)
 
----
+## AI disclosure
 
-## 📢 Feedback & Support
-*Found a bug or missing feature?* Let us know!  
-🐙 **GitHub Issues**: [Main Repo](https://github.com/TinyTank800/MinecraftAllImages/issues)  
-💬 **Discord**: [Join The Jemsire Community](https://discord.jemsire.com)  
+Parts of this repository were developed with **AI-assisted coding tools**. **Item images are not AI-generated** — they are captured in-game with the Fabric export mod in [`generation/standalone-mod/`](generation/standalone-mod/).
 
----
-
-*Note: This project is not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang AB.*
+*Not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang AB.*

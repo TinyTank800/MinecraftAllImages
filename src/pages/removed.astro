@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { GalleryApp } from '../components/GalleryApp';
+---
+
+<BaseLayout
+	title="Removed Minecraft Item Textures | Minecraft Item Gallery"
+	description="Browse every Minecraft item texture that was removed from the game across version history."
+	canonical="/removed"
+>
+	<GalleryApp client:load removedOnly={true} />
+</BaseLayout>

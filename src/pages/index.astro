@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { GalleryApp } from '../components/GalleryApp';
+---
+
+<BaseLayout
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'WebApplication',
+		name: 'Minecraft Item Gallery',
+		url: 'https://mcitemgallery.com',
+		description: 'Browse and download Minecraft item images across all game versions.',
+		applicationCategory: 'MultimediaApplication',
+		operatingSystem: 'Web',
+		offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	}}
+>
+	<GalleryApp client:load />
+</BaseLayout>

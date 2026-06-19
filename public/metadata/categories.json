@@ -1,0 +1,5720 @@
+{
+  "decorations": [
+    {
+      "filename": "acacia_boat.png",
+      "slug": "acacia-boat"
+    },
+    {
+      "filename": "acacia_chest_boat.png",
+      "slug": "acacia-chest-boat"
+    },
+    {
+      "filename": "acacia_door.png",
+      "slug": "acacia-door"
+    },
+    {
+      "filename": "acacia_fence.png",
+      "slug": "acacia-fence"
+    },
+    {
+      "filename": "acacia_fence_gate.png",
+      "slug": "acacia-fence-gate"
+    },
+    {
+      "filename": "acacia_hanging_sign.png",
+      "slug": "acacia-hanging-sign"
+    },
+    {
+      "filename": "acacia_leaves.png",
+      "slug": "acacia-leaves"
+    },
+    {
+      "filename": "acacia_log.png",
+      "slug": "acacia-log"
+    },
+    {
+      "filename": "acacia_planks.png",
+      "slug": "acacia-planks"
+    },
+    {
+      "filename": "acacia_sapling.png",
+      "slug": "acacia-sapling"
+    },
+    {
+      "filename": "acacia_sign.png",
+      "slug": "acacia-sign"
+    },
+    {
+      "filename": "acacia_slab.png",
+      "slug": "acacia-slab"
+    },
+    {
+      "filename": "acacia_stairs.png",
+      "slug": "acacia-stairs"
+    },
+    {
+      "filename": "acacia_trapdoor.png",
+      "slug": "acacia-trapdoor"
+    },
+    {
+      "filename": "andesite_slab.png",
+      "slug": "andesite-slab"
+    },
+    {
+      "filename": "andesite_stairs.png",
+      "slug": "andesite-stairs"
+    },
+    {
+      "filename": "andesite_wall.png",
+      "slug": "andesite-wall"
+    },
+    {
+      "filename": "angler_pottery_sherd.png",
+      "slug": "angler-pottery-sherd"
+    },
+    {
+      "filename": "archer_pottery_sherd.png",
+      "slug": "archer-pottery-sherd"
+    },
+    {
+      "filename": "arms_up_pottery_sherd.png",
+      "slug": "arms-up-pottery-sherd"
+    },
+    {
+      "filename": "azalea_leaves.png",
+      "slug": "azalea-leaves"
+    },
+    {
+      "filename": "bamboo_door.png",
+      "slug": "bamboo-door"
+    },
+    {
+      "filename": "bamboo_fence.png",
+      "slug": "bamboo-fence"
+    },
+    {
+      "filename": "bamboo_fence_gate.png",
+      "slug": "bamboo-fence-gate"
+    },
+    {
+      "filename": "bamboo_hanging_sign.png",
+      "slug": "bamboo-hanging-sign"
+    },
+    {
+      "filename": "bamboo_mosaic_slab.png",
+      "slug": "bamboo-mosaic-slab"
+    },
+    {
+      "filename": "bamboo_mosaic_stairs.png",
+      "slug": "bamboo-mosaic-stairs"
+    },
+    {
+      "filename": "bamboo_planks.png",
+      "slug": "bamboo-planks"
+    },
+    {
+      "filename": "bamboo_sign.png",
+      "slug": "bamboo-sign"
+    },
+    {
+      "filename": "bamboo_slab.png",
+      "slug": "bamboo-slab"
+    },
+    {
+      "filename": "bamboo_stairs.png",
+      "slug": "bamboo-stairs"
+    },
+    {
+      "filename": "bamboo_trapdoor.png",
+      "slug": "bamboo-trapdoor"
+    },
+    {
+      "filename": "bedrock.png",
+      "slug": "bedrock"
+    },
+    {
+      "filename": "birch_boat.png",
+      "slug": "birch-boat"
+    },
+    {
+      "filename": "birch_chest_boat.png",
+      "slug": "birch-chest-boat"
+    },
+    {
+      "filename": "birch_door.png",
+      "slug": "birch-door"
+    },
+    {
+      "filename": "birch_fence.png",
+      "slug": "birch-fence"
+    },
+    {
+      "filename": "birch_fence_gate.png",
+      "slug": "birch-fence-gate"
+    },
+    {
+      "filename": "birch_hanging_sign.png",
+      "slug": "birch-hanging-sign"
+    },
+    {
+      "filename": "birch_leaves.png",
+      "slug": "birch-leaves"
+    },
+    {
+      "filename": "birch_log.png",
+      "slug": "birch-log"
+    },
+    {
+      "filename": "birch_planks.png",
+      "slug": "birch-planks"
+    },
+    {
+      "filename": "birch_sapling.png",
+      "slug": "birch-sapling"
+    },
+    {
+      "filename": "birch_sign.png",
+      "slug": "birch-sign"
+    },
+    {
+      "filename": "birch_slab.png",
+      "slug": "birch-slab"
+    },
+    {
+      "filename": "birch_stairs.png",
+      "slug": "birch-stairs"
+    },
+    {
+      "filename": "birch_trapdoor.png",
+      "slug": "birch-trapdoor"
+    },
+    {
+      "filename": "black_banner.png",
+      "slug": "black-banner"
+    },
+    {
+      "filename": "black_bed.png",
+      "slug": "black-bed"
+    },
+    {
+      "filename": "black_candle.png",
+      "slug": "black-candle"
+    },
+    {
+      "filename": "black_carpet.png",
+      "slug": "black-carpet"
+    },
+    {
+      "filename": "black_concrete.png",
+      "slug": "black-concrete"
+    },
+    {
+      "filename": "black_concrete_powder.png",
+      "slug": "black-concrete-powder"
+    },
+    {
+      "filename": "black_dye.png",
+      "slug": "black-dye"
+    },
+    {
+      "filename": "black_glazed_terracotta.png",
+      "slug": "black-glazed-terracotta"
+    },
+    {
+      "filename": "black_stained_glass.png",
+      "slug": "black-stained-glass"
+    },
+    {
+      "filename": "black_stained_glass_pane.png",
+      "slug": "black-stained-glass-pane"
+    },
+    {
+      "filename": "black_terracotta.png",
+      "slug": "black-terracotta"
+    },
+    {
+      "filename": "black_wool.png",
+      "slug": "black-wool"
+    },
+    {
+      "filename": "blackstone_slab.png",
+      "slug": "blackstone-slab"
+    },
+    {
+      "filename": "blackstone_stairs.png",
+      "slug": "blackstone-stairs"
+    },
+    {
+      "filename": "blackstone_wall.png",
+      "slug": "blackstone-wall"
+    },
+    {
+      "filename": "blade_pottery_sherd.png",
+      "slug": "blade-pottery-sherd"
+    },
+    {
+      "filename": "blue_banner.png",
+      "slug": "blue-banner"
+    },
+    {
+      "filename": "blue_bed.png",
+      "slug": "blue-bed"
+    },
+    {
+      "filename": "blue_candle.png",
+      "slug": "blue-candle"
+    },
+    {
+      "filename": "blue_carpet.png",
+      "slug": "blue-carpet"
+    },
+    {
+      "filename": "blue_concrete.png",
+      "slug": "blue-concrete"
+    },
+    {
+      "filename": "blue_concrete_powder.png",
+      "slug": "blue-concrete-powder"
+    },
+    {
+      "filename": "blue_dye.png",
+      "slug": "blue-dye"
+    },
+    {
+      "filename": "blue_glazed_terracotta.png",
+      "slug": "blue-glazed-terracotta"
+    },
+    {
+      "filename": "blue_stained_glass.png",
+      "slug": "blue-stained-glass"
+    },
+    {
+      "filename": "blue_stained_glass_pane.png",
+      "slug": "blue-stained-glass-pane"
+    },
+    {
+      "filename": "blue_terracotta.png",
+      "slug": "blue-terracotta"
+    },
+    {
+      "filename": "blue_wool.png",
+      "slug": "blue-wool"
+    },
+    {
+      "filename": "book.png",
+      "slug": "book"
+    },
+    {
+      "filename": "bookshelf.png",
+      "slug": "bookshelf"
+    },
+    {
+      "filename": "bordure_indented_banner_pattern.png",
+      "slug": "bordure-indented-banner-pattern"
+    },
+    {
+      "filename": "brewer_pottery_sherd.png",
+      "slug": "brewer-pottery-sherd"
+    },
+    {
+      "filename": "brown_banner.png",
+      "slug": "brown-banner"
+    },
+    {
+      "filename": "brown_bed.png",
+      "slug": "brown-bed"
+    },
+    {
+      "filename": "brown_candle.png",
+      "slug": "brown-candle"
+    },
+    {
+      "filename": "brown_carpet.png",
+      "slug": "brown-carpet"
+    },
+    {
+      "filename": "brown_concrete.png",
+      "slug": "brown-concrete"
+    },
+    {
+      "filename": "brown_concrete_powder.png",
+      "slug": "brown-concrete-powder"
+    },
+    {
+      "filename": "brown_dye.png",
+      "slug": "brown-dye"
+    },
+    {
+      "filename": "brown_glazed_terracotta.png",
+      "slug": "brown-glazed-terracotta"
+    },
+    {
+      "filename": "brown_stained_glass.png",
+      "slug": "brown-stained-glass"
+    },
+    {
+      "filename": "brown_stained_glass_pane.png",
+      "slug": "brown-stained-glass-pane"
+    },
+    {
+      "filename": "brown_terracotta.png",
+      "slug": "brown-terracotta"
+    },
+    {
+      "filename": "brown_wool.png",
+      "slug": "brown-wool"
+    },
+    {
+      "filename": "burn_pottery_sherd.png",
+      "slug": "burn-pottery-sherd"
+    },
+    {
+      "filename": "cactus_flower.png",
+      "slug": "cactus-flower"
+    },
+    {
+      "filename": "candle.png",
+      "slug": "candle"
+    },
+    {
+      "filename": "cherry_boat.png",
+      "slug": "cherry-boat"
+    },
+    {
+      "filename": "cherry_chest_boat.png",
+      "slug": "cherry-chest-boat"
+    },
+    {
+      "filename": "cherry_door.png",
+      "slug": "cherry-door"
+    },
+    {
+      "filename": "cherry_fence.png",
+      "slug": "cherry-fence"
+    },
+    {
+      "filename": "cherry_fence_gate.png",
+      "slug": "cherry-fence-gate"
+    },
+    {
+      "filename": "cherry_hanging_sign.png",
+      "slug": "cherry-hanging-sign"
+    },
+    {
+      "filename": "cherry_leaves.png",
+      "slug": "cherry-leaves"
+    },
+    {
+      "filename": "cherry_log.png",
+      "slug": "cherry-log"
+    },
+    {
+      "filename": "cherry_planks.png",
+      "slug": "cherry-planks"
+    },
+    {
+      "filename": "cherry_sapling.png",
+      "slug": "cherry-sapling"
+    },
+    {
+      "filename": "cherry_sign.png",
+      "slug": "cherry-sign"
+    },
+    {
+      "filename": "cherry_slab.png",
+      "slug": "cherry-slab"
+    },
+    {
+      "filename": "cherry_stairs.png",
+      "slug": "cherry-stairs"
+    },
+    {
+      "filename": "cherry_trapdoor.png",
+      "slug": "cherry-trapdoor"
+    },
+    {
+      "filename": "chiseled_bookshelf.png",
+      "slug": "chiseled-bookshelf"
+    },
+    {
+      "filename": "cobbled_deepslate_slab.png",
+      "slug": "cobbled-deepslate-slab"
+    },
+    {
+      "filename": "cobbled_deepslate_stairs.png",
+      "slug": "cobbled-deepslate-stairs"
+    },
+    {
+      "filename": "cobbled_deepslate_wall.png",
+      "slug": "cobbled-deepslate-wall"
+    },
+    {
+      "filename": "cobblestone_slab.png",
+      "slug": "cobblestone-slab"
+    },
+    {
+      "filename": "cobblestone_stairs.png",
+      "slug": "cobblestone-stairs"
+    },
+    {
+      "filename": "cobblestone_wall.png",
+      "slug": "cobblestone-wall"
+    },
+    {
+      "filename": "cornflower.png",
+      "slug": "cornflower"
+    },
+    {
+      "filename": "creeper_banner_pattern.png",
+      "slug": "creeper-banner-pattern"
+    },
+    {
+      "filename": "creeper_head.png",
+      "slug": "creeper-head"
+    },
+    {
+      "filename": "crimson_door.png",
+      "slug": "crimson-door"
+    },
+    {
+      "filename": "crimson_fence.png",
+      "slug": "crimson-fence"
+    },
+    {
+      "filename": "crimson_fence_gate.png",
+      "slug": "crimson-fence-gate"
+    },
+    {
+      "filename": "crimson_hanging_sign.png",
+      "slug": "crimson-hanging-sign"
+    },
+    {
+      "filename": "crimson_planks.png",
+      "slug": "crimson-planks"
+    },
+    {
+      "filename": "crimson_sign.png",
+      "slug": "crimson-sign"
+    },
+    {
+      "filename": "crimson_slab.png",
+      "slug": "crimson-slab"
+    },
+    {
+      "filename": "crimson_stairs.png",
+      "slug": "crimson-stairs"
+    },
+    {
+      "filename": "crimson_trapdoor.png",
+      "slug": "crimson-trapdoor"
+    },
+    {
+      "filename": "cut_red_sandstone_slab.png",
+      "slug": "cut-red-sandstone-slab"
+    },
+    {
+      "filename": "cut_sandstone_slab.png",
+      "slug": "cut-sandstone-slab"
+    },
+    {
+      "filename": "cyan_banner.png",
+      "slug": "cyan-banner"
+    },
+    {
+      "filename": "cyan_bed.png",
+      "slug": "cyan-bed"
+    },
+    {
+      "filename": "cyan_candle.png",
+      "slug": "cyan-candle"
+    },
+    {
+      "filename": "cyan_carpet.png",
+      "slug": "cyan-carpet"
+    },
+    {
+      "filename": "cyan_concrete.png",
+      "slug": "cyan-concrete"
+    },
+    {
+      "filename": "cyan_concrete_powder.png",
+      "slug": "cyan-concrete-powder"
+    },
+    {
+      "filename": "cyan_dye.png",
+      "slug": "cyan-dye"
+    },
+    {
+      "filename": "cyan_glazed_terracotta.png",
+      "slug": "cyan-glazed-terracotta"
+    },
+    {
+      "filename": "cyan_stained_glass.png",
+      "slug": "cyan-stained-glass"
+    },
+    {
+      "filename": "cyan_stained_glass_pane.png",
+      "slug": "cyan-stained-glass-pane"
+    },
+    {
+      "filename": "cyan_terracotta.png",
+      "slug": "cyan-terracotta"
+    },
+    {
+      "filename": "cyan_wool.png",
+      "slug": "cyan-wool"
+    },
+    {
+      "filename": "danger_pottery_sherd.png",
+      "slug": "danger-pottery-sherd"
+    },
+    {
+      "filename": "dark_oak_boat.png",
+      "slug": "dark-oak-boat"
+    },
+    {
+      "filename": "dark_oak_chest_boat.png",
+      "slug": "dark-oak-chest-boat"
+    },
+    {
+      "filename": "dark_oak_door.png",
+      "slug": "dark-oak-door"
+    },
+    {
+      "filename": "dark_oak_fence.png",
+      "slug": "dark-oak-fence"
+    },
+    {
+      "filename": "dark_oak_fence_gate.png",
+      "slug": "dark-oak-fence-gate"
+    },
+    {
+      "filename": "dark_oak_hanging_sign.png",
+      "slug": "dark-oak-hanging-sign"
+    },
+    {
+      "filename": "dark_oak_leaves.png",
+      "slug": "dark-oak-leaves"
+    },
+    {
+      "filename": "dark_oak_log.png",
+      "slug": "dark-oak-log"
+    },
+    {
+      "filename": "dark_oak_planks.png",
+      "slug": "dark-oak-planks"
+    },
+    {
+      "filename": "dark_oak_sapling.png",
+      "slug": "dark-oak-sapling"
+    },
+    {
+      "filename": "dark_oak_sign.png",
+      "slug": "dark-oak-sign"
+    },
+    {
+      "filename": "dark_oak_slab.png",
+      "slug": "dark-oak-slab"
+    },
+    {
+      "filename": "dark_oak_stairs.png",
+      "slug": "dark-oak-stairs"
+    },
+    {
+      "filename": "dark_oak_trapdoor.png",
+      "slug": "dark-oak-trapdoor"
+    },
+    {
+      "filename": "decorated_pot.png",
+      "slug": "decorated-pot"
+    },
+    {
+      "filename": "deepslate_tile_slab.png",
+      "slug": "deepslate-tile-slab"
+    },
+    {
+      "filename": "deepslate_tile_stairs.png",
+      "slug": "deepslate-tile-stairs"
+    },
+    {
+      "filename": "deepslate_tile_wall.png",
+      "slug": "deepslate-tile-wall"
+    },
+    {
+      "filename": "diorite_slab.png",
+      "slug": "diorite-slab"
+    },
+    {
+      "filename": "diorite_stairs.png",
+      "slug": "diorite-stairs"
+    },
+    {
+      "filename": "diorite_wall.png",
+      "slug": "diorite-wall"
+    },
+    {
+      "filename": "dragon_head.png",
+      "slug": "dragon-head"
+    },
+    {
+      "filename": "enchanted_book.png",
+      "slug": "enchanted-book"
+    },
+    {
+      "filename": "explorer_pottery_sherd.png",
+      "slug": "explorer-pottery-sherd"
+    },
+    {
+      "filename": "field_masoned_banner_pattern.png",
+      "slug": "field-masoned-banner-pattern"
+    },
+    {
+      "filename": "filled_map.png",
+      "slug": "filled-map"
+    },
+    {
+      "filename": "firework_rocket.png",
+      "slug": "firework-rocket"
+    },
+    {
+      "filename": "firework_star.png",
+      "slug": "firework-star"
+    },
+    {
+      "filename": "flow_banner_pattern.png",
+      "slug": "flow-banner-pattern"
+    },
+    {
+      "filename": "flow_pottery_sherd.png",
+      "slug": "flow-pottery-sherd"
+    },
+    {
+      "filename": "flower_banner_pattern.png",
+      "slug": "flower-banner-pattern"
+    },
+    {
+      "filename": "flower_pot.png",
+      "slug": "flower-pot"
+    },
+    {
+      "filename": "flowering_azalea.png",
+      "slug": "flowering-azalea"
+    },
+    {
+      "filename": "flowering_azalea_leaves.png",
+      "slug": "flowering-azalea-leaves"
+    },
+    {
+      "filename": "friend_pottery_sherd.png",
+      "slug": "friend-pottery-sherd"
+    },
+    {
+      "filename": "glass.png",
+      "slug": "glass"
+    },
+    {
+      "filename": "glass_bottle.png",
+      "slug": "glass-bottle"
+    },
+    {
+      "filename": "glass_pane.png",
+      "slug": "glass-pane"
+    },
+    {
+      "filename": "globe_banner_pattern.png",
+      "slug": "globe-banner-pattern"
+    },
+    {
+      "filename": "granite_slab.png",
+      "slug": "granite-slab"
+    },
+    {
+      "filename": "granite_stairs.png",
+      "slug": "granite-stairs"
+    },
+    {
+      "filename": "granite_wall.png",
+      "slug": "granite-wall"
+    },
+    {
+      "filename": "gray_banner.png",
+      "slug": "gray-banner"
+    },
+    {
+      "filename": "gray_bed.png",
+      "slug": "gray-bed"
+    },
+    {
+      "filename": "gray_candle.png",
+      "slug": "gray-candle"
+    },
+    {
+      "filename": "gray_carpet.png",
+      "slug": "gray-carpet"
+    },
+    {
+      "filename": "gray_concrete.png",
+      "slug": "gray-concrete"
+    },
+    {
+      "filename": "gray_concrete_powder.png",
+      "slug": "gray-concrete-powder"
+    },
+    {
+      "filename": "gray_dye.png",
+      "slug": "gray-dye"
+    },
+    {
+      "filename": "gray_glazed_terracotta.png",
+      "slug": "gray-glazed-terracotta"
+    },
+    {
+      "filename": "gray_stained_glass.png",
+      "slug": "gray-stained-glass"
+    },
+    {
+      "filename": "gray_stained_glass_pane.png",
+      "slug": "gray-stained-glass-pane"
+    },
+    {
+      "filename": "gray_terracotta.png",
+      "slug": "gray-terracotta"
+    },
+    {
+      "filename": "gray_wool.png",
+      "slug": "gray-wool"
+    },
+    {
+      "filename": "green_banner.png",
+      "slug": "green-banner"
+    },
+    {
+      "filename": "green_bed.png",
+      "slug": "green-bed"
+    },
+    {
+      "filename": "green_candle.png",
+      "slug": "green-candle"
+    },
+    {
+      "filename": "green_carpet.png",
+      "slug": "green-carpet"
+    },
+    {
+      "filename": "green_concrete.png",
+      "slug": "green-concrete"
+    },
+    {
+      "filename": "green_concrete_powder.png",
+      "slug": "green-concrete-powder"
+    },
+    {
+      "filename": "green_dye.png",
+      "slug": "green-dye"
+    },
+    {
+      "filename": "green_glazed_terracotta.png",
+      "slug": "green-glazed-terracotta"
+    },
+    {
+      "filename": "green_stained_glass.png",
+      "slug": "green-stained-glass"
+    },
+    {
+      "filename": "green_stained_glass_pane.png",
+      "slug": "green-stained-glass-pane"
+    },
+    {
+      "filename": "green_terracotta.png",
+      "slug": "green-terracotta"
+    },
+    {
+      "filename": "green_wool.png",
+      "slug": "green-wool"
+    },
+    {
+      "filename": "guster_banner_pattern.png",
+      "slug": "guster-banner-pattern"
+    },
+    {
+      "filename": "guster_pottery_sherd.png",
+      "slug": "guster-pottery-sherd"
+    },
+    {
+      "filename": "heart_pottery_sherd.png",
+      "slug": "heart-pottery-sherd"
+    },
+    {
+      "filename": "heartbreak_pottery_sherd.png",
+      "slug": "heartbreak-pottery-sherd"
+    },
+    {
+      "filename": "howl_pottery_sherd.png",
+      "slug": "howl-pottery-sherd"
+    },
+    {
+      "filename": "jack_o_lantern.png",
+      "slug": "jack-o-lantern"
+    },
+    {
+      "filename": "jungle_boat.png",
+      "slug": "jungle-boat"
+    },
+    {
+      "filename": "jungle_chest_boat.png",
+      "slug": "jungle-chest-boat"
+    },
+    {
+      "filename": "jungle_door.png",
+      "slug": "jungle-door"
+    },
+    {
+      "filename": "jungle_fence.png",
+      "slug": "jungle-fence"
+    },
+    {
+      "filename": "jungle_fence_gate.png",
+      "slug": "jungle-fence-gate"
+    },
+    {
+      "filename": "jungle_hanging_sign.png",
+      "slug": "jungle-hanging-sign"
+    },
+    {
+      "filename": "jungle_leaves.png",
+      "slug": "jungle-leaves"
+    },
+    {
+      "filename": "jungle_log.png",
+      "slug": "jungle-log"
+    },
+    {
+      "filename": "jungle_planks.png",
+      "slug": "jungle-planks"
+    },
+    {
+      "filename": "jungle_sapling.png",
+      "slug": "jungle-sapling"
+    },
+    {
+      "filename": "jungle_sign.png",
+      "slug": "jungle-sign"
+    },
+    {
+      "filename": "jungle_slab.png",
+      "slug": "jungle-slab"
+    },
+    {
+      "filename": "jungle_stairs.png",
+      "slug": "jungle-stairs"
+    },
+    {
+      "filename": "jungle_trapdoor.png",
+      "slug": "jungle-trapdoor"
+    },
+    {
+      "filename": "knowledge_book.png",
+      "slug": "knowledge-book"
+    },
+    {
+      "filename": "lantern.png",
+      "slug": "lantern"
+    },
+    {
+      "filename": "light_blue_banner.png",
+      "slug": "light-blue-banner"
+    },
+    {
+      "filename": "light_blue_bed.png",
+      "slug": "light-blue-bed"
+    },
+    {
+      "filename": "light_blue_candle.png",
+      "slug": "light-blue-candle"
+    },
+    {
+      "filename": "light_blue_carpet.png",
+      "slug": "light-blue-carpet"
+    },
+    {
+      "filename": "light_blue_concrete.png",
+      "slug": "light-blue-concrete"
+    },
+    {
+      "filename": "light_blue_concrete_powder.png",
+      "slug": "light-blue-concrete-powder"
+    },
+    {
+      "filename": "light_blue_dye.png",
+      "slug": "light-blue-dye"
+    },
+    {
+      "filename": "light_blue_glazed_terracotta.png",
+      "slug": "light-blue-glazed-terracotta"
+    },
+    {
+      "filename": "light_blue_stained_glass.png",
+      "slug": "light-blue-stained-glass"
+    },
+    {
+      "filename": "light_blue_stained_glass_pane.png",
+      "slug": "light-blue-stained-glass-pane"
+    },
+    {
+      "filename": "light_blue_terracotta.png",
+      "slug": "light-blue-terracotta"
+    },
+    {
+      "filename": "light_blue_wool.png",
+      "slug": "light-blue-wool"
+    },
+    {
+      "filename": "light_gray_banner.png",
+      "slug": "light-gray-banner"
+    },
+    {
+      "filename": "light_gray_bed.png",
+      "slug": "light-gray-bed"
+    },
+    {
+      "filename": "light_gray_candle.png",
+      "slug": "light-gray-candle"
+    },
+    {
+      "filename": "light_gray_carpet.png",
+      "slug": "light-gray-carpet"
+    },
+    {
+      "filename": "light_gray_concrete.png",
+      "slug": "light-gray-concrete"
+    },
+    {
+      "filename": "light_gray_concrete_powder.png",
+      "slug": "light-gray-concrete-powder"
+    },
+    {
+      "filename": "light_gray_dye.png",
+      "slug": "light-gray-dye"
+    },
+    {
+      "filename": "light_gray_glazed_terracotta.png",
+      "slug": "light-gray-glazed-terracotta"
+    },
+    {
+      "filename": "light_gray_stained_glass.png",
+      "slug": "light-gray-stained-glass"
+    },
+    {
+      "filename": "light_gray_stained_glass_pane.png",
+      "slug": "light-gray-stained-glass-pane"
+    },
+    {
+      "filename": "light_gray_terracotta.png",
+      "slug": "light-gray-terracotta"
+    },
+    {
+      "filename": "light_gray_wool.png",
+      "slug": "light-gray-wool"
+    },
+    {
+      "filename": "lime_banner.png",
+      "slug": "lime-banner"
+    },
+    {
+      "filename": "lime_bed.png",
+      "slug": "lime-bed"
+    },
+    {
+      "filename": "lime_candle.png",
+      "slug": "lime-candle"
+    },
+    {
+      "filename": "lime_carpet.png",
+      "slug": "lime-carpet"
+    },
+    {
+      "filename": "lime_concrete.png",
+      "slug": "lime-concrete"
+    },
+    {
+      "filename": "lime_concrete_powder.png",
+      "slug": "lime-concrete-powder"
+    },
+    {
+      "filename": "lime_dye.png",
+      "slug": "lime-dye"
+    },
+    {
+      "filename": "lime_glazed_terracotta.png",
+      "slug": "lime-glazed-terracotta"
+    },
+    {
+      "filename": "lime_stained_glass.png",
+      "slug": "lime-stained-glass"
+    },
+    {
+      "filename": "lime_stained_glass_pane.png",
+      "slug": "lime-stained-glass-pane"
+    },
+    {
+      "filename": "lime_terracotta.png",
+      "slug": "lime-terracotta"
+    },
+    {
+      "filename": "lime_wool.png",
+      "slug": "lime-wool"
+    },
+    {
+      "filename": "lingering_potion.png",
+      "slug": "lingering-potion"
+    },
+    {
+      "filename": "magenta_banner.png",
+      "slug": "magenta-banner"
+    },
+    {
+      "filename": "magenta_bed.png",
+      "slug": "magenta-bed"
+    },
+    {
+      "filename": "magenta_candle.png",
+      "slug": "magenta-candle"
+    },
+    {
+      "filename": "magenta_carpet.png",
+      "slug": "magenta-carpet"
+    },
+    {
+      "filename": "magenta_concrete.png",
+      "slug": "magenta-concrete"
+    },
+    {
+      "filename": "magenta_concrete_powder.png",
+      "slug": "magenta-concrete-powder"
+    },
+    {
+      "filename": "magenta_dye.png",
+      "slug": "magenta-dye"
+    },
+    {
+      "filename": "magenta_glazed_terracotta.png",
+      "slug": "magenta-glazed-terracotta"
+    },
+    {
+      "filename": "magenta_stained_glass.png",
+      "slug": "magenta-stained-glass"
+    },
+    {
+      "filename": "magenta_stained_glass_pane.png",
+      "slug": "magenta-stained-glass-pane"
+    },
+    {
+      "filename": "magenta_terracotta.png",
+      "slug": "magenta-terracotta"
+    },
+    {
+      "filename": "magenta_wool.png",
+      "slug": "magenta-wool"
+    },
+    {
+      "filename": "mangrove_boat.png",
+      "slug": "mangrove-boat"
+    },
+    {
+      "filename": "mangrove_chest_boat.png",
+      "slug": "mangrove-chest-boat"
+    },
+    {
+      "filename": "mangrove_door.png",
+      "slug": "mangrove-door"
+    },
+    {
+      "filename": "mangrove_fence.png",
+      "slug": "mangrove-fence"
+    },
+    {
+      "filename": "mangrove_fence_gate.png",
+      "slug": "mangrove-fence-gate"
+    },
+    {
+      "filename": "mangrove_hanging_sign.png",
+      "slug": "mangrove-hanging-sign"
+    },
+    {
+      "filename": "mangrove_leaves.png",
+      "slug": "mangrove-leaves"
+    },
+    {
+      "filename": "mangrove_log.png",
+      "slug": "mangrove-log"
+    },
+    {
+      "filename": "mangrove_planks.png",
+      "slug": "mangrove-planks"
+    },
+    {
+      "filename": "mangrove_sign.png",
+      "slug": "mangrove-sign"
+    },
+    {
+      "filename": "mangrove_slab.png",
+      "slug": "mangrove-slab"
+    },
+    {
+      "filename": "mangrove_stairs.png",
+      "slug": "mangrove-stairs"
+    },
+    {
+      "filename": "mangrove_trapdoor.png",
+      "slug": "mangrove-trapdoor"
+    },
+    {
+      "filename": "map.png",
+      "slug": "map"
+    },
+    {
+      "filename": "miner_pottery_sherd.png",
+      "slug": "miner-pottery-sherd"
+    },
+    {
+      "filename": "mojang_banner_pattern.png",
+      "slug": "mojang-banner-pattern"
+    },
+    {
+      "filename": "moss_carpet.png",
+      "slug": "moss-carpet"
+    },
+    {
+      "filename": "mossy_cobblestone_slab.png",
+      "slug": "mossy-cobblestone-slab"
+    },
+    {
+      "filename": "mossy_cobblestone_stairs.png",
+      "slug": "mossy-cobblestone-stairs"
+    },
+    {
+      "filename": "mossy_cobblestone_wall.png",
+      "slug": "mossy-cobblestone-wall"
+    },
+    {
+      "filename": "mourner_pottery_sherd.png",
+      "slug": "mourner-pottery-sherd"
+    },
+    {
+      "filename": "music_disc_11.png",
+      "slug": "music-disc-11"
+    },
+    {
+      "filename": "music_disc_13.png",
+      "slug": "music-disc-13"
+    },
+    {
+      "filename": "music_disc_5.png",
+      "slug": "music-disc-5"
+    },
+    {
+      "filename": "music_disc_blocks.png",
+      "slug": "music-disc-blocks"
+    },
+    {
+      "filename": "music_disc_cat.png",
+      "slug": "music-disc-cat"
+    },
+    {
+      "filename": "music_disc_chirp.png",
+      "slug": "music-disc-chirp"
+    },
+    {
+      "filename": "music_disc_creator.png",
+      "slug": "music-disc-creator"
+    },
+    {
+      "filename": "music_disc_creator_music_box.png",
+      "slug": "music-disc-creator-music-box"
+    },
+    {
+      "filename": "music_disc_far.png",
+      "slug": "music-disc-far"
+    },
+    {
+      "filename": "music_disc_mall.png",
+      "slug": "music-disc-mall"
+    },
+    {
+      "filename": "music_disc_mellohi.png",
+      "slug": "music-disc-mellohi"
+    },
+    {
+      "filename": "music_disc_otherside.png",
+      "slug": "music-disc-otherside"
+    },
+    {
+      "filename": "music_disc_pigstep.png",
+      "slug": "music-disc-pigstep"
+    },
+    {
+      "filename": "music_disc_precipice.png",
+      "slug": "music-disc-precipice"
+    },
+    {
+      "filename": "music_disc_relic.png",
+      "slug": "music-disc-relic"
+    },
+    {
+      "filename": "music_disc_stal.png",
+      "slug": "music-disc-stal"
+    },
+    {
+      "filename": "music_disc_strad.png",
+      "slug": "music-disc-strad"
+    },
+    {
+      "filename": "music_disc_tears.png",
+      "slug": "music-disc-tears"
+    },
+    {
+      "filename": "music_disc_wait.png",
+      "slug": "music-disc-wait"
+    },
+    {
+      "filename": "music_disc_ward.png",
+      "slug": "music-disc-ward"
+    },
+    {
+      "filename": "oak_boat.png",
+      "slug": "oak-boat"
+    },
+    {
+      "filename": "oak_chest_boat.png",
+      "slug": "oak-chest-boat"
+    },
+    {
+      "filename": "oak_door.png",
+      "slug": "oak-door"
+    },
+    {
+      "filename": "oak_fence.png",
+      "slug": "oak-fence"
+    },
+    {
+      "filename": "oak_fence_gate.png",
+      "slug": "oak-fence-gate"
+    },
+    {
+      "filename": "oak_hanging_sign.png",
+      "slug": "oak-hanging-sign"
+    },
+    {
+      "filename": "oak_leaves.png",
+      "slug": "oak-leaves"
+    },
+    {
+      "filename": "oak_log.png",
+      "slug": "oak-log"
+    },
+    {
+      "filename": "oak_planks.png",
+      "slug": "oak-planks"
+    },
+    {
+      "filename": "oak_sapling.png",
+      "slug": "oak-sapling"
+    },
+    {
+      "filename": "oak_sign.png",
+      "slug": "oak-sign"
+    },
+    {
+      "filename": "oak_slab.png",
+      "slug": "oak-slab"
+    },
+    {
+      "filename": "oak_stairs.png",
+      "slug": "oak-stairs"
+    },
+    {
+      "filename": "oak_trapdoor.png",
+      "slug": "oak-trapdoor"
+    },
+    {
+      "filename": "orange_banner.png",
+      "slug": "orange-banner"
+    },
+    {
+      "filename": "orange_bed.png",
+      "slug": "orange-bed"
+    },
+    {
+      "filename": "orange_candle.png",
+      "slug": "orange-candle"
+    },
+    {
+      "filename": "orange_carpet.png",
+      "slug": "orange-carpet"
+    },
+    {
+      "filename": "orange_concrete.png",
+      "slug": "orange-concrete"
+    },
+    {
+      "filename": "orange_concrete_powder.png",
+      "slug": "orange-concrete-powder"
+    },
+    {
+      "filename": "orange_dye.png",
+      "slug": "orange-dye"
+    },
+    {
+      "filename": "orange_glazed_terracotta.png",
+      "slug": "orange-glazed-terracotta"
+    },
+    {
+      "filename": "orange_stained_glass.png",
+      "slug": "orange-stained-glass"
+    },
+    {
+      "filename": "orange_stained_glass_pane.png",
+      "slug": "orange-stained-glass-pane"
+    },
+    {
+      "filename": "orange_terracotta.png",
+      "slug": "orange-terracotta"
+    },
+    {
+      "filename": "orange_wool.png",
+      "slug": "orange-wool"
+    },
+    {
+      "filename": "painting.png",
+      "slug": "painting"
+    },
+    {
+      "filename": "pale_moss_carpet.png",
+      "slug": "pale-moss-carpet"
+    },
+    {
+      "filename": "pale_oak_boat.png",
+      "slug": "pale-oak-boat"
+    },
+    {
+      "filename": "pale_oak_chest_boat.png",
+      "slug": "pale-oak-chest-boat"
+    },
+    {
+      "filename": "pale_oak_door.png",
+      "slug": "pale-oak-door"
+    },
+    {
+      "filename": "pale_oak_fence.png",
+      "slug": "pale-oak-fence"
+    },
+    {
+      "filename": "pale_oak_fence_gate.png",
+      "slug": "pale-oak-fence-gate"
+    },
+    {
+      "filename": "pale_oak_hanging_sign.png",
+      "slug": "pale-oak-hanging-sign"
+    },
+    {
+      "filename": "pale_oak_leaves.png",
+      "slug": "pale-oak-leaves"
+    },
+    {
+      "filename": "pale_oak_log.png",
+      "slug": "pale-oak-log"
+    },
+    {
+      "filename": "pale_oak_planks.png",
+      "slug": "pale-oak-planks"
+    },
+    {
+      "filename": "pale_oak_sapling.png",
+      "slug": "pale-oak-sapling"
+    },
+    {
+      "filename": "pale_oak_sign.png",
+      "slug": "pale-oak-sign"
+    },
+    {
+      "filename": "pale_oak_slab.png",
+      "slug": "pale-oak-slab"
+    },
+    {
+      "filename": "pale_oak_stairs.png",
+      "slug": "pale-oak-stairs"
+    },
+    {
+      "filename": "pale_oak_trapdoor.png",
+      "slug": "pale-oak-trapdoor"
+    },
+    {
+      "filename": "petrified_oak_slab.png",
+      "slug": "petrified-oak-slab"
+    },
+    {
+      "filename": "piglin_banner_pattern.png",
+      "slug": "piglin-banner-pattern"
+    },
+    {
+      "filename": "piglin_head.png",
+      "slug": "piglin-head"
+    },
+    {
+      "filename": "pink_banner.png",
+      "slug": "pink-banner"
+    },
+    {
+      "filename": "pink_bed.png",
+      "slug": "pink-bed"
+    },
+    {
+      "filename": "pink_candle.png",
+      "slug": "pink-candle"
+    },
+    {
+      "filename": "pink_carpet.png",
+      "slug": "pink-carpet"
+    },
+    {
+      "filename": "pink_concrete.png",
+      "slug": "pink-concrete"
+    },
+    {
+      "filename": "pink_concrete_powder.png",
+      "slug": "pink-concrete-powder"
+    },
+    {
+      "filename": "pink_dye.png",
+      "slug": "pink-dye"
+    },
+    {
+      "filename": "pink_glazed_terracotta.png",
+      "slug": "pink-glazed-terracotta"
+    },
+    {
+      "filename": "pink_stained_glass.png",
+      "slug": "pink-stained-glass"
+    },
+    {
+      "filename": "pink_stained_glass_pane.png",
+      "slug": "pink-stained-glass-pane"
+    },
+    {
+      "filename": "pink_terracotta.png",
+      "slug": "pink-terracotta"
+    },
+    {
+      "filename": "pink_wool.png",
+      "slug": "pink-wool"
+    },
+    {
+      "filename": "player_head.png",
+      "slug": "player-head"
+    },
+    {
+      "filename": "plenty_pottery_sherd.png",
+      "slug": "plenty-pottery-sherd"
+    },
+    {
+      "filename": "polished_andesite_slab.png",
+      "slug": "polished-andesite-slab"
+    },
+    {
+      "filename": "polished_andesite_stairs.png",
+      "slug": "polished-andesite-stairs"
+    },
+    {
+      "filename": "polished_blackstone_slab.png",
+      "slug": "polished-blackstone-slab"
+    },
+    {
+      "filename": "polished_blackstone_stairs.png",
+      "slug": "polished-blackstone-stairs"
+    },
+    {
+      "filename": "polished_blackstone_wall.png",
+      "slug": "polished-blackstone-wall"
+    },
+    {
+      "filename": "polished_deepslate_slab.png",
+      "slug": "polished-deepslate-slab"
+    },
+    {
+      "filename": "polished_deepslate_stairs.png",
+      "slug": "polished-deepslate-stairs"
+    },
+    {
+      "filename": "polished_deepslate_wall.png",
+      "slug": "polished-deepslate-wall"
+    },
+    {
+      "filename": "polished_diorite_slab.png",
+      "slug": "polished-diorite-slab"
+    },
+    {
+      "filename": "polished_diorite_stairs.png",
+      "slug": "polished-diorite-stairs"
+    },
+    {
+      "filename": "polished_granite_slab.png",
+      "slug": "polished-granite-slab"
+    },
+    {
+      "filename": "polished_granite_stairs.png",
+      "slug": "polished-granite-stairs"
+    },
+    {
+      "filename": "polished_tuff_slab.png",
+      "slug": "polished-tuff-slab"
+    },
+    {
+      "filename": "polished_tuff_stairs.png",
+      "slug": "polished-tuff-stairs"
+    },
+    {
+      "filename": "polished_tuff_wall.png",
+      "slug": "polished-tuff-wall"
+    },
+    {
+      "filename": "potion.png",
+      "slug": "potion"
+    },
+    {
+      "filename": "prize_pottery_sherd.png",
+      "slug": "prize-pottery-sherd"
+    },
+    {
+      "filename": "purple_banner.png",
+      "slug": "purple-banner"
+    },
+    {
+      "filename": "purple_bed.png",
+      "slug": "purple-bed"
+    },
+    {
+      "filename": "purple_candle.png",
+      "slug": "purple-candle"
+    },
+    {
+      "filename": "purple_carpet.png",
+      "slug": "purple-carpet"
+    },
+    {
+      "filename": "purple_concrete.png",
+      "slug": "purple-concrete"
+    },
+    {
+      "filename": "purple_concrete_powder.png",
+      "slug": "purple-concrete-powder"
+    },
+    {
+      "filename": "purple_dye.png",
+      "slug": "purple-dye"
+    },
+    {
+      "filename": "purple_glazed_terracotta.png",
+      "slug": "purple-glazed-terracotta"
+    },
+    {
+      "filename": "purple_stained_glass.png",
+      "slug": "purple-stained-glass"
+    },
+    {
+      "filename": "purple_stained_glass_pane.png",
+      "slug": "purple-stained-glass-pane"
+    },
+    {
+      "filename": "purple_terracotta.png",
+      "slug": "purple-terracotta"
+    },
+    {
+      "filename": "purple_wool.png",
+      "slug": "purple-wool"
+    },
+    {
+      "filename": "purpur_slab.png",
+      "slug": "purpur-slab"
+    },
+    {
+      "filename": "purpur_stairs.png",
+      "slug": "purpur-stairs"
+    },
+    {
+      "filename": "red_banner.png",
+      "slug": "red-banner"
+    },
+    {
+      "filename": "red_bed.png",
+      "slug": "red-bed"
+    },
+    {
+      "filename": "red_candle.png",
+      "slug": "red-candle"
+    },
+    {
+      "filename": "red_carpet.png",
+      "slug": "red-carpet"
+    },
+    {
+      "filename": "red_concrete.png",
+      "slug": "red-concrete"
+    },
+    {
+      "filename": "red_concrete_powder.png",
+      "slug": "red-concrete-powder"
+    },
+    {
+      "filename": "red_dye.png",
+      "slug": "red-dye"
+    },
+    {
+      "filename": "red_glazed_terracotta.png",
+      "slug": "red-glazed-terracotta"
+    },
+    {
+      "filename": "red_sandstone_slab.png",
+      "slug": "red-sandstone-slab"
+    },
+    {
+      "filename": "red_sandstone_stairs.png",
+      "slug": "red-sandstone-stairs"
+    },
+    {
+      "filename": "red_sandstone_wall.png",
+      "slug": "red-sandstone-wall"
+    },
+    {
+      "filename": "red_stained_glass.png",
+      "slug": "red-stained-glass"
+    },
+    {
+      "filename": "red_stained_glass_pane.png",
+      "slug": "red-stained-glass-pane"
+    },
+    {
+      "filename": "red_terracotta.png",
+      "slug": "red-terracotta"
+    },
+    {
+      "filename": "red_wool.png",
+      "slug": "red-wool"
+    },
+    {
+      "filename": "sandstone_slab.png",
+      "slug": "sandstone-slab"
+    },
+    {
+      "filename": "sandstone_stairs.png",
+      "slug": "sandstone-stairs"
+    },
+    {
+      "filename": "sandstone_wall.png",
+      "slug": "sandstone-wall"
+    },
+    {
+      "filename": "scrape_pottery_sherd.png",
+      "slug": "scrape-pottery-sherd"
+    },
+    {
+      "filename": "sea_lantern.png",
+      "slug": "sea-lantern"
+    },
+    {
+      "filename": "sheaf_pottery_sherd.png",
+      "slug": "sheaf-pottery-sherd"
+    },
+    {
+      "filename": "shelter_pottery_sherd.png",
+      "slug": "shelter-pottery-sherd"
+    },
+    {
+      "filename": "sign.png",
+      "slug": "sign"
+    },
+    {
+      "filename": "skeleton_skull.png",
+      "slug": "skeleton-skull"
+    },
+    {
+      "filename": "skull_banner_pattern.png",
+      "slug": "skull-banner-pattern"
+    },
+    {
+      "filename": "skull_pottery_sherd.png",
+      "slug": "skull-pottery-sherd"
+    },
+    {
+      "filename": "smooth_red_sandstone_slab.png",
+      "slug": "smooth-red-sandstone-slab"
+    },
+    {
+      "filename": "smooth_red_sandstone_stairs.png",
+      "slug": "smooth-red-sandstone-stairs"
+    },
+    {
+      "filename": "smooth_sandstone_slab.png",
+      "slug": "smooth-sandstone-slab"
+    },
+    {
+      "filename": "smooth_sandstone_stairs.png",
+      "slug": "smooth-sandstone-stairs"
+    },
+    {
+      "filename": "smooth_stone_slab.png",
+      "slug": "smooth-stone-slab"
+    },
+    {
+      "filename": "snort_pottery_sherd.png",
+      "slug": "snort-pottery-sherd"
+    },
+    {
+      "filename": "soul_lantern.png",
+      "slug": "soul-lantern"
+    },
+    {
+      "filename": "soul_torch.png",
+      "slug": "soul-torch"
+    },
+    {
+      "filename": "splash_potion.png",
+      "slug": "splash-potion"
+    },
+    {
+      "filename": "spruce_boat.png",
+      "slug": "spruce-boat"
+    },
+    {
+      "filename": "spruce_chest_boat.png",
+      "slug": "spruce-chest-boat"
+    },
+    {
+      "filename": "spruce_door.png",
+      "slug": "spruce-door"
+    },
+    {
+      "filename": "spruce_fence.png",
+      "slug": "spruce-fence"
+    },
+    {
+      "filename": "spruce_fence_gate.png",
+      "slug": "spruce-fence-gate"
+    },
+    {
+      "filename": "spruce_hanging_sign.png",
+      "slug": "spruce-hanging-sign"
+    },
+    {
+      "filename": "spruce_leaves.png",
+      "slug": "spruce-leaves"
+    },
+    {
+      "filename": "spruce_log.png",
+      "slug": "spruce-log"
+    },
+    {
+      "filename": "spruce_planks.png",
+      "slug": "spruce-planks"
+    },
+    {
+      "filename": "spruce_sapling.png",
+      "slug": "spruce-sapling"
+    },
+    {
+      "filename": "spruce_sign.png",
+      "slug": "spruce-sign"
+    },
+    {
+      "filename": "spruce_slab.png",
+      "slug": "spruce-slab"
+    },
+    {
+      "filename": "spruce_stairs.png",
+      "slug": "spruce-stairs"
+    },
+    {
+      "filename": "spruce_trapdoor.png",
+      "slug": "spruce-trapdoor"
+    },
+    {
+      "filename": "spyglass.png",
+      "slug": "spyglass"
+    },
+    {
+      "filename": "stone_slab.png",
+      "slug": "stone-slab"
+    },
+    {
+      "filename": "stone_stairs.png",
+      "slug": "stone-stairs"
+    },
+    {
+      "filename": "stripped_acacia_log.png",
+      "slug": "stripped-acacia-log"
+    },
+    {
+      "filename": "stripped_birch_log.png",
+      "slug": "stripped-birch-log"
+    },
+    {
+      "filename": "stripped_cherry_log.png",
+      "slug": "stripped-cherry-log"
+    },
+    {
+      "filename": "stripped_dark_oak_log.png",
+      "slug": "stripped-dark-oak-log"
+    },
+    {
+      "filename": "stripped_jungle_log.png",
+      "slug": "stripped-jungle-log"
+    },
+    {
+      "filename": "stripped_mangrove_log.png",
+      "slug": "stripped-mangrove-log"
+    },
+    {
+      "filename": "stripped_oak_log.png",
+      "slug": "stripped-oak-log"
+    },
+    {
+      "filename": "stripped_pale_oak_log.png",
+      "slug": "stripped-pale-oak-log"
+    },
+    {
+      "filename": "stripped_spruce_log.png",
+      "slug": "stripped-spruce-log"
+    },
+    {
+      "filename": "sunflower.png",
+      "slug": "sunflower"
+    },
+    {
+      "filename": "terracotta.png",
+      "slug": "terracotta"
+    },
+    {
+      "filename": "tinted_glass.png",
+      "slug": "tinted-glass"
+    },
+    {
+      "filename": "torch.png",
+      "slug": "torch"
+    },
+    {
+      "filename": "torchflower.png",
+      "slug": "torchflower"
+    },
+    {
+      "filename": "torchflower_seeds.png",
+      "slug": "torchflower-seeds"
+    },
+    {
+      "filename": "tuff_slab.png",
+      "slug": "tuff-slab"
+    },
+    {
+      "filename": "tuff_stairs.png",
+      "slug": "tuff-stairs"
+    },
+    {
+      "filename": "tuff_wall.png",
+      "slug": "tuff-wall"
+    },
+    {
+      "filename": "warped_door.png",
+      "slug": "warped-door"
+    },
+    {
+      "filename": "warped_fence.png",
+      "slug": "warped-fence"
+    },
+    {
+      "filename": "warped_fence_gate.png",
+      "slug": "warped-fence-gate"
+    },
+    {
+      "filename": "warped_hanging_sign.png",
+      "slug": "warped-hanging-sign"
+    },
+    {
+      "filename": "warped_planks.png",
+      "slug": "warped-planks"
+    },
+    {
+      "filename": "warped_sign.png",
+      "slug": "warped-sign"
+    },
+    {
+      "filename": "warped_slab.png",
+      "slug": "warped-slab"
+    },
+    {
+      "filename": "warped_stairs.png",
+      "slug": "warped-stairs"
+    },
+    {
+      "filename": "warped_trapdoor.png",
+      "slug": "warped-trapdoor"
+    },
+    {
+      "filename": "white_banner.png",
+      "slug": "white-banner"
+    },
+    {
+      "filename": "white_bed.png",
+      "slug": "white-bed"
+    },
+    {
+      "filename": "white_candle.png",
+      "slug": "white-candle"
+    },
+    {
+      "filename": "white_carpet.png",
+      "slug": "white-carpet"
+    },
+    {
+      "filename": "white_concrete.png",
+      "slug": "white-concrete"
+    },
+    {
+      "filename": "white_concrete_powder.png",
+      "slug": "white-concrete-powder"
+    },
+    {
+      "filename": "white_dye.png",
+      "slug": "white-dye"
+    },
+    {
+      "filename": "white_glazed_terracotta.png",
+      "slug": "white-glazed-terracotta"
+    },
+    {
+      "filename": "white_stained_glass.png",
+      "slug": "white-stained-glass"
+    },
+    {
+      "filename": "white_stained_glass_pane.png",
+      "slug": "white-stained-glass-pane"
+    },
+    {
+      "filename": "white_terracotta.png",
+      "slug": "white-terracotta"
+    },
+    {
+      "filename": "white_wool.png",
+      "slug": "white-wool"
+    },
+    {
+      "filename": "wildflowers.png",
+      "slug": "wildflowers"
+    },
+    {
+      "filename": "wither_skeleton_skull.png",
+      "slug": "wither-skeleton-skull"
+    },
+    {
+      "filename": "writable_book.png",
+      "slug": "writable-book"
+    },
+    {
+      "filename": "written_book.png",
+      "slug": "written-book"
+    },
+    {
+      "filename": "yellow_banner.png",
+      "slug": "yellow-banner"
+    },
+    {
+      "filename": "yellow_bed.png",
+      "slug": "yellow-bed"
+    },
+    {
+      "filename": "yellow_candle.png",
+      "slug": "yellow-candle"
+    },
+    {
+      "filename": "yellow_carpet.png",
+      "slug": "yellow-carpet"
+    },
+    {
+      "filename": "yellow_concrete.png",
+      "slug": "yellow-concrete"
+    },
+    {
+      "filename": "yellow_concrete_powder.png",
+      "slug": "yellow-concrete-powder"
+    },
+    {
+      "filename": "yellow_dye.png",
+      "slug": "yellow-dye"
+    },
+    {
+      "filename": "yellow_glazed_terracotta.png",
+      "slug": "yellow-glazed-terracotta"
+    },
+    {
+      "filename": "yellow_stained_glass.png",
+      "slug": "yellow-stained-glass"
+    },
+    {
+      "filename": "yellow_stained_glass_pane.png",
+      "slug": "yellow-stained-glass-pane"
+    },
+    {
+      "filename": "yellow_terracotta.png",
+      "slug": "yellow-terracotta"
+    },
+    {
+      "filename": "yellow_wool.png",
+      "slug": "yellow-wool"
+    },
+    {
+      "filename": "zombie_head.png",
+      "slug": "zombie-head"
+    }
+  ],
+  "redstone": [
+    {
+      "filename": "acacia_button.png",
+      "slug": "acacia-button"
+    },
+    {
+      "filename": "acacia_pressure_plate.png",
+      "slug": "acacia-pressure-plate"
+    },
+    {
+      "filename": "activator_rail.png",
+      "slug": "activator-rail"
+    },
+    {
+      "filename": "bamboo_button.png",
+      "slug": "bamboo-button"
+    },
+    {
+      "filename": "bamboo_pressure_plate.png",
+      "slug": "bamboo-pressure-plate"
+    },
+    {
+      "filename": "birch_button.png",
+      "slug": "birch-button"
+    },
+    {
+      "filename": "birch_pressure_plate.png",
+      "slug": "birch-pressure-plate"
+    },
+    {
+      "filename": "calibrated_sculk_sensor.png",
+      "slug": "calibrated-sculk-sensor"
+    },
+    {
+      "filename": "cherry_button.png",
+      "slug": "cherry-button"
+    },
+    {
+      "filename": "cherry_pressure_plate.png",
+      "slug": "cherry-pressure-plate"
+    },
+    {
+      "filename": "comparator.png",
+      "slug": "comparator"
+    },
+    {
+      "filename": "crimson_button.png",
+      "slug": "crimson-button"
+    },
+    {
+      "filename": "crimson_pressure_plate.png",
+      "slug": "crimson-pressure-plate"
+    },
+    {
+      "filename": "dark_oak_button.png",
+      "slug": "dark-oak-button"
+    },
+    {
+      "filename": "dark_oak_pressure_plate.png",
+      "slug": "dark-oak-pressure-plate"
+    },
+    {
+      "filename": "daylight_detector.png",
+      "slug": "daylight-detector"
+    },
+    {
+      "filename": "deepslate_redstone_ore.png",
+      "slug": "deepslate-redstone-ore"
+    },
+    {
+      "filename": "detector_rail.png",
+      "slug": "detector-rail"
+    },
+    {
+      "filename": "dispenser.png",
+      "slug": "dispenser"
+    },
+    {
+      "filename": "dropper.png",
+      "slug": "dropper"
+    },
+    {
+      "filename": "heavy_weighted_pressure_plate.png",
+      "slug": "heavy-weighted-pressure-plate"
+    },
+    {
+      "filename": "hopper.png",
+      "slug": "hopper"
+    },
+    {
+      "filename": "hopper_minecart.png",
+      "slug": "hopper-minecart"
+    },
+    {
+      "filename": "jungle_button.png",
+      "slug": "jungle-button"
+    },
+    {
+      "filename": "jungle_pressure_plate.png",
+      "slug": "jungle-pressure-plate"
+    },
+    {
+      "filename": "lever.png",
+      "slug": "lever"
+    },
+    {
+      "filename": "light_weighted_pressure_plate.png",
+      "slug": "light-weighted-pressure-plate"
+    },
+    {
+      "filename": "mangrove_button.png",
+      "slug": "mangrove-button"
+    },
+    {
+      "filename": "mangrove_pressure_plate.png",
+      "slug": "mangrove-pressure-plate"
+    },
+    {
+      "filename": "note_block.png",
+      "slug": "note-block"
+    },
+    {
+      "filename": "oak_button.png",
+      "slug": "oak-button"
+    },
+    {
+      "filename": "oak_pressure_plate.png",
+      "slug": "oak-pressure-plate"
+    },
+    {
+      "filename": "observer.png",
+      "slug": "observer"
+    },
+    {
+      "filename": "pale_oak_button.png",
+      "slug": "pale-oak-button"
+    },
+    {
+      "filename": "pale_oak_pressure_plate.png",
+      "slug": "pale-oak-pressure-plate"
+    },
+    {
+      "filename": "piston.png",
+      "slug": "piston"
+    },
+    {
+      "filename": "polished_blackstone_button.png",
+      "slug": "polished-blackstone-button"
+    },
+    {
+      "filename": "polished_blackstone_pressure_plate.png",
+      "slug": "polished-blackstone-pressure-plate"
+    },
+    {
+      "filename": "redstone.png",
+      "slug": "redstone"
+    },
+    {
+      "filename": "redstone_block.png",
+      "slug": "redstone-block"
+    },
+    {
+      "filename": "redstone_lamp.png",
+      "slug": "redstone-lamp"
+    },
+    {
+      "filename": "redstone_ore.png",
+      "slug": "redstone-ore"
+    },
+    {
+      "filename": "redstone_torch.png",
+      "slug": "redstone-torch"
+    },
+    {
+      "filename": "repeater.png",
+      "slug": "repeater"
+    },
+    {
+      "filename": "sculk_sensor.png",
+      "slug": "sculk-sensor"
+    },
+    {
+      "filename": "spruce_button.png",
+      "slug": "spruce-button"
+    },
+    {
+      "filename": "spruce_pressure_plate.png",
+      "slug": "spruce-pressure-plate"
+    },
+    {
+      "filename": "sticky_piston.png",
+      "slug": "sticky-piston"
+    },
+    {
+      "filename": "stone_button.png",
+      "slug": "stone-button"
+    },
+    {
+      "filename": "stone_pressure_plate.png",
+      "slug": "stone-pressure-plate"
+    },
+    {
+      "filename": "target.png",
+      "slug": "target"
+    },
+    {
+      "filename": "tripwire_hook.png",
+      "slug": "tripwire-hook"
+    },
+    {
+      "filename": "warped_button.png",
+      "slug": "warped-button"
+    },
+    {
+      "filename": "warped_pressure_plate.png",
+      "slug": "warped-pressure-plate"
+    }
+  ],
+  "misc": [
+    {
+      "filename": "acacia_wood.png",
+      "slug": "acacia-wood"
+    },
+    {
+      "filename": "air.png",
+      "slug": "air"
+    },
+    {
+      "filename": "allium.png",
+      "slug": "allium"
+    },
+    {
+      "filename": "anvil.png",
+      "slug": "anvil"
+    },
+    {
+      "filename": "armor_stand.png",
+      "slug": "armor-stand"
+    },
+    {
+      "filename": "arrow.png",
+      "slug": "arrow"
+    },
+    {
+      "filename": "axolotl_bucket.png",
+      "slug": "axolotl-bucket"
+    },
+    {
+      "filename": "azalea.png",
+      "slug": "azalea"
+    },
+    {
+      "filename": "azure_bluet.png",
+      "slug": "azure-bluet"
+    },
+    {
+      "filename": "barrel.png",
+      "slug": "barrel"
+    },
+    {
+      "filename": "barrier.png",
+      "slug": "barrier"
+    },
+    {
+      "filename": "beacon.png",
+      "slug": "beacon"
+    },
+    {
+      "filename": "bee_nest.png",
+      "slug": "bee-nest"
+    },
+    {
+      "filename": "bell.png",
+      "slug": "bell"
+    },
+    {
+      "filename": "big_dripleaf.png",
+      "slug": "big-dripleaf"
+    },
+    {
+      "filename": "birch_wood.png",
+      "slug": "birch-wood"
+    },
+    {
+      "filename": "black_bundle.png",
+      "slug": "black-bundle"
+    },
+    {
+      "filename": "black_harness.png",
+      "slug": "black-harness"
+    },
+    {
+      "filename": "black_shulker_box.png",
+      "slug": "black-shulker-box"
+    },
+    {
+      "filename": "blast_furnace.png",
+      "slug": "blast-furnace"
+    },
+    {
+      "filename": "blue_bundle.png",
+      "slug": "blue-bundle"
+    },
+    {
+      "filename": "blue_egg.png",
+      "slug": "blue-egg"
+    },
+    {
+      "filename": "blue_harness.png",
+      "slug": "blue-harness"
+    },
+    {
+      "filename": "blue_orchid.png",
+      "slug": "blue-orchid"
+    },
+    {
+      "filename": "blue_shulker_box.png",
+      "slug": "blue-shulker-box"
+    },
+    {
+      "filename": "bolt_armor_trim_smithing_template.png",
+      "slug": "bolt-armor-trim-smithing-template"
+    },
+    {
+      "filename": "bone.png",
+      "slug": "bone"
+    },
+    {
+      "filename": "bone_meal.png",
+      "slug": "bone-meal"
+    },
+    {
+      "filename": "bow.png",
+      "slug": "bow"
+    },
+    {
+      "filename": "bowl.png",
+      "slug": "bowl"
+    },
+    {
+      "filename": "brewing_stand.png",
+      "slug": "brewing-stand"
+    },
+    {
+      "filename": "brown_bundle.png",
+      "slug": "brown-bundle"
+    },
+    {
+      "filename": "brown_egg.png",
+      "slug": "brown-egg"
+    },
+    {
+      "filename": "brown_harness.png",
+      "slug": "brown-harness"
+    },
+    {
+      "filename": "brown_mushroom.png",
+      "slug": "brown-mushroom"
+    },
+    {
+      "filename": "brown_shulker_box.png",
+      "slug": "brown-shulker-box"
+    },
+    {
+      "filename": "brush.png",
+      "slug": "brush"
+    },
+    {
+      "filename": "bucket.png",
+      "slug": "bucket"
+    },
+    {
+      "filename": "bundle.png",
+      "slug": "bundle"
+    },
+    {
+      "filename": "bush.png",
+      "slug": "bush"
+    },
+    {
+      "filename": "cactus.png",
+      "slug": "cactus"
+    },
+    {
+      "filename": "cactus_green.png",
+      "slug": "cactus-green"
+    },
+    {
+      "filename": "campfire.png",
+      "slug": "campfire"
+    },
+    {
+      "filename": "cartography_table.png",
+      "slug": "cartography-table"
+    },
+    {
+      "filename": "carved_pumpkin.png",
+      "slug": "carved-pumpkin"
+    },
+    {
+      "filename": "cauldron.png",
+      "slug": "cauldron"
+    },
+    {
+      "filename": "chain.png",
+      "slug": "chain"
+    },
+    {
+      "filename": "chest.png",
+      "slug": "chest"
+    },
+    {
+      "filename": "chest_minecart.png",
+      "slug": "chest-minecart"
+    },
+    {
+      "filename": "chipped_anvil.png",
+      "slug": "chipped-anvil"
+    },
+    {
+      "filename": "clay.png",
+      "slug": "clay"
+    },
+    {
+      "filename": "clock.png",
+      "slug": "clock"
+    },
+    {
+      "filename": "closed_eyeblossom.png",
+      "slug": "closed-eyeblossom"
+    },
+    {
+      "filename": "coast_armor_trim_smithing_template.png",
+      "slug": "coast-armor-trim-smithing-template"
+    },
+    {
+      "filename": "cobweb.png",
+      "slug": "cobweb"
+    },
+    {
+      "filename": "cocoa_beans.png",
+      "slug": "cocoa-beans"
+    },
+    {
+      "filename": "cod.png",
+      "slug": "cod"
+    },
+    {
+      "filename": "cod_bucket.png",
+      "slug": "cod-bucket"
+    },
+    {
+      "filename": "compass.png",
+      "slug": "compass"
+    },
+    {
+      "filename": "composter.png",
+      "slug": "composter"
+    },
+    {
+      "filename": "conduit.png",
+      "slug": "conduit"
+    },
+    {
+      "filename": "crafter.png",
+      "slug": "crafter"
+    },
+    {
+      "filename": "crafting_table.png",
+      "slug": "crafting-table"
+    },
+    {
+      "filename": "creaking_heart.png",
+      "slug": "creaking-heart"
+    },
+    {
+      "filename": "cyan_bundle.png",
+      "slug": "cyan-bundle"
+    },
+    {
+      "filename": "cyan_harness.png",
+      "slug": "cyan-harness"
+    },
+    {
+      "filename": "cyan_shulker_box.png",
+      "slug": "cyan-shulker-box"
+    },
+    {
+      "filename": "damaged_anvil.png",
+      "slug": "damaged-anvil"
+    },
+    {
+      "filename": "dandelion.png",
+      "slug": "dandelion"
+    },
+    {
+      "filename": "dandelion_yellow.png",
+      "slug": "dandelion-yellow"
+    },
+    {
+      "filename": "dark_oak_wood.png",
+      "slug": "dark-oak-wood"
+    },
+    {
+      "filename": "dead_bush.png",
+      "slug": "dead-bush"
+    },
+    {
+      "filename": "debug_stick.png",
+      "slug": "debug-stick"
+    },
+    {
+      "filename": "disc_fragment_5.png",
+      "slug": "disc-fragment-5"
+    },
+    {
+      "filename": "dragon_breath.png",
+      "slug": "dragon-breath"
+    },
+    {
+      "filename": "dragon_egg.png",
+      "slug": "dragon-egg"
+    },
+    {
+      "filename": "dune_armor_trim_smithing_template.png",
+      "slug": "dune-armor-trim-smithing-template"
+    },
+    {
+      "filename": "egg.png",
+      "slug": "egg"
+    },
+    {
+      "filename": "elytra.png",
+      "slug": "elytra"
+    },
+    {
+      "filename": "enchanting_table.png",
+      "slug": "enchanting-table"
+    },
+    {
+      "filename": "end_crystal.png",
+      "slug": "end-crystal"
+    },
+    {
+      "filename": "end_portal_frame.png",
+      "slug": "end-portal-frame"
+    },
+    {
+      "filename": "experience_bottle.png",
+      "slug": "experience-bottle"
+    },
+    {
+      "filename": "eye_armor_trim_smithing_template.png",
+      "slug": "eye-armor-trim-smithing-template"
+    },
+    {
+      "filename": "farmland.png",
+      "slug": "farmland"
+    },
+    {
+      "filename": "feather.png",
+      "slug": "feather"
+    },
+    {
+      "filename": "fern.png",
+      "slug": "fern"
+    },
+    {
+      "filename": "fire_charge.png",
+      "slug": "fire-charge"
+    },
+    {
+      "filename": "firefly_bush.png",
+      "slug": "firefly-bush"
+    },
+    {
+      "filename": "fletching_table.png",
+      "slug": "fletching-table"
+    },
+    {
+      "filename": "flint.png",
+      "slug": "flint"
+    },
+    {
+      "filename": "flow_armor_trim_smithing_template.png",
+      "slug": "flow-armor-trim-smithing-template"
+    },
+    {
+      "filename": "frogspawn.png",
+      "slug": "frogspawn"
+    },
+    {
+      "filename": "furnace.png",
+      "slug": "furnace"
+    },
+    {
+      "filename": "furnace_minecart.png",
+      "slug": "furnace-minecart"
+    },
+    {
+      "filename": "goat_horn.png",
+      "slug": "goat-horn"
+    },
+    {
+      "filename": "grass.png",
+      "slug": "grass"
+    },
+    {
+      "filename": "grass_path.png",
+      "slug": "grass-path"
+    },
+    {
+      "filename": "gray_bundle.png",
+      "slug": "gray-bundle"
+    },
+    {
+      "filename": "gray_harness.png",
+      "slug": "gray-harness"
+    },
+    {
+      "filename": "gray_shulker_box.png",
+      "slug": "gray-shulker-box"
+    },
+    {
+      "filename": "green_bundle.png",
+      "slug": "green-bundle"
+    },
+    {
+      "filename": "green_harness.png",
+      "slug": "green-harness"
+    },
+    {
+      "filename": "green_shulker_box.png",
+      "slug": "green-shulker-box"
+    },
+    {
+      "filename": "gunpowder.png",
+      "slug": "gunpowder"
+    },
+    {
+      "filename": "host_armor_trim_smithing_template.png",
+      "slug": "host-armor-trim-smithing-template"
+    },
+    {
+      "filename": "ink_sac.png",
+      "slug": "ink-sac"
+    },
+    {
+      "filename": "item_frame.png",
+      "slug": "item-frame"
+    },
+    {
+      "filename": "jigsaw.png",
+      "slug": "jigsaw"
+    },
+    {
+      "filename": "jukebox.png",
+      "slug": "jukebox"
+    },
+    {
+      "filename": "jungle_wood.png",
+      "slug": "jungle-wood"
+    },
+    {
+      "filename": "ladder.png",
+      "slug": "ladder"
+    },
+    {
+      "filename": "large_fern.png",
+      "slug": "large-fern"
+    },
+    {
+      "filename": "lava_bucket.png",
+      "slug": "lava-bucket"
+    },
+    {
+      "filename": "lead.png",
+      "slug": "lead"
+    },
+    {
+      "filename": "leaf_litter.png",
+      "slug": "leaf-litter"
+    },
+    {
+      "filename": "leather.png",
+      "slug": "leather"
+    },
+    {
+      "filename": "leather_horse_armor.png",
+      "slug": "leather-horse-armor"
+    },
+    {
+      "filename": "lectern.png",
+      "slug": "lectern"
+    },
+    {
+      "filename": "light.png",
+      "slug": "light"
+    },
+    {
+      "filename": "light_blue_bundle.png",
+      "slug": "light-blue-bundle"
+    },
+    {
+      "filename": "light_blue_harness.png",
+      "slug": "light-blue-harness"
+    },
+    {
+      "filename": "light_blue_shulker_box.png",
+      "slug": "light-blue-shulker-box"
+    },
+    {
+      "filename": "light_gray_bundle.png",
+      "slug": "light-gray-bundle"
+    },
+    {
+      "filename": "light_gray_harness.png",
+      "slug": "light-gray-harness"
+    },
+    {
+      "filename": "light_gray_shulker_box.png",
+      "slug": "light-gray-shulker-box"
+    },
+    {
+      "filename": "lilac.png",
+      "slug": "lilac"
+    },
+    {
+      "filename": "lily_of_the_valley.png",
+      "slug": "lily-of-the-valley"
+    },
+    {
+      "filename": "lily_pad.png",
+      "slug": "lily-pad"
+    },
+    {
+      "filename": "lime_bundle.png",
+      "slug": "lime-bundle"
+    },
+    {
+      "filename": "lime_harness.png",
+      "slug": "lime-harness"
+    },
+    {
+      "filename": "lime_shulker_box.png",
+      "slug": "lime-shulker-box"
+    },
+    {
+      "filename": "loom.png",
+      "slug": "loom"
+    },
+    {
+      "filename": "mace.png",
+      "slug": "mace"
+    },
+    {
+      "filename": "magenta_bundle.png",
+      "slug": "magenta-bundle"
+    },
+    {
+      "filename": "magenta_harness.png",
+      "slug": "magenta-harness"
+    },
+    {
+      "filename": "magenta_shulker_box.png",
+      "slug": "magenta-shulker-box"
+    },
+    {
+      "filename": "magma_cream.png",
+      "slug": "magma-cream"
+    },
+    {
+      "filename": "milk_bucket.png",
+      "slug": "milk-bucket"
+    },
+    {
+      "filename": "minecart.png",
+      "slug": "minecart"
+    },
+    {
+      "filename": "name_tag.png",
+      "slug": "name-tag"
+    },
+    {
+      "filename": "nautilus_shell.png",
+      "slug": "nautilus-shell"
+    },
+    {
+      "filename": "nether_sprouts.png",
+      "slug": "nether-sprouts"
+    },
+    {
+      "filename": "nether_wart.png",
+      "slug": "nether-wart"
+    },
+    {
+      "filename": "oak_wood.png",
+      "slug": "oak-wood"
+    },
+    {
+      "filename": "ochre_froglight.png",
+      "slug": "ochre-froglight"
+    },
+    {
+      "filename": "ominous_bottle.png",
+      "slug": "ominous-bottle"
+    },
+    {
+      "filename": "ominous_trial_key.png",
+      "slug": "ominous-trial-key"
+    },
+    {
+      "filename": "open_eyeblossom.png",
+      "slug": "open-eyeblossom"
+    },
+    {
+      "filename": "orange_bundle.png",
+      "slug": "orange-bundle"
+    },
+    {
+      "filename": "orange_harness.png",
+      "slug": "orange-harness"
+    },
+    {
+      "filename": "orange_shulker_box.png",
+      "slug": "orange-shulker-box"
+    },
+    {
+      "filename": "orange_tulip.png",
+      "slug": "orange-tulip"
+    },
+    {
+      "filename": "oxeye_daisy.png",
+      "slug": "oxeye-daisy"
+    },
+    {
+      "filename": "paper.png",
+      "slug": "paper"
+    },
+    {
+      "filename": "peony.png",
+      "slug": "peony"
+    },
+    {
+      "filename": "phantom_membrane.png",
+      "slug": "phantom-membrane"
+    },
+    {
+      "filename": "pink_bundle.png",
+      "slug": "pink-bundle"
+    },
+    {
+      "filename": "pink_harness.png",
+      "slug": "pink-harness"
+    },
+    {
+      "filename": "pink_petals.png",
+      "slug": "pink-petals"
+    },
+    {
+      "filename": "pink_shulker_box.png",
+      "slug": "pink-shulker-box"
+    },
+    {
+      "filename": "pink_tulip.png",
+      "slug": "pink-tulip"
+    },
+    {
+      "filename": "pitcher_plant.png",
+      "slug": "pitcher-plant"
+    },
+    {
+      "filename": "pitcher_pod.png",
+      "slug": "pitcher-pod"
+    },
+    {
+      "filename": "poppy.png",
+      "slug": "poppy"
+    },
+    {
+      "filename": "powered_rail.png",
+      "slug": "powered-rail"
+    },
+    {
+      "filename": "pumpkin.png",
+      "slug": "pumpkin"
+    },
+    {
+      "filename": "pumpkin_seeds.png",
+      "slug": "pumpkin-seeds"
+    },
+    {
+      "filename": "purple_bundle.png",
+      "slug": "purple-bundle"
+    },
+    {
+      "filename": "purple_harness.png",
+      "slug": "purple-harness"
+    },
+    {
+      "filename": "purple_shulker_box.png",
+      "slug": "purple-shulker-box"
+    },
+    {
+      "filename": "purpur_pillar.png",
+      "slug": "purpur-pillar"
+    },
+    {
+      "filename": "rail.png",
+      "slug": "rail"
+    },
+    {
+      "filename": "raiser_armor_trim_smithing_template.png",
+      "slug": "raiser-armor-trim-smithing-template"
+    },
+    {
+      "filename": "recovery_compass.png",
+      "slug": "recovery-compass"
+    },
+    {
+      "filename": "red_bundle.png",
+      "slug": "red-bundle"
+    },
+    {
+      "filename": "red_harness.png",
+      "slug": "red-harness"
+    },
+    {
+      "filename": "red_mushroom.png",
+      "slug": "red-mushroom"
+    },
+    {
+      "filename": "red_shulker_box.png",
+      "slug": "red-shulker-box"
+    },
+    {
+      "filename": "red_tulip.png",
+      "slug": "red-tulip"
+    },
+    {
+      "filename": "resin_clump.png",
+      "slug": "resin-clump"
+    },
+    {
+      "filename": "rib_armor_trim_smithing_template.png",
+      "slug": "rib-armor-trim-smithing-template"
+    },
+    {
+      "filename": "rose_bush.png",
+      "slug": "rose-bush"
+    },
+    {
+      "filename": "rose_red.png",
+      "slug": "rose-red"
+    },
+    {
+      "filename": "rotten_flesh.png",
+      "slug": "rotten-flesh"
+    },
+    {
+      "filename": "saddle.png",
+      "slug": "saddle"
+    },
+    {
+      "filename": "scaffolding.png",
+      "slug": "scaffolding"
+    },
+    {
+      "filename": "sea_pickle.png",
+      "slug": "sea-pickle"
+    },
+    {
+      "filename": "seagrass.png",
+      "slug": "seagrass"
+    },
+    {
+      "filename": "sentry_armor_trim_smithing_template.png",
+      "slug": "sentry-armor-trim-smithing-template"
+    },
+    {
+      "filename": "shaper_armor_trim_smithing_template.png",
+      "slug": "shaper-armor-trim-smithing-template"
+    },
+    {
+      "filename": "shield.png",
+      "slug": "shield"
+    },
+    {
+      "filename": "short_dry_grass.png",
+      "slug": "short-dry-grass"
+    },
+    {
+      "filename": "short_grass.png",
+      "slug": "short-grass"
+    },
+    {
+      "filename": "shulker_box.png",
+      "slug": "shulker-box"
+    },
+    {
+      "filename": "shulker_shell.png",
+      "slug": "shulker-shell"
+    },
+    {
+      "filename": "silence_armor_trim_smithing_template.png",
+      "slug": "silence-armor-trim-smithing-template"
+    },
+    {
+      "filename": "small_dripleaf.png",
+      "slug": "small-dripleaf"
+    },
+    {
+      "filename": "smithing_table.png",
+      "slug": "smithing-table"
+    },
+    {
+      "filename": "smoker.png",
+      "slug": "smoker"
+    },
+    {
+      "filename": "sniffer_egg.png",
+      "slug": "sniffer-egg"
+    },
+    {
+      "filename": "snout_armor_trim_smithing_template.png",
+      "slug": "snout-armor-trim-smithing-template"
+    },
+    {
+      "filename": "spawner.png",
+      "slug": "spawner"
+    },
+    {
+      "filename": "spectral_arrow.png",
+      "slug": "spectral-arrow"
+    },
+    {
+      "filename": "spire_armor_trim_smithing_template.png",
+      "slug": "spire-armor-trim-smithing-template"
+    },
+    {
+      "filename": "spruce_wood.png",
+      "slug": "spruce-wood"
+    },
+    {
+      "filename": "stick.png",
+      "slug": "stick"
+    },
+    {
+      "filename": "string.png",
+      "slug": "string"
+    },
+    {
+      "filename": "stripped_acacia_wood.png",
+      "slug": "stripped-acacia-wood"
+    },
+    {
+      "filename": "stripped_birch_wood.png",
+      "slug": "stripped-birch-wood"
+    },
+    {
+      "filename": "stripped_dark_oak_wood.png",
+      "slug": "stripped-dark-oak-wood"
+    },
+    {
+      "filename": "stripped_jungle_wood.png",
+      "slug": "stripped-jungle-wood"
+    },
+    {
+      "filename": "stripped_oak_wood.png",
+      "slug": "stripped-oak-wood"
+    },
+    {
+      "filename": "stripped_spruce_wood.png",
+      "slug": "stripped-spruce-wood"
+    },
+    {
+      "filename": "structure_void.png",
+      "slug": "structure-void"
+    },
+    {
+      "filename": "sugar.png",
+      "slug": "sugar"
+    },
+    {
+      "filename": "sugar_cane.png",
+      "slug": "sugar-cane"
+    },
+    {
+      "filename": "tadpole_bucket.png",
+      "slug": "tadpole-bucket"
+    },
+    {
+      "filename": "tall_dry_grass.png",
+      "slug": "tall-dry-grass"
+    },
+    {
+      "filename": "tall_grass.png",
+      "slug": "tall-grass"
+    },
+    {
+      "filename": "tide_armor_trim_smithing_template.png",
+      "slug": "tide-armor-trim-smithing-template"
+    },
+    {
+      "filename": "tipped_arrow.png",
+      "slug": "tipped-arrow"
+    },
+    {
+      "filename": "tnt.png",
+      "slug": "tnt"
+    },
+    {
+      "filename": "tnt_minecart.png",
+      "slug": "tnt-minecart"
+    },
+    {
+      "filename": "totem_of_undying.png",
+      "slug": "totem-of-undying"
+    },
+    {
+      "filename": "trapped_chest.png",
+      "slug": "trapped-chest"
+    },
+    {
+      "filename": "trial_key.png",
+      "slug": "trial-key"
+    },
+    {
+      "filename": "trial_spawner.png",
+      "slug": "trial-spawner"
+    },
+    {
+      "filename": "trident.png",
+      "slug": "trident"
+    },
+    {
+      "filename": "turtle_egg.png",
+      "slug": "turtle-egg"
+    },
+    {
+      "filename": "u.png",
+      "slug": "u"
+    },
+    {
+      "filename": "vault.png",
+      "slug": "vault"
+    },
+    {
+      "filename": "verdant_froglight.png",
+      "slug": "verdant-froglight"
+    },
+    {
+      "filename": "vex_armor_trim_smithing_template.png",
+      "slug": "vex-armor-trim-smithing-template"
+    },
+    {
+      "filename": "ward_armor_trim_smithing_template.png",
+      "slug": "ward-armor-trim-smithing-template"
+    },
+    {
+      "filename": "water_bucket.png",
+      "slug": "water-bucket"
+    },
+    {
+      "filename": "wayfinder_armor_trim_smithing_template.png",
+      "slug": "wayfinder-armor-trim-smithing-template"
+    },
+    {
+      "filename": "wheat.png",
+      "slug": "wheat"
+    },
+    {
+      "filename": "wheat_seeds.png",
+      "slug": "wheat-seeds"
+    },
+    {
+      "filename": "white_bundle.png",
+      "slug": "white-bundle"
+    },
+    {
+      "filename": "white_harness.png",
+      "slug": "white-harness"
+    },
+    {
+      "filename": "white_shulker_box.png",
+      "slug": "white-shulker-box"
+    },
+    {
+      "filename": "white_tulip.png",
+      "slug": "white-tulip"
+    },
+    {
+      "filename": "wild_armor_trim_smithing_template.png",
+      "slug": "wild-armor-trim-smithing-template"
+    },
+    {
+      "filename": "wind_charge.png",
+      "slug": "wind-charge"
+    },
+    {
+      "filename": "wither_rose.png",
+      "slug": "wither-rose"
+    },
+    {
+      "filename": "wolf_armor.png",
+      "slug": "wolf-armor"
+    },
+    {
+      "filename": "x.png",
+      "slug": "x"
+    },
+    {
+      "filename": "yellow_bundle.png",
+      "slug": "yellow-bundle"
+    },
+    {
+      "filename": "yellow_harness.png",
+      "slug": "yellow-harness"
+    },
+    {
+      "filename": "yellow_shulker_box.png",
+      "slug": "yellow-shulker-box"
+    }
+  ],
+  "blocks": [
+    {
+      "filename": "ancient_debris.png",
+      "slug": "ancient-debris"
+    },
+    {
+      "filename": "andesite.png",
+      "slug": "andesite"
+    },
+    {
+      "filename": "bamboo.png",
+      "slug": "bamboo"
+    },
+    {
+      "filename": "bamboo_block.png",
+      "slug": "bamboo-block"
+    },
+    {
+      "filename": "bamboo_chest_raft.png",
+      "slug": "bamboo-chest-raft"
+    },
+    {
+      "filename": "bamboo_mosaic.png",
+      "slug": "bamboo-mosaic"
+    },
+    {
+      "filename": "bamboo_raft.png",
+      "slug": "bamboo-raft"
+    },
+    {
+      "filename": "basalt.png",
+      "slug": "basalt"
+    },
+    {
+      "filename": "beehive.png",
+      "slug": "beehive"
+    },
+    {
+      "filename": "blackstone.png",
+      "slug": "blackstone"
+    },
+    {
+      "filename": "blue_ice.png",
+      "slug": "blue-ice"
+    },
+    {
+      "filename": "bone_block.png",
+      "slug": "bone-block"
+    },
+    {
+      "filename": "brain_coral.png",
+      "slug": "brain-coral"
+    },
+    {
+      "filename": "brain_coral_block.png",
+      "slug": "brain-coral-block"
+    },
+    {
+      "filename": "brain_coral_fan.png",
+      "slug": "brain-coral-fan"
+    },
+    {
+      "filename": "brown_mushroom_block.png",
+      "slug": "brown-mushroom-block"
+    },
+    {
+      "filename": "bubble_coral.png",
+      "slug": "bubble-coral"
+    },
+    {
+      "filename": "bubble_coral_block.png",
+      "slug": "bubble-coral-block"
+    },
+    {
+      "filename": "bubble_coral_fan.png",
+      "slug": "bubble-coral-fan"
+    },
+    {
+      "filename": "calcite.png",
+      "slug": "calcite"
+    },
+    {
+      "filename": "chain_command_block.png",
+      "slug": "chain-command-block"
+    },
+    {
+      "filename": "cherry_wood.png",
+      "slug": "cherry-wood"
+    },
+    {
+      "filename": "chiseled_deepslate.png",
+      "slug": "chiseled-deepslate"
+    },
+    {
+      "filename": "chiseled_polished_blackstone.png",
+      "slug": "chiseled-polished-blackstone"
+    },
+    {
+      "filename": "chiseled_red_sandstone.png",
+      "slug": "chiseled-red-sandstone"
+    },
+    {
+      "filename": "chiseled_sandstone.png",
+      "slug": "chiseled-sandstone"
+    },
+    {
+      "filename": "chiseled_tuff.png",
+      "slug": "chiseled-tuff"
+    },
+    {
+      "filename": "coarse_dirt.png",
+      "slug": "coarse-dirt"
+    },
+    {
+      "filename": "cobbled_deepslate.png",
+      "slug": "cobbled-deepslate"
+    },
+    {
+      "filename": "cobblestone.png",
+      "slug": "cobblestone"
+    },
+    {
+      "filename": "command_block.png",
+      "slug": "command-block"
+    },
+    {
+      "filename": "command_block_minecart.png",
+      "slug": "command-block-minecart"
+    },
+    {
+      "filename": "cracked_deepslate_tiles.png",
+      "slug": "cracked-deepslate-tiles"
+    },
+    {
+      "filename": "crimson_fungus.png",
+      "slug": "crimson-fungus"
+    },
+    {
+      "filename": "crimson_hyphae.png",
+      "slug": "crimson-hyphae"
+    },
+    {
+      "filename": "crimson_nylium.png",
+      "slug": "crimson-nylium"
+    },
+    {
+      "filename": "crimson_roots.png",
+      "slug": "crimson-roots"
+    },
+    {
+      "filename": "crimson_stem.png",
+      "slug": "crimson-stem"
+    },
+    {
+      "filename": "crying_obsidian.png",
+      "slug": "crying-obsidian"
+    },
+    {
+      "filename": "cut_red_sandstone.png",
+      "slug": "cut-red-sandstone"
+    },
+    {
+      "filename": "cut_sandstone.png",
+      "slug": "cut-sandstone"
+    },
+    {
+      "filename": "dead_brain_coral.png",
+      "slug": "dead-brain-coral"
+    },
+    {
+      "filename": "dead_brain_coral_block.png",
+      "slug": "dead-brain-coral-block"
+    },
+    {
+      "filename": "dead_brain_coral_fan.png",
+      "slug": "dead-brain-coral-fan"
+    },
+    {
+      "filename": "dead_bubble_coral.png",
+      "slug": "dead-bubble-coral"
+    },
+    {
+      "filename": "dead_bubble_coral_block.png",
+      "slug": "dead-bubble-coral-block"
+    },
+    {
+      "filename": "dead_bubble_coral_fan.png",
+      "slug": "dead-bubble-coral-fan"
+    },
+    {
+      "filename": "dead_fire_coral.png",
+      "slug": "dead-fire-coral"
+    },
+    {
+      "filename": "dead_fire_coral_block.png",
+      "slug": "dead-fire-coral-block"
+    },
+    {
+      "filename": "dead_fire_coral_fan.png",
+      "slug": "dead-fire-coral-fan"
+    },
+    {
+      "filename": "dead_horn_coral.png",
+      "slug": "dead-horn-coral"
+    },
+    {
+      "filename": "dead_horn_coral_block.png",
+      "slug": "dead-horn-coral-block"
+    },
+    {
+      "filename": "dead_horn_coral_fan.png",
+      "slug": "dead-horn-coral-fan"
+    },
+    {
+      "filename": "dead_tube_coral.png",
+      "slug": "dead-tube-coral"
+    },
+    {
+      "filename": "dead_tube_coral_block.png",
+      "slug": "dead-tube-coral-block"
+    },
+    {
+      "filename": "dead_tube_coral_fan.png",
+      "slug": "dead-tube-coral-fan"
+    },
+    {
+      "filename": "deepslate.png",
+      "slug": "deepslate"
+    },
+    {
+      "filename": "deepslate_tiles.png",
+      "slug": "deepslate-tiles"
+    },
+    {
+      "filename": "diorite.png",
+      "slug": "diorite"
+    },
+    {
+      "filename": "dirt.png",
+      "slug": "dirt"
+    },
+    {
+      "filename": "dirt_path.png",
+      "slug": "dirt-path"
+    },
+    {
+      "filename": "dripstone_block.png",
+      "slug": "dripstone-block"
+    },
+    {
+      "filename": "end_stone.png",
+      "slug": "end-stone"
+    },
+    {
+      "filename": "fire_coral.png",
+      "slug": "fire-coral"
+    },
+    {
+      "filename": "fire_coral_block.png",
+      "slug": "fire-coral-block"
+    },
+    {
+      "filename": "fire_coral_fan.png",
+      "slug": "fire-coral-fan"
+    },
+    {
+      "filename": "gilded_blackstone.png",
+      "slug": "gilded-blackstone"
+    },
+    {
+      "filename": "glowstone.png",
+      "slug": "glowstone"
+    },
+    {
+      "filename": "granite.png",
+      "slug": "granite"
+    },
+    {
+      "filename": "grass_block.png",
+      "slug": "grass-block"
+    },
+    {
+      "filename": "gravel.png",
+      "slug": "gravel"
+    },
+    {
+      "filename": "grindstone.png",
+      "slug": "grindstone"
+    },
+    {
+      "filename": "hanging_roots.png",
+      "slug": "hanging-roots"
+    },
+    {
+      "filename": "hay_block.png",
+      "slug": "hay-block"
+    },
+    {
+      "filename": "heavy_core.png",
+      "slug": "heavy-core"
+    },
+    {
+      "filename": "horn_coral.png",
+      "slug": "horn-coral"
+    },
+    {
+      "filename": "horn_coral_block.png",
+      "slug": "horn-coral-block"
+    },
+    {
+      "filename": "horn_coral_fan.png",
+      "slug": "horn-coral-fan"
+    },
+    {
+      "filename": "ice.png",
+      "slug": "ice"
+    },
+    {
+      "filename": "infested_cobblestone.png",
+      "slug": "infested-cobblestone"
+    },
+    {
+      "filename": "infested_deepslate.png",
+      "slug": "infested-deepslate"
+    },
+    {
+      "filename": "infested_stone.png",
+      "slug": "infested-stone"
+    },
+    {
+      "filename": "lodestone.png",
+      "slug": "lodestone"
+    },
+    {
+      "filename": "magma_block.png",
+      "slug": "magma-block"
+    },
+    {
+      "filename": "mangrove_propagule.png",
+      "slug": "mangrove-propagule"
+    },
+    {
+      "filename": "mangrove_roots.png",
+      "slug": "mangrove-roots"
+    },
+    {
+      "filename": "mangrove_wood.png",
+      "slug": "mangrove-wood"
+    },
+    {
+      "filename": "moss_block.png",
+      "slug": "moss-block"
+    },
+    {
+      "filename": "mossy_cobblestone.png",
+      "slug": "mossy-cobblestone"
+    },
+    {
+      "filename": "mud.png",
+      "slug": "mud"
+    },
+    {
+      "filename": "muddy_mangrove_roots.png",
+      "slug": "muddy-mangrove-roots"
+    },
+    {
+      "filename": "mushroom_stem.png",
+      "slug": "mushroom-stem"
+    },
+    {
+      "filename": "mycelium.png",
+      "slug": "mycelium"
+    },
+    {
+      "filename": "nether_wart_block.png",
+      "slug": "nether-wart-block"
+    },
+    {
+      "filename": "netherrack.png",
+      "slug": "netherrack"
+    },
+    {
+      "filename": "obsidian.png",
+      "slug": "obsidian"
+    },
+    {
+      "filename": "packed_ice.png",
+      "slug": "packed-ice"
+    },
+    {
+      "filename": "packed_mud.png",
+      "slug": "packed-mud"
+    },
+    {
+      "filename": "pale_hanging_moss.png",
+      "slug": "pale-hanging-moss"
+    },
+    {
+      "filename": "pale_moss_block.png",
+      "slug": "pale-moss-block"
+    },
+    {
+      "filename": "pale_oak_wood.png",
+      "slug": "pale-oak-wood"
+    },
+    {
+      "filename": "podzol.png",
+      "slug": "podzol"
+    },
+    {
+      "filename": "pointed_dripstone.png",
+      "slug": "pointed-dripstone"
+    },
+    {
+      "filename": "polished_andesite.png",
+      "slug": "polished-andesite"
+    },
+    {
+      "filename": "polished_basalt.png",
+      "slug": "polished-basalt"
+    },
+    {
+      "filename": "polished_blackstone.png",
+      "slug": "polished-blackstone"
+    },
+    {
+      "filename": "polished_deepslate.png",
+      "slug": "polished-deepslate"
+    },
+    {
+      "filename": "polished_diorite.png",
+      "slug": "polished-diorite"
+    },
+    {
+      "filename": "polished_granite.png",
+      "slug": "polished-granite"
+    },
+    {
+      "filename": "polished_tuff.png",
+      "slug": "polished-tuff"
+    },
+    {
+      "filename": "powder_snow_bucket.png",
+      "slug": "powder-snow-bucket"
+    },
+    {
+      "filename": "purpur_block.png",
+      "slug": "purpur-block"
+    },
+    {
+      "filename": "red_mushroom_block.png",
+      "slug": "red-mushroom-block"
+    },
+    {
+      "filename": "red_sand.png",
+      "slug": "red-sand"
+    },
+    {
+      "filename": "red_sandstone.png",
+      "slug": "red-sandstone"
+    },
+    {
+      "filename": "reinforced_deepslate.png",
+      "slug": "reinforced-deepslate"
+    },
+    {
+      "filename": "repeating_command_block.png",
+      "slug": "repeating-command-block"
+    },
+    {
+      "filename": "resin_block.png",
+      "slug": "resin-block"
+    },
+    {
+      "filename": "respawn_anchor.png",
+      "slug": "respawn-anchor"
+    },
+    {
+      "filename": "rooted_dirt.png",
+      "slug": "rooted-dirt"
+    },
+    {
+      "filename": "sand.png",
+      "slug": "sand"
+    },
+    {
+      "filename": "sandstone.png",
+      "slug": "sandstone"
+    },
+    {
+      "filename": "sculk.png",
+      "slug": "sculk"
+    },
+    {
+      "filename": "sculk_catalyst.png",
+      "slug": "sculk-catalyst"
+    },
+    {
+      "filename": "sculk_shrieker.png",
+      "slug": "sculk-shrieker"
+    },
+    {
+      "filename": "sculk_vein.png",
+      "slug": "sculk-vein"
+    },
+    {
+      "filename": "shroomlight.png",
+      "slug": "shroomlight"
+    },
+    {
+      "filename": "slime_block.png",
+      "slug": "slime-block"
+    },
+    {
+      "filename": "smooth_basalt.png",
+      "slug": "smooth-basalt"
+    },
+    {
+      "filename": "smooth_red_sandstone.png",
+      "slug": "smooth-red-sandstone"
+    },
+    {
+      "filename": "smooth_sandstone.png",
+      "slug": "smooth-sandstone"
+    },
+    {
+      "filename": "smooth_stone.png",
+      "slug": "smooth-stone"
+    },
+    {
+      "filename": "snow.png",
+      "slug": "snow"
+    },
+    {
+      "filename": "snow_block.png",
+      "slug": "snow-block"
+    },
+    {
+      "filename": "snowball.png",
+      "slug": "snowball"
+    },
+    {
+      "filename": "soul_campfire.png",
+      "slug": "soul-campfire"
+    },
+    {
+      "filename": "soul_sand.png",
+      "slug": "soul-sand"
+    },
+    {
+      "filename": "soul_soil.png",
+      "slug": "soul-soil"
+    },
+    {
+      "filename": "sponge.png",
+      "slug": "sponge"
+    },
+    {
+      "filename": "spore_blossom.png",
+      "slug": "spore-blossom"
+    },
+    {
+      "filename": "stone.png",
+      "slug": "stone"
+    },
+    {
+      "filename": "stonecutter.png",
+      "slug": "stonecutter"
+    },
+    {
+      "filename": "stripped_bamboo_block.png",
+      "slug": "stripped-bamboo-block"
+    },
+    {
+      "filename": "stripped_cherry_wood.png",
+      "slug": "stripped-cherry-wood"
+    },
+    {
+      "filename": "stripped_crimson_hyphae.png",
+      "slug": "stripped-crimson-hyphae"
+    },
+    {
+      "filename": "stripped_crimson_stem.png",
+      "slug": "stripped-crimson-stem"
+    },
+    {
+      "filename": "stripped_mangrove_wood.png",
+      "slug": "stripped-mangrove-wood"
+    },
+    {
+      "filename": "stripped_pale_oak_wood.png",
+      "slug": "stripped-pale-oak-wood"
+    },
+    {
+      "filename": "stripped_warped_hyphae.png",
+      "slug": "stripped-warped-hyphae"
+    },
+    {
+      "filename": "stripped_warped_stem.png",
+      "slug": "stripped-warped-stem"
+    },
+    {
+      "filename": "structure_block.png",
+      "slug": "structure-block"
+    },
+    {
+      "filename": "suspicious_gravel.png",
+      "slug": "suspicious-gravel"
+    },
+    {
+      "filename": "suspicious_sand.png",
+      "slug": "suspicious-sand"
+    },
+    {
+      "filename": "test_block.png",
+      "slug": "test-block"
+    },
+    {
+      "filename": "test_instance_block.png",
+      "slug": "test-instance-block"
+    },
+    {
+      "filename": "tube_coral.png",
+      "slug": "tube-coral"
+    },
+    {
+      "filename": "tube_coral_block.png",
+      "slug": "tube-coral-block"
+    },
+    {
+      "filename": "tube_coral_fan.png",
+      "slug": "tube-coral-fan"
+    },
+    {
+      "filename": "tuff.png",
+      "slug": "tuff"
+    },
+    {
+      "filename": "twisting_vines.png",
+      "slug": "twisting-vines"
+    },
+    {
+      "filename": "vine.png",
+      "slug": "vine"
+    },
+    {
+      "filename": "warped_fungus.png",
+      "slug": "warped-fungus"
+    },
+    {
+      "filename": "warped_fungus_on_a_stick.png",
+      "slug": "warped-fungus-on-a-stick"
+    },
+    {
+      "filename": "warped_hyphae.png",
+      "slug": "warped-hyphae"
+    },
+    {
+      "filename": "warped_nylium.png",
+      "slug": "warped-nylium"
+    },
+    {
+      "filename": "warped_roots.png",
+      "slug": "warped-roots"
+    },
+    {
+      "filename": "warped_stem.png",
+      "slug": "warped-stem"
+    },
+    {
+      "filename": "warped_wart_block.png",
+      "slug": "warped-wart-block"
+    },
+    {
+      "filename": "weeping_vines.png",
+      "slug": "weeping-vines"
+    },
+    {
+      "filename": "wet_sponge.png",
+      "slug": "wet-sponge"
+    }
+  ],
+  "food": [
+    {
+      "filename": "apple.png",
+      "slug": "apple"
+    },
+    {
+      "filename": "baked_potato.png",
+      "slug": "baked-potato"
+    },
+    {
+      "filename": "beef.png",
+      "slug": "beef"
+    },
+    {
+      "filename": "beetroot.png",
+      "slug": "beetroot"
+    },
+    {
+      "filename": "beetroot_seeds.png",
+      "slug": "beetroot-seeds"
+    },
+    {
+      "filename": "beetroot_soup.png",
+      "slug": "beetroot-soup"
+    },
+    {
+      "filename": "bread.png",
+      "slug": "bread"
+    },
+    {
+      "filename": "cake.png",
+      "slug": "cake"
+    },
+    {
+      "filename": "carrot.png",
+      "slug": "carrot"
+    },
+    {
+      "filename": "carrot_on_a_stick.png",
+      "slug": "carrot-on-a-stick"
+    },
+    {
+      "filename": "chicken.png",
+      "slug": "chicken"
+    },
+    {
+      "filename": "chorus_flower.png",
+      "slug": "chorus-flower"
+    },
+    {
+      "filename": "chorus_fruit.png",
+      "slug": "chorus-fruit"
+    },
+    {
+      "filename": "chorus_plant.png",
+      "slug": "chorus-plant"
+    },
+    {
+      "filename": "cooked_beef.png",
+      "slug": "cooked-beef"
+    },
+    {
+      "filename": "cooked_chicken.png",
+      "slug": "cooked-chicken"
+    },
+    {
+      "filename": "cooked_cod.png",
+      "slug": "cooked-cod"
+    },
+    {
+      "filename": "cooked_mutton.png",
+      "slug": "cooked-mutton"
+    },
+    {
+      "filename": "cooked_porkchop.png",
+      "slug": "cooked-porkchop"
+    },
+    {
+      "filename": "cooked_rabbit.png",
+      "slug": "cooked-rabbit"
+    },
+    {
+      "filename": "cooked_salmon.png",
+      "slug": "cooked-salmon"
+    },
+    {
+      "filename": "cookie.png",
+      "slug": "cookie"
+    },
+    {
+      "filename": "dried_ghast.png",
+      "slug": "dried-ghast"
+    },
+    {
+      "filename": "dried_kelp.png",
+      "slug": "dried-kelp"
+    },
+    {
+      "filename": "dried_kelp_block.png",
+      "slug": "dried-kelp-block"
+    },
+    {
+      "filename": "enchanted_golden_apple.png",
+      "slug": "enchanted-golden-apple"
+    },
+    {
+      "filename": "fermented_spider_eye.png",
+      "slug": "fermented-spider-eye"
+    },
+    {
+      "filename": "glistering_melon_slice.png",
+      "slug": "glistering-melon-slice"
+    },
+    {
+      "filename": "glow_berries.png",
+      "slug": "glow-berries"
+    },
+    {
+      "filename": "glow_ink_sac.png",
+      "slug": "glow-ink-sac"
+    },
+    {
+      "filename": "glow_item_frame.png",
+      "slug": "glow-item-frame"
+    },
+    {
+      "filename": "glow_lichen.png",
+      "slug": "glow-lichen"
+    },
+    {
+      "filename": "golden_apple.png",
+      "slug": "golden-apple"
+    },
+    {
+      "filename": "golden_carrot.png",
+      "slug": "golden-carrot"
+    },
+    {
+      "filename": "golden_horse_armor.png",
+      "slug": "golden-horse-armor"
+    },
+    {
+      "filename": "honey_block.png",
+      "slug": "honey-block"
+    },
+    {
+      "filename": "honey_bottle.png",
+      "slug": "honey-bottle"
+    },
+    {
+      "filename": "honeycomb.png",
+      "slug": "honeycomb"
+    },
+    {
+      "filename": "honeycomb_block.png",
+      "slug": "honeycomb-block"
+    },
+    {
+      "filename": "kelp.png",
+      "slug": "kelp"
+    },
+    {
+      "filename": "melon.png",
+      "slug": "melon"
+    },
+    {
+      "filename": "melon_seeds.png",
+      "slug": "melon-seeds"
+    },
+    {
+      "filename": "melon_slice.png",
+      "slug": "melon-slice"
+    },
+    {
+      "filename": "mushroom_stew.png",
+      "slug": "mushroom-stew"
+    },
+    {
+      "filename": "mutton.png",
+      "slug": "mutton"
+    },
+    {
+      "filename": "poisonous_potato.png",
+      "slug": "poisonous-potato"
+    },
+    {
+      "filename": "popped_chorus_fruit.png",
+      "slug": "popped-chorus-fruit"
+    },
+    {
+      "filename": "porkchop.png",
+      "slug": "porkchop"
+    },
+    {
+      "filename": "potato.png",
+      "slug": "potato"
+    },
+    {
+      "filename": "pufferfish.png",
+      "slug": "pufferfish"
+    },
+    {
+      "filename": "pufferfish_bucket.png",
+      "slug": "pufferfish-bucket"
+    },
+    {
+      "filename": "pumpkin_pie.png",
+      "slug": "pumpkin-pie"
+    },
+    {
+      "filename": "rabbit.png",
+      "slug": "rabbit"
+    },
+    {
+      "filename": "rabbit_foot.png",
+      "slug": "rabbit-foot"
+    },
+    {
+      "filename": "rabbit_hide.png",
+      "slug": "rabbit-hide"
+    },
+    {
+      "filename": "rabbit_stew.png",
+      "slug": "rabbit-stew"
+    },
+    {
+      "filename": "raw_copper.png",
+      "slug": "raw-copper"
+    },
+    {
+      "filename": "raw_copper_block.png",
+      "slug": "raw-copper-block"
+    },
+    {
+      "filename": "raw_gold.png",
+      "slug": "raw-gold"
+    },
+    {
+      "filename": "raw_gold_block.png",
+      "slug": "raw-gold-block"
+    },
+    {
+      "filename": "raw_iron.png",
+      "slug": "raw-iron"
+    },
+    {
+      "filename": "raw_iron_block.png",
+      "slug": "raw-iron-block"
+    },
+    {
+      "filename": "salmon.png",
+      "slug": "salmon"
+    },
+    {
+      "filename": "salmon_bucket.png",
+      "slug": "salmon-bucket"
+    },
+    {
+      "filename": "spider_eye.png",
+      "slug": "spider-eye"
+    },
+    {
+      "filename": "suspicious_stew.png",
+      "slug": "suspicious-stew"
+    },
+    {
+      "filename": "sweet_berries.png",
+      "slug": "sweet-berries"
+    },
+    {
+      "filename": "tropical_fish.png",
+      "slug": "tropical-fish"
+    },
+    {
+      "filename": "tropical_fish_bucket.png",
+      "slug": "tropical-fish-bucket"
+    }
+  ],
+  "spawn_eggs": [
+    {
+      "filename": "allay_spawn_egg.png",
+      "slug": "allay-spawn-egg"
+    },
+    {
+      "filename": "armadillo_spawn_egg.png",
+      "slug": "armadillo-spawn-egg"
+    },
+    {
+      "filename": "axolotl_spawn_egg.png",
+      "slug": "axolotl-spawn-egg"
+    },
+    {
+      "filename": "bat_spawn_egg.png",
+      "slug": "bat-spawn-egg"
+    },
+    {
+      "filename": "bee_spawn_egg.png",
+      "slug": "bee-spawn-egg"
+    },
+    {
+      "filename": "blaze_spawn_egg.png",
+      "slug": "blaze-spawn-egg"
+    },
+    {
+      "filename": "bogged_spawn_egg.png",
+      "slug": "bogged-spawn-egg"
+    },
+    {
+      "filename": "breeze_spawn_egg.png",
+      "slug": "breeze-spawn-egg"
+    },
+    {
+      "filename": "camel_spawn_egg.png",
+      "slug": "camel-spawn-egg"
+    },
+    {
+      "filename": "cat_spawn_egg.png",
+      "slug": "cat-spawn-egg"
+    },
+    {
+      "filename": "cave_spider_spawn_egg.png",
+      "slug": "cave-spider-spawn-egg"
+    },
+    {
+      "filename": "chicken_spawn_egg.png",
+      "slug": "chicken-spawn-egg"
+    },
+    {
+      "filename": "cod_spawn_egg.png",
+      "slug": "cod-spawn-egg"
+    },
+    {
+      "filename": "cow_spawn_egg.png",
+      "slug": "cow-spawn-egg"
+    },
+    {
+      "filename": "creaking_spawn_egg.png",
+      "slug": "creaking-spawn-egg"
+    },
+    {
+      "filename": "creeper_spawn_egg.png",
+      "slug": "creeper-spawn-egg"
+    },
+    {
+      "filename": "dolphin_spawn_egg.png",
+      "slug": "dolphin-spawn-egg"
+    },
+    {
+      "filename": "donkey_spawn_egg.png",
+      "slug": "donkey-spawn-egg"
+    },
+    {
+      "filename": "drowned_spawn_egg.png",
+      "slug": "drowned-spawn-egg"
+    },
+    {
+      "filename": "elder_guardian_spawn_egg.png",
+      "slug": "elder-guardian-spawn-egg"
+    },
+    {
+      "filename": "ender_dragon_spawn_egg.png",
+      "slug": "ender-dragon-spawn-egg"
+    },
+    {
+      "filename": "enderman_spawn_egg.png",
+      "slug": "enderman-spawn-egg"
+    },
+    {
+      "filename": "endermite_spawn_egg.png",
+      "slug": "endermite-spawn-egg"
+    },
+    {
+      "filename": "evoker_spawn_egg.png",
+      "slug": "evoker-spawn-egg"
+    },
+    {
+      "filename": "fox_spawn_egg.png",
+      "slug": "fox-spawn-egg"
+    },
+    {
+      "filename": "frog_spawn_egg.png",
+      "slug": "frog-spawn-egg"
+    },
+    {
+      "filename": "ghast_spawn_egg.png",
+      "slug": "ghast-spawn-egg"
+    },
+    {
+      "filename": "glow_squid_spawn_egg.png",
+      "slug": "glow-squid-spawn-egg"
+    },
+    {
+      "filename": "goat_spawn_egg.png",
+      "slug": "goat-spawn-egg"
+    },
+    {
+      "filename": "guardian_spawn_egg.png",
+      "slug": "guardian-spawn-egg"
+    },
+    {
+      "filename": "happy_ghast_spawn_egg.png",
+      "slug": "happy-ghast-spawn-egg"
+    },
+    {
+      "filename": "hoglin_spawn_egg.png",
+      "slug": "hoglin-spawn-egg"
+    },
+    {
+      "filename": "horse_spawn_egg.png",
+      "slug": "horse-spawn-egg"
+    },
+    {
+      "filename": "husk_spawn_egg.png",
+      "slug": "husk-spawn-egg"
+    },
+    {
+      "filename": "iron_golem_spawn_egg.png",
+      "slug": "iron-golem-spawn-egg"
+    },
+    {
+      "filename": "llama_spawn_egg.png",
+      "slug": "llama-spawn-egg"
+    },
+    {
+      "filename": "magma_cube_spawn_egg.png",
+      "slug": "magma-cube-spawn-egg"
+    },
+    {
+      "filename": "mooshroom_spawn_egg.png",
+      "slug": "mooshroom-spawn-egg"
+    },
+    {
+      "filename": "mule_spawn_egg.png",
+      "slug": "mule-spawn-egg"
+    },
+    {
+      "filename": "ocelot_spawn_egg.png",
+      "slug": "ocelot-spawn-egg"
+    },
+    {
+      "filename": "panda_spawn_egg.png",
+      "slug": "panda-spawn-egg"
+    },
+    {
+      "filename": "parrot_spawn_egg.png",
+      "slug": "parrot-spawn-egg"
+    },
+    {
+      "filename": "phantom_spawn_egg.png",
+      "slug": "phantom-spawn-egg"
+    },
+    {
+      "filename": "pig_spawn_egg.png",
+      "slug": "pig-spawn-egg"
+    },
+    {
+      "filename": "piglin_brute_spawn_egg.png",
+      "slug": "piglin-brute-spawn-egg"
+    },
+    {
+      "filename": "piglin_spawn_egg.png",
+      "slug": "piglin-spawn-egg"
+    },
+    {
+      "filename": "pillager_spawn_egg.png",
+      "slug": "pillager-spawn-egg"
+    },
+    {
+      "filename": "polar_bear_spawn_egg.png",
+      "slug": "polar-bear-spawn-egg"
+    },
+    {
+      "filename": "pufferfish_spawn_egg.png",
+      "slug": "pufferfish-spawn-egg"
+    },
+    {
+      "filename": "rabbit_spawn_egg.png",
+      "slug": "rabbit-spawn-egg"
+    },
+    {
+      "filename": "ravager_spawn_egg.png",
+      "slug": "ravager-spawn-egg"
+    },
+    {
+      "filename": "salmon_spawn_egg.png",
+      "slug": "salmon-spawn-egg"
+    },
+    {
+      "filename": "sheep_spawn_egg.png",
+      "slug": "sheep-spawn-egg"
+    },
+    {
+      "filename": "shulker_spawn_egg.png",
+      "slug": "shulker-spawn-egg"
+    },
+    {
+      "filename": "silverfish_spawn_egg.png",
+      "slug": "silverfish-spawn-egg"
+    },
+    {
+      "filename": "skeleton_horse_spawn_egg.png",
+      "slug": "skeleton-horse-spawn-egg"
+    },
+    {
+      "filename": "skeleton_spawn_egg.png",
+      "slug": "skeleton-spawn-egg"
+    },
+    {
+      "filename": "slime_spawn_egg.png",
+      "slug": "slime-spawn-egg"
+    },
+    {
+      "filename": "sniffer_spawn_egg.png",
+      "slug": "sniffer-spawn-egg"
+    },
+    {
+      "filename": "snow_golem_spawn_egg.png",
+      "slug": "snow-golem-spawn-egg"
+    },
+    {
+      "filename": "spider_spawn_egg.png",
+      "slug": "spider-spawn-egg"
+    },
+    {
+      "filename": "squid_spawn_egg.png",
+      "slug": "squid-spawn-egg"
+    },
+    {
+      "filename": "stray_spawn_egg.png",
+      "slug": "stray-spawn-egg"
+    },
+    {
+      "filename": "strider_spawn_egg.png",
+      "slug": "strider-spawn-egg"
+    },
+    {
+      "filename": "tadpole_spawn_egg.png",
+      "slug": "tadpole-spawn-egg"
+    },
+    {
+      "filename": "trader_llama_spawn_egg.png",
+      "slug": "trader-llama-spawn-egg"
+    },
+    {
+      "filename": "tropical_fish_spawn_egg.png",
+      "slug": "tropical-fish-spawn-egg"
+    },
+    {
+      "filename": "turtle_spawn_egg.png",
+      "slug": "turtle-spawn-egg"
+    },
+    {
+      "filename": "vex_spawn_egg.png",
+      "slug": "vex-spawn-egg"
+    },
+    {
+      "filename": "villager_spawn_egg.png",
+      "slug": "villager-spawn-egg"
+    },
+    {
+      "filename": "vindicator_spawn_egg.png",
+      "slug": "vindicator-spawn-egg"
+    },
+    {
+      "filename": "wandering_trader_spawn_egg.png",
+      "slug": "wandering-trader-spawn-egg"
+    },
+    {
+      "filename": "warden_spawn_egg.png",
+      "slug": "warden-spawn-egg"
+    },
+    {
+      "filename": "witch_spawn_egg.png",
+      "slug": "witch-spawn-egg"
+    },
+    {
+      "filename": "wither_skeleton_spawn_egg.png",
+      "slug": "wither-skeleton-spawn-egg"
+    },
+    {
+      "filename": "wither_spawn_egg.png",
+      "slug": "wither-spawn-egg"
+    },
+    {
+      "filename": "wolf_spawn_egg.png",
+      "slug": "wolf-spawn-egg"
+    },
+    {
+      "filename": "zoglin_spawn_egg.png",
+      "slug": "zoglin-spawn-egg"
+    },
+    {
+      "filename": "zombie_horse_spawn_egg.png",
+      "slug": "zombie-horse-spawn-egg"
+    },
+    {
+      "filename": "zombie_pigman_spawn_egg.png",
+      "slug": "zombie-pigman-spawn-egg"
+    },
+    {
+      "filename": "zombie_spawn_egg.png",
+      "slug": "zombie-spawn-egg"
+    },
+    {
+      "filename": "zombie_villager_spawn_egg.png",
+      "slug": "zombie-villager-spawn-egg"
+    },
+    {
+      "filename": "zombified_piglin_spawn_egg.png",
+      "slug": "zombified-piglin-spawn-egg"
+    }
+  ],
+  "materials": [
+    {
+      "filename": "amethyst_block.png",
+      "slug": "amethyst-block"
+    },
+    {
+      "filename": "amethyst_cluster.png",
+      "slug": "amethyst-cluster"
+    },
+    {
+      "filename": "amethyst_shard.png",
+      "slug": "amethyst-shard"
+    },
+    {
+      "filename": "armadillo_scute.png",
+      "slug": "armadillo-scute"
+    },
+    {
+      "filename": "blaze_powder.png",
+      "slug": "blaze-powder"
+    },
+    {
+      "filename": "blaze_rod.png",
+      "slug": "blaze-rod"
+    },
+    {
+      "filename": "breeze_rod.png",
+      "slug": "breeze-rod"
+    },
+    {
+      "filename": "brick.png",
+      "slug": "brick"
+    },
+    {
+      "filename": "brick_slab.png",
+      "slug": "brick-slab"
+    },
+    {
+      "filename": "brick_stairs.png",
+      "slug": "brick-stairs"
+    },
+    {
+      "filename": "brick_wall.png",
+      "slug": "brick-wall"
+    },
+    {
+      "filename": "bricks.png",
+      "slug": "bricks"
+    },
+    {
+      "filename": "budding_amethyst.png",
+      "slug": "budding-amethyst"
+    },
+    {
+      "filename": "charcoal.png",
+      "slug": "charcoal"
+    },
+    {
+      "filename": "chiseled_copper.png",
+      "slug": "chiseled-copper"
+    },
+    {
+      "filename": "chiseled_nether_bricks.png",
+      "slug": "chiseled-nether-bricks"
+    },
+    {
+      "filename": "chiseled_quartz_block.png",
+      "slug": "chiseled-quartz-block"
+    },
+    {
+      "filename": "chiseled_resin_bricks.png",
+      "slug": "chiseled-resin-bricks"
+    },
+    {
+      "filename": "chiseled_stone_bricks.png",
+      "slug": "chiseled-stone-bricks"
+    },
+    {
+      "filename": "chiseled_tuff_bricks.png",
+      "slug": "chiseled-tuff-bricks"
+    },
+    {
+      "filename": "clay_ball.png",
+      "slug": "clay-ball"
+    },
+    {
+      "filename": "coal.png",
+      "slug": "coal"
+    },
+    {
+      "filename": "coal_block.png",
+      "slug": "coal-block"
+    },
+    {
+      "filename": "coal_ore.png",
+      "slug": "coal-ore"
+    },
+    {
+      "filename": "copper_block.png",
+      "slug": "copper-block"
+    },
+    {
+      "filename": "copper_bulb.png",
+      "slug": "copper-bulb"
+    },
+    {
+      "filename": "copper_door.png",
+      "slug": "copper-door"
+    },
+    {
+      "filename": "copper_grate.png",
+      "slug": "copper-grate"
+    },
+    {
+      "filename": "copper_ingot.png",
+      "slug": "copper-ingot"
+    },
+    {
+      "filename": "copper_ore.png",
+      "slug": "copper-ore"
+    },
+    {
+      "filename": "copper_trapdoor.png",
+      "slug": "copper-trapdoor"
+    },
+    {
+      "filename": "cracked_deepslate_bricks.png",
+      "slug": "cracked-deepslate-bricks"
+    },
+    {
+      "filename": "cracked_nether_bricks.png",
+      "slug": "cracked-nether-bricks"
+    },
+    {
+      "filename": "cracked_polished_blackstone_bricks.png",
+      "slug": "cracked-polished-blackstone-bricks"
+    },
+    {
+      "filename": "cracked_stone_bricks.png",
+      "slug": "cracked-stone-bricks"
+    },
+    {
+      "filename": "cut_copper.png",
+      "slug": "cut-copper"
+    },
+    {
+      "filename": "cut_copper_slab.png",
+      "slug": "cut-copper-slab"
+    },
+    {
+      "filename": "cut_copper_stairs.png",
+      "slug": "cut-copper-stairs"
+    },
+    {
+      "filename": "dark_prismarine.png",
+      "slug": "dark-prismarine"
+    },
+    {
+      "filename": "dark_prismarine_slab.png",
+      "slug": "dark-prismarine-slab"
+    },
+    {
+      "filename": "dark_prismarine_stairs.png",
+      "slug": "dark-prismarine-stairs"
+    },
+    {
+      "filename": "deepslate_brick_slab.png",
+      "slug": "deepslate-brick-slab"
+    },
+    {
+      "filename": "deepslate_brick_stairs.png",
+      "slug": "deepslate-brick-stairs"
+    },
+    {
+      "filename": "deepslate_brick_wall.png",
+      "slug": "deepslate-brick-wall"
+    },
+    {
+      "filename": "deepslate_bricks.png",
+      "slug": "deepslate-bricks"
+    },
+    {
+      "filename": "deepslate_coal_ore.png",
+      "slug": "deepslate-coal-ore"
+    },
+    {
+      "filename": "deepslate_copper_ore.png",
+      "slug": "deepslate-copper-ore"
+    },
+    {
+      "filename": "deepslate_diamond_ore.png",
+      "slug": "deepslate-diamond-ore"
+    },
+    {
+      "filename": "deepslate_emerald_ore.png",
+      "slug": "deepslate-emerald-ore"
+    },
+    {
+      "filename": "deepslate_gold_ore.png",
+      "slug": "deepslate-gold-ore"
+    },
+    {
+      "filename": "deepslate_iron_ore.png",
+      "slug": "deepslate-iron-ore"
+    },
+    {
+      "filename": "deepslate_lapis_ore.png",
+      "slug": "deepslate-lapis-ore"
+    },
+    {
+      "filename": "diamond.png",
+      "slug": "diamond"
+    },
+    {
+      "filename": "diamond_block.png",
+      "slug": "diamond-block"
+    },
+    {
+      "filename": "diamond_horse_armor.png",
+      "slug": "diamond-horse-armor"
+    },
+    {
+      "filename": "diamond_ore.png",
+      "slug": "diamond-ore"
+    },
+    {
+      "filename": "echo_shard.png",
+      "slug": "echo-shard"
+    },
+    {
+      "filename": "emerald.png",
+      "slug": "emerald"
+    },
+    {
+      "filename": "emerald_block.png",
+      "slug": "emerald-block"
+    },
+    {
+      "filename": "emerald_ore.png",
+      "slug": "emerald-ore"
+    },
+    {
+      "filename": "end_rod.png",
+      "slug": "end-rod"
+    },
+    {
+      "filename": "end_stone_brick_slab.png",
+      "slug": "end-stone-brick-slab"
+    },
+    {
+      "filename": "end_stone_brick_stairs.png",
+      "slug": "end-stone-brick-stairs"
+    },
+    {
+      "filename": "end_stone_brick_wall.png",
+      "slug": "end-stone-brick-wall"
+    },
+    {
+      "filename": "end_stone_bricks.png",
+      "slug": "end-stone-bricks"
+    },
+    {
+      "filename": "ender_chest.png",
+      "slug": "ender-chest"
+    },
+    {
+      "filename": "ender_eye.png",
+      "slug": "ender-eye"
+    },
+    {
+      "filename": "ender_pearl.png",
+      "slug": "ender-pearl"
+    },
+    {
+      "filename": "exposed_chiseled_copper.png",
+      "slug": "exposed-chiseled-copper"
+    },
+    {
+      "filename": "exposed_copper.png",
+      "slug": "exposed-copper"
+    },
+    {
+      "filename": "exposed_copper_bulb.png",
+      "slug": "exposed-copper-bulb"
+    },
+    {
+      "filename": "exposed_copper_door.png",
+      "slug": "exposed-copper-door"
+    },
+    {
+      "filename": "exposed_copper_grate.png",
+      "slug": "exposed-copper-grate"
+    },
+    {
+      "filename": "exposed_copper_trapdoor.png",
+      "slug": "exposed-copper-trapdoor"
+    },
+    {
+      "filename": "exposed_cut_copper.png",
+      "slug": "exposed-cut-copper"
+    },
+    {
+      "filename": "exposed_cut_copper_slab.png",
+      "slug": "exposed-cut-copper-slab"
+    },
+    {
+      "filename": "exposed_cut_copper_stairs.png",
+      "slug": "exposed-cut-copper-stairs"
+    },
+    {
+      "filename": "ghast_tear.png",
+      "slug": "ghast-tear"
+    },
+    {
+      "filename": "glowstone_dust.png",
+      "slug": "glowstone-dust"
+    },
+    {
+      "filename": "gold_block.png",
+      "slug": "gold-block"
+    },
+    {
+      "filename": "gold_ingot.png",
+      "slug": "gold-ingot"
+    },
+    {
+      "filename": "gold_nugget.png",
+      "slug": "gold-nugget"
+    },
+    {
+      "filename": "gold_ore.png",
+      "slug": "gold-ore"
+    },
+    {
+      "filename": "heart_of_the_sea.png",
+      "slug": "heart-of-the-sea"
+    },
+    {
+      "filename": "infested_chiseled_stone_bricks.png",
+      "slug": "infested-chiseled-stone-bricks"
+    },
+    {
+      "filename": "infested_cracked_stone_bricks.png",
+      "slug": "infested-cracked-stone-bricks"
+    },
+    {
+      "filename": "infested_mossy_stone_bricks.png",
+      "slug": "infested-mossy-stone-bricks"
+    },
+    {
+      "filename": "infested_stone_bricks.png",
+      "slug": "infested-stone-bricks"
+    },
+    {
+      "filename": "iron_bars.png",
+      "slug": "iron-bars"
+    },
+    {
+      "filename": "iron_block.png",
+      "slug": "iron-block"
+    },
+    {
+      "filename": "iron_door.png",
+      "slug": "iron-door"
+    },
+    {
+      "filename": "iron_horse_armor.png",
+      "slug": "iron-horse-armor"
+    },
+    {
+      "filename": "iron_ingot.png",
+      "slug": "iron-ingot"
+    },
+    {
+      "filename": "iron_nugget.png",
+      "slug": "iron-nugget"
+    },
+    {
+      "filename": "iron_ore.png",
+      "slug": "iron-ore"
+    },
+    {
+      "filename": "iron_trapdoor.png",
+      "slug": "iron-trapdoor"
+    },
+    {
+      "filename": "lapis_block.png",
+      "slug": "lapis-block"
+    },
+    {
+      "filename": "lapis_lazuli.png",
+      "slug": "lapis-lazuli"
+    },
+    {
+      "filename": "lapis_ore.png",
+      "slug": "lapis-ore"
+    },
+    {
+      "filename": "large_amethyst_bud.png",
+      "slug": "large-amethyst-bud"
+    },
+    {
+      "filename": "lightning_rod.png",
+      "slug": "lightning-rod"
+    },
+    {
+      "filename": "medium_amethyst_bud.png",
+      "slug": "medium-amethyst-bud"
+    },
+    {
+      "filename": "mossy_stone_brick_slab.png",
+      "slug": "mossy-stone-brick-slab"
+    },
+    {
+      "filename": "mossy_stone_brick_stairs.png",
+      "slug": "mossy-stone-brick-stairs"
+    },
+    {
+      "filename": "mossy_stone_brick_wall.png",
+      "slug": "mossy-stone-brick-wall"
+    },
+    {
+      "filename": "mossy_stone_bricks.png",
+      "slug": "mossy-stone-bricks"
+    },
+    {
+      "filename": "mud_brick_slab.png",
+      "slug": "mud-brick-slab"
+    },
+    {
+      "filename": "mud_brick_stairs.png",
+      "slug": "mud-brick-stairs"
+    },
+    {
+      "filename": "mud_brick_wall.png",
+      "slug": "mud-brick-wall"
+    },
+    {
+      "filename": "mud_bricks.png",
+      "slug": "mud-bricks"
+    },
+    {
+      "filename": "nether_brick.png",
+      "slug": "nether-brick"
+    },
+    {
+      "filename": "nether_brick_fence.png",
+      "slug": "nether-brick-fence"
+    },
+    {
+      "filename": "nether_brick_slab.png",
+      "slug": "nether-brick-slab"
+    },
+    {
+      "filename": "nether_brick_stairs.png",
+      "slug": "nether-brick-stairs"
+    },
+    {
+      "filename": "nether_brick_wall.png",
+      "slug": "nether-brick-wall"
+    },
+    {
+      "filename": "nether_bricks.png",
+      "slug": "nether-bricks"
+    },
+    {
+      "filename": "nether_gold_ore.png",
+      "slug": "nether-gold-ore"
+    },
+    {
+      "filename": "nether_quartz_ore.png",
+      "slug": "nether-quartz-ore"
+    },
+    {
+      "filename": "nether_star.png",
+      "slug": "nether-star"
+    },
+    {
+      "filename": "netherite_block.png",
+      "slug": "netherite-block"
+    },
+    {
+      "filename": "netherite_ingot.png",
+      "slug": "netherite-ingot"
+    },
+    {
+      "filename": "netherite_scrap.png",
+      "slug": "netherite-scrap"
+    },
+    {
+      "filename": "netherite_upgrade_smithing_template.png",
+      "slug": "netherite-upgrade-smithing-template"
+    },
+    {
+      "filename": "oxidized_chiseled_copper.png",
+      "slug": "oxidized-chiseled-copper"
+    },
+    {
+      "filename": "oxidized_copper.png",
+      "slug": "oxidized-copper"
+    },
+    {
+      "filename": "oxidized_copper_bulb.png",
+      "slug": "oxidized-copper-bulb"
+    },
+    {
+      "filename": "oxidized_copper_door.png",
+      "slug": "oxidized-copper-door"
+    },
+    {
+      "filename": "oxidized_copper_grate.png",
+      "slug": "oxidized-copper-grate"
+    },
+    {
+      "filename": "oxidized_copper_trapdoor.png",
+      "slug": "oxidized-copper-trapdoor"
+    },
+    {
+      "filename": "oxidized_cut_copper.png",
+      "slug": "oxidized-cut-copper"
+    },
+    {
+      "filename": "oxidized_cut_copper_slab.png",
+      "slug": "oxidized-cut-copper-slab"
+    },
+    {
+      "filename": "oxidized_cut_copper_stairs.png",
+      "slug": "oxidized-cut-copper-stairs"
+    },
+    {
+      "filename": "pearlescent_froglight.png",
+      "slug": "pearlescent-froglight"
+    },
+    {
+      "filename": "polished_blackstone_brick_slab.png",
+      "slug": "polished-blackstone-brick-slab"
+    },
+    {
+      "filename": "polished_blackstone_brick_stairs.png",
+      "slug": "polished-blackstone-brick-stairs"
+    },
+    {
+      "filename": "polished_blackstone_brick_wall.png",
+      "slug": "polished-blackstone-brick-wall"
+    },
+    {
+      "filename": "polished_blackstone_bricks.png",
+      "slug": "polished-blackstone-bricks"
+    },
+    {
+      "filename": "prismarine.png",
+      "slug": "prismarine"
+    },
+    {
+      "filename": "prismarine_brick_slab.png",
+      "slug": "prismarine-brick-slab"
+    },
+    {
+      "filename": "prismarine_brick_stairs.png",
+      "slug": "prismarine-brick-stairs"
+    },
+    {
+      "filename": "prismarine_bricks.png",
+      "slug": "prismarine-bricks"
+    },
+    {
+      "filename": "prismarine_crystals.png",
+      "slug": "prismarine-crystals"
+    },
+    {
+      "filename": "prismarine_shard.png",
+      "slug": "prismarine-shard"
+    },
+    {
+      "filename": "prismarine_slab.png",
+      "slug": "prismarine-slab"
+    },
+    {
+      "filename": "prismarine_stairs.png",
+      "slug": "prismarine-stairs"
+    },
+    {
+      "filename": "prismarine_wall.png",
+      "slug": "prismarine-wall"
+    },
+    {
+      "filename": "quartz.png",
+      "slug": "quartz"
+    },
+    {
+      "filename": "quartz_block.png",
+      "slug": "quartz-block"
+    },
+    {
+      "filename": "quartz_bricks.png",
+      "slug": "quartz-bricks"
+    },
+    {
+      "filename": "quartz_pillar.png",
+      "slug": "quartz-pillar"
+    },
+    {
+      "filename": "quartz_slab.png",
+      "slug": "quartz-slab"
+    },
+    {
+      "filename": "quartz_stairs.png",
+      "slug": "quartz-stairs"
+    },
+    {
+      "filename": "red_nether_brick_slab.png",
+      "slug": "red-nether-brick-slab"
+    },
+    {
+      "filename": "red_nether_brick_stairs.png",
+      "slug": "red-nether-brick-stairs"
+    },
+    {
+      "filename": "red_nether_brick_wall.png",
+      "slug": "red-nether-brick-wall"
+    },
+    {
+      "filename": "red_nether_bricks.png",
+      "slug": "red-nether-bricks"
+    },
+    {
+      "filename": "resin_brick.png",
+      "slug": "resin-brick"
+    },
+    {
+      "filename": "resin_brick_slab.png",
+      "slug": "resin-brick-slab"
+    },
+    {
+      "filename": "resin_brick_stairs.png",
+      "slug": "resin-brick-stairs"
+    },
+    {
+      "filename": "resin_brick_wall.png",
+      "slug": "resin-brick-wall"
+    },
+    {
+      "filename": "resin_bricks.png",
+      "slug": "resin-bricks"
+    },
+    {
+      "filename": "scute.png",
+      "slug": "scute"
+    },
+    {
+      "filename": "slime_ball.png",
+      "slug": "slime-ball"
+    },
+    {
+      "filename": "small_amethyst_bud.png",
+      "slug": "small-amethyst-bud"
+    },
+    {
+      "filename": "smooth_quartz.png",
+      "slug": "smooth-quartz"
+    },
+    {
+      "filename": "smooth_quartz_slab.png",
+      "slug": "smooth-quartz-slab"
+    },
+    {
+      "filename": "smooth_quartz_stairs.png",
+      "slug": "smooth-quartz-stairs"
+    },
+    {
+      "filename": "stone_brick_slab.png",
+      "slug": "stone-brick-slab"
+    },
+    {
+      "filename": "stone_brick_stairs.png",
+      "slug": "stone-brick-stairs"
+    },
+    {
+      "filename": "stone_brick_wall.png",
+      "slug": "stone-brick-wall"
+    },
+    {
+      "filename": "stone_bricks.png",
+      "slug": "stone-bricks"
+    },
+    {
+      "filename": "tuff_brick_slab.png",
+      "slug": "tuff-brick-slab"
+    },
+    {
+      "filename": "tuff_brick_stairs.png",
+      "slug": "tuff-brick-stairs"
+    },
+    {
+      "filename": "tuff_brick_wall.png",
+      "slug": "tuff-brick-wall"
+    },
+    {
+      "filename": "tuff_bricks.png",
+      "slug": "tuff-bricks"
+    },
+    {
+      "filename": "turtle_scute.png",
+      "slug": "turtle-scute"
+    },
+    {
+      "filename": "waxed_chiseled_copper.png",
+      "slug": "waxed-chiseled-copper"
+    },
+    {
+      "filename": "waxed_copper_block.png",
+      "slug": "waxed-copper-block"
+    },
+    {
+      "filename": "waxed_copper_bulb.png",
+      "slug": "waxed-copper-bulb"
+    },
+    {
+      "filename": "waxed_copper_door.png",
+      "slug": "waxed-copper-door"
+    },
+    {
+      "filename": "waxed_copper_grate.png",
+      "slug": "waxed-copper-grate"
+    },
+    {
+      "filename": "waxed_copper_trapdoor.png",
+      "slug": "waxed-copper-trapdoor"
+    },
+    {
+      "filename": "waxed_cut_copper.png",
+      "slug": "waxed-cut-copper"
+    },
+    {
+      "filename": "waxed_cut_copper_slab.png",
+      "slug": "waxed-cut-copper-slab"
+    },
+    {
+      "filename": "waxed_cut_copper_stairs.png",
+      "slug": "waxed-cut-copper-stairs"
+    },
+    {
+      "filename": "waxed_exposed_chiseled_copper.png",
+      "slug": "waxed-exposed-chiseled-copper"
+    },
+    {
+      "filename": "waxed_exposed_copper.png",
+      "slug": "waxed-exposed-copper"
+    },
+    {
+      "filename": "waxed_exposed_copper_bulb.png",
+      "slug": "waxed-exposed-copper-bulb"
+    },
+    {
+      "filename": "waxed_exposed_copper_door.png",
+      "slug": "waxed-exposed-copper-door"
+    },
+    {
+      "filename": "waxed_exposed_copper_grate.png",
+      "slug": "waxed-exposed-copper-grate"
+    },
+    {
+      "filename": "waxed_exposed_copper_trapdoor.png",
+      "slug": "waxed-exposed-copper-trapdoor"
+    },
+    {
+      "filename": "waxed_exposed_cut_copper.png",
+      "slug": "waxed-exposed-cut-copper"
+    },
+    {
+      "filename": "waxed_exposed_cut_copper_slab.png",
+      "slug": "waxed-exposed-cut-copper-slab"
+    },
+    {
+      "filename": "waxed_exposed_cut_copper_stairs.png",
+      "slug": "waxed-exposed-cut-copper-stairs"
+    },
+    {
+      "filename": "waxed_oxidized_chiseled_copper.png",
+      "slug": "waxed-oxidized-chiseled-copper"
+    },
+    {
+      "filename": "waxed_oxidized_copper.png",
+      "slug": "waxed-oxidized-copper"
+    },
+    {
+      "filename": "waxed_oxidized_copper_bulb.png",
+      "slug": "waxed-oxidized-copper-bulb"
+    },
+    {
+      "filename": "waxed_oxidized_copper_door.png",
+      "slug": "waxed-oxidized-copper-door"
+    },
+    {
+      "filename": "waxed_oxidized_copper_grate.png",
+      "slug": "waxed-oxidized-copper-grate"
+    },
+    {
+      "filename": "waxed_oxidized_copper_trapdoor.png",
+      "slug": "waxed-oxidized-copper-trapdoor"
+    },
+    {
+      "filename": "waxed_oxidized_cut_copper.png",
+      "slug": "waxed-oxidized-cut-copper"
+    },
+    {
+      "filename": "waxed_oxidized_cut_copper_slab.png",
+      "slug": "waxed-oxidized-cut-copper-slab"
+    },
+    {
+      "filename": "waxed_oxidized_cut_copper_stairs.png",
+      "slug": "waxed-oxidized-cut-copper-stairs"
+    },
+    {
+      "filename": "waxed_weathered_chiseled_copper.png",
+      "slug": "waxed-weathered-chiseled-copper"
+    },
+    {
+      "filename": "waxed_weathered_copper.png",
+      "slug": "waxed-weathered-copper"
+    },
+    {
+      "filename": "waxed_weathered_copper_bulb.png",
+      "slug": "waxed-weathered-copper-bulb"
+    },
+    {
+      "filename": "waxed_weathered_copper_door.png",
+      "slug": "waxed-weathered-copper-door"
+    },
+    {
+      "filename": "waxed_weathered_copper_grate.png",
+      "slug": "waxed-weathered-copper-grate"
+    },
+    {
+      "filename": "waxed_weathered_copper_trapdoor.png",
+      "slug": "waxed-weathered-copper-trapdoor"
+    },
+    {
+      "filename": "waxed_weathered_cut_copper.png",
+      "slug": "waxed-weathered-cut-copper"
+    },
+    {
+      "filename": "waxed_weathered_cut_copper_slab.png",
+      "slug": "waxed-weathered-cut-copper-slab"
+    },
+    {
+      "filename": "waxed_weathered_cut_copper_stairs.png",
+      "slug": "waxed-weathered-cut-copper-stairs"
+    },
+    {
+      "filename": "weathered_chiseled_copper.png",
+      "slug": "weathered-chiseled-copper"
+    },
+    {
+      "filename": "weathered_copper.png",
+      "slug": "weathered-copper"
+    },
+    {
+      "filename": "weathered_copper_bulb.png",
+      "slug": "weathered-copper-bulb"
+    },
+    {
+      "filename": "weathered_copper_door.png",
+      "slug": "weathered-copper-door"
+    },
+    {
+      "filename": "weathered_copper_grate.png",
+      "slug": "weathered-copper-grate"
+    },
+    {
+      "filename": "weathered_copper_trapdoor.png",
+      "slug": "weathered-copper-trapdoor"
+    },
+    {
+      "filename": "weathered_cut_copper.png",
+      "slug": "weathered-cut-copper"
+    },
+    {
+      "filename": "weathered_cut_copper_slab.png",
+      "slug": "weathered-cut-copper-slab"
+    },
+    {
+      "filename": "weathered_cut_copper_stairs.png",
+      "slug": "weathered-cut-copper-stairs"
+    }
+  ],
+  "combat": [
+    {
+      "filename": "chainmail_boots.png",
+      "slug": "chainmail-boots"
+    },
+    {
+      "filename": "chainmail_chestplate.png",
+      "slug": "chainmail-chestplate"
+    },
+    {
+      "filename": "chainmail_helmet.png",
+      "slug": "chainmail-helmet"
+    },
+    {
+      "filename": "chainmail_leggings.png",
+      "slug": "chainmail-leggings"
+    },
+    {
+      "filename": "crossbow.png",
+      "slug": "crossbow"
+    },
+    {
+      "filename": "diamond_axe.png",
+      "slug": "diamond-axe"
+    },
+    {
+      "filename": "diamond_boots.png",
+      "slug": "diamond-boots"
+    },
+    {
+      "filename": "diamond_chestplate.png",
+      "slug": "diamond-chestplate"
+    },
+    {
+      "filename": "diamond_helmet.png",
+      "slug": "diamond-helmet"
+    },
+    {
+      "filename": "diamond_leggings.png",
+      "slug": "diamond-leggings"
+    },
+    {
+      "filename": "diamond_sword.png",
+      "slug": "diamond-sword"
+    },
+    {
+      "filename": "golden_axe.png",
+      "slug": "golden-axe"
+    },
+    {
+      "filename": "golden_boots.png",
+      "slug": "golden-boots"
+    },
+    {
+      "filename": "golden_chestplate.png",
+      "slug": "golden-chestplate"
+    },
+    {
+      "filename": "golden_helmet.png",
+      "slug": "golden-helmet"
+    },
+    {
+      "filename": "golden_leggings.png",
+      "slug": "golden-leggings"
+    },
+    {
+      "filename": "golden_sword.png",
+      "slug": "golden-sword"
+    },
+    {
+      "filename": "iron_axe.png",
+      "slug": "iron-axe"
+    },
+    {
+      "filename": "iron_boots.png",
+      "slug": "iron-boots"
+    },
+    {
+      "filename": "iron_chestplate.png",
+      "slug": "iron-chestplate"
+    },
+    {
+      "filename": "iron_helmet.png",
+      "slug": "iron-helmet"
+    },
+    {
+      "filename": "iron_leggings.png",
+      "slug": "iron-leggings"
+    },
+    {
+      "filename": "iron_sword.png",
+      "slug": "iron-sword"
+    },
+    {
+      "filename": "leather_boots.png",
+      "slug": "leather-boots"
+    },
+    {
+      "filename": "leather_chestplate.png",
+      "slug": "leather-chestplate"
+    },
+    {
+      "filename": "leather_helmet.png",
+      "slug": "leather-helmet"
+    },
+    {
+      "filename": "leather_leggings.png",
+      "slug": "leather-leggings"
+    },
+    {
+      "filename": "netherite_axe.png",
+      "slug": "netherite-axe"
+    },
+    {
+      "filename": "netherite_boots.png",
+      "slug": "netherite-boots"
+    },
+    {
+      "filename": "netherite_chestplate.png",
+      "slug": "netherite-chestplate"
+    },
+    {
+      "filename": "netherite_helmet.png",
+      "slug": "netherite-helmet"
+    },
+    {
+      "filename": "netherite_leggings.png",
+      "slug": "netherite-leggings"
+    },
+    {
+      "filename": "netherite_sword.png",
+      "slug": "netherite-sword"
+    },
+    {
+      "filename": "stone_axe.png",
+      "slug": "stone-axe"
+    },
+    {
+      "filename": "stone_sword.png",
+      "slug": "stone-sword"
+    },
+    {
+      "filename": "turtle_helmet.png",
+      "slug": "turtle-helmet"
+    },
+    {
+      "filename": "wooden_axe.png",
+      "slug": "wooden-axe"
+    },
+    {
+      "filename": "wooden_sword.png",
+      "slug": "wooden-sword"
+    }
+  ],
+  "tools": [
+    {
+      "filename": "diamond_hoe.png",
+      "slug": "diamond-hoe"
+    },
+    {
+      "filename": "diamond_pickaxe.png",
+      "slug": "diamond-pickaxe"
+    },
+    {
+      "filename": "diamond_shovel.png",
+      "slug": "diamond-shovel"
+    },
+    {
+      "filename": "fishing_rod.png",
+      "slug": "fishing-rod"
+    },
+    {
+      "filename": "flint_and_steel.png",
+      "slug": "flint-and-steel"
+    },
+    {
+      "filename": "golden_hoe.png",
+      "slug": "golden-hoe"
+    },
+    {
+      "filename": "golden_pickaxe.png",
+      "slug": "golden-pickaxe"
+    },
+    {
+      "filename": "golden_shovel.png",
+      "slug": "golden-shovel"
+    },
+    {
+      "filename": "iron_hoe.png",
+      "slug": "iron-hoe"
+    },
+    {
+      "filename": "iron_pickaxe.png",
+      "slug": "iron-pickaxe"
+    },
+    {
+      "filename": "iron_shovel.png",
+      "slug": "iron-shovel"
+    },
+    {
+      "filename": "netherite_hoe.png",
+      "slug": "netherite-hoe"
+    },
+    {
+      "filename": "netherite_pickaxe.png",
+      "slug": "netherite-pickaxe"
+    },
+    {
+      "filename": "netherite_shovel.png",
+      "slug": "netherite-shovel"
+    },
+    {
+      "filename": "shears.png",
+      "slug": "shears"
+    },
+    {
+      "filename": "stone_hoe.png",
+      "slug": "stone-hoe"
+    },
+    {
+      "filename": "stone_pickaxe.png",
+      "slug": "stone-pickaxe"
+    },
+    {
+      "filename": "stone_shovel.png",
+      "slug": "stone-shovel"
+    },
+    {
+      "filename": "wooden_hoe.png",
+      "slug": "wooden-hoe"
+    },
+    {
+      "filename": "wooden_pickaxe.png",
+      "slug": "wooden-pickaxe"
+    },
+    {
+      "filename": "wooden_shovel.png",
+      "slug": "wooden-shovel"
+    }
+  ]
+}

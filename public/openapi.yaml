@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: Minecraft Item Gallery CDN
+  version: 1.0.0
+  description: |
+    Phase 1 public CDN endpoints for fetching Minecraft item images and metadata.
+    No authentication required. Phase 2 will add `api.mcitemgallery.com` with optional API keys.
+  contact:
+    name: TinyTank800
+    url: https://github.com/TinyTank800/MinecraftAllImages
+servers:
+  - url: https://mcitemgallery.com
+    description: Production CDN
+paths:
+  /images/versions.json:
+    get:
+      summary: List available Minecraft versions
+      operationId: getVersions
+      responses:
+        '200':
+          description: Version index
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [versions, base]
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      type: string
+                      example: '1.21.6'
+                  base:
+                    type: string
+                    description: Lowest version (full base image set)
+                    example: '1.13.2'
+  /images/{version}.zip:
+    get:
+      summary: Download a version archive
+      description: |
+        Base version ZIP contains manifest.json and all PNGs.
+        Incremental version ZIPs contain changes.json and only added/modified PNGs.
+      operationId: getVersionZip
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+          example: '1.21.6'
+      responses:
+        '200':
+          description: ZIP archive
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /images/{version}/{item}.png:
+    get:
+      summary: Get a single item PNG
+      operationId: getItemPng
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+          example: '1.21.6'
+        - name: item
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Item filename including .png extension
+          example: diamond_sword.png
+      responses:
+        '200':
+          description: Transparent PNG
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /images/{version}/{item}.webp:
+    get:
+      summary: Get a single item WebP (when packaged with Sharp)
+      operationId: getItemWebp
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: item
+          in: path
+          required: true
+          schema:
+            type: string
+          example: diamond_sword.webp
+      responses:
+        '200':
+          description: Lossless WebP
+          content:
+            image/webp:
+              schema:
+                type: string
+                format: binary
+  /metadata/items-index.json:
+    get:
+      summary: Item metadata index
+      description: Maps filename to slug, category, version history, and removal status.
+      operationId: getItemsIndex
+      responses:
+        '200':
+          description: Items index
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    slug:
+                      type: string
+                      example: diamond-sword
+                    displayName:
+                      type: string
+                      example: Diamond Sword
+                    category:
+                      type: string
+                      example: combat
+                    latestVersion:
+                      type: string
+                    firstSeen:
+                      type: string
+                    removed:
+                      type: boolean
+                    historyCount:
+                      type: integer
+  /metadata/categories.json:
+    get:
+      summary: Items grouped by category
+      operationId: getCategories
+      responses:
+        '200':
+          description: Category map
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      filename:
+                        type: string
+                      slug:
+                        type: string
+  /metadata/palettes.json:
+    get:
+      summary: Dominant color palettes per item
+      operationId: getPalettes
+      responses:
+        '200':
+          description: Hex color arrays keyed by filename
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                    pattern: '^#[0-9a-fA-F]{6}$'
+  /metadata/removed-archive.json:
+    get:
+      summary: Removed items archive metadata
+      operationId: getRemovedArchive
+      responses:
+        '200':
+          description: Removed item history
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    lastSeen:
+                      type: string
+                      nullable: true
+                    removedIn:
+                      type: string

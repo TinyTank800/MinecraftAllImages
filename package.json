@@ -1,16 +1,41 @@
 {
-  "name": "minecraftallimages",
-  "version": "1.0.0",
-  "description": "A searchable, downloadable gallery of Minecraft item images captured from the in-game hotbar.",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+  "name": "minecraft-item-gallery",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint",
+    "package-version": "node scripts/package-version.mjs",
+    "package-particles": "node scripts/package-particles.mjs",
+    "enrich-metadata": "node scripts/enrich-metadata.mjs",
+    "postpackage": "node scripts/enrich-metadata.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.7",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.8",
+    "file-saver": "2.0.5",
+    "jszip": "3.10.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
   "devDependencies": {
-    "vite": "^7.2.2"
+    "@eslint/js": "^9",
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-plugin-react-hooks": "^5",
+    "gifenc": "^1.0.3",
+    "sharp": "^0.34.3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "typescript-eslint": "^8"
   }
 }

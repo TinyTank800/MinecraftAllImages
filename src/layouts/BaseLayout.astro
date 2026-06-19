@@ -1,0 +1,51 @@
+---
+const SITE_URL = 'https://mcitemgallery.com';
+const DESCRIPTION =
+	'Browse and download high-quality images of every Minecraft item, block, and texture across all game versions. Search by name, compare version history, and export single PNGs or bulk ZIPs.';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title = 'Minecraft Item Gallery — Every Item Image, All Versions', description = DESCRIPTION, canonical = '/', jsonLd } = Astro.props;
+
+const fullTitle = title;
+const canonicalUrl = new URL(canonical, SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:site_name" content="Minecraft Item Gallery" />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="theme-color" content="#e11d2e" />
+		<script is:inline>
+			(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+		</script>
+		{jsonLd && (
+			<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		)}
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	@import "../styles/globals.css";
+</style>

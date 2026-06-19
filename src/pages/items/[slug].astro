@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ItemPageApp } from '../../components/ItemPageApp';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+
+interface ItemEntry {
+	slug: string;
+	displayName: string;
+	category: string;
+	latestVersion: string;
+	firstSeen: string;
+	removed: boolean;
+	historyCount: number;
+}
+
+export async function getStaticPaths() {
+	const indexPath = path.join(process.cwd(), 'public', 'metadata', 'items-index.json');
+	try {
+		const raw = await fs.readFile(indexPath, 'utf8');
+		const index = JSON.parse(raw) as Record<string, ItemEntry>;
+		return Object.entries(index).map(([filename, entry]) => ({
+			params: { slug: entry.slug },
+			props: { filename, entry },
+		}));
+	} catch {
+		return [];
+	}
+}
+
+const { filename, entry } = Astro.props;
+const title = `${entry.displayName} — Minecraft Item Icon (${entry.latestVersion})`;
+const description = `Download the transparent ${entry.displayName} Minecraft item icon. Available since ${entry.firstSeen}, latest in ${entry.latestVersion}. Version history and color palette included.`;
+const imageUrl = `/images/${entry.latestVersion}/${filename}`;
+
+const jsonLd = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ImageObject',
+		name: entry.displayName,
+		contentUrl: new URL(imageUrl, 'https://mcitemgallery.com').href,
+		description,
+		encodingFormat: 'image/png',
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mcitemgallery.com/' },
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: entry.category,
+				item: new URL(`/items/category/${entry.category}`, 'https://mcitemgallery.com').href,
+			},
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: entry.displayName,
+				item: Astro.url.href,
+			},
+		],
+	},
+];
+---
+
+<BaseLayout title={title} description={description} canonical={`/items/${entry.slug}`} jsonLd={jsonLd}>
+	<ItemPageApp
+		client:load
+		meta={{
+			filename,
+			slug: entry.slug,
+			displayName: entry.displayName,
+			category: entry.category,
+			latestVersion: entry.latestVersion,
+			firstSeen: entry.firstSeen,
+			removed: entry.removed,
+			historyCount: entry.historyCount,
+		}}
+	/>
+</BaseLayout>

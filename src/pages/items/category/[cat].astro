@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { GalleryApp } from '../../../components/GalleryApp';
+import { CATEGORY_LABELS, type ItemCategory } from '../../../lib/categories';
+
+const VALID_CATEGORIES = [
+	'blocks', 'combat', 'tools', 'food', 'redstone',
+	'spawn_eggs', 'decorations', 'materials', 'misc',
+] as const;
+
+export function getStaticPaths() {
+	return [
+		'blocks', 'combat', 'tools', 'food', 'redstone',
+		'spawn_eggs', 'decorations', 'materials', 'misc',
+	].map((cat) => ({ params: { cat } }));
+}
+
+const { cat } = Astro.params;
+if (!cat || !(VALID_CATEGORIES as readonly string[]).includes(cat)) {
+	return Astro.redirect('/');
+}
+const category = cat as ItemCategory;
+const label = CATEGORY_LABELS[category];
+---
+
+<BaseLayout
+	title={`${label} — Minecraft Item Gallery`}
+	description={`Browse every Minecraft ${label.toLowerCase()} item icon across all game versions.`}
+	canonical={`/items/category/${cat}`}
+>
+	<nav class="container breadcrumbs" aria-label="Breadcrumb">
+		<a href="/">Home</a><span class="sep">›</span>
+		<span>{label}</span>
+	</nav>
+	<GalleryApp client:load initialCategory={category} />
+</BaseLayout>

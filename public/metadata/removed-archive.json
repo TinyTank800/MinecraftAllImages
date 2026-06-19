@@ -1,0 +1,106 @@
+{
+  "cactus_green.png": {
+    "lastSeen": "1.13.2",
+    "removedIn": "1.15.2"
+  },
+  "dandelion_yellow.png": {
+    "lastSeen": "1.13.2",
+    "removedIn": "1.15.2"
+  },
+  "rose_red.png": {
+    "lastSeen": "1.13.2",
+    "removedIn": "1.15.2"
+  },
+  "sign.png": {
+    "lastSeen": "1.13.2",
+    "removedIn": "1.15.2"
+  },
+  "creeper_banner_pattern.png": {
+    "lastSeen": "1.21.4",
+    "removedIn": "1.16.5"
+  },
+  "crossbow.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cut_red_sandstone.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cut_red_sandstone_slab.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cut_sandstone.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cut_sandstone_slab.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_banner.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_bed.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_carpet.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_concrete.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_concrete_powder.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_dye.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_glazed_terracotta.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_shulker_box.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_stained_glass.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_stained_glass_pane.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_terracotta.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "cyan_wool.png": {
+    "lastSeen": "1.17.1",
+    "removedIn": "1.16.5"
+  },
+  "zombie_pigman_spawn_egg.png": {
+    "lastSeen": "1.13.2",
+    "removedIn": "1.16.5"
+  },
+  "grass_path.png": {
+    "lastSeen": "1.14.4",
+    "removedIn": "1.17.1"
+  },
+  "grass.png": {
+    "lastSeen": "1.21.4",
+    "removedIn": "1.21.6"
+  },
+  "scute.png": {
+    "lastSeen": "1.21.4",
+    "removedIn": "1.21.6"
+  }
+}
