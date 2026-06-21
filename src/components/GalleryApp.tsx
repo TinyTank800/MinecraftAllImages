@@ -8,6 +8,7 @@ import { Gallery } from '@/components/Gallery';
 import { ProgressBar } from '@/components/ProgressBar';
 import { ItemModal } from '@/components/ItemModal';
 import { BackToTop } from '@/components/BackToTop';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Supporters } from '@/components/Supporters';
 import { SiteFooter } from '@/components/SiteFooter';
 import { useGalleryData } from '@/hooks/useGalleryData';
@@ -83,6 +84,7 @@ export function GalleryApp(props: GalleryAppProps) {
 	const historyEntries = modalFilename ? (state.itemHistory.get(modalFilename) || []) : [];
 
 	return (
+		<ErrorBoundary>
 		<div className="min-h-screen flex flex-col">
 			<Header />
 
@@ -219,5 +221,6 @@ export function GalleryApp(props: GalleryAppProps) {
 				<BackToTop containerId="gallery-container" />
 			</div>
 		</div>
+		</ErrorBoundary>
 	);
 }

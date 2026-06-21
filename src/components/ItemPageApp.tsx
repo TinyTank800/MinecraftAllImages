@@ -1,6 +1,7 @@
 "use client";
 
 import { Header } from '@/components/Header';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ItemDetailPanel } from '@/components/ItemDetailPanel';
 import { ProgressBar } from '@/components/ProgressBar';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -41,6 +42,7 @@ export function ItemPageApp({ meta }: { meta: ItemPageMeta }) {
 	const ready = progress.text === 'Done!';
 
 	return (
+		<ErrorBoundary>
 		<div className="min-h-screen flex flex-col">
 			<Header />
 
@@ -135,6 +137,7 @@ export function ItemPageApp({ meta }: { meta: ItemPageMeta }) {
 
 			<SiteFooter />
 		</div>
+		</ErrorBoundary>
 	);
 }
 

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Header } from '../components/Header';
+import { SiteFooter } from '../components/SiteFooter';
+---
+
+<BaseLayout
+	title="Page Not Found — Minecraft Item Gallery"
+	description="The page you requested does not exist on Minecraft Item Gallery."
+	canonical="/404"
+>
+	<div class="min-h-screen flex flex-col">
+		<Header client:load />
+		<main class="container flex-1 py-16 pb-24">
+			<div class="card p-8 md:p-10 max-w-xl mx-auto text-center">
+				<p class="text-6xl font-bold gradient-text mb-4" aria-hidden="true">404</p>
+				<h1 class="gradient-text text-2xl md:text-3xl font-bold mb-3">Page not found</h1>
+				<p class="hero-lead mb-6">
+					That link does not match any page on this site. Check the URL, or browse the item and
+					particle galleries from home.
+				</p>
+				<div class="flex flex-wrap gap-3 justify-center">
+					<a href="/" class="btn btn-primary">Back to gallery</a>
+					<a href="/particles" class="btn btn-ghost">Particle textures</a>
+					<a href="/docs" class="btn btn-ghost">Documentation</a>
+				</div>
+			</div>
+		</main>
+		<SiteFooter client:load />
+	</div>
+</BaseLayout>

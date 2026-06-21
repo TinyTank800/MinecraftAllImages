@@ -14,6 +14,7 @@ import {
 	buildShareSelectionParams,
 	decodeSelectionBitset,
 } from '@/lib/share-selection';
+import { altTextForParticle, formatParticleName } from '@/lib/particles';
 import { buildVersionPath, compareVersions } from '@/lib/versioning';
 import type {
 	LoadedParticleInfo,

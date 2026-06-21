@@ -6,6 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { ProgressBar } from '@/components/ProgressBar';
 import { SearchBar } from '@/components/SearchBar';
 import { BackToTop } from '@/components/BackToTop';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ParticleControls } from '@/components/ParticleControls';
 import { ParticleGallery } from '@/components/ParticleGallery';
 import { ParticleModal } from '@/components/ParticleModal';
@@ -68,6 +69,7 @@ export function ParticlesApp() {
 	const historyEntries = modalId ? state.particleHistory.get(modalId) || [] : [];
 
 	return (
+		<ErrorBoundary>
 		<div className="min-h-screen flex flex-col">
 			<Header />
 
@@ -206,5 +208,6 @@ export function ParticlesApp() {
 				<BackToTop containerId="particle-gallery-container" />
 			</div>
 		</div>
+		</ErrorBoundary>
 	);
 }
