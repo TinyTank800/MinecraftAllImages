@@ -16,6 +16,9 @@ export function Header() {
 				</div>
 
 				<nav className="header-actions" aria-label="Site navigation">
+					<a href="/" className="btn btn-ghost text-sm py-1 px-2 header-nav-link">
+						Items
+					</a>
 					<a href="/particles" className="btn btn-ghost text-sm py-1 px-2 header-nav-link">
 						Particles
 					</a>

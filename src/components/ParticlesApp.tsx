@@ -123,17 +123,8 @@ export function ParticlesApp() {
 				</details>
 
 				<div className="sticky-controls">
-					<div className="card p-3 sm:p-4">
-						<ParticleControls
-							availableVersions={availableVersions}
-							currentVersion={currentVersion}
-							setCurrentVersion={setCurrentVersion}
-							sortMode={sortMode}
-							setSortMode={setSortMode}
-							showRemovedItems={showRemovedItems}
-							setShowRemovedItems={setShowRemovedItems}
-						/>
-						<div className="my-3">
+					<div className="card gallery-toolbar p-3 sm:p-4">
+						<div className="gallery-toolbar-search toolbar-section">
 							<SearchBar
 								search={searchTerm}
 								setSearch={setSearchTerm}
@@ -152,6 +143,17 @@ export function ParticlesApp() {
 									Selection link copied to clipboard!
 								</p>
 							)}
+						</div>
+						<div className="gallery-toolbar-filters toolbar-section">
+							<ParticleControls
+								availableVersions={availableVersions}
+								currentVersion={currentVersion}
+								setCurrentVersion={setCurrentVersion}
+								sortMode={sortMode}
+								setSortMode={setSortMode}
+								showRemovedItems={showRemovedItems}
+								setShowRemovedItems={setShowRemovedItems}
+							/>
 						</div>
 					</div>
 				</div>

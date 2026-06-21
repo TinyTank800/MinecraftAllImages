@@ -133,22 +133,8 @@ export function GalleryApp(props: GalleryAppProps) {
 					</details>
 
 				<div className="sticky-controls">
-					<div className="card p-3 sm:p-4">
-						<Controls
-							availableVersions={availableVersions}
-							currentVersion={currentVersion}
-							setCurrentVersion={setCurrentVersion}
-							sortMode={sortMode}
-							setSortMode={setSortMode}
-							showRemovedItems={showRemovedItems}
-							setShowRemovedItems={setShowRemovedItems}
-							imageSource={imageSource}
-							setImageSource={setImageSource}
-							categoryFilter={categoryFilter}
-							setCategoryFilter={setCategoryFilter}
-							hideRemovedToggle={props.removedOnly}
-						/>
-						<div className="my-3">
+					<div className="card gallery-toolbar p-3 sm:p-4">
+						<div className="gallery-toolbar-search toolbar-section">
 							<SearchBar
 								search={searchTerm}
 								setSearch={setSearchTerm}
@@ -165,6 +151,22 @@ export function GalleryApp(props: GalleryAppProps) {
 									Selection link copied to clipboard!
 								</p>
 							)}
+						</div>
+						<div className="gallery-toolbar-filters toolbar-section">
+							<Controls
+								availableVersions={availableVersions}
+								currentVersion={currentVersion}
+								setCurrentVersion={setCurrentVersion}
+								sortMode={sortMode}
+								setSortMode={setSortMode}
+								showRemovedItems={showRemovedItems}
+								setShowRemovedItems={setShowRemovedItems}
+								imageSource={imageSource}
+								setImageSource={setImageSource}
+								categoryFilter={categoryFilter}
+								setCategoryFilter={setCategoryFilter}
+								hideRemovedToggle={props.removedOnly}
+							/>
 						</div>
 					</div>
 				</div>
