@@ -2293,6 +2293,10 @@
   ],
   "misc": [
     {
+      "filename": "acacia_shelf.png",
+      "slug": "acacia-shelf"
+    },
+    {
       "filename": "acacia_wood.png",
       "slug": "acacia-wood"
     },
@@ -2351,6 +2355,10 @@
     {
       "filename": "big_dripleaf.png",
       "slug": "big-dripleaf"
+    },
+    {
+      "filename": "birch_shelf.png",
+      "slug": "birch-shelf"
     },
     {
       "filename": "birch_wood.png",
@@ -2573,6 +2581,10 @@
       "slug": "dandelion-yellow"
     },
     {
+      "filename": "dark_oak_shelf.png",
+      "slug": "dark-oak-shelf"
+    },
+    {
       "filename": "dark_oak_wood.png",
       "slug": "dark-oak-wood"
     },
@@ -2733,6 +2745,10 @@
       "slug": "jukebox"
     },
     {
+      "filename": "jungle_shelf.png",
+      "slug": "jungle-shelf"
+    },
+    {
       "filename": "jungle_wood.png",
       "slug": "jungle-wood"
     },
@@ -2867,6 +2883,10 @@
     {
       "filename": "nether_wart.png",
       "slug": "nether-wart"
+    },
+    {
+      "filename": "oak_shelf.png",
+      "slug": "oak-shelf"
     },
     {
       "filename": "oak_wood.png",
@@ -3113,6 +3133,10 @@
       "slug": "spire-armor-trim-smithing-template"
     },
     {
+      "filename": "spruce_shelf.png",
+      "slug": "spruce-shelf"
+    },
+    {
       "filename": "spruce_wood.png",
       "slug": "spruce-wood"
     },
@@ -3327,6 +3351,10 @@
       "slug": "bamboo-raft"
     },
     {
+      "filename": "bamboo_shelf.png",
+      "slug": "bamboo-shelf"
+    },
+    {
       "filename": "basalt.png",
       "slug": "basalt"
     },
@@ -3381,6 +3409,10 @@
     {
       "filename": "chain_command_block.png",
       "slug": "chain-command-block"
+    },
+    {
+      "filename": "cherry_shelf.png",
+      "slug": "cherry-shelf"
     },
     {
       "filename": "cherry_wood.png",
@@ -3445,6 +3477,10 @@
     {
       "filename": "crimson_roots.png",
       "slug": "crimson-roots"
+    },
+    {
+      "filename": "crimson_shelf.png",
+      "slug": "crimson-shelf"
     },
     {
       "filename": "crimson_stem.png",
@@ -3643,6 +3679,10 @@
       "slug": "mangrove-roots"
     },
     {
+      "filename": "mangrove_shelf.png",
+      "slug": "mangrove-shelf"
+    },
+    {
       "filename": "mangrove_wood.png",
       "slug": "mangrove-wood"
     },
@@ -3697,6 +3737,10 @@
     {
       "filename": "pale_moss_block.png",
       "slug": "pale-moss-block"
+    },
+    {
+      "filename": "pale_oak_shelf.png",
+      "slug": "pale-oak-shelf"
     },
     {
       "filename": "pale_oak_wood.png",
@@ -3963,6 +4007,10 @@
       "slug": "warped-roots"
     },
     {
+      "filename": "warped_shelf.png",
+      "slug": "warped-shelf"
+    },
+    {
       "filename": "warped_stem.png",
       "slug": "warped-stem"
     },
@@ -4157,6 +4205,10 @@
       "slug": "mushroom-stew"
     },
     {
+      "filename": "music_disc_lava_chicken.png",
+      "slug": "music-disc-lava-chicken"
+    },
+    {
       "filename": "mutton.png",
       "slug": "mutton"
     },
@@ -4309,6 +4361,10 @@
     {
       "filename": "cod_spawn_egg.png",
       "slug": "cod-spawn-egg"
+    },
+    {
+      "filename": "copper_golem_spawn_egg.png",
+      "slug": "copper-golem-spawn-egg"
     },
     {
       "filename": "cow_spawn_egg.png",
@@ -4689,6 +4745,10 @@
       "slug": "coal-ore"
     },
     {
+      "filename": "copper_bars.png",
+      "slug": "copper-bars"
+    },
+    {
       "filename": "copper_block.png",
       "slug": "copper-block"
     },
@@ -4697,20 +4757,48 @@
       "slug": "copper-bulb"
     },
     {
+      "filename": "copper_chain.png",
+      "slug": "copper-chain"
+    },
+    {
+      "filename": "copper_chest.png",
+      "slug": "copper-chest"
+    },
+    {
       "filename": "copper_door.png",
       "slug": "copper-door"
+    },
+    {
+      "filename": "copper_golem_statue.png",
+      "slug": "copper-golem-statue"
     },
     {
       "filename": "copper_grate.png",
       "slug": "copper-grate"
     },
     {
+      "filename": "copper_horse_armor.png",
+      "slug": "copper-horse-armor"
+    },
+    {
       "filename": "copper_ingot.png",
       "slug": "copper-ingot"
     },
     {
+      "filename": "copper_lantern.png",
+      "slug": "copper-lantern"
+    },
+    {
+      "filename": "copper_nugget.png",
+      "slug": "copper-nugget"
+    },
+    {
       "filename": "copper_ore.png",
       "slug": "copper-ore"
+    },
+    {
+      "filename": "copper_torch.png",
+      "slug": "copper-torch"
     },
     {
       "filename": "copper_trapdoor.png",
@@ -4873,16 +4961,36 @@
       "slug": "exposed-copper"
     },
     {
+      "filename": "exposed_copper_bars.png",
+      "slug": "exposed-copper-bars"
+    },
+    {
       "filename": "exposed_copper_bulb.png",
       "slug": "exposed-copper-bulb"
+    },
+    {
+      "filename": "exposed_copper_chain.png",
+      "slug": "exposed-copper-chain"
+    },
+    {
+      "filename": "exposed_copper_chest.png",
+      "slug": "exposed-copper-chest"
     },
     {
       "filename": "exposed_copper_door.png",
       "slug": "exposed-copper-door"
     },
     {
+      "filename": "exposed_copper_golem_statue.png",
+      "slug": "exposed-copper-golem-statue"
+    },
+    {
       "filename": "exposed_copper_grate.png",
       "slug": "exposed-copper-grate"
+    },
+    {
+      "filename": "exposed_copper_lantern.png",
+      "slug": "exposed-copper-lantern"
     },
     {
       "filename": "exposed_copper_trapdoor.png",
@@ -4899,6 +5007,10 @@
     {
       "filename": "exposed_cut_copper_stairs.png",
       "slug": "exposed-cut-copper-stairs"
+    },
+    {
+      "filename": "exposed_lightning_rod.png",
+      "slug": "exposed-lightning-rod"
     },
     {
       "filename": "ghast_tear.png",
@@ -4951,6 +5063,10 @@
     {
       "filename": "iron_block.png",
       "slug": "iron-block"
+    },
+    {
+      "filename": "iron_chain.png",
+      "slug": "iron-chain"
     },
     {
       "filename": "iron_door.png",
@@ -5093,16 +5209,36 @@
       "slug": "oxidized-copper"
     },
     {
+      "filename": "oxidized_copper_bars.png",
+      "slug": "oxidized-copper-bars"
+    },
+    {
       "filename": "oxidized_copper_bulb.png",
       "slug": "oxidized-copper-bulb"
+    },
+    {
+      "filename": "oxidized_copper_chain.png",
+      "slug": "oxidized-copper-chain"
+    },
+    {
+      "filename": "oxidized_copper_chest.png",
+      "slug": "oxidized-copper-chest"
     },
     {
       "filename": "oxidized_copper_door.png",
       "slug": "oxidized-copper-door"
     },
     {
+      "filename": "oxidized_copper_golem_statue.png",
+      "slug": "oxidized-copper-golem-statue"
+    },
+    {
       "filename": "oxidized_copper_grate.png",
       "slug": "oxidized-copper-grate"
+    },
+    {
+      "filename": "oxidized_copper_lantern.png",
+      "slug": "oxidized-copper-lantern"
     },
     {
       "filename": "oxidized_copper_trapdoor.png",
@@ -5119,6 +5255,10 @@
     {
       "filename": "oxidized_cut_copper_stairs.png",
       "slug": "oxidized-cut-copper-stairs"
+    },
+    {
+      "filename": "oxidized_lightning_rod.png",
+      "slug": "oxidized-lightning-rod"
     },
     {
       "filename": "pearlescent_froglight.png",
@@ -5301,6 +5441,10 @@
       "slug": "waxed-chiseled-copper"
     },
     {
+      "filename": "waxed_copper_bars.png",
+      "slug": "waxed-copper-bars"
+    },
+    {
       "filename": "waxed_copper_block.png",
       "slug": "waxed-copper-block"
     },
@@ -5309,12 +5453,28 @@
       "slug": "waxed-copper-bulb"
     },
     {
+      "filename": "waxed_copper_chain.png",
+      "slug": "waxed-copper-chain"
+    },
+    {
+      "filename": "waxed_copper_chest.png",
+      "slug": "waxed-copper-chest"
+    },
+    {
       "filename": "waxed_copper_door.png",
       "slug": "waxed-copper-door"
     },
     {
+      "filename": "waxed_copper_golem_statue.png",
+      "slug": "waxed-copper-golem-statue"
+    },
+    {
       "filename": "waxed_copper_grate.png",
       "slug": "waxed-copper-grate"
+    },
+    {
+      "filename": "waxed_copper_lantern.png",
+      "slug": "waxed-copper-lantern"
     },
     {
       "filename": "waxed_copper_trapdoor.png",
@@ -5341,16 +5501,36 @@
       "slug": "waxed-exposed-copper"
     },
     {
+      "filename": "waxed_exposed_copper_bars.png",
+      "slug": "waxed-exposed-copper-bars"
+    },
+    {
       "filename": "waxed_exposed_copper_bulb.png",
       "slug": "waxed-exposed-copper-bulb"
+    },
+    {
+      "filename": "waxed_exposed_copper_chain.png",
+      "slug": "waxed-exposed-copper-chain"
+    },
+    {
+      "filename": "waxed_exposed_copper_chest.png",
+      "slug": "waxed-exposed-copper-chest"
     },
     {
       "filename": "waxed_exposed_copper_door.png",
       "slug": "waxed-exposed-copper-door"
     },
     {
+      "filename": "waxed_exposed_copper_golem_statue.png",
+      "slug": "waxed-exposed-copper-golem-statue"
+    },
+    {
       "filename": "waxed_exposed_copper_grate.png",
       "slug": "waxed-exposed-copper-grate"
+    },
+    {
+      "filename": "waxed_exposed_copper_lantern.png",
+      "slug": "waxed-exposed-copper-lantern"
     },
     {
       "filename": "waxed_exposed_copper_trapdoor.png",
@@ -5369,6 +5549,14 @@
       "slug": "waxed-exposed-cut-copper-stairs"
     },
     {
+      "filename": "waxed_exposed_lightning_rod.png",
+      "slug": "waxed-exposed-lightning-rod"
+    },
+    {
+      "filename": "waxed_lightning_rod.png",
+      "slug": "waxed-lightning-rod"
+    },
+    {
       "filename": "waxed_oxidized_chiseled_copper.png",
       "slug": "waxed-oxidized-chiseled-copper"
     },
@@ -5377,16 +5565,36 @@
       "slug": "waxed-oxidized-copper"
     },
     {
+      "filename": "waxed_oxidized_copper_bars.png",
+      "slug": "waxed-oxidized-copper-bars"
+    },
+    {
       "filename": "waxed_oxidized_copper_bulb.png",
       "slug": "waxed-oxidized-copper-bulb"
+    },
+    {
+      "filename": "waxed_oxidized_copper_chain.png",
+      "slug": "waxed-oxidized-copper-chain"
+    },
+    {
+      "filename": "waxed_oxidized_copper_chest.png",
+      "slug": "waxed-oxidized-copper-chest"
     },
     {
       "filename": "waxed_oxidized_copper_door.png",
       "slug": "waxed-oxidized-copper-door"
     },
     {
+      "filename": "waxed_oxidized_copper_golem_statue.png",
+      "slug": "waxed-oxidized-copper-golem-statue"
+    },
+    {
       "filename": "waxed_oxidized_copper_grate.png",
       "slug": "waxed-oxidized-copper-grate"
+    },
+    {
+      "filename": "waxed_oxidized_copper_lantern.png",
+      "slug": "waxed-oxidized-copper-lantern"
     },
     {
       "filename": "waxed_oxidized_copper_trapdoor.png",
@@ -5405,6 +5613,10 @@
       "slug": "waxed-oxidized-cut-copper-stairs"
     },
     {
+      "filename": "waxed_oxidized_lightning_rod.png",
+      "slug": "waxed-oxidized-lightning-rod"
+    },
+    {
       "filename": "waxed_weathered_chiseled_copper.png",
       "slug": "waxed-weathered-chiseled-copper"
     },
@@ -5413,16 +5625,36 @@
       "slug": "waxed-weathered-copper"
     },
     {
+      "filename": "waxed_weathered_copper_bars.png",
+      "slug": "waxed-weathered-copper-bars"
+    },
+    {
       "filename": "waxed_weathered_copper_bulb.png",
       "slug": "waxed-weathered-copper-bulb"
+    },
+    {
+      "filename": "waxed_weathered_copper_chain.png",
+      "slug": "waxed-weathered-copper-chain"
+    },
+    {
+      "filename": "waxed_weathered_copper_chest.png",
+      "slug": "waxed-weathered-copper-chest"
     },
     {
       "filename": "waxed_weathered_copper_door.png",
       "slug": "waxed-weathered-copper-door"
     },
     {
+      "filename": "waxed_weathered_copper_golem_statue.png",
+      "slug": "waxed-weathered-copper-golem-statue"
+    },
+    {
       "filename": "waxed_weathered_copper_grate.png",
       "slug": "waxed-weathered-copper-grate"
+    },
+    {
+      "filename": "waxed_weathered_copper_lantern.png",
+      "slug": "waxed-weathered-copper-lantern"
     },
     {
       "filename": "waxed_weathered_copper_trapdoor.png",
@@ -5441,6 +5673,10 @@
       "slug": "waxed-weathered-cut-copper-stairs"
     },
     {
+      "filename": "waxed_weathered_lightning_rod.png",
+      "slug": "waxed-weathered-lightning-rod"
+    },
+    {
       "filename": "weathered_chiseled_copper.png",
       "slug": "weathered-chiseled-copper"
     },
@@ -5449,16 +5685,36 @@
       "slug": "weathered-copper"
     },
     {
+      "filename": "weathered_copper_bars.png",
+      "slug": "weathered-copper-bars"
+    },
+    {
       "filename": "weathered_copper_bulb.png",
       "slug": "weathered-copper-bulb"
+    },
+    {
+      "filename": "weathered_copper_chain.png",
+      "slug": "weathered-copper-chain"
+    },
+    {
+      "filename": "weathered_copper_chest.png",
+      "slug": "weathered-copper-chest"
     },
     {
       "filename": "weathered_copper_door.png",
       "slug": "weathered-copper-door"
     },
     {
+      "filename": "weathered_copper_golem_statue.png",
+      "slug": "weathered-copper-golem-statue"
+    },
+    {
       "filename": "weathered_copper_grate.png",
       "slug": "weathered-copper-grate"
+    },
+    {
+      "filename": "weathered_copper_lantern.png",
+      "slug": "weathered-copper-lantern"
     },
     {
       "filename": "weathered_copper_trapdoor.png",
@@ -5475,6 +5731,10 @@
     {
       "filename": "weathered_cut_copper_stairs.png",
       "slug": "weathered-cut-copper-stairs"
+    },
+    {
+      "filename": "weathered_lightning_rod.png",
+      "slug": "weathered-lightning-rod"
     }
   ],
   "combat": [
@@ -5493,6 +5753,30 @@
     {
       "filename": "chainmail_leggings.png",
       "slug": "chainmail-leggings"
+    },
+    {
+      "filename": "copper_axe.png",
+      "slug": "copper-axe"
+    },
+    {
+      "filename": "copper_boots.png",
+      "slug": "copper-boots"
+    },
+    {
+      "filename": "copper_chestplate.png",
+      "slug": "copper-chestplate"
+    },
+    {
+      "filename": "copper_helmet.png",
+      "slug": "copper-helmet"
+    },
+    {
+      "filename": "copper_leggings.png",
+      "slug": "copper-leggings"
+    },
+    {
+      "filename": "copper_sword.png",
+      "slug": "copper-sword"
     },
     {
       "filename": "crossbow.png",
@@ -5632,6 +5916,18 @@
     }
   ],
   "tools": [
+    {
+      "filename": "copper_hoe.png",
+      "slug": "copper-hoe"
+    },
+    {
+      "filename": "copper_pickaxe.png",
+      "slug": "copper-pickaxe"
+    },
+    {
+      "filename": "copper_shovel.png",
+      "slug": "copper-shovel"
+    },
     {
       "filename": "diamond_hoe.png",
       "slug": "diamond-hoe"

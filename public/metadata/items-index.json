@@ -1065,10 +1065,10 @@
     "slug": "chain-command-block",
     "displayName": "Chain Command Block",
     "category": "blocks",
-    "latestVersion": "1.21.5",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 10
+    "historyCount": 11
   },
   "charcoal.png": {
     "slug": "charcoal",
@@ -1209,10 +1209,10 @@
     "slug": "clock",
     "displayName": "Clock",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 11
+    "historyCount": 12
   },
   "coal.png": {
     "slug": "coal",
@@ -1281,10 +1281,10 @@
     "slug": "cobblestone-wall",
     "displayName": "Cobblestone Wall",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "cobweb.png": {
     "slug": "cobweb",
@@ -1335,10 +1335,10 @@
     "slug": "command-block",
     "displayName": "Command Block",
     "category": "blocks",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 11
+    "historyCount": 12
   },
   "command_block_minecart.png": {
     "slug": "command-block-minecart",
@@ -1362,10 +1362,10 @@
     "slug": "compass",
     "displayName": "Compass",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 9
+    "historyCount": 10
   },
   "conduit.png": {
     "slug": "conduit",
@@ -1560,10 +1560,10 @@
     "slug": "cyan-dye",
     "displayName": "Cyan Dye",
     "category": "decorations",
-    "latestVersion": "1.17.1",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
-    "removed": true,
-    "historyCount": 4
+    "removed": false,
+    "historyCount": 5
   },
   "cyan_glazed_terracotta.png": {
     "slug": "cyan-glazed-terracotta",
@@ -1956,10 +1956,10 @@
     "slug": "debug-stick",
     "displayName": "Debug Stick",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "detector_rail.png": {
     "slug": "detector-rail",
@@ -2253,19 +2253,19 @@
     "slug": "enchanted-book",
     "displayName": "Enchanted Book",
     "category": "decorations",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "enchanted_golden_apple.png": {
     "slug": "enchanted-golden-apple",
     "displayName": "Enchanted Golden Apple",
     "category": "food",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "enchanting_table.png": {
     "slug": "enchanting-table",
@@ -2325,19 +2325,19 @@
     "slug": "end-crystal",
     "displayName": "End Crystal",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "end_portal_frame.png": {
     "slug": "end-portal-frame",
     "displayName": "End Portal Frame",
     "category": "misc",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "end_rod.png": {
     "slug": "end-rod",
@@ -2379,10 +2379,10 @@
     "slug": "experience-bottle",
     "displayName": "Bottle o' Enchanting",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "farmland.png": {
     "slug": "farmland",
@@ -2847,10 +2847,10 @@
     "slug": "gray-dye",
     "displayName": "Gray Dye",
     "category": "decorations",
-    "latestVersion": "1.13.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "gray_glazed_terracotta.png": {
     "slug": "gray-glazed-terracotta",
@@ -3000,10 +3000,10 @@
     "slug": "green-wool",
     "displayName": "Green Wool",
     "category": "decorations",
-    "latestVersion": "1.13.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "guardian_spawn_egg.png": {
     "slug": "guardian-spawn-egg",
@@ -3333,10 +3333,10 @@
     "slug": "iron-trapdoor",
     "displayName": "Iron Trapdoor",
     "category": "materials",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "item_frame.png": {
     "slug": "item-frame",
@@ -3675,10 +3675,10 @@
     "slug": "light-blue-dye",
     "displayName": "Light Blue Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "light_blue_glazed_terracotta.png": {
     "slug": "light-blue-glazed-terracotta",
@@ -3783,10 +3783,10 @@
     "slug": "light-gray-dye",
     "displayName": "Light Gray Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "light_gray_glazed_terracotta.png": {
     "slug": "light-gray-glazed-terracotta",
@@ -3918,10 +3918,10 @@
     "slug": "lime-dye",
     "displayName": "Lime Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "lime_glazed_terracotta.png": {
     "slug": "lime-glazed-terracotta",
@@ -4044,10 +4044,10 @@
     "slug": "magenta-dye",
     "displayName": "Magenta Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "magenta_glazed_terracotta.png": {
     "slug": "magenta-glazed-terracotta",
@@ -4107,10 +4107,10 @@
     "slug": "magma-block",
     "displayName": "Magma Block",
     "category": "blocks",
-    "latestVersion": "1.21.5",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 10
+    "historyCount": 11
   },
   "magma_cream.png": {
     "slug": "magma-cream",
@@ -4458,10 +4458,10 @@
     "slug": "nether-star",
     "displayName": "Nether Star",
     "category": "materials",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "nether_wart.png": {
     "slug": "nether-wart",
@@ -4692,10 +4692,10 @@
     "slug": "orange-dye",
     "displayName": "Orange Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "orange_glazed_terracotta.png": {
     "slug": "orange-glazed-terracotta",
@@ -4899,10 +4899,10 @@
     "slug": "pink-dye",
     "displayName": "Pink Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "pink_glazed_terracotta.png": {
     "slug": "pink-glazed-terracotta",
@@ -5097,10 +5097,10 @@
     "slug": "prismarine",
     "displayName": "Prismarine",
     "category": "materials",
-    "latestVersion": "1.20.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "prismarine_bricks.png": {
     "slug": "prismarine-bricks",
@@ -5151,19 +5151,19 @@
     "slug": "prismarine-slab",
     "displayName": "Prismarine Slab",
     "category": "materials",
-    "latestVersion": "1.18.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "prismarine_stairs.png": {
     "slug": "prismarine-stairs",
     "displayName": "Prismarine Stairs",
     "category": "materials",
-    "latestVersion": "1.18.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "pufferfish.png": {
     "slug": "pufferfish",
@@ -5268,10 +5268,10 @@
     "slug": "purple-dye",
     "displayName": "Purple Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "purple_glazed_terracotta.png": {
     "slug": "purple-glazed-terracotta",
@@ -5691,10 +5691,10 @@
     "slug": "repeating-command-block",
     "displayName": "Repeating Command Block",
     "category": "blocks",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 9
+    "historyCount": 10
   },
   "rose_bush.png": {
     "slug": "rose-bush",
@@ -5943,10 +5943,10 @@
     "slug": "slime-block",
     "displayName": "Slime Block",
     "category": "blocks",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 3
+    "historyCount": 4
   },
   "slime_spawn_egg.png": {
     "slug": "slime-spawn-egg",
@@ -6366,10 +6366,10 @@
     "slug": "stripped-acacia-log",
     "displayName": "Stripped Acacia Log",
     "category": "decorations",
-    "latestVersion": "1.13.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "stripped_acacia_wood.png": {
     "slug": "stripped-acacia-wood",
@@ -6969,10 +6969,10 @@
     "slug": "written-book",
     "displayName": "Written Book",
     "category": "decorations",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 12
+    "historyCount": 13
   },
   "x.png": {
     "slug": "x",
@@ -7077,10 +7077,10 @@
     "slug": "yellow-wool",
     "displayName": "Yellow Wool",
     "category": "decorations",
-    "latestVersion": "1.13.2",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.13.2",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "zombie_head.png": {
     "slug": "zombie-head",
@@ -7203,10 +7203,10 @@
     "slug": "black-dye",
     "displayName": "Black Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "blast_furnace.png": {
     "slug": "blast-furnace",
@@ -7221,10 +7221,10 @@
     "slug": "blue-dye",
     "displayName": "Blue Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "brick_wall.png": {
     "slug": "brick-wall",
@@ -7239,10 +7239,10 @@
     "slug": "brown-dye",
     "displayName": "Brown Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "campfire.png": {
     "slug": "campfire",
@@ -7291,7 +7291,7 @@
   },
   "creeper_banner_pattern.png": {
     "slug": "creeper-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Creeper Charge Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.14.4",
@@ -7356,10 +7356,10 @@
     "slug": "diorite-wall",
     "displayName": "Diorite Wall",
     "category": "decorations",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "end_stone_brick_slab.png": {
     "slug": "end-stone-brick-slab",
@@ -7399,7 +7399,7 @@
   },
   "flower_banner_pattern.png": {
     "slug": "flower-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Flower Charge Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.14.4",
@@ -7417,7 +7417,7 @@
   },
   "globe_banner_pattern.png": {
     "slug": "globe-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Globe Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.14.4",
@@ -7446,19 +7446,19 @@
     "slug": "granite-wall",
     "displayName": "Granite Wall",
     "category": "decorations",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "green_dye.png": {
     "slug": "green-dye",
     "displayName": "Green Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "grindstone.png": {
     "slug": "grindstone",
@@ -7534,7 +7534,7 @@
   },
   "mojang_banner_pattern.png": {
     "slug": "mojang-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Thing Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.14.4",
@@ -7581,10 +7581,10 @@
     "slug": "mossy-stone-brick-wall",
     "displayName": "Mossy Stone Brick Wall",
     "category": "materials",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "nether_brick_wall.png": {
     "slug": "nether-brick-wall",
@@ -7680,10 +7680,10 @@
     "slug": "prismarine-wall",
     "displayName": "Prismarine Wall",
     "category": "materials",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "ravager_spawn_egg.png": {
     "slug": "ravager-spawn-egg",
@@ -7698,10 +7698,10 @@
     "slug": "red-dye",
     "displayName": "Red Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "red_nether_brick_slab.png": {
     "slug": "red-nether-brick-slab",
@@ -7759,7 +7759,7 @@
   },
   "skull_banner_pattern.png": {
     "slug": "skull-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Skull Charge Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.14.4",
@@ -7923,10 +7923,10 @@
     "slug": "white-dye",
     "displayName": "White Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "wither_rose.png": {
     "slug": "wither-rose",
@@ -7941,10 +7941,10 @@
     "slug": "yellow-dye",
     "displayName": "Yellow Dye",
     "category": "decorations",
-    "latestVersion": "1.14.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.14.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "bee_nest.png": {
     "slug": "bee-nest",
@@ -8272,7 +8272,7 @@
   },
   "piglin_banner_pattern.png": {
     "slug": "piglin-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Snout Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.16.5",
@@ -8580,10 +8580,10 @@
     "slug": "warped-hyphae",
     "displayName": "Warped Hyphae",
     "category": "blocks",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.16.5",
     "removed": false,
-    "historyCount": 7
+    "historyCount": 8
   },
   "warped_nylium.png": {
     "slug": "warped-nylium",
@@ -8976,10 +8976,10 @@
     "slug": "crimson-hyphae",
     "displayName": "Crimson Hyphae",
     "category": "blocks",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.17.1",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "crimson_nylium.png": {
     "slug": "crimson-nylium",
@@ -9705,10 +9705,10 @@
     "slug": "sculk-sensor",
     "displayName": "Sculk Sensor",
     "category": "redstone",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.17.1",
     "removed": false,
-    "historyCount": 6
+    "historyCount": 7
   },
   "small_amethyst_bud.png": {
     "slug": "small-amethyst-bud",
@@ -10344,10 +10344,10 @@
     "slug": "recovery-compass",
     "displayName": "Recovery Compass",
     "category": "misc",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.19.4",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "reinforced_deepslate.png": {
     "slug": "reinforced-deepslate",
@@ -10380,10 +10380,10 @@
     "slug": "sculk-shrieker",
     "displayName": "Sculk Shrieker",
     "category": "blocks",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.19.4",
     "removed": false,
-    "historyCount": 5
+    "historyCount": 6
   },
   "sculk_vein.png": {
     "slug": "sculk-vein",
@@ -10731,10 +10731,10 @@
     "slug": "calibrated-sculk-sensor",
     "displayName": "Calibrated Sculk Sensor",
     "category": "redstone",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.20.6",
     "removed": false,
-    "historyCount": 4
+    "historyCount": 5
   },
   "camel_spawn_egg.png": {
     "slug": "camel-spawn-egg",
@@ -10909,7 +10909,7 @@
   },
   "coast_armor_trim_smithing_template.png": {
     "slug": "coast-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Coast Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -10954,7 +10954,7 @@
   },
   "dune_armor_trim_smithing_template.png": {
     "slug": "dune-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Dune Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -10972,7 +10972,7 @@
   },
   "eye_armor_trim_smithing_template.png": {
     "slug": "eye-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Eye Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11008,7 +11008,7 @@
   },
   "host_armor_trim_smithing_template.png": {
     "slug": "host-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Host Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11071,7 +11071,7 @@
   },
   "netherite_upgrade_smithing_template.png": {
     "slug": "netherite-upgrade-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Netherite Upgrade",
     "category": "materials",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11143,7 +11143,7 @@
   },
   "raiser_armor_trim_smithing_template.png": {
     "slug": "raiser-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Raiser Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11152,7 +11152,7 @@
   },
   "rib_armor_trim_smithing_template.png": {
     "slug": "rib-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Rib Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11161,7 +11161,7 @@
   },
   "sentry_armor_trim_smithing_template.png": {
     "slug": "sentry-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Sentry Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11170,7 +11170,7 @@
   },
   "shaper_armor_trim_smithing_template.png": {
     "slug": "shaper-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Shaper Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11206,7 +11206,7 @@
   },
   "silence_armor_trim_smithing_template.png": {
     "slug": "silence-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Silence Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11251,7 +11251,7 @@
   },
   "snout_armor_trim_smithing_template.png": {
     "slug": "snout-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Snout Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11260,7 +11260,7 @@
   },
   "spire_armor_trim_smithing_template.png": {
     "slug": "spire-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Spire Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11323,7 +11323,7 @@
   },
   "tide_armor_trim_smithing_template.png": {
     "slug": "tide-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Tide Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11359,7 +11359,7 @@
   },
   "vex_armor_trim_smithing_template.png": {
     "slug": "vex-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Vex Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11368,7 +11368,7 @@
   },
   "ward_armor_trim_smithing_template.png": {
     "slug": "ward-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Ward Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11386,7 +11386,7 @@
   },
   "wayfinder_armor_trim_smithing_template.png": {
     "slug": "wayfinder-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Wayfinder Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11395,7 +11395,7 @@
   },
   "wild_armor_trim_smithing_template.png": {
     "slug": "wild-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Wild Armor Trim",
     "category": "misc",
     "latestVersion": "1.20.6",
     "firstSeen": "1.20.6",
@@ -11440,7 +11440,7 @@
   },
   "bolt_armor_trim_smithing_template.png": {
     "slug": "bolt-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Bolt Armor Trim",
     "category": "misc",
     "latestVersion": "1.21.4",
     "firstSeen": "1.21.4",
@@ -11559,10 +11559,10 @@
     "slug": "copper-trapdoor",
     "displayName": "Copper Trapdoor",
     "category": "materials",
-    "latestVersion": "1.21.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.21.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "crafter.png": {
     "slug": "crafter",
@@ -11656,7 +11656,7 @@
   },
   "flow_armor_trim_smithing_template.png": {
     "slug": "flow-armor-trim-smithing-template",
-    "displayName": "Smithing Template",
+    "displayName": "Flow Armor Trim",
     "category": "misc",
     "latestVersion": "1.21.4",
     "firstSeen": "1.21.4",
@@ -11665,7 +11665,7 @@
   },
   "flow_banner_pattern.png": {
     "slug": "flow-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Flow Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.21.4",
@@ -11701,7 +11701,7 @@
   },
   "guster_banner_pattern.png": {
     "slug": "guster-banner-pattern",
-    "displayName": "Banner Pattern",
+    "displayName": "Guster Banner Pattern",
     "category": "decorations",
     "latestVersion": "1.21.4",
     "firstSeen": "1.21.4",
@@ -11926,7 +11926,7 @@
   },
   "pale_oak_chest_boat.png": {
     "slug": "pale-oak-chest-boat",
-    "displayName": "Pale Oak Chest Boat",
+    "displayName": "Pale Oak Boat with Chest",
     "category": "decorations",
     "latestVersion": "1.21.6",
     "firstSeen": "1.21.4",
@@ -12124,7 +12124,7 @@
   },
   "resin_block.png": {
     "slug": "resin-block",
-    "displayName": "Resin Block",
+    "displayName": "Block of Resin",
     "category": "blocks",
     "latestVersion": "1.21.4",
     "firstSeen": "1.21.4",
@@ -12342,10 +12342,10 @@
     "slug": "waxed-copper-trapdoor",
     "displayName": "Waxed Copper Trapdoor",
     "category": "materials",
-    "latestVersion": "1.21.4",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.21.4",
     "removed": false,
-    "historyCount": 1
+    "historyCount": 2
   },
   "waxed_exposed_chiseled_copper.png": {
     "slug": "waxed-exposed-chiseled-copper",
@@ -12432,10 +12432,10 @@
     "slug": "waxed-oxidized-copper-trapdoor",
     "displayName": "Waxed Oxidized Copper Trapdoor",
     "category": "materials",
-    "latestVersion": "1.21.6",
+    "latestVersion": "1.21.10",
     "firstSeen": "1.21.4",
     "removed": false,
-    "historyCount": 2
+    "historyCount": 3
   },
   "waxed_weathered_chiseled_copper.png": {
     "slug": "waxed-weathered-chiseled-copper",
@@ -12763,7 +12763,7 @@
   },
   "music_disc_tears.png": {
     "slug": "music-disc-tears",
-    "displayName": "Music Disc Tears",
+    "displayName": "Music Disc",
     "category": "decorations",
     "latestVersion": "1.21.6",
     "firstSeen": "1.21.6",
@@ -12821,6 +12821,672 @@
     "category": "misc",
     "latestVersion": "1.21.6",
     "firstSeen": "1.21.6",
+    "removed": false,
+    "historyCount": 1
+  },
+  "acacia_shelf.png": {
+    "slug": "acacia-shelf",
+    "displayName": "Acacia Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "bamboo_shelf.png": {
+    "slug": "bamboo-shelf",
+    "displayName": "Bamboo Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "birch_shelf.png": {
+    "slug": "birch-shelf",
+    "displayName": "Birch Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "cherry_shelf.png": {
+    "slug": "cherry-shelf",
+    "displayName": "Cherry Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_axe.png": {
+    "slug": "copper-axe",
+    "displayName": "Copper Axe",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_bars.png": {
+    "slug": "copper-bars",
+    "displayName": "Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_boots.png": {
+    "slug": "copper-boots",
+    "displayName": "Copper Boots",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_chain.png": {
+    "slug": "copper-chain",
+    "displayName": "Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_chest.png": {
+    "slug": "copper-chest",
+    "displayName": "Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_chestplate.png": {
+    "slug": "copper-chestplate",
+    "displayName": "Copper Chestplate",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_golem_spawn_egg.png": {
+    "slug": "copper-golem-spawn-egg",
+    "displayName": "Copper Golem Spawn Egg",
+    "category": "spawn_eggs",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_golem_statue.png": {
+    "slug": "copper-golem-statue",
+    "displayName": "Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_helmet.png": {
+    "slug": "copper-helmet",
+    "displayName": "Copper Helmet",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_hoe.png": {
+    "slug": "copper-hoe",
+    "displayName": "Copper Hoe",
+    "category": "tools",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_horse_armor.png": {
+    "slug": "copper-horse-armor",
+    "displayName": "Copper Horse Armor",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_lantern.png": {
+    "slug": "copper-lantern",
+    "displayName": "Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_leggings.png": {
+    "slug": "copper-leggings",
+    "displayName": "Copper Leggings",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_nugget.png": {
+    "slug": "copper-nugget",
+    "displayName": "Copper Nugget",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_pickaxe.png": {
+    "slug": "copper-pickaxe",
+    "displayName": "Copper Pickaxe",
+    "category": "tools",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_shovel.png": {
+    "slug": "copper-shovel",
+    "displayName": "Copper Shovel",
+    "category": "tools",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_sword.png": {
+    "slug": "copper-sword",
+    "displayName": "Copper Sword",
+    "category": "combat",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "copper_torch.png": {
+    "slug": "copper-torch",
+    "displayName": "Copper Torch",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "crimson_shelf.png": {
+    "slug": "crimson-shelf",
+    "displayName": "Crimson Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "dark_oak_shelf.png": {
+    "slug": "dark-oak-shelf",
+    "displayName": "Dark Oak Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_copper_bars.png": {
+    "slug": "exposed-copper-bars",
+    "displayName": "Exposed Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_copper_chain.png": {
+    "slug": "exposed-copper-chain",
+    "displayName": "Exposed Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_copper_chest.png": {
+    "slug": "exposed-copper-chest",
+    "displayName": "Exposed Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_copper_golem_statue.png": {
+    "slug": "exposed-copper-golem-statue",
+    "displayName": "Exposed Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_copper_lantern.png": {
+    "slug": "exposed-copper-lantern",
+    "displayName": "Exposed Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "exposed_lightning_rod.png": {
+    "slug": "exposed-lightning-rod",
+    "displayName": "Exposed Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "iron_chain.png": {
+    "slug": "iron-chain",
+    "displayName": "Iron Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "jungle_shelf.png": {
+    "slug": "jungle-shelf",
+    "displayName": "Jungle Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "mangrove_shelf.png": {
+    "slug": "mangrove-shelf",
+    "displayName": "Mangrove Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "music_disc_lava_chicken.png": {
+    "slug": "music-disc-lava-chicken",
+    "displayName": "Music Disc",
+    "category": "food",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oak_shelf.png": {
+    "slug": "oak-shelf",
+    "displayName": "Oak Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_copper_bars.png": {
+    "slug": "oxidized-copper-bars",
+    "displayName": "Oxidized Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_copper_chain.png": {
+    "slug": "oxidized-copper-chain",
+    "displayName": "Oxidized Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_copper_chest.png": {
+    "slug": "oxidized-copper-chest",
+    "displayName": "Oxidized Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_copper_golem_statue.png": {
+    "slug": "oxidized-copper-golem-statue",
+    "displayName": "Oxidized Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_copper_lantern.png": {
+    "slug": "oxidized-copper-lantern",
+    "displayName": "Oxidized Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "oxidized_lightning_rod.png": {
+    "slug": "oxidized-lightning-rod",
+    "displayName": "Oxidized Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "pale_oak_shelf.png": {
+    "slug": "pale-oak-shelf",
+    "displayName": "Pale Oak Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "spruce_shelf.png": {
+    "slug": "spruce-shelf",
+    "displayName": "Spruce Shelf",
+    "category": "misc",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "warped_shelf.png": {
+    "slug": "warped-shelf",
+    "displayName": "Warped Shelf",
+    "category": "blocks",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_copper_bars.png": {
+    "slug": "waxed-copper-bars",
+    "displayName": "Waxed Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_copper_chain.png": {
+    "slug": "waxed-copper-chain",
+    "displayName": "Waxed Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_copper_chest.png": {
+    "slug": "waxed-copper-chest",
+    "displayName": "Waxed Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_copper_golem_statue.png": {
+    "slug": "waxed-copper-golem-statue",
+    "displayName": "Waxed Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_copper_lantern.png": {
+    "slug": "waxed-copper-lantern",
+    "displayName": "Waxed Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_copper_bars.png": {
+    "slug": "waxed-exposed-copper-bars",
+    "displayName": "Waxed Exposed Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_copper_chain.png": {
+    "slug": "waxed-exposed-copper-chain",
+    "displayName": "Waxed Exposed Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_copper_chest.png": {
+    "slug": "waxed-exposed-copper-chest",
+    "displayName": "Waxed Exposed Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_copper_golem_statue.png": {
+    "slug": "waxed-exposed-copper-golem-statue",
+    "displayName": "Waxed Exposed Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_copper_lantern.png": {
+    "slug": "waxed-exposed-copper-lantern",
+    "displayName": "Waxed Exposed Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_exposed_lightning_rod.png": {
+    "slug": "waxed-exposed-lightning-rod",
+    "displayName": "Waxed Exposed Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_lightning_rod.png": {
+    "slug": "waxed-lightning-rod",
+    "displayName": "Waxed Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_copper_bars.png": {
+    "slug": "waxed-oxidized-copper-bars",
+    "displayName": "Waxed Oxidized Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_copper_chain.png": {
+    "slug": "waxed-oxidized-copper-chain",
+    "displayName": "Waxed Oxidized Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_copper_chest.png": {
+    "slug": "waxed-oxidized-copper-chest",
+    "displayName": "Waxed Oxidized Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_copper_golem_statue.png": {
+    "slug": "waxed-oxidized-copper-golem-statue",
+    "displayName": "Waxed Oxidized Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_copper_lantern.png": {
+    "slug": "waxed-oxidized-copper-lantern",
+    "displayName": "Waxed Oxidized Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_oxidized_lightning_rod.png": {
+    "slug": "waxed-oxidized-lightning-rod",
+    "displayName": "Waxed Oxidized Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_copper_bars.png": {
+    "slug": "waxed-weathered-copper-bars",
+    "displayName": "Waxed Weathered Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_copper_chain.png": {
+    "slug": "waxed-weathered-copper-chain",
+    "displayName": "Waxed Weathered Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_copper_chest.png": {
+    "slug": "waxed-weathered-copper-chest",
+    "displayName": "Waxed Weathered Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_copper_golem_statue.png": {
+    "slug": "waxed-weathered-copper-golem-statue",
+    "displayName": "Waxed Weathered Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_copper_lantern.png": {
+    "slug": "waxed-weathered-copper-lantern",
+    "displayName": "Waxed Weathered Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "waxed_weathered_lightning_rod.png": {
+    "slug": "waxed-weathered-lightning-rod",
+    "displayName": "Waxed Weathered Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_copper_bars.png": {
+    "slug": "weathered-copper-bars",
+    "displayName": "Weathered Copper Bars",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_copper_chain.png": {
+    "slug": "weathered-copper-chain",
+    "displayName": "Weathered Copper Chain",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_copper_chest.png": {
+    "slug": "weathered-copper-chest",
+    "displayName": "Weathered Copper Chest",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_copper_golem_statue.png": {
+    "slug": "weathered-copper-golem-statue",
+    "displayName": "Weathered Copper Golem Statue",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_copper_lantern.png": {
+    "slug": "weathered-copper-lantern",
+    "displayName": "Weathered Copper Lantern",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
+    "removed": false,
+    "historyCount": 1
+  },
+  "weathered_lightning_rod.png": {
+    "slug": "weathered-lightning-rod",
+    "displayName": "Weathered Lightning Rod",
+    "category": "materials",
+    "latestVersion": "1.21.10",
+    "firstSeen": "1.21.10",
     "removed": false,
     "historyCount": 1
   }
