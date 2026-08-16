@@ -1,0 +1,22 @@
+# See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
+mod.id = "itemgalleryexporter"
+mod.name = "Item Gallery Exporter"
+mod.group = "com.tinytank.itemgallery"
+mod.version = "1.0.0"
+
+deps.fabric_loader = "0.19.3"
+loomx.loom_version = "1.17-SNAPSHOT"
+
+["1.21.1"]
+# Mod compatibility range in fabric.mod.json
+mod.mc_compat = ">=1.21 <=1.21.1"
+# List of releases to be marked compatible on Modrinth/Curseforge
+mod.mc_releases = ["1.21", "1.21.1"]
+
+deps.fabric_api = "0.116.15+1.21.1"
+
+["26.2.x"]
+mod.mc_compat = "~26.2"
+mod.mc_releases = ["26.2"]
+
+deps.fabric_api = "0.157.0+26.2"

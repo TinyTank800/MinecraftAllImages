@@ -3,6 +3,9 @@ build/
 run/
 *.log
 
+# Stonecutter generated per-version subprojects
+versions/
+
 # Eclipse
 .classpath
 .project

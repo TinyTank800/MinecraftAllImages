@@ -32,15 +32,57 @@ public final class ImageExport {
     private ImageExport() {
     }
 
-    /** Crops the top-left {@code scale x scale} region of a full framebuffer capture into a new image. */
-    public static NativeImage crop(NativeImage full, int scale) {
-        NativeImage cropped = new NativeImage(scale, scale, false);
-        for (int y = 0; y < scale; y++) {
-            for (int x = 0; x < scale; x++) {
-                cropped.setPixelRGBA(x, y, full.getPixelRGBA(x, y));
+    /**
+     * Reads a pixel as an ARGB int, regardless of the version's NativeImage byte order
+     * ({@code getPixelRGBA} returns ABGR on 1.21.1, {@code getPixel} returns ARGB on 26.1+).
+     */
+    private static int readPixel(NativeImage image, int x, int y) {
+        //? if >=26.1 {
+        return image.getPixel(x, y);
+        //?} else {
+        /*
+        int abgr = image.getPixelRGBA(x, y);
+        int a = (abgr >>> 24) & 0xFF;
+        int r = abgr & 0xFF;
+        int g = (abgr >>> 8) & 0xFF;
+        int b = (abgr >>> 16) & 0xFF;
+        return (a << 24) | (r << 16) | (g << 8) | b;
+        */
+        //?}
+    }
+
+    /** Writes an ARGB int to a pixel, converting to the version's NativeImage byte order. */
+    private static void writePixel(NativeImage image, int x, int y, int argb) {
+        //? if >=26.1 {
+        image.setPixel(x, y, argb);
+        //?} else {
+        /*
+        int a = (argb >>> 24) & 0xFF;
+        int r = (argb >>> 16) & 0xFF;
+        int g = (argb >>> 8) & 0xFF;
+        int b = argb & 0xFF;
+        image.setPixelRGBA(x, y, (a << 24) | (b << 16) | (g << 8) | r);
+        */
+        //?}
+    }
+
+    /** Crops a {@code size x size} region centered within a {@code renderedSize×renderedSize}
+     *  rendered area of a full framebuffer capture into a new image. */
+    public static NativeImage crop(NativeImage full, int size, int renderedSize) {
+        int offset = (renderedSize - size) / 2;
+        if (offset < 0) offset = 0;
+        NativeImage cropped = new NativeImage(size, size, false);
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                writePixel(cropped, x, y, readPixel(full, x + offset, y + offset));
             }
         }
         return cropped;
+    }
+
+    /** Crops the top-left {@code size×size} region (convenience, same offset as {@code renderedSize=size}). */
+    public static NativeImage crop(NativeImage full, int size) {
+        return crop(full, size, size);
     }
 
     /**
@@ -49,12 +91,14 @@ public final class ImageExport {
      *
      * @return the MD5 hex hash of the final RGBA pixels (used to diff versions)
      */
-    public static String unmixHashAndWrite(NativeImage overBlack, NativeImage overWhite, int scale, File out) throws IOException {
+    public static String unmixHashAndWrite(NativeImage overBlack, NativeImage overWhite, int scale, int renderedPhysical, File out) throws IOException {
+        int offset = (renderedPhysical - scale) / 2;
+        if (offset < 0) offset = 0;
         NativeImage image = new NativeImage(scale, scale, false);
         try {
             for (int y = 0; y < scale; y++) {
                 for (int x = 0; x < scale; x++) {
-                    image.setPixelRGBA(x, y, unmixPixel(overBlack.getPixelRGBA(x, y), overWhite.getPixelRGBA(x, y)));
+                    writePixel(image, x, y, unmixPixel(readPixel(overBlack, x + offset, y + offset), readPixel(overWhite, x + offset, y + offset)));
                 }
             }
             String hash = hashPixels(image, scale);
@@ -66,12 +110,12 @@ public final class ImageExport {
     }
 
     /**
-     * Un-mixes one pixel. Inputs are NativeImage ABGR ints captured over black and white backgrounds
-     * (their own alpha is ignored, since the framebuffer is opaque). Returns a straight-alpha ABGR int.
+     * Un-mixes one pixel. Inputs are ARGB ints captured over black and white backgrounds (their own
+     * alpha is ignored, since the framebuffer is opaque). Returns a straight-alpha ARGB int.
      */
     private static int unmixPixel(int black, int white) {
-        int rb = black & 0xFF, gb = (black >>> 8) & 0xFF, bb = (black >>> 16) & 0xFF;
-        int rw = white & 0xFF, gw = (white >>> 8) & 0xFF, bw = (white >>> 16) & 0xFF;
+        int rb = (black >>> 16) & 0xFF, gb = (black >>> 8) & 0xFF, bb = black & 0xFF;
+        int rw = (white >>> 16) & 0xFF, gw = (white >>> 8) & 0xFF, bw = white & 0xFF;
 
         // (O_white - O_black) ~= 255 * (1 - a) per channel; average the three for stability.
         int diff = ((rw - rb) + (gw - gb) + (bw - bb));
@@ -88,7 +132,7 @@ public final class ImageExport {
         int b = clamp255((int) Math.round(bb / a));
         int alpha = clamp255((int) Math.round(a * 255.0));
 
-        return (alpha << 24) | (b << 16) | (g << 8) | r;
+        return (alpha << 24) | (r << 16) | (g << 8) | b;
     }
 
     private static double clamp01(double v) {
@@ -104,7 +148,7 @@ public final class ImageExport {
         int i = 0;
         for (int y = 0; y < scale; y++) {
             for (int x = 0; x < scale; x++) {
-                int color = image.getPixelRGBA(x, y);
+                int color = readPixel(image, x, y);
                 bytes[i++] = (byte) ((color >> 24) & 0xFF);
                 bytes[i++] = (byte) ((color >> 16) & 0xFF);
                 bytes[i++] = (byte) ((color >> 8) & 0xFF);

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.HolderLookup;
@@ -80,9 +81,31 @@ public class GalleryExportScreen extends Screen {
     private boolean started = false;
     private boolean done = false;
 
+    //? if >=26.1 {
+    // Asynchronous capture state. 26.2 defers GUI drawing, so the framebuffer can only be read back
+    // one frame after a pass was drawn (see extractRenderState).
+    /** Physical pixel size the item was rendered at (may be larger than {@link #scale} for clean integer atlas ratios). */
+    private int renderedPhysical = 0;
+
+    @Nullable
+    private NativeImage blackPass = null;
+    @Nullable
+    private NativeImage whitePass = null;
+    private boolean captureInFlight = false;
+    private int awaiting = AWAIT_NONE;
+    @Nullable
+    private Task activeTask = null;
+
+    private static final int AWAIT_NONE = 0;
+    private static final int AWAIT_BLACK = 1;
+    private static final int AWAIT_WHITE = 2;
+    //?} else {
+    /*
     // Reused full-framebuffer scratch image so we don't allocate one per pass per item.
     @Nullable
     private NativeImage fullCapture = null;
+    */
+    //?}
 
     public GalleryExportScreen(String version, int scale, @Nullable String namespace, boolean variants) {
         super(Component.literal("Item Gallery Export"));
@@ -108,7 +131,11 @@ public class GalleryExportScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         HolderLookup.Provider registryAccess = mc.level.registryAccess();
         for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-            ResourceLocation id = entry.getKey().location();
+            //? if >=26.1 {
+            Identifier id = entry.getKey().identifier();
+            //?} else {
+            /*ResourceLocation id = entry.getKey().location();*/
+            //?}
             if (namespace != null && !id.getNamespace().equals(namespace)) {
                 continue;
             }
@@ -116,7 +143,7 @@ public class GalleryExportScreen extends Screen {
             String name = galleryName(id);
             String label = displayLabel(id, stack, registryAccess);
             this.names.put(name + ".png", label);
-            this.queue.add(new Task(name, label, g -> g.renderItem(stack, 0, 0)));
+            this.queue.add(new Task(name, label, g -> drawItem(g, stack)));
         }
     }
 
@@ -146,12 +173,16 @@ public class GalleryExportScreen extends Screen {
             ItemStack captured = stack.copy();
             String label = displayLabel(id, captured, registryAccess);
             this.names.put(name + ".png", label);
-            this.queue.add(new Task(name, label, g -> g.renderItem(captured, 0, 0)));
+            this.queue.add(new Task(name, label, g -> drawItem(g, captured)));
         }
 
         // Include items that aren't in the search tab (air, technical blocks, ...) as default stacks.
         for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-            ResourceLocation id = entry.getKey().location();
+            //? if >=26.1 {
+            Identifier id = entry.getKey().identifier();
+            //?} else {
+            /*ResourceLocation id = entry.getKey().location();*/
+            //?}
             if (namespace != null && !id.getNamespace().equals(namespace)) {
                 continue;
             }
@@ -165,7 +196,7 @@ public class GalleryExportScreen extends Screen {
             ItemStack stack = new ItemStack(entry.getValue());
             String label = displayLabel(id, stack, registryAccess);
             this.names.put(name + ".png", label);
-            this.queue.add(new Task(name, label, g -> g.renderItem(stack, 0, 0)));
+            this.queue.add(new Task(name, label, g -> drawItem(g, stack)));
         }
     }
 
@@ -230,6 +261,17 @@ public class GalleryExportScreen extends Screen {
         return id.getNamespace() + "__" + id.getPath();
     }
 
+    /** Renders the item at 16x16 GUI units; the call differs between 1.21.1 and 26.1+. */
+    private static void drawItem(GuiGraphics guiGraphics, ItemStack stack) {
+        //? if >=26.1 {
+        guiGraphics.item(stack, 0, 0);
+        //?} else {
+        /*
+        guiGraphics.renderItem(stack, 0, 0);
+        */
+        //?}
+    }
+
     @Override
     public boolean isPauseScreen() {
         return false;
@@ -244,13 +286,140 @@ public class GalleryExportScreen extends Screen {
 
     @Override
     public void removed() {
+        //? if >=26.1 {
+        if (this.blackPass != null) {
+            this.blackPass.close();
+            this.blackPass = null;
+        }
+        if (this.whitePass != null) {
+            this.whitePass.close();
+            this.whitePass = null;
+        }
+        //?} else {
+        /*
         if (this.fullCapture != null) {
             this.fullCapture.close();
             this.fullCapture = null;
         }
+        */
+        //?}
         super.removed();
     }
 
+    //? if >=26.1 {
+    /**
+     * 26.2 defers GUI drawing: the {@code GuiGraphicsExtractor} queue is flushed by {@code GuiRenderer}
+     * at the end of the render phase, and the main render target is cleared at the start of the next
+     * frame's render. A screenshot copy issued during extraction therefore captures the previous
+     * frame's finished image, so each pass is drawn on one frame and captured on the next.
+     */
+    @Override
+    public void extractRenderState(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        guiGraphics.fill(0, 0, this.width, this.height, 0xFF101010);
+        guiGraphics.centeredText(this.font,
+                done ? "Finishing..." : ("Exporting " + processed + " / " + total),
+                this.width / 2, this.height / 2, 0xFFFFFFFF);
+
+        if (done) {
+            return;
+        }
+        if (!started) {
+            started = true;
+            LOGGER.info("[ItemGallery] extractRenderState() running, beginning export of {} icons...", total);
+        }
+
+        Minecraft mc = Minecraft.getInstance();
+        RenderTarget rt = mc.gameRenderer.mainRenderTarget();
+        if (this.scale > rt.width || this.scale > rt.height) {
+            return; // window smaller than icon size
+        }
+
+        // Wait for the outstanding screenshot before issuing another.
+        if (captureInFlight) {
+            return;
+        }
+
+        // Capture the pass drawn last frame (it is fully rendered in the main render target now).
+        if (awaiting != AWAIT_NONE) {
+            int pass = awaiting;
+            awaiting = AWAIT_NONE;
+            captureInFlight = true;
+            Screenshot.takeScreenshot(rt, 1, image -> {
+                if (pass == AWAIT_BLACK) {
+                    blackPass = image;
+                } else {
+                    whitePass = image;
+                }
+                captureInFlight = false;
+            });
+            return;
+        }
+
+        // Both passes are in hand: un-mix, write, and advance to the next task.
+        if (blackPass != null && whitePass != null) {
+            Task task = activeTask;
+            try {
+                String hash = ImageExport.unmixHashAndWrite(
+                        blackPass, whitePass, this.scale, this.renderedPhysical, new File(this.versionDir, task.fileBaseName() + ".png"));
+                this.hashes.put(task.fileBaseName() + ".png", hash);
+            } catch (Throwable t) {
+                failures++;
+                if (failures <= 5) {
+                    LOGGER.error("[ItemGallery] Failed to export {}", task.fileBaseName(), t);
+                }
+            } finally {
+                blackPass.close();
+                whitePass.close();
+                blackPass = null;
+                whitePass = null;
+            }
+            processed++;
+            if (processed % 250 == 0) {
+                LOGGER.info("[ItemGallery] Progress {} / {} ({} written, {} failures)",
+                        processed, total, hashes.size(), failures);
+            }
+            activeTask = null;
+            return;
+        }
+
+        // Start the next task, or finish.
+        if (activeTask == null) {
+            Task task = queue.poll();
+            if (task == null) {
+                finish();
+                return;
+            }
+            activeTask = task;
+        }
+
+        // Draw the next needed pass; it is captured on the following frame.
+        if (blackPass == null) {
+            drawPass(guiGraphics, activeTask.drawer(), BG_BLACK);
+            awaiting = AWAIT_BLACK;
+        } else {
+            drawPass(guiGraphics, activeTask.drawer(), BG_WHITE);
+            awaiting = AWAIT_WHITE;
+        }
+    }
+
+    /** Draws one pass over the given background, scaled to fill exactly {@code scale} pixels. */
+    private void drawPass(GuiGraphics guiGraphics, Drawer drawer, int bgArgb) {
+        Minecraft mc = Minecraft.getInstance();
+        double guiScale = mc.getWindow().getGuiScale();
+        int step = (int)(16 * guiScale);
+        int renderedPhysical = ((this.scale + step - 1) / step) * step;
+        this.renderedPhysical = renderedPhysical;
+        float k = renderedPhysical / (16.0f * (float)guiScale);
+        int coverGui = (int) Math.ceil(renderedPhysical / guiScale) + 1;
+
+        guiGraphics.fill(0, 0, coverGui, coverGui, bgArgb);
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().scale(k, k);
+        drawer.draw(guiGraphics);
+        guiGraphics.pose().popMatrix();
+    }
+    //?} else {
+    /*
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.fill(0, 0, this.width, this.height, 0xFF101010);
@@ -302,7 +471,7 @@ public class GalleryExportScreen extends Screen {
         NativeImage overWhite = capturePass(guiGraphics, task.drawer(), BG_WHITE, k, coverGui, rt);
         try {
             String hash = ImageExport.unmixHashAndWrite(
-                    overBlack, overWhite, this.scale, new File(this.versionDir, task.fileBaseName() + ".png"));
+                    overBlack, overWhite, this.scale, this.scale, new File(this.versionDir, task.fileBaseName() + ".png"));
             this.hashes.put(task.fileBaseName() + ".png", hash);
         } finally {
             overBlack.close();
@@ -310,7 +479,7 @@ public class GalleryExportScreen extends Screen {
         }
     }
 
-    /** Draws the task over the given background, reads back the top-left crop, returns it. */
+    // Draws the task over the given background, reads back the top-left crop, returns it.
     private NativeImage capturePass(GuiGraphics guiGraphics, Drawer drawer, int bgArgb, float k, int coverGui, RenderTarget rt) {
         guiGraphics.fill(0, 0, coverGui, coverGui, bgArgb);
         guiGraphics.pose().pushPose();
@@ -327,7 +496,7 @@ public class GalleryExportScreen extends Screen {
         return ImageExport.crop(full, this.scale);
     }
 
-    /** Lazily allocates (and reuses) the full-framebuffer scratch image, reallocating only on resize. */
+    // Lazily allocates (and reuses) the full-framebuffer scratch image, reallocating only on resize.
     private NativeImage fullCapture(RenderTarget rt) {
         if (this.fullCapture == null
                 || this.fullCapture.getWidth() != rt.width
@@ -339,6 +508,8 @@ public class GalleryExportScreen extends Screen {
         }
         return this.fullCapture;
     }
+    */
+    //?}
 
     private void finish() {
         done = true;
@@ -363,11 +534,29 @@ public class GalleryExportScreen extends Screen {
                         + " (base version, no changes.json)";
             }
             LOGGER.info("[ItemGallery] {}", message);
+            //? if >=26.2 {
+            mc.gui.hud.getChat().addClientSystemMessage(Component.literal(message));
+            //?} else {
+            /*
             mc.gui.getChat().addMessage(Component.literal(message));
+            */
+            //?}
         } catch (Exception e) {
             LOGGER.error("[ItemGallery] Export finalize failed", e);
+            //? if >=26.2 {
+            mc.gui.hud.getChat().addClientSystemMessage(Component.literal("Item gallery export failed: " + e.getMessage()));
+            //?} else {
+            /*
             mc.gui.getChat().addMessage(Component.literal("Item gallery export failed: " + e.getMessage()));
+            */
+            //?}
         }
+        //? if >=26.2 {
+        mc.gui.setScreen(null);
+        //?} else {
+        /*
         mc.setScreen(null);
+        */
+        //?}
     }
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "itemgalleryexporter",
+  "id": "${id}",
   "version": "${version}",
 
-  "name": "Item Gallery Exporter",
+  "name": "${name}",
   "description": "Renders one transparent icon per item and generates gallery manifest.json / changes.json files for the Minecraft item gallery.",
   "authors": [
     "tinytank800"
@@ -22,7 +22,7 @@
   "depends": {
     "fabricloader": ">=0.16.0",
     "fabric-api": "*",
-    "minecraft": "~1.21.1",
+    "minecraft": "${minecraft}",
     "java": ">=21"
   }
 }

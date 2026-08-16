@@ -67,7 +67,13 @@ public class ItemGalleryMod implements ClientModInitializer {
             pending = null;
             LOGGER.info("[ItemGallery] Opening export screen for {} (scale {}, namespace {}, variants {})",
                     req.version, req.scale, req.namespace == null ? "<all>" : req.namespace, req.variants);
+            //? if >=26.2 {
+            mc.gui.setScreen(new GalleryExportScreen(req.version, req.scale, req.namespace, req.variants));
+            //?} else {
+            /*
             mc.setScreen(new GalleryExportScreen(req.version, req.scale, req.namespace, req.variants));
+            */
+            //?}
         });
     }
 
